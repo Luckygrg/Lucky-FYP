@@ -1,72 +1,65 @@
 @extends('layouts.main')
-@section('title', 'Login - SpaLush')
-@section('hyasabcontentauncha')
 
-<div class="register-wrapper">
-    <form class="register-card" action="{{ route('loginuser') }}" method="POST" novalidate>
+@section('content')
+
+<div style="max-width: 450px; margin: 60px auto; padding: 40px; background: white; border-radius: 8px;">
+    
+    <h2 style="text-align: center; color: green;">Login to SpaLush</h2>
+    
+    <br>
+
+    {{-- SHOW ALL ERRORS AT TOP --}}
+    @if ($errors->any())
+        <div style="background: #ffcccc; padding: 15px; border-radius: 4px; margin-bottom: 20px; border: 2px solid red;">
+            <strong style="color: red;">ERROR! Please fix these problems:</strong>
+            <ul style="margin: 10px 0 0 20px; color: red;">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    {{-- SHOW SESSION ERROR --}}
+    @if(session('error'))
+        <div style="background: #ffcccc; padding: 15px; border-radius: 4px; margin-bottom: 20px; border: 2px solid red; color: red;">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    {{-- SHOW SESSION SUCCESS --}}
+    @if(session('success'))
+        <div style="background: #ccffcc; padding: 15px; border-radius: 4px; margin-bottom: 20px; border: 2px solid green; color: green;">
+            {{ session('success') }}
+        </div>
+    @endif
+    
+    <form action="{{ route('loginuser') }}" method="POST">
         @csrf
-
-        <h2>Welcome Back</h2>
-
-        @if(session('error'))
-            <div class="alert alert-error">
-                {{ session('error') }}
-            </div>
-        @endif
-
-        @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        @if ($errors->any())
-            <div class="alert alert-error">
-                <strong>Login failed:</strong>
-                <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        <div class="form-group">
-            <label for="email">Email Address</label>
-            <input 
-                type="email" 
-                id="email"
-                name="email" 
-                placeholder="Enter your email address"
-                value="{{ old('email') }}"
-                required
-                autofocus
-            >
-            @error('email')
-                <small class="error-text">{{ $message }}</small>
-            @enderror
-        </div>
-
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input 
-                type="password" 
-                id="password"
-                name="password" 
-                placeholder="Enter your password"
-                required
-            >
-            @error('password')
-                <small class="error-text">{{ $message }}</small>
-            @enderror
-        </div>
-
-        <button type="submit">Login</button>
-
-        <p class="login-link">
-            Don't have an account? <a href="{{ route('usersignup') }}">Create one here</a>
-        </p>
+        
+        <label>Email</label>
+        <br>
+        <input type="email" name="email" value="{{ old('email') }}" placeholder="Enter your email" required style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ddd;">
+        
+        <br>
+        
+        <label>Password</label>
+        <br>
+        <input type="password" name="password" placeholder="Enter your password" required style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ddd;">
+        
+        <br>
+        
+        <button type="submit" style="width: 100%; padding: 12px; background: green; color: white; border: none; cursor: pointer; font-size: 16px; font-weight: bold;">
+            Login
+        </button>
     </form>
+    
+    <br>
+    
+    <p style="text-align: center;">
+        No account? <a href="{{ route('usersignup') }}" style="color: green;">Sign Up</a>
+    </p>
+
 </div>
 
 @endsection

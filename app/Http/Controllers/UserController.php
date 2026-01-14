@@ -7,69 +7,84 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-
 class UserController extends Controller
 {
-    public function index()
+    /**
+     * Show the login form
+     */
+    public function showlogin()
     {
-        //
+        return view('login');
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the signup form
      */
     public function showsignup()
     {
         return view('signup');
     }
 
-    public function showlogin()
-    {
-        return view('login');
-    }
-
+    /**
+     * Handle user registration
+     * NOW REDIRECTS TO LOGIN PAGE INSTEAD OF AUTO-LOGIN
+     */
     public function store(Request $request)
     {
-        // dd($request); 
+        // Validate the request
         $request->validate([
-            'name' => 'required|string|max:100',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
         ]);
 
-        User::create([
+        // Create the user
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('userlogin');
+        // CHANGED: Redirect to LOGIN page with success message
+        // (User has to login manually)
+        return redirect()->route('userlogin')->with('success', 'Account created successfully! Please login.');
     }
 
+    /**
+     * Handle user login
+     */
     public function login(Request $request)
     {
+        // Validate the request
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
-        if (Auth::attempt($request->only('email', 'password'))) {
-            return redirect('/');
+        // Attempt to log the user in
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            // Authentication passed
+            $request->session()->regenerate();
+            
+            return redirect('/')->with('success', 'Welcome back, ' . Auth::user()->name . '!');
         }
 
-        return back()->with('error', 'Invalid credentials');
+        // Authentication failed
+        return back()->with('error', 'Invalid email or password. Please try again.')->withInput($request->only('email'));
     }
 
+    /**
+     * Handle user logout
+     */
     public function logout(Request $request)
     {
-        Auth::logout(); // logout user
+        Auth::logout();
 
-        // invalidate session
         $request->session()->invalidate();
-
-        // regenerate CSRF token
         $request->session()->regenerateToken();
 
-        return redirect('/userlogin');
+        return redirect('/')->with('success', 'You have been logged out successfully.');
     }
 }

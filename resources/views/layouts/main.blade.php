@@ -1,8 +1,6 @@
 @include('layouts.header')
 @include('layouts.nav')
 
-<main>
-    @yield('hyasabcontentauncha')
-</main>
+    @yield('content')
 
 @include('layouts.footer')
