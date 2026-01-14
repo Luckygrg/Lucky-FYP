@@ -1,11 +1,19 @@
 @extends('layouts.main')
 @section('content')
 
+
 <!-- Hero Section -->
 <section class="hero-section">
     <h1>Welcome to Spa Lush</h1>
     <p>Nepal's Premier Online Platform for Spa & Wellness Services. Book your perfect relaxation experience today.</p>
-    <a href="{{ route('usersignup') }}" class="cta-button">Get Started</a>
+    
+    @guest
+        {{-- Show this button ONLY if user is NOT logged in --}}
+        <a href="{{ route('usersignup') }}" class="cta-button">Get Started</a>
+    @else
+        {{-- Show this button ONLY if user IS logged in --}}
+        <a href="/dashboard" class="cta-button">Browse Spas</a>
+    @endguest
 </section>
 
 <!-- Features Section -->
@@ -64,11 +72,19 @@
     </div>
 </section>
 
-<!-- CTA Section -->
+<!-- CTA Section - Different for guests vs logged in users -->
 <section class="cta-section">
-    <h2>Ready to Relax?</h2>
-    <p>Join thousands of satisfied customers and book your wellness experience today.</p>
-    <a href="{{ route('usersignup') }}" class="cta-button">Sign Up Now</a>
+    @guest
+        {{-- Show this ONLY if user is NOT logged in --}}
+        <h2>Ready to Relax?</h2>
+        <p>Join thousands of satisfied customers and book your wellness experience today.</p>
+        <a href="{{ route('usersignup') }}" class="cta-button">Sign Up Now</a>
+    @else
+        {{-- Show this ONLY if user IS logged in --}}
+        <h2>Welcome back, {{ Auth::user()->name }}!</h2>
+        <p>Ready to book your next spa experience?</p>
+        <a href="/dashboard" class="cta-button">View Available Spas</a>
+    @endguest
 </section>
 
 @endsection
