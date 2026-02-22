@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     /**
+     * Show the role selection page
+     */
+    public function showRoleSelection()
+    {
+        return view('role-selection');
+    }
+
+    /**
      * Show the login form
      */
     public function showlogin()
@@ -20,9 +28,16 @@ class UserController extends Controller
     /**
      * Show the signup form
      */
-    public function showsignup()
+    public function showsignup(Request $request)
     {
-        return view('signup');
+        $role = $request->query('role', 'customer');
+        
+        // Validate role
+        if (!in_array($role, ['customer', 'spa_owner'])) {
+            return redirect()->route('role.selection');
+        }
+        
+        return view('signup', ['selectedRole' => $role]);
     }
 
     /**
@@ -32,17 +47,19 @@ class UserController extends Controller
     public function store(Request $request)
     {
         // Validate the request
-        // $request->validate([
-        //     'name' => 'required|string|max:255',
-        //     'email' => 'required|string|email|max:255|unique:users',
-        //     'password' => 'required|string|min:8|confirmed',
-        // ]);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'role' => 'required|in:customer,spa_owner',
+        ]);
 
         // Create the user
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => $request->role,
         ]);
 
         // CHANGED: Redirect to LOGIN page with success message
@@ -68,7 +85,19 @@ class UserController extends Controller
             // Authentication passed
             $request->session()->regenerate();
             
-            return redirect('/')->with('success', 'Welcome back, ' . Auth::user()->name . '!');
+            $user = Auth::user();
+            
+            // Redirect based on role
+            switch ($user->role) {
+                case 'admin':
+                    return redirect()->route('admin.admin')->with('success', 'Welcome Admin, ' . $user->name . '!');
+                case 'spa_owner':
+                    return redirect()->route('spa_owner.dashboard')->with('success', 'Welcome, ' . $user->name . '!');
+                case 'customer':
+                    return redirect()->route('customer.dashboard')->with('success', 'Welcome, ' . $user->name . '!');
+                default:
+                    return redirect('/')->with('success', 'Welcome back, ' . $user->name . '!');
+            }
         }
 
         // Authentication failed
