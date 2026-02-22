@@ -3,8 +3,7 @@
     <nav class="luxury-navbar">
         <div class="luxury-nav-container">
             <a class="luxury-logo" href="/">
-                <span class="logo-icon">✦</span>
-                <span class="logo-text">SPALUSH</span>
+                <img src="{{ asset('assets/img/logo.png') }}" alt="SpaLush Logo" style="height: 100px; width: auto; object-fit: contain;">
             </a>
 
             <div class="luxury-nav-menu">
