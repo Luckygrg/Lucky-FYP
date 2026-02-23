@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Login - SpaLush')
+@section('title', 'Forgot Password - SpaLush')
 
 @section('content')
 
@@ -11,7 +11,7 @@
         box-sizing: border-box;
     }
     
-    .login-wrapper {
+    .forgot-wrapper {
         min-height: 100vh;
         background: #f8f9fa;
         display: flex;
@@ -20,7 +20,7 @@
         padding: 40px 20px;
     }
     
-    .login-container {
+    .forgot-container {
         background: white;
         border-radius: 16px;
         box-shadow: 0 4px 20px rgba(0,0,0,0.08);
@@ -30,21 +30,22 @@
         padding: 45px 40px;
     }
     
-    .login-header {
+    .forgot-header {
         text-align: center;
         margin-bottom: 35px;
     }
     
-    .login-header h2 {
+    .forgot-header h2 {
         color: #1a1a1a;
         font-size: 32px;
         font-weight: 700;
         margin-bottom: 10px;
     }
     
-    .login-header p {
+    .forgot-header p {
         color: #666666;
         font-size: 15px;
+        line-height: 1.6;
     }
     
     .alert {
@@ -65,17 +66,6 @@
         background: #d4edda;
         color: #155724;
         border: 1px solid #c3e6cb;
-    }
-    
-    .alert strong {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: 600;
-    }
-    
-    .alert ul {
-        margin-left: 20px;
-        margin-top: 8px;
     }
     
     .form-group {
@@ -177,33 +167,22 @@
     }
     
     @media (max-width: 576px) {
-        .login-container {
+        .forgot-container {
             padding: 35px 25px;
         }
         
-        .login-header h2 {
+        .forgot-header h2 {
             font-size: 26px;
         }
     }
 </style>
 
-<div class="login-wrapper">
-    <div class="login-container">
-        <div class="login-header">
-            <h2>Welcome Back</h2>
-            <p>Login to your SpaLush account</p>
+<div class="forgot-wrapper">
+    <div class="forgot-container">
+        <div class="forgot-header">
+            <h2>Forgot Password?</h2>
+            <p>Enter your email address and we'll send you a link to reset your password.</p>
         </div>
-
-        @if ($errors->any())
-            <div class="alert alert-error">
-                <strong>⚠ Please fix the following errors:</strong>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
 
         @if(session('error'))
             <div class="alert alert-error">
@@ -217,7 +196,7 @@
             </div>
         @endif
         
-        <form action="{{ route('loginuser') }}" method="POST">
+        <form action="{{ route('password.email') }}" method="POST">
             @csrf
             
             <div class="form-group">
@@ -232,21 +211,7 @@
                 >
             </div>
             
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input 
-                    type="password" 
-                    id="password"
-                    name="password" 
-                    placeholder="Enter your password" 
-                    required
-                >
-                <div style="text-align: right; margin-top: 8px;">
-                    <a href="{{ route('password.request') }}" style="color: #c9a961; text-decoration: none; font-size: 13px; font-weight: 600;">Forgot Password?</a>
-                </div>
-            </div>
-            
-            <button type="submit" class="submit-btn">Login</button>
+            <button type="submit" class="submit-btn">Send Reset Link</button>
         </form>
         
         <div class="divider">
@@ -254,7 +219,7 @@
         </div>
         
         <div class="form-footer">
-            Don't have an account? <a href="{{ route('role.selection') }}">Sign Up</a>
+            Remember your password? <a href="{{ route('userlogin') }}">Login</a>
         </div>
     </div>
 </div>

@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SpaOwnerController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SpaController;
+use App\Http\Controllers\PasswordResetController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,6 +20,12 @@ Route::get('/usersignup', [UserController::class, 'showsignup'])->name('usersign
 Route::post('/usersignup', [UserController::class, 'store'])->name('usersignup.create');
 
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+
+// Password Reset Routes
+Route::get('/forgot-password', [PasswordResetController::class, 'showForgotForm'])->name('password.request');
+Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLink'])->name('password.email');
+Route::get('/reset-password/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset-password', [PasswordResetController::class, 'resetPassword'])->name('password.update');
 
 // Admin Routes
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {

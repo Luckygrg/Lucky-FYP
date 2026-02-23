@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Login - SpaLush')
+@section('title', 'Reset Password - SpaLush')
 
 @section('content')
 
@@ -11,7 +11,7 @@
         box-sizing: border-box;
     }
     
-    .login-wrapper {
+    .reset-wrapper {
         min-height: 100vh;
         background: #f8f9fa;
         display: flex;
@@ -20,7 +20,7 @@
         padding: 40px 20px;
     }
     
-    .login-container {
+    .reset-container {
         background: white;
         border-radius: 16px;
         box-shadow: 0 4px 20px rgba(0,0,0,0.08);
@@ -30,19 +30,19 @@
         padding: 45px 40px;
     }
     
-    .login-header {
+    .reset-header {
         text-align: center;
         margin-bottom: 35px;
     }
     
-    .login-header h2 {
+    .reset-header h2 {
         color: #1a1a1a;
         font-size: 32px;
         font-weight: 700;
         margin-bottom: 10px;
     }
     
-    .login-header p {
+    .reset-header p {
         color: #666666;
         font-size: 15px;
     }
@@ -59,23 +59,6 @@
         background: #f8d7da;
         color: #721c24;
         border: 1px solid #f5c6cb;
-    }
-    
-    .alert-success {
-        background: #d4edda;
-        color: #155724;
-        border: 1px solid #c3e6cb;
-    }
-    
-    .alert strong {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: 600;
-    }
-    
-    .alert ul {
-        margin-left: 20px;
-        margin-top: 8px;
     }
     
     .form-group {
@@ -134,76 +117,23 @@
         background: #b8985a;
     }
     
-    .submit-btn:active {
-        transform: translateY(0);
-    }
-    
-    .form-footer {
-        margin-top: 30px;
-        text-align: center;
-    }
-    
-    .form-footer a {
-        color: #c9a961;
-        text-decoration: none;
-        font-size: 14px;
-        font-weight: 600;
-        transition: all 0.3s ease;
-    }
-    
-    .form-footer a:hover {
-        color: #b8985a;
-        text-decoration: underline;
-    }
-    
-    .divider {
-        display: flex;
-        align-items: center;
-        text-align: center;
-        margin: 25px 0;
-        color: #999999;
-        font-size: 14px;
-    }
-    
-    .divider::before,
-    .divider::after {
-        content: '';
-        flex: 1;
-        border-bottom: 1px solid #e8e8e8;
-    }
-    
-    .divider span {
-        padding: 0 15px;
-    }
-    
     @media (max-width: 576px) {
-        .login-container {
+        .reset-container {
             padding: 35px 25px;
         }
         
-        .login-header h2 {
+        .reset-header h2 {
             font-size: 26px;
         }
     }
 </style>
 
-<div class="login-wrapper">
-    <div class="login-container">
-        <div class="login-header">
-            <h2>Welcome Back</h2>
-            <p>Login to your SpaLush account</p>
+<div class="reset-wrapper">
+    <div class="reset-container">
+        <div class="reset-header">
+            <h2>Reset Password</h2>
+            <p>Enter your new password below</p>
         </div>
-
-        @if ($errors->any())
-            <div class="alert alert-error">
-                <strong>⚠ Please fix the following errors:</strong>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
 
         @if(session('error'))
             <div class="alert alert-error">
@@ -211,51 +141,47 @@
             </div>
         @endif
 
-        @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
+        @if ($errors->any())
+            <div class="alert alert-error">
+                <strong>Please fix the following errors:</strong>
+                <ul style="margin: 10px 0 0 20px;">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
         @endif
         
-        <form action="{{ route('loginuser') }}" method="POST">
+        <form action="{{ route('password.update') }}" method="POST">
             @csrf
             
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input 
-                    type="email" 
-                    id="email"
-                    name="email" 
-                    value="{{ old('email') }}" 
-                    placeholder="Enter your email" 
-                    required
-                >
-            </div>
+            <input type="hidden" name="token" value="{{ $token }}">
+            <input type="hidden" name="email" value="{{ $email }}">
             
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password">New Password</label>
                 <input 
                     type="password" 
                     id="password"
                     name="password" 
-                    placeholder="Enter your password" 
+                    placeholder="Enter new password (min 8 characters)" 
                     required
                 >
-                <div style="text-align: right; margin-top: 8px;">
-                    <a href="{{ route('password.request') }}" style="color: #c9a961; text-decoration: none; font-size: 13px; font-weight: 600;">Forgot Password?</a>
-                </div>
             </div>
             
-            <button type="submit" class="submit-btn">Login</button>
+            <div class="form-group">
+                <label for="password_confirmation">Confirm Password</label>
+                <input 
+                    type="password" 
+                    id="password_confirmation"
+                    name="password_confirmation" 
+                    placeholder="Re-enter your password" 
+                    required
+                >
+            </div>
+            
+            <button type="submit" class="submit-btn">Reset Password</button>
         </form>
-        
-        <div class="divider">
-            <span>OR</span>
-        </div>
-        
-        <div class="form-footer">
-            Don't have an account? <a href="{{ route('role.selection') }}">Sign Up</a>
-        </div>
     </div>
 </div>
 
