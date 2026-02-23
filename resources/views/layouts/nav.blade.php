@@ -10,7 +10,7 @@
                 @guest
                     <a href="/" class="luxury-nav-link">Home</a>
                     <a href="{{ route('spas.index') }}" class="luxury-nav-link">Our Spas</a>
-                    <a href="#" class="luxury-nav-link">Experiences</a>
+                    <a href="{{ route('about') }}" class="luxury-nav-link">About</a>
                     <a href="{{ route('userlogin') }}" class="luxury-nav-link">Login</a>
                     <a href="{{ route('role.selection') }}" class="luxury-nav-btn">Register</a>
                 @endguest
@@ -18,6 +18,7 @@
                 @auth
                     <a href="/" class="luxury-nav-link">Home</a>
                     <a href="{{ route('spas.index') }}" class="luxury-nav-link">Our Spas</a>
+                    <a href="{{ route('about') }}" class="luxury-nav-link">About</a>
                     <a href="#" class="luxury-nav-link">My Bookings</a>
                     <span class="luxury-nav-welcome">{{ Auth::user()->name }}</span>
                     <form method="POST" action="{{ route('logout') }}" style="display: inline;">

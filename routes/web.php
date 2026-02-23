@@ -12,6 +12,10 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
 Route::get('/userlogin', [UserController::class, 'showlogin'])->name('userlogin');
 Route::post('/userlogin', [UserController::class, 'login'])->name('loginuser');
 
