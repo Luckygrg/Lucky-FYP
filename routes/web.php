@@ -16,6 +16,19 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
+// Treatment Pages
+Route::get('/treatments/celestial-floatation', function () {
+    return view('treatments.celestial-floatation');
+})->name('treatment.celestial-floatation');
+
+Route::get('/treatments/mud-ritual', function () {
+    return view('treatments.mud-ritual');
+})->name('treatment.mud-ritual');
+
+Route::get('/treatments/hydromassage', function () {
+    return view('treatments.hydromassage');
+})->name('treatment.hydromassage');
+
 Route::get('/userlogin', [UserController::class, 'showlogin'])->name('userlogin');
 Route::post('/userlogin', [UserController::class, 'login'])->name('loginuser');
 

@@ -59,9 +59,9 @@
     
     /* Welcome Section */
     .welcome-section {
-        padding: 100px 20px;
+        padding: 100px 20px 40px;
         text-align: center;
-        background: #f9f9f9;
+        background: #f5f5f5;
     }
     
     .welcome-section h2 {
@@ -84,17 +84,17 @@
     
     /* Services Grid */
     .services-luxury {
-        max-width: 1400px;
+        max-width: 100%;
         margin: 0 auto;
-        padding: 80px 20px;
+        padding: 80px 40px;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 40px;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
     }
     
     .service-luxury-card {
         position: relative;
-        height: 450px;
+        height: 350px;
         overflow: hidden;
         cursor: pointer;
         box-shadow: 0 10px 40px rgba(0,0,0,0.1);
@@ -292,10 +292,191 @@
     <p>At SpaLush, we believe in the transformative power of touch, the healing properties of nature, and the importance of taking time for yourself. Our curated collection of premium spa experiences brings you the finest wellness destinations across Nepal.</p>
 </section>
 
+<!-- Spa Treatments Section -->
+<section class="spa-treatments-section">
+    <div class="treatments-container">
+        <h2 class="treatments-title">Spa Treatments</h2>
+        <p class="treatments-intro">
+            A spa treatment is a professional wellness and beauty service provided by trained therapists in a relaxing spa environment. 
+            It is designed to improve physical health, enhance skin condition, reduce stress and promote overall well-being. 
+            Spa treatments may include massage therapies, skin care services, body cleansing rituals, hydrotherapy and other relaxation-focused experiences. 
+            These treatments help clients feel refreshed, balanced and rejuvenated, both physically and mentally.
+        </p>
+        
+        <div class="treatments-grid">
+            <!-- Celestial Floatation -->
+            <div class="treatment-card">
+                <div class="treatment-image">
+                    <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800" alt="Celestial Floatation">
+                </div>
+                <div class="treatment-content">
+                    <h3 class="treatment-name">Celestial Floatation</h3>
+                    <p class="treatment-preview">
+                        Experience weightless tranquility in our state-of-the-art floatation pods. Immerse yourself in a sensory deprivation environment that promotes deep relaxation and mental clarity.
+                    </p>
+                    <a href="{{ route('treatment.celestial-floatation') }}" class="read-more-btn">Read More</a>
+                </div>
+            </div>
+            
+            <!-- Mud Ritual -->
+            <div class="treatment-card">
+                <div class="treatment-image">
+                    <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800" alt="Mud Ritual">
+                </div>
+                <div class="treatment-content">
+                    <h3 class="treatment-name">Mud Ritual</h3>
+                    <p class="treatment-preview">
+                        Indulge in the ancient healing power of mineral-rich mud therapy. This detoxifying treatment draws out impurities while nourishing your skin with essential minerals.
+                    </p>
+                    <a href="{{ route('treatment.mud-ritual') }}" class="read-more-btn">Read More</a>
+                </div>
+            </div>
+            
+            <!-- Hydromassage -->
+            <div class="treatment-card">
+                <div class="treatment-image">
+                    <img src="https://images.unsplash.com/photo-1596178060671-7a80dc8059ea?w=800" alt="Hydromassage">
+                </div>
+                <div class="treatment-content">
+                    <h3 class="treatment-name">Hydromassage</h3>
+                    <p class="treatment-preview">
+                        Experience the therapeutic power of water with our advanced hydromassage therapy. Targeted water jets provide a customized massage experience without getting wet.
+                    </p>
+                    <a href="{{ route('treatment.hydromassage') }}" class="read-more-btn">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .spa-treatments-section {
+        padding: 40px 20px 100px;
+        background: #f5f5f5;
+    }
+    
+    .treatments-container {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+    
+    .treatments-title {
+        font-size: 42px;
+        font-weight: 300;
+        color: #1a1a1a;
+        text-align: center;
+        margin-bottom: 30px;
+        font-family: 'Georgia', serif;
+        letter-spacing: 2px;
+    }
+    
+    .treatments-intro {
+        font-size: 16px;
+        color: #666;
+        text-align: center;
+        max-width: 900px;
+        margin: 0 auto 40px;
+        line-height: 1.8;
+        font-weight: 300;
+    }
+    
+    .treatments-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+    }
+    
+    .treatment-card {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .treatment-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+    
+    .treatment-image {
+        width: 100%;
+        height: 250px;
+        overflow: hidden;
+    }
+    
+    .treatment-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    
+    .treatment-card:hover .treatment-image img {
+        transform: scale(1.05);
+    }
+    
+    .treatment-content {
+        padding: 30px;
+    }
+    
+    .treatment-name {
+        font-size: 26px;
+        font-weight: 400;
+        color: #1a1a1a;
+        margin-bottom: 15px;
+        font-family: 'Georgia', serif;
+        letter-spacing: 1px;
+    }
+    
+    .treatment-preview {
+        font-size: 15px;
+        color: #666;
+        line-height: 1.7;
+        margin-bottom: 20px;
+    }
+    
+    .read-more-btn {
+        background: transparent;
+        color: #c9a961;
+        border: 2px solid #c9a961;
+        padding: 12px 35px;
+        font-size: 13px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        border-radius: 4px;
+        margin-top: 15px;
+    }
+    
+    .read-more-btn:hover {
+        background: #c9a961;
+        color: white;
+    }
+    
+    @media (max-width: 768px) {
+        .treatments-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .treatments-title {
+            font-size: 32px;
+        }
+        
+        .treatments-intro {
+            font-size: 15px;
+        }
+    }
+</style>
+
 <!-- Services Grid -->
 <section class="services-luxury">
     <div class="service-luxury-card">
-        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800" alt="Massage Therapy">
+        <img src="{{ asset('assets/img/Massage.jpg') }}" alt="Massage Therapy">
         <div class="service-overlay">
             <h3>Massage Therapy</h3>
             <p>Indulge in our signature massage treatments designed to release tension and restore balance.</p>
@@ -303,7 +484,7 @@
     </div>
     
     <div class="service-luxury-card">
-        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800" alt="Facial Treatments">
+        <img src="{{ asset('assets/img/Facial.jpg') }}" alt="Facial Treatments">
         <div class="service-overlay">
             <h3>Facial Treatments</h3>
             <p>Rejuvenate your skin with our luxurious facial treatments using premium organic products.</p>
@@ -311,10 +492,18 @@
     </div>
     
     <div class="service-luxury-card">
-        <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800" alt="Body Treatments">
+        <img src="{{ asset('assets/img/Body.jpg') }}" alt="Body Treatments">
         <div class="service-overlay">
             <h3>Body Treatments</h3>
             <p>Experience complete body renewal with our exclusive body wraps and scrubs.</p>
+        </div>
+    </div>
+    
+    <div class="service-luxury-card">
+        <img src="{{ asset('assets/img/Stone.jpg') }}" alt="Hot Stone Therapy">
+        <div class="service-overlay">
+            <h3>Hot Stone Therapy</h3>
+            <p>Melt away stress with heated volcanic stones that penetrate deep into muscles, easing tension and restoring warmth.</p>
         </div>
     </div>
 </section>
