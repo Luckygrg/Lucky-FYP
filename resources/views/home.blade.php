@@ -7,7 +7,7 @@
         position: relative;
         height: 90vh;
         background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
-                    url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1920') center/cover;
+                    url("{{ asset('assets/img/11.jpg') }}") center/cover;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -59,29 +59,73 @@
     
     /* Welcome Section */
     .welcome-section {
-        padding: 100px 20px 40px;
+        padding: 100px 40px 80px;
         text-align: center;
-        background: #f5f5f5;
+        background: #1a1a1a;
+        position: relative;
+        overflow: hidden;
     }
-    
+
+    .welcome-section::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 1px;
+        background: linear-gradient(to right, transparent, #c9a961, transparent);
+    }
+
+    .welcome-section::after {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        height: 1px;
+        background: linear-gradient(to right, transparent, #c9a961, transparent);
+    }
+
+    .welcome-eyebrow {
+        font-size: 11px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: #c9a961;
+        margin-bottom: 22px;
+        font-weight: 400;
+    }
+
     .welcome-section h2 {
-        font-size: 42px;
+        font-size: 46px;
         font-weight: 300;
-        color: #1a1a1a;
-        margin-bottom: 20px;
+        color: #ffffff;
+        margin-bottom: 16px;
         font-family: 'Georgia', serif;
         letter-spacing: 2px;
+        line-height: 1.2;
     }
-    
-    .welcome-section p {
-        font-size: 18px;
-        color: #666;
-        max-width: 700px;
-        margin: 0 auto 50px;
-        line-height: 1.8;
+
+    .welcome-subtitle {
+        font-size: 15px;
+        color: #c9a961;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: 300;
+        margin-bottom: 36px;
+    }
+
+    .welcome-divider {
+        width: 60px;
+        height: 1px;
+        background: #c9a961;
+        margin: 0 auto 36px;
+    }
+
+    .welcome-section .welcome-body {
+        font-size: 16px;
+        color: rgba(255,255,255,0.65);
+        max-width: 760px;
+        margin: 0 auto 20px;
+        line-height: 1.95;
         font-weight: 300;
     }
-    
+
     /* Services Grid */
     .services-luxury {
         max-width: 100%;
@@ -137,52 +181,6 @@
     }
     
     /* Experience Section */
-    .experience-section {
-        background: #1a1a1a;
-        color: white;
-        padding: 100px 20px;
-        text-align: center;
-    }
-    
-    .experience-section h2 {
-        font-size: 42px;
-        font-weight: 300;
-        margin-bottom: 60px;
-        font-family: 'Georgia', serif;
-        letter-spacing: 2px;
-    }
-    
-    .experience-grid {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 50px;
-    }
-    
-    .experience-item {
-        padding: 20px;
-    }
-    
-    .experience-icon {
-        font-size: 48px;
-        margin-bottom: 20px;
-    }
-    
-    .experience-item h3 {
-        font-size: 20px;
-        font-weight: 400;
-        margin-bottom: 15px;
-        letter-spacing: 1px;
-    }
-    
-    .experience-item p {
-        font-size: 15px;
-        font-weight: 300;
-        opacity: 0.8;
-        line-height: 1.7;
-    }
-    
     /* Stats Luxury */
     .stats-luxury {
         padding: 100px 20px;
@@ -266,7 +264,6 @@
         }
         
         .welcome-section h2,
-        .experience-section h2,
         .cta-luxury h2 {
             font-size: 32px;
         }
@@ -288,8 +285,17 @@
 
 <!-- Welcome Section -->
 <section class="welcome-section">
-    <h2>A Sanctuary of Serenity</h2>
-    <p>At SpaLush, we believe in the transformative power of touch, the healing properties of nature, and the importance of taking time for yourself. Our curated collection of premium spa experiences brings you the finest wellness destinations across Nepal.</p>
+    <p class="welcome-eyebrow">Nepal's Premier Wellness Platform</p>
+    <h2>Welcome to Spa Lush</h2>
+    <p class="welcome-subtitle">Your one-stop destination for relaxation &amp; wellness</p>
+    <div class="welcome-divider"></div>
+    <p class="welcome-body">
+        Discover and book the finest spa and wellness services across Nepal — all in one place. Spa Lush makes it effortless to browse treatments, check availability and secure your appointment online in just a few clicks.
+    </p>
+    <p class="welcome-body">
+        Whether you're looking for a soothing massage, a therapeutic treatment or a full wellness experience, Spa Lush connects you with trusted spa professionals near you. No more phone calls, no more waiting just seamless, stress-free booking at your fingertips.
+    </p>
+
 </section>
 
 <!-- Spa Treatments Section -->
@@ -307,7 +313,7 @@
             <!-- Celestial Floatation -->
             <div class="treatment-card">
                 <div class="treatment-image">
-                    <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800" alt="Celestial Floatation">
+                    <img src="{{ asset('assets/img/celestial_floatation.jpg') }}" alt="Celestial Floatation">
                 </div>
                 <div class="treatment-content">
                     <h3 class="treatment-name">Celestial Floatation</h3>
@@ -321,7 +327,7 @@
             <!-- Mud Ritual -->
             <div class="treatment-card">
                 <div class="treatment-image">
-                    <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800" alt="Mud Ritual">
+                    <img src="{{ asset('assets/img/mud_ritual.jpg') }}" alt="Mud Ritual">
                 </div>
                 <div class="treatment-content">
                     <h3 class="treatment-name">Mud Ritual</h3>
@@ -335,7 +341,7 @@
             <!-- Hydromassage -->
             <div class="treatment-card">
                 <div class="treatment-image">
-                    <img src="https://images.unsplash.com/photo-1596178060671-7a80dc8059ea?w=800" alt="Hydromassage">
+                    <img src="{{ asset('assets/img/hydromassage.jpg') }}" alt="Hydromassage">
                 </div>
                 <div class="treatment-content">
                     <h3 class="treatment-name">Hydromassage</h3>
@@ -508,35 +514,7 @@
     </div>
 </section>
 
-<!-- Experience Section -->
-<section class="experience-section">
-    <h2>The SpaLush Experience</h2>
-    <div class="experience-grid">
-        <div class="experience-item">
-            <div class="experience-icon">✨</div>
-            <h3>Premium Quality</h3>
-            <p>Only the finest spas and wellness centers, carefully selected for excellence.</p>
-        </div>
-        
-        <div class="experience-item">
-            <div class="experience-icon">🌿</div>
-            <h3>Natural Products</h3>
-            <p>Organic and natural treatments that honor your body and the environment.</p>
-        </div>
-        
-        <div class="experience-item">
-            <div class="experience-icon">👐</div>
-            <h3>Expert Therapists</h3>
-            <p>Highly trained professionals dedicated to your wellness journey.</p>
-        </div>
-        
-        <div class="experience-item">
-            <div class="experience-icon">🎯</div>
-            <h3>Personalized Care</h3>
-            <p>Tailored treatments designed specifically for your unique needs.</p>
-        </div>
-    </div>
-</section>
+
 
 <!-- Stats Section -->
 <section class="stats-luxury">

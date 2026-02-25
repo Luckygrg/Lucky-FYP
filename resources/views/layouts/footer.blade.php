@@ -55,21 +55,20 @@
         .luxury-footer {
             background: #1a1a1a;
             color: rgba(255,255,255,0.7);
-            padding: 80px 0 30px;
+            padding: 60px 0 24px;
             margin-top: 0;
         }
         
         .luxury-footer-container {
-            max-width: 1400px;
-            margin: 0 auto;
+            width: 100%;
             padding: 0 40px;
         }
         
         .luxury-footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 50px;
-            margin-bottom: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
         }
         
         .luxury-footer-section h3 {

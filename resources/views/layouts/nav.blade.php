@@ -3,7 +3,7 @@
     <nav class="luxury-navbar">
         <div class="luxury-nav-container">
             <a class="luxury-logo" href="/">
-                <img src="{{ asset('assets/img/logo.png') }}" alt="SpaLush Logo" style="height: 100px; width: auto; object-fit: contain;">
+                <img src="{{ asset('assets/img/logo.png') }}" alt="SpaLush Logo" style="height: 86px; width: auto; object-fit: contain;">
             </a>
 
             <div class="luxury-nav-menu">
@@ -35,7 +35,7 @@
         .luxury-navbar {
             background: rgba(26, 26, 26, 0.95);
             backdrop-filter: blur(10px);
-            padding: 20px 0;
+            padding: 7px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -43,9 +43,8 @@
         }
         
         .luxury-nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
+            width: 100%;
+            padding: 0 40px 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -57,10 +56,11 @@
             gap: 10px;
             text-decoration: none;
             color: white;
+            padding: 4px 8px;
         }
         
         .logo-icon {
-            font-size: 24px;
+            font-size: 32px;
             color: #c9a961;
         }
         
@@ -75,14 +75,14 @@
         .luxury-nav-menu {
             display: flex;
             align-items: center;
-            gap: 35px;
+            gap: 45px;
         }
         
         .luxury-nav-link {
             color: rgba(255,255,255,0.85);
             text-decoration: none;
-            font-size: 13px;
-            letter-spacing: 1.5px;
+            font-size: 14px;
+            letter-spacing: 1.8px;
             text-transform: uppercase;
             font-weight: 400;
             transition: all 0.3s ease;
@@ -109,12 +109,12 @@
         }
         
         .luxury-nav-btn {
-            padding: 10px 28px;
+            padding: 12px 32px;
             background: transparent;
             color: rgba(255,255,255,0.9);
             border: 1px solid rgba(255,255,255,0.25);
             text-decoration: none;
-            font-size: 12px;
+            font-size: 13px;
             letter-spacing: 2px;
             text-transform: uppercase;
             transition: all 0.3s ease;
