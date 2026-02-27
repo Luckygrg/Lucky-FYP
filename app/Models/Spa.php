@@ -25,6 +25,7 @@ class Spa extends Model
         'email',
         'opening_hours',
         'is_active',
+        'status',
     ];
 
     protected $casts = [

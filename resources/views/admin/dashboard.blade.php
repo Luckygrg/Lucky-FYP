@@ -254,10 +254,10 @@
     <div class="sidebar">
         <div class="logo">SPA<span>LUSH</span></div>
         
-        <a href="#" class="menu-item active">
+        <a href="{{ route('admin.admin') }}" class="menu-item active">
             <span>📊</span> Dashboard
         </a>
-        <a href="#" class="menu-item">
+        <a href="{{ route('admin.spa_owners') }}" class="menu-item">
             <span>🏢</span> Spa Owners
         </a>
         <a href="#" class="menu-item">
@@ -298,19 +298,19 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <h3>Total Spa Owners</h3>
-                <div class="number">25</div>
+                <div class="number">{{ $totalSpaOwners }}</div>
             </div>
             <div class="stat-card">
                 <h3>Total Customers</h3>
-                <div class="number">1,234</div>
+                <div class="number">{{ $totalCustomers }}</div>
             </div>
             <div class="stat-card">
-                <h3>Total Services</h3>
-                <div class="number">156</div>
+                <h3>Total Spas</h3>
+                <div class="number">{{ $totalSpas }}</div>
             </div>
             <div class="stat-card">
-                <h3>Platform Revenue</h3>
-                <div class="number">$45,890</div>
+                <h3>Pending Approvals</h3>
+                <div class="number">{{ $pendingSpas }}</div>
             </div>
         </div>
         
@@ -318,7 +318,7 @@
         <div class="quick-actions">
             <h2>Quick Actions</h2>
             <div class="actions-grid">
-                <a href="#" class="action-btn">🏢 Manage Spa Owners</a>
+                <a href="{{ route('admin.spa_owners') }}" class="action-btn">🏢 Manage Spa Owners</a>
                 <a href="#" class="action-btn">👥 Manage Customers</a>
                 <a href="#" class="action-btn">💆 Manage Services</a>
                 <a href="#" class="action-btn">📊 View System Activity</a>

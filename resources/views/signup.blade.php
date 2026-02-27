@@ -208,6 +208,29 @@
             <p>Join SpaLush and get started today</p>
         </div>
 
+        @if($selectedRole === 'spa_owner')
+        <div style="
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            border-left: 4px solid #c9a961;
+            border-radius: 6px;
+            padding: 14px 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 13.5px;
+            color: #78600a;
+            line-height: 1.6;
+        ">
+            <span style="font-size:18px; flex-shrink:0;">ℹ️</span>
+            <div>
+                <strong>Admin Approval Required</strong><br>
+                After registering, your spa listing must be <strong>reviewed and approved by an admin</strong> before it becomes visible to customers. You will be able to submit your spa details from your dashboard.
+            </div>
+        </div>
+        @endif
+
         @if ($errors->any())
             <div class="alert alert-error">
                 <strong>⚠ Please fix the following errors:</strong>

@@ -14,6 +14,7 @@ class SpaController extends Controller
     public function index()
     {
         $spas = Spa::where('is_active', true)
+            ->where('status', 'approved')
             ->orderBy('is_featured', 'desc')
             ->orderBy('rating', 'desc')
             ->get();
