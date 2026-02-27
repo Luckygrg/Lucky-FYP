@@ -46,5 +46,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Get the spa owned by this user (one-to-one).
+     */
+    public function spa()
+    {
+        return $this->hasOne(Spa::class, 'user_id');
+    }
 } 
 

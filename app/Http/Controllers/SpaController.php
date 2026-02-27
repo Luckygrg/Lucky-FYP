@@ -26,6 +26,11 @@ class SpaController extends Controller
      */
     public function create()
     {
+        if (Auth::user()->spa()->exists()) {
+            return redirect()->route('spa_owner.dashboard')
+                ->with('error', 'You already have a spa registered. Only one spa is allowed per owner.');
+        }
+
         return view('spas.create');
     }
 
@@ -34,6 +39,11 @@ class SpaController extends Controller
      */
     public function store(Request $request)
     {
+        if (Auth::user()->spa()->exists()) {
+            return redirect()->route('spa_owner.dashboard')
+                ->with('error', 'You already have a spa registered. Only one spa is allowed per owner.');
+        }
+
         $request->validate([
             'name' => 'required|string|max:255',
             'location' => 'required|string|max:255',

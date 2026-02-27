@@ -337,7 +337,11 @@
         <div class="quick-actions">
             <h2>Quick Actions</h2>
             <div class="actions-grid">
-                <a href="{{ route('spa_owner.spas.create') }}" class="action-btn">➕ Add Your Spa</a>
+                @if(!$spa)
+                    <a href="{{ route('spa_owner.spas.create') }}" class="action-btn">➕ Add Your Spa</a>
+                @else
+                    <a href="{{ route('spas.show', $spa) }}" class="action-btn">🏠 View My Spa</a>
+                @endif
                 <a href="#" class="action-btn">💆 Add New Service</a>
                 <a href="#" class="action-btn">📅 View All Bookings</a>
                 <a href="#" class="action-btn">🕐 Update Schedule</a>

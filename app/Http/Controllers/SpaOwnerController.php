@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Spa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SpaOwnerController extends Controller
 {
@@ -11,6 +13,8 @@ class SpaOwnerController extends Controller
      */
     public function dashboard()
     {
-        return view('spa_owner.dashboard');
+        $spa = Spa::where('user_id', Auth::id())->first();
+
+        return view('spa_owner.dashboard', compact('spa'));
     }
 }
