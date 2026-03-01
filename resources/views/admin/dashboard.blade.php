@@ -260,10 +260,7 @@
         <a href="{{ route('admin.spa_owners') }}" class="menu-item">
             <span>🏢</span> Spa Owners
         </a>
-        <a href="#" class="menu-item">
-            <span>👥</span> Customers
-        </a>
-        <a href="#" class="menu-item">
+        <a href="{{ route('admin.services') }}" class="menu-item">
             <span>💆</span> Services
         </a>
         <a href="#" class="menu-item">
@@ -305,7 +302,7 @@
                 <div class="number">{{ $totalCustomers }}</div>
             </div>
             <div class="stat-card">
-                <h3>Total Spas</h3>
+                <h3>Approved Spas</h3>
                 <div class="number">{{ $totalSpas }}</div>
             </div>
             <div class="stat-card">
@@ -319,9 +316,9 @@
             <h2>Quick Actions</h2>
             <div class="actions-grid">
                 <a href="{{ route('admin.spa_owners') }}" class="action-btn">🏢 Manage Spa Owners</a>
-                <a href="#" class="action-btn">👥 Manage Customers</a>
-                <a href="#" class="action-btn">💆 Manage Services</a>
-                <a href="#" class="action-btn">📊 View System Activity</a>
+                <a href="{{ route('admin.services') }}" class="action-btn">💆 Manage Services</a>
+                <a href="#" class="action-btn">📈 View System Activity</a>
+                <a href="#" class="action-btn">⚙️ Settings</a>
             </div>
         </div>
         
@@ -331,7 +328,6 @@
             <ul>
                 <li>✓ Login to admin panel with secure authentication</li>
                 <li>✓ Manage spa owners (view, approve, suspend accounts)</li>
-                <li>✓ Manage customers (view profiles, manage accounts)</li>
                 <li>✓ Manage all services across the platform</li>
                 <li>✓ Monitor system activity and access logs</li>
                 <li>✓ View platform statistics and generate reports</li>

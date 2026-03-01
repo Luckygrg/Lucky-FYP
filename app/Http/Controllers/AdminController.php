@@ -13,10 +13,10 @@ class AdminController extends Controller
      */
     public function dashboard()
     {
-        $totalSpaOwners = User::where('role', 'spa_owner')->count();
-        $totalCustomers = User::where('role', 'customer')->count();
-        $totalSpas      = Spa::count();
-        $pendingSpas    = Spa::where('status', 'pending')->count();
+        $totalSpaOwners  = User::where('role', 'spa_owner')->count();
+        $totalCustomers  = User::where('role', 'customer')->count();
+        $totalSpas       = Spa::where('status', 'approved')->count();
+        $pendingSpas     = Spa::where('status', 'pending')->count();
 
         return view('admin.dashboard', compact(
             'totalSpaOwners',
@@ -64,5 +64,18 @@ class AdminController extends Controller
     {
         $spa->update(['status' => 'disapproved', 'is_active' => false]);
         return back()->with('error', "Spa '{$spa->name}' has been disapproved.");
+    }
+
+    /**
+     * Show all approved spas and their services
+     */
+    public function services()
+    {
+        $spas = Spa::where('status', 'approved')
+            ->with('services')
+            ->orderBy('name')
+            ->get();
+
+        return view('admin.services', compact('spas'));
     }
 }

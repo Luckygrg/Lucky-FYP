@@ -42,4 +42,12 @@ class Spa extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    /**
+     * Get the services offered by this spa
+     */
+    public function services()
+    {
+        return $this->hasMany(Service::class);
+    }
 }

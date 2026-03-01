@@ -51,12 +51,32 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/spa-owners/{user}', [AdminController::class, 'showSpaOwner'])->name('spa_owner_show');
     Route::post('/spas/{spa}/approve', [AdminController::class, 'approveSpa'])->name('spa.approve');
     Route::post('/spas/{spa}/disapprove', [AdminController::class, 'disapproveSpa'])->name('spa.disapprove');
+    Route::get('/services', [AdminController::class, 'services'])->name('services');
 });
 
 // Spa Owner Routes
 Route::middleware(['auth', 'role:spa_owner'])->prefix('spa-owner')->name('spa_owner.')->group(function () {
     Route::get('/dashboard', [SpaOwnerController::class, 'dashboard'])->name('dashboard');
+
+    // Spa management
     Route::get('/spas/create', [SpaController::class, 'create'])->name('spas.create');
+    Route::get('/spa/edit', [SpaOwnerController::class, 'editSpa'])->name('spa.edit');
+    Route::put('/spa', [SpaOwnerController::class, 'updateSpa'])->name('spa.update');
+
+    // Services CRUD
+    Route::get('/services', [SpaOwnerController::class, 'services'])->name('services');
+    Route::get('/services/create', [SpaOwnerController::class, 'createService'])->name('services.create');
+    Route::post('/services', [SpaOwnerController::class, 'storeService'])->name('services.store');
+    Route::get('/services/{service}/edit', [SpaOwnerController::class, 'editService'])->name('services.edit');
+    Route::put('/services/{service}', [SpaOwnerController::class, 'updateService'])->name('services.update');
+    Route::delete('/services/{service}', [SpaOwnerController::class, 'destroyService'])->name('services.destroy');
+
+    // Other pages
+    Route::get('/bookings', [SpaOwnerController::class, 'bookings'])->name('bookings');
+    Route::get('/schedule', [SpaOwnerController::class, 'schedule'])->name('schedule');
+    Route::get('/customers', [SpaOwnerController::class, 'customers'])->name('customers');
+    Route::get('/settings', [SpaOwnerController::class, 'settings'])->name('settings');
+    Route::put('/settings', [SpaOwnerController::class, 'updateSettings'])->name('settings.update');
 });
 
 // Spa Routes (public and authenticated)

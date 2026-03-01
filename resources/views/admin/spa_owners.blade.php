@@ -244,10 +244,7 @@
         <a href="{{ route('admin.spa_owners') }}" class="menu-item active">
             <span>🏢</span> Spa Owners
         </a>
-        <a href="#" class="menu-item">
-            <span>👥</span> Customers
-        </a>
-        <a href="#" class="menu-item">
+        <a href="{{ route('admin.services') }}" class="menu-item">
             <span>💆</span> Services
         </a>
         <a href="#" class="menu-item">

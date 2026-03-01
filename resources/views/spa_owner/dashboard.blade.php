@@ -18,75 +18,7 @@
         font-family: Arial, sans-serif;
     }
     
-    .sidebar {
-        width: 260px;
-        background: #1a1a1a;
-        padding: 30px 0;
-        display: flex;
-        flex-direction: column;
-        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-    }
-    
-    .logo {
-        font-size: 24px;
-        font-weight: 300;
-        color: white;
-        margin: 0 30px 50px;
-        letter-spacing: 3px;
-        font-family: 'Georgia', serif;
-    }
-    
-    .logo span {
-        color: #c9a961;
-    }
-    
-    .menu-item {
-        padding: 15px 30px;
-        margin-bottom: 5px;
-        color: rgba(255,255,255,0.7);
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        transition: all 0.3s;
-        font-size: 14px;
-        letter-spacing: 0.5px;
-    }
-    
-    .menu-item:hover {
-        background: rgba(201, 169, 97, 0.1);
-        color: #c9a961;
-    }
-    
-    .menu-item.active {
-        background: rgba(201, 169, 97, 0.15);
-        color: #c9a961;
-        border-left: 3px solid #c9a961;
-    }
-    
-    .logout-btn {
-        margin-top: auto;
-        margin-left: 30px;
-        margin-right: 30px;
-        padding: 12px 20px;
-        border-radius: 4px;
-        border: 1px solid rgba(255,255,255,0.2);
-        background: transparent;
-        color: rgba(255,255,255,0.7);
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        transition: all 0.3s;
-        font-size: 14px;
-        letter-spacing: 0.5px;
-    }
-    
-    .logout-btn:hover {
-        background: #c9a961;
-        border-color: #c9a961;
-        color: white;
-    }
+    /* sidebar styles live in the partial */
     
     .main-content {
         flex: 1;
@@ -269,36 +201,7 @@
 </style>
 
 <div class="dashboard-container">
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <div class="logo">SPA<span>LUSH</span></div>
-        
-        <a href="#" class="menu-item active">
-            <span>📊</span> Dashboard
-        </a>
-        <a href="#" class="menu-item">
-            <span>💆</span> Services
-        </a>
-        <a href="#" class="menu-item">
-            <span>📅</span> Bookings
-        </a>
-        <a href="#" class="menu-item">
-            <span>🕐</span> Schedule
-        </a>
-        <a href="#" class="menu-item">
-            <span>👥</span> Customers
-        </a>
-        <a href="#" class="menu-item">
-            <span>⚙️</span> Settings
-        </a>
-        
-        <form action="{{ route('logout') }}" method="POST" style="margin-top: auto;">
-            @csrf
-            <button type="submit" class="logout-btn">
-                <span>🚪</span> Log Out
-            </button>
-        </form>
-    </div>
+    @include('spa_owner.partials.sidebar')
     
     <!-- Main Content -->
     <div class="main-content">
@@ -317,19 +220,19 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <h3>Total Services</h3>
-                <div class="number">12</div>
+                <div class="number">{{ $servicesCount }}</div>
             </div>
             <div class="stat-card">
                 <h3>Total Bookings</h3>
-                <div class="number">45</div>
+                <div class="number">0</div>
             </div>
             <div class="stat-card">
                 <h3>Total Customers</h3>
-                <div class="number">38</div>
+                <div class="number">0</div>
             </div>
             <div class="stat-card">
                 <h3>Total Earning</h3>
-                <div class="number">$2,450</div>
+                <div class="number">$0</div>
             </div>
         </div>
         
@@ -341,11 +244,13 @@
                     <a href="{{ route('spa_owner.spas.create') }}" class="action-btn">➕ Add Your Spa</a>
                 @else
                     <a href="{{ route('spas.show', $spa) }}" class="action-btn">🏠 View My Spa</a>
+                    <a href="{{ route('spa_owner.spa.edit') }}" class="action-btn">✏️ Edit My Spa</a>
                 @endif
-                <a href="#" class="action-btn">💆 Add New Service</a>
-                <a href="#" class="action-btn">📅 View All Bookings</a>
-                <a href="#" class="action-btn">🕐 Update Schedule</a>
-                <a href="#" class="action-btn">👥 View Customers</a>
+                <a href="{{ route('spa_owner.services.create') }}" class="action-btn">➕ Add New Service</a>
+                <a href="{{ route('spa_owner.services') }}" class="action-btn">💆 Manage Services</a>
+                <a href="{{ route('spa_owner.bookings') }}" class="action-btn">📅 View All Bookings</a>
+                <a href="{{ route('spa_owner.schedule') }}" class="action-btn">🕐 Update Schedule</a>
+                <a href="{{ route('spa_owner.customers') }}" class="action-btn">👥 View Customers</a>
             </div>
         </div>
         
