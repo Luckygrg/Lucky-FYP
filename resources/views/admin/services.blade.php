@@ -1,4 +1,4 @@
-@extends('layouts.main')
+﻿@extends('layouts.main')
 
 @section('title', 'Services - Admin | SpaLush')
 
@@ -10,7 +10,7 @@
     .dashboard-container {
         display: flex;
         min-height: 100vh;
-        background: #f8f9fa;
+        background: #1a1a1a;
         font-family: Arial, sans-serif;
     }
 
@@ -46,20 +46,20 @@
 
     .page-header { margin-bottom: 30px; }
     .page-header h1 {
-        font-size: 32px; color: #1a1a1a; font-weight: 300;
+        font-size: 32px; color: white; font-weight: 300;
         font-family: 'Georgia', serif; letter-spacing: 1px; margin-bottom: 8px;
     }
-    .page-header p { color: #888; font-size: 15px; }
+    .page-header p { color: rgba(255,255,255,0.6); font-size: 15px; }
 
     /* ── Summary Bar ── */
     .summary-bar {
         display: flex; gap: 16px; margin-bottom: 30px; flex-wrap: wrap;
     }
     .summary-pill {
-        background: white;
+        background: #2a2a2a;
         border-radius: 8px;
         padding: 16px 24px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         border-left: 4px solid #c9a961;
         min-width: 150px;
     }
@@ -68,11 +68,12 @@
 
     /* ── Spa Block ── */
     .spa-block {
-        background: white;
+        background: #2a2a2a;
         border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         margin-bottom: 28px;
         overflow: hidden;
+        border: 1px solid rgba(201,169,97,0.15);
     }
 
     .spa-header {
@@ -116,35 +117,35 @@
 
     table { width: 100%; border-collapse: collapse; }
     thead th {
-        background: #f8f9fa;
+        background: #111;
         padding: 12px 16px;
         text-align: left;
         font-size: 11px;
         font-weight: 600;
-        color: #999;
+        color: rgba(255,255,255,0.5);
         text-transform: uppercase;
         letter-spacing: 0.8px;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
     }
-    tbody tr { border-bottom: 1px solid #f5f5f5; transition: background 0.15s; }
-    tbody tr:hover { background: #fafafa; }
+    tbody tr { border-bottom: 1px solid rgba(255,255,255,0.06); transition: background 0.15s; }
+    tbody tr:hover { background: rgba(201,169,97,0.05); }
     tbody tr:last-child { border-bottom: none; }
-    td { padding: 14px 16px; font-size: 13.5px; color: #333; vertical-align: middle; }
+    td { padding: 14px 16px; font-size: 13.5px; color: rgba(255,255,255,0.7); vertical-align: middle; }
 
-    .service-name { font-weight: 500; color: #1a1a1a; }
-    .service-desc { font-size: 12px; color: #888; margin-top: 3px; line-height: 1.5; }
+    .service-name { font-weight: 500; color: white; }
+    .service-desc { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 3px; line-height: 1.5; }
 
     .category-chip {
-        background: #f1f5f9;
-        color: #475569;
+        background: rgba(255,255,255,0.1);
+        color: rgba(255,255,255,0.7);
         padding: 3px 10px;
         border-radius: 10px;
         font-size: 12px;
         font-weight: 500;
     }
 
-    .price { font-weight: 600; color: #1a1a1a; }
-    .duration { color: #666; font-size: 13px; }
+    .price { font-weight: 600; color: #c9a961; }
+    .duration { color: rgba(255,255,255,0.6); font-size: 13px; }
 
     .badge {
         display: inline-block; padding: 3px 10px; border-radius: 10px;
@@ -167,9 +168,9 @@
 
     /* Empty state (no spas) */
     .empty-state {
-        background: white; border-radius: 8px; padding: 70px 20px;
-        text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        color: #aaa;
+        background: #2a2a2a; border-radius: 8px; padding: 70px 20px;
+        text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        color: rgba(255,255,255,0.4);
     }
     .empty-state p { margin-top: 12px; font-size: 15px; }
 
@@ -185,15 +186,16 @@
     <div class="sidebar">
         <div class="logo">SPA<span>LUSH</span></div>
 
-        <a href="{{ route('admin.admin') }}" class="menu-item"><span>📊</span> Dashboard</a>
-        <a href="{{ route('admin.spa_owners') }}" class="menu-item"><span>🏢</span> Spa Owners</a>
-        <a href="{{ route('admin.services') }}" class="menu-item active"><span>💆</span> Services</a>
-        <a href="#" class="menu-item"><span>📈</span> System Activity</a>
-        <a href="#" class="menu-item"><span>⚙️</span> Settings</a>
+        <a href="{{ route('admin.admin') }}" class="menu-item"><span></span> Dashboard</a>
+        <a href="{{ route('admin.spa_owners') }}" class="menu-item"><span></span> Spa Owners</a>
+        <a href="{{ route('admin.services') }}" class="menu-item active"><span></span> Services</a>
+        <a href="{{ route('admin.categories.index') }}" class="menu-item"><span></span> Spa Categories</a>
+        <a href="#" class="menu-item"><span></span> System Activity</a>
+        <a href="#" class="menu-item"><span></span> Settings</a>
 
         <form action="{{ route('logout') }}" method="POST" style="margin-top: auto; padding: 0 30px;">
             @csrf
-            <button type="submit" class="logout-btn"><span>🚪</span> Log Out</button>
+            <button type="submit" class="logout-btn"><span></span> Log Out</button>
         </form>
     </div>
 
@@ -222,7 +224,7 @@
 
         @if($spas->isEmpty())
             <div class="empty-state">
-                <div style="font-size:40px;">💆</div>
+                <div style="font-size:40px;"></div>
                 <p>No approved spas yet. Approve a spa to see their services here.</p>
             </div>
         @else
@@ -252,7 +254,7 @@
                 <!-- Services Table -->
                 @if($spa->services->isEmpty())
                     <div class="no-services">
-                        <span>📋</span> This spa has not added any services yet.
+                        <span></span> This spa has not added any services yet.
                     </div>
                 @else
                 <div class="services-table-wrap">
@@ -300,9 +302,9 @@
                                 </td>
                                 <td>
                                     @if($service->is_available)
-                                        <span class="badge badge-available">✓ Available</span>
+                                        <span class="badge badge-available"> Available</span>
                                     @else
-                                        <span class="badge badge-unavailable">✕ Unavailable</span>
+                                        <span class="badge badge-unavailable"> Unavailable</span>
                                     @endif
                                 </td>
                             </tr>

@@ -13,7 +13,7 @@
     
     .forgot-wrapper {
         min-height: 100vh;
-        background: #f8f9fa;
+        background: #1a1a1a;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -21,10 +21,10 @@
     }
     
     .forgot-container {
-        background: white;
+        background: #2a2a2a;
         border-radius: 16px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        border: 2px solid #e8e8e8;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        border: 2px solid rgba(201,169,97,0.2);
         max-width: 450px;
         width: 100%;
         padding: 45px 40px;
@@ -36,14 +36,14 @@
     }
     
     .forgot-header h2 {
-        color: #1a1a1a;
+        color: white;
         font-size: 32px;
         font-weight: 700;
         margin-bottom: 10px;
     }
     
     .forgot-header p {
-        color: #666666;
+        color: rgba(255,255,255,0.6);
         font-size: 15px;
         line-height: 1.6;
     }
@@ -74,7 +74,7 @@
     
     .form-group label {
         display: block;
-        color: #1a1a1a;
+        color: rgba(255,255,255,0.7);
         font-size: 14px;
         font-weight: 600;
         margin-bottom: 8px;
@@ -83,12 +83,12 @@
     .form-group input {
         width: 100%;
         padding: 14px 16px;
-        border: 2px solid #e8e8e8;
+        border: 1px solid rgba(255,255,255,0.15);
         border-radius: 10px;
         font-size: 15px;
-        color: #1a1a1a;
+        color: rgba(255,255,255,0.9);
         transition: all 0.3s ease;
-        background: white;
+        background: #2d2d2d;
     }
     
     .form-group input:focus {
@@ -98,7 +98,7 @@
     }
     
     .form-group input::placeholder {
-        color: #999999;
+        color: rgba(255,255,255,0.3);
     }
     
     .submit-btn {
@@ -151,7 +151,7 @@
         align-items: center;
         text-align: center;
         margin: 25px 0;
-        color: #999999;
+        color: rgba(255,255,255,0.4);
         font-size: 14px;
     }
     
@@ -159,7 +159,7 @@
     .divider::after {
         content: '';
         flex: 1;
-        border-bottom: 1px solid #e8e8e8;
+        border-bottom: 1px solid rgba(255,255,255,0.15);
     }
     
     .divider span {

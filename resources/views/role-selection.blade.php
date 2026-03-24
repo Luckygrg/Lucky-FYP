@@ -16,7 +16,7 @@
     
     .role-selection-wrapper {
         min-height: 100vh;
-        background: #ffffff;
+        background: #1a1a1a;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -34,14 +34,14 @@
     }
     
     .header-section h1 {
-        color: #1a1a1a;
+        color: white;
         font-size: 42px;
         font-weight: 700;
         margin-bottom: 15px;
     }
     
     .header-section p {
-        color: #666666;
+        color: rgba(255,255,255,0.6);
         font-size: 18px;
         font-weight: 400;
     }
@@ -54,11 +54,11 @@
     }
     
     .role-card {
-        background: white;
+        background: #2a2a2a;
         border-radius: 16px;
         padding: 45px 35px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        border: 2px solid #e8e8e8;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        border: 2px solid rgba(201,169,97,0.2);
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         position: relative;
         overflow: hidden;
@@ -103,7 +103,7 @@
     }
     
     .role-card h2 {
-        color: #1a1a1a;
+        color: white;
         font-size: 28px;
         font-weight: 700;
         text-align: center;
@@ -111,7 +111,7 @@
     }
     
     .role-description {
-        color: #666666;
+        color: rgba(255,255,255,0.6);
         font-size: 16px;
         text-align: center;
         margin-bottom: 30px;
@@ -124,7 +124,7 @@
     }
     
     .features-list li {
-        color: #333333;
+        color: rgba(255,255,255,0.8);
         font-size: 15px;
         padding: 12px 0;
         padding-left: 35px;
@@ -133,7 +133,7 @@
     }
     
     .features-list li::before {
-        content: '✓';
+        content: '';
         position: absolute;
         left: 0;
         top: 12px;
@@ -177,7 +177,7 @@
     }
     
     .footer-links p {
-        color: #666666;
+        color: rgba(255,255,255,0.6);
         font-size: 16px;
     }
     

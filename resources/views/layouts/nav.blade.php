@@ -40,6 +40,7 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(201, 169, 97, 0.35);
         }
         
         .luxury-nav-container {

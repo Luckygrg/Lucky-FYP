@@ -19,22 +19,23 @@
     .create-spa-header h1 {
         font-size: 36px;
         font-weight: 300;
-        color: #1a1a1a;
+        color: white;
         margin-bottom: 10px;
         font-family: 'Georgia', serif;
         letter-spacing: 1px;
     }
     
     .create-spa-header p {
-        color: #666;
+        color: rgba(255,255,255,0.6);
         font-size: 16px;
     }
     
     .spa-form {
-        background: white;
+        background: #2a2a2a;
         padding: 40px;
         border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        border: 1px solid rgba(201,169,97,0.15);
     }
     
     .form-group {
@@ -43,7 +44,7 @@
     
     .form-group label {
         display: block;
-        color: #1a1a1a;
+        color: rgba(255,255,255,0.7);
         font-size: 14px;
         font-weight: 600;
         margin-bottom: 8px;
@@ -54,10 +55,11 @@
     .form-group select {
         width: 100%;
         padding: 12px 16px;
-        border: 2px solid #e8e8e8;
+        border: 1px solid rgba(255,255,255,0.15);
         border-radius: 8px;
         font-size: 15px;
-        color: #1a1a1a;
+        color: rgba(255,255,255,0.9);
+        background: #2d2d2d;
         transition: all 0.3s ease;
     }
     
@@ -76,7 +78,7 @@
     
     .form-group small {
         display: block;
-        color: #999;
+        color: rgba(255,255,255,0.4);
         font-size: 13px;
         margin-top: 6px;
     }

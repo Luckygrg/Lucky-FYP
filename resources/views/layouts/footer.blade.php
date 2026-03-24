@@ -57,6 +57,7 @@
             color: rgba(255,255,255,0.7);
             padding: 60px 0 24px;
             margin-top: 0;
+            border-top: 1px solid rgba(201, 169, 97, 0.35);
         }
         
         .luxury-footer-container {

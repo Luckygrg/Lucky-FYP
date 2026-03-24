@@ -10,7 +10,7 @@
     .dashboard-container {
         display: flex;
         min-height: 100vh;
-        background: #f8f9fa;
+        background: #1a1a1a;
         font-family: Arial, sans-serif;
     }
 
@@ -74,13 +74,13 @@
     .header { margin-bottom: 30px; }
     .header h1 {
         font-size: 32px;
-        color: #1a1a1a;
+        color: white;
         font-weight: 300;
         margin-bottom: 8px;
         font-family: 'Georgia', serif;
         letter-spacing: 1px;
     }
-    .header p { color: #666; font-size: 15px; }
+    .header p { color: rgba(255,255,255,0.6); font-size: 15px; }
 
     /* ── Alert Messages ── */
     .alert {
@@ -102,10 +102,10 @@
     }
     .filter-btn {
         padding: 8px 18px;
-        border: 1px solid #ddd;
+        border: 1px solid rgba(255,255,255,0.15);
         border-radius: 20px;
-        background: white;
-        color: #555;
+        background: #2a2a2a;
+        color: rgba(255,255,255,0.6);
         cursor: pointer;
         font-size: 13px;
         text-decoration: none;
@@ -119,14 +119,15 @@
 
     /* ── Table Card ── */
     .table-card {
-        background: white;
+        background: #2a2a2a;
         border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         overflow: hidden;
+        border: 1px solid rgba(201,169,97,0.15);
     }
     .table-card-header {
         padding: 20px 25px;
-        border-bottom: 1px solid #f0f0f0;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -134,7 +135,7 @@
     .table-card-header h2 {
         font-size: 18px;
         font-weight: 300;
-        color: #1a1a1a;
+        color: white;
         font-family: 'Georgia', serif;
         letter-spacing: 0.5px;
     }
@@ -149,20 +150,20 @@
 
     table { width: 100%; border-collapse: collapse; }
     thead th {
-        background: #f8f9fa;
+        background: #111;
         padding: 14px 16px;
         text-align: left;
         font-size: 12px;
         font-weight: 600;
-        color: #666;
+        color: rgba(255,255,255,0.5);
         text-transform: uppercase;
         letter-spacing: 0.8px;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
     }
-    tbody tr { border-bottom: 1px solid #f5f5f5; transition: background 0.15s; }
-    tbody tr:hover { background: #fafafa; }
+    tbody tr { border-bottom: 1px solid rgba(255,255,255,0.06); transition: background 0.15s; }
+    tbody tr:hover { background: rgba(201,169,97,0.05); }
     tbody tr:last-child { border-bottom: none; }
-    td { padding: 16px; font-size: 14px; color: #333; vertical-align: middle; }
+    td { padding: 16px; font-size: 14px; color: rgba(255,255,255,0.7); vertical-align: middle; }
 
     .owner-info { display: flex; align-items: center; gap: 12px; }
     .avatar {
@@ -172,11 +173,11 @@
         display: flex; align-items: center; justify-content: center;
         color: white; font-size: 15px; font-weight: 600; flex-shrink: 0;
     }
-    .owner-name { font-weight: 500; color: #1a1a1a; }
-    .owner-email { font-size: 12px; color: #888; margin-top: 2px; }
+    .owner-name { font-weight: 500; color: white; }
+    .owner-email { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 2px; }
 
-    .spa-name { font-weight: 500; color: #1a1a1a; }
-    .no-spa { color: #aaa; font-style: italic; font-size: 13px; }
+    .spa-name { font-weight: 500; color: white; }
+    .no-spa { color: rgba(255,255,255,0.3); font-style: italic; font-size: 13px; }
 
     /* Status badges */
     .badge {
@@ -188,9 +189,9 @@
         text-transform: capitalize;
         letter-spacing: 0.3px;
     }
-    .badge-pending      { background: #fff3cd; color: #856404; }
-    .badge-approved     { background: #d1e7dd; color: #0a5239; }
-    .badge-disapproved  { background: #f8d7da; color: #842029; }
+    .badge-pending      { background: rgba(201,169,97,0.15); color: #c9a961; }
+    .badge-approved     { background: rgba(52,168,83,0.15); color: #5cb85c; }
+    .badge-disapproved  { background: rgba(220,53,69,0.15); color: #e07070; }
     .badge-no-spa       { background: #e2e8f0; color: #64748b; }
 
     /* Action buttons */
@@ -216,12 +217,12 @@
     .btn-disapprove { background: #dc3545; color: white; }
     .btn-disapprove:hover { background: #bb2d3b; }
 
-    .joined-date { color: #888; font-size: 13px; }
+    .joined-date { color: rgba(255,255,255,0.5); font-size: 13px; }
 
     .empty-state {
         text-align: center;
         padding: 60px 20px;
-        color: #aaa;
+        color: rgba(255,255,255,0.4);
     }
     .empty-state p { font-size: 15px; margin-top: 10px; }
 
@@ -239,24 +240,27 @@
         <div class="logo">SPA<span>LUSH</span></div>
 
         <a href="{{ route('admin.admin') }}" class="menu-item">
-            <span>📊</span> Dashboard
+            <span></span> Dashboard
         </a>
         <a href="{{ route('admin.spa_owners') }}" class="menu-item active">
-            <span>🏢</span> Spa Owners
+            <span></span> Spa Owners
         </a>
         <a href="{{ route('admin.services') }}" class="menu-item">
-            <span>💆</span> Services
+            <span></span> Services
+        </a>
+        <a href="{{ route('admin.categories.index') }}" class="menu-item">
+            <span></span> Spa Categories
         </a>
         <a href="#" class="menu-item">
-            <span>📈</span> System Activity
+            <span></span> System Activity
         </a>
         <a href="#" class="menu-item">
-            <span>⚙️</span> Settings
+            <span></span> Settings
         </a>
 
         <form action="{{ route('logout') }}" method="POST" style="margin-top: auto; padding: 0 30px;">
             @csrf
-            <button type="submit" class="logout-btn"><span>🚪</span> Log Out</button>
+            <button type="submit" class="logout-btn"><span></span> Log Out</button>
         </form>
     </div>
 
@@ -268,10 +272,10 @@
         </div>
 
         @if(session('success'))
-            <div class="alert alert-success">✓ {{ session('success') }}</div>
+            <div class="alert alert-success"> {{ session('success') }}</div>
         @endif
         @if(session('error'))
-            <div class="alert alert-error">✕ {{ session('error') }}</div>
+            <div class="alert alert-error"> {{ session('error') }}</div>
         @endif
 
         <!-- Filter Tabs -->
@@ -313,7 +317,7 @@
 
             @if($filtered->isEmpty())
                 <div class="empty-state">
-                    <div style="font-size:40px;">🏢</div>
+                    <div style="font-size:40px;"></div>
                     <p>No spa owners found for this filter.</p>
                 </div>
             @else
@@ -363,11 +367,11 @@
                         <td>
                             @if($owner->spa)
                                 @if($owner->spa->status === 'approved')
-                                    <span class="badge badge-approved">✓ Approved</span>
+                                    <span class="badge badge-approved"> Approved</span>
                                 @elseif($owner->spa->status === 'disapproved')
-                                    <span class="badge badge-disapproved">✕ Disapproved</span>
+                                    <span class="badge badge-disapproved"> Disapproved</span>
                                 @else
-                                    <span class="badge badge-pending">⏳ Pending</span>
+                                    <span class="badge badge-pending">Pending</span>
                                 @endif
                             @else
                                 <span class="badge badge-no-spa">No Spa</span>
@@ -379,14 +383,14 @@
                         <td>
                             <div class="actions">
                                 <a href="{{ route('admin.spa_owner_show', $owner) }}" class="btn btn-view">
-                                    👁 View
+                                    View
                                 </a>
 
                                 @if($owner->spa)
                                     @if($owner->spa->status !== 'approved')
                                         <form action="{{ route('admin.spa.approve', $owner->spa) }}" method="POST" style="display:inline;">
                                             @csrf
-                                            <button type="submit" class="btn btn-approve">✓ Approve</button>
+                                            <button type="submit" class="btn btn-approve"> Approve</button>
                                         </form>
                                     @endif
 
@@ -394,7 +398,7 @@
                                         <form action="{{ route('admin.spa.disapprove', $owner->spa) }}" method="POST" style="display:inline;"
                                               onsubmit="return confirm('Disapprove this spa?')">
                                             @csrf
-                                            <button type="submit" class="btn btn-disapprove">✕ Disapprove</button>
+                                            <button type="submit" class="btn btn-disapprove"> Disapprove</button>
                                         </form>
                                     @endif
                                 @endif

@@ -14,7 +14,7 @@ class SpaSeeder extends Seeder
     public function run(): void
     {
         $spas = [
-            'luckygrxx@gmail.com' => [
+            'lucky@spalush.com' => [
                 'name'          => 'Serenity Bliss Spa',
                 'location'      => 'Thamel, Kathmandu',
                 'city'          => 'Kathmandu',
@@ -30,7 +30,7 @@ class SpaSeeder extends Seeder
                 'is_active'     => true,
                 'status'        => 'approved',
             ],
-            'anita@spalush.com' => [
+            'rebika@spalush.com' => [
                 'name'          => 'Lotus Garden Wellness',
                 'location'      => 'Lazimpat, Kathmandu',
                 'city'          => 'Kathmandu',
@@ -46,7 +46,7 @@ class SpaSeeder extends Seeder
                 'is_active'     => true,
                 'status'        => 'approved',
             ],
-            'prakash@spalush.com' => [
+            'kristi@spalush.com' => [
                 'name'          => 'Alpine Zen Retreat',
                 'location'      => 'Lakeside, Pokhara',
                 'city'          => 'Pokhara',
@@ -62,7 +62,7 @@ class SpaSeeder extends Seeder
                 'is_active'     => true,
                 'status'        => 'pending',
             ],
-            'sunita@spalush.com' => [
+            'salina@spalush.com' => [
                 'name'          => 'Golden Aura Beauty & Spa',
                 'location'      => 'New Road, Pokhara',
                 'city'          => 'Pokhara',
@@ -78,7 +78,7 @@ class SpaSeeder extends Seeder
                 'is_active'     => true,
                 'status'        => 'pending',
             ],
-            'bikash@spalush.com' => [
+            'lancy@spalush.com' => [
                 'name'          => 'Tranquil Peaks Spa',
                 'location'      => 'Durbar Marg, Kathmandu',
                 'city'          => 'Kathmandu',

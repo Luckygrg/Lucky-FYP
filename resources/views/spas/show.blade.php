@@ -65,30 +65,31 @@
     }
 
     .status-banner.pending {
-        background: #fff8e1;
-        color: #8b6914;
-        border-left: 4px solid #f0b429;
+        background: rgba(201,169,97,0.12);
+        color: #c9a961;
+        border-left: 4px solid #c9a961;
     }
 
     .status-banner.approved {
-        background: #e8f5e9;
-        color: #2e7d32;
+        background: rgba(67,160,71,0.12);
+        color: #6fcf72;
         border-left: 4px solid #43a047;
     }
 
     .status-banner.disapproved {
-        background: #fce4ec;
-        color: #c62828;
+        background: rgba(229,57,53,0.12);
+        color: #ef9a9a;
         border-left: 4px solid #e53935;
     }
 
     /* Main card */
     .spa-card-main {
-        background: white;
+        background: #2a2a2a;
         border-radius: 12px;
-        box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+        box-shadow: 0 4px 18px rgba(0,0,0,0.4);
         overflow: hidden;
         margin-bottom: 35px;
+        border: 1px solid rgba(201,169,97,0.15);
     }
 
     .spa-image-wrap {
@@ -132,8 +133,8 @@
         position: absolute;
         top: 20px;
         right: 20px;
-        background: white;
-        color: #1a1a1a;
+        background: #1a1a1a;
+        color: #c9a961;
         padding: 7px 14px;
         border-radius: 20px;
         font-size: 14px;
@@ -155,7 +156,7 @@
     .spa-meta-row h2 {
         font-size: 32px;
         font-weight: 400;
-        color: #1a1a1a;
+        color: white;
         font-family: 'Georgia', serif;
         flex: 1;
     }
@@ -168,8 +169,8 @@
     }
 
     .rating-star { color: #c9a961; font-size: 18px; }
-    .rating-number { font-weight: 700; font-size: 18px; color: #1a1a1a; }
-    .rating-count { color: #999; font-size: 14px; }
+    .rating-number { font-weight: 700; font-size: 18px; color: white; }
+    .rating-count { color: rgba(255,255,255,0.5); font-size: 14px; }
 
     .spa-info-grid {
         display: grid;
@@ -182,7 +183,7 @@
         display: flex;
         align-items: flex-start;
         gap: 10px;
-        color: #555;
+        color: rgba(255,255,255,0.6);
         font-size: 14px;
     }
 
@@ -201,8 +202,8 @@
     }
 
     .spa-tag {
-        background: #f5f5f5;
-        color: #666;
+        background: rgba(255,255,255,0.08);
+        color: rgba(255,255,255,0.6);
         padding: 5px 14px;
         border-radius: 14px;
         font-size: 13px;
@@ -210,7 +211,7 @@
 
     .section-divider {
         border: none;
-        border-top: 1px solid #f0f0f0;
+        border-top: 1px solid rgba(255,255,255,0.1);
         margin: 25px 0;
     }
 
@@ -224,24 +225,25 @@
     }
 
     .spa-description-text {
-        color: #555;
+        color: rgba(255,255,255,0.6);
         font-size: 15px;
         line-height: 1.8;
     }
 
     /* Services */
     .services-section {
-        background: white;
+        background: #2a2a2a;
         border-radius: 12px;
-        box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+        box-shadow: 0 4px 18px rgba(0,0,0,0.4);
         padding: 35px 40px;
         margin-bottom: 35px;
+        border: 1px solid rgba(201,169,97,0.15);
     }
 
     .services-section h3 {
         font-size: 22px;
         font-weight: 300;
-        color: #1a1a1a;
+        color: white;
         font-family: 'Georgia', serif;
         margin-bottom: 25px;
         letter-spacing: 1px;
@@ -254,27 +256,28 @@
     }
 
     .service-card {
-        border: 1px solid #f0f0f0;
+        border: 1px solid rgba(255,255,255,0.1);
         border-radius: 8px;
         padding: 22px;
         transition: all 0.3s;
+        background: #333;
     }
 
     .service-card:hover {
         border-color: #c9a961;
-        box-shadow: 0 4px 12px rgba(201,169,97,0.12);
+        box-shadow: 0 4px 12px rgba(201,169,97,0.15);
     }
 
     .service-name {
         font-size: 16px;
         font-weight: 600;
-        color: #1a1a1a;
+        color: white;
         margin-bottom: 8px;
     }
 
     .service-desc {
         font-size: 13px;
-        color: #888;
+        color: rgba(255,255,255,0.5);
         line-height: 1.6;
         margin-bottom: 14px;
     }
@@ -287,7 +290,7 @@
     }
 
     .service-duration {
-        color: #999;
+        color: rgba(255,255,255,0.5);
         display: flex;
         align-items: center;
         gap: 5px;
@@ -308,8 +311,8 @@
 
     /* Owner actions */
     .owner-actions {
-        background: #fffdf5;
-        border: 1px solid #f0e8ce;
+        background: rgba(201,169,97,0.08);
+        border: 1px solid rgba(201,169,97,0.25);
         border-radius: 10px;
         padding: 25px 30px;
         margin-bottom: 35px;
@@ -322,7 +325,7 @@
 
     .owner-actions p {
         font-size: 14px;
-        color: #8b7644;
+        color: rgba(201,169,97,0.8);
     }
 
     .owner-actions-buttons {

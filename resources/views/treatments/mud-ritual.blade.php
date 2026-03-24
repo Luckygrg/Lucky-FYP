@@ -42,7 +42,7 @@
     .treatment-section h2 {
         font-size: 36px;
         font-weight: 300;
-        color: #1a1a1a;
+        color: white;
         margin-bottom: 25px;
         font-family: 'Georgia', serif;
         letter-spacing: 1px;
@@ -50,7 +50,7 @@
     
     .treatment-section p {
         font-size: 16px;
-        color: #666;
+        color: rgba(255,255,255,0.7);
         line-height: 1.9;
         margin-bottom: 20px;
     }
@@ -63,7 +63,7 @@
     }
     
     .benefit-card {
-        background: #f5f5f5;
+        background: #2a2a2a;
         padding: 30px;
         border-radius: 8px;
         border-left: 4px solid #c9a961;
@@ -71,14 +71,14 @@
     
     .benefit-card h3 {
         font-size: 20px;
-        color: #1a1a1a;
+        color: white;
         margin-bottom: 15px;
         font-weight: 500;
     }
     
     .benefit-card p {
         font-size: 15px;
-        color: #666;
+        color: rgba(255,255,255,0.6);
         line-height: 1.7;
         margin: 0;
     }
@@ -115,13 +115,13 @@
     .cta-section {
         text-align: center;
         padding: 80px 20px;
-        background: #f5f5f5;
+        background: #111;
     }
     
     .cta-section h2 {
         font-size: 38px;
         font-weight: 300;
-        color: #1a1a1a;
+        color: white;
         margin-bottom: 30px;
         font-family: 'Georgia', serif;
     }

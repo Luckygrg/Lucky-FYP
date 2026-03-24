@@ -184,7 +184,7 @@
     /* Stats Luxury */
     .stats-luxury {
         padding: 100px 20px;
-        background: white;
+        background: #1a1a1a;
     }
     
     .stats-luxury-grid {
@@ -206,7 +206,7 @@
     
     .stat-luxury-item p {
         font-size: 16px;
-        color: #666;
+        color: rgba(255,255,255,0.6);
         letter-spacing: 1px;
         text-transform: uppercase;
         font-size: 13px;
@@ -278,7 +278,7 @@
         @guest
             <a href="{{ route('role.selection') }}" class="luxury-btn">Begin Your Journey</a>
         @else
-            <a href="/dashboard" class="luxury-btn">Explore Spas</a>
+            <a href="{{ route('spas.index') }}" class="luxury-btn">Explore Spas</a>
         @endguest
     </div>
 </section>
@@ -358,7 +358,7 @@
 <style>
     .spa-treatments-section {
         padding: 40px 20px 100px;
-        background: #f5f5f5;
+        background: #111;
     }
     
     .treatments-container {
@@ -369,7 +369,7 @@
     .treatments-title {
         font-size: 42px;
         font-weight: 300;
-        color: #1a1a1a;
+        color: white;
         text-align: center;
         margin-bottom: 30px;
         font-family: 'Georgia', serif;
@@ -378,7 +378,7 @@
     
     .treatments-intro {
         font-size: 16px;
-        color: #666;
+        color: rgba(255,255,255,0.7);
         text-align: center;
         max-width: 900px;
         margin: 0 auto 40px;
@@ -394,16 +394,17 @@
     }
     
     .treatment-card {
-        background: white;
+        background: #2a2a2a;
         border-radius: 8px;
         overflow: hidden;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid rgba(201,169,97,0.15);
     }
     
     .treatment-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.4);
     }
     
     .treatment-image {
@@ -430,7 +431,7 @@
     .treatment-name {
         font-size: 26px;
         font-weight: 400;
-        color: #1a1a1a;
+        color: white;
         margin-bottom: 15px;
         font-family: 'Georgia', serif;
         letter-spacing: 1px;
@@ -438,7 +439,7 @@
     
     .treatment-preview {
         font-size: 15px;
-        color: #666;
+        color: rgba(255,255,255,0.6);
         line-height: 1.7;
         margin-bottom: 20px;
     }
@@ -532,7 +533,7 @@
             <p>Treatments Completed</p>
         </div>
         <div class="stat-luxury-item">
-            <h3>4.8★</h3>
+            <h3>4.8</h3>
             <p>Average Rating</p>
         </div>
     </div>
@@ -547,7 +548,7 @@
     @else
         <h2>Welcome Back, {{ Auth::user()->name }}</h2>
         <p>Your next moment of tranquility awaits. Explore our collection of premium spa experiences.</p>
-        <a href="/dashboard" class="luxury-btn">View Available Spas</a>
+        <a href="{{ route('spas.index') }}" class="luxury-btn">View Available Spas</a>
     @endguest
 </section>
 

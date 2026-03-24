@@ -22,11 +22,12 @@
     }
     
     .about-nav {
-        background: white;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        background: #1a1a1a;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.4);
         position: sticky;
         top: 80px;
         z-index: 100;
+        border-bottom: 1px solid rgba(201,169,97,0.15);
     }
     
     .about-nav-container {
@@ -39,7 +40,7 @@
     }
     
     .about-nav-link {
-        color: #666;
+        color: rgba(255,255,255,0.6);
         text-decoration: none;
         font-size: 14px;
         letter-spacing: 1px;
@@ -66,7 +67,7 @@
     .section-title {
         font-size: 42px;
         font-weight: 300;
-        color: #1a1a1a;
+        color: white;
         margin-bottom: 40px;
         font-family: 'Georgia', serif;
         letter-spacing: 2px;
@@ -74,7 +75,7 @@
     }
     
     .section-content {
-        color: #666;
+        color: rgba(255,255,255,0.7);
         font-size: 16px;
         line-height: 1.8;
         text-align: justify;
@@ -94,10 +95,11 @@
     .mission-box,
     .vision-box {
         padding: 40px;
-        background: white;
+        background: #2a2a2a;
         border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         position: relative;
+        border: 1px solid rgba(201,169,97,0.15);
     }
     
     .mission-box::before {
@@ -123,26 +125,26 @@
     .box-title {
         font-size: 28px;
         font-weight: 400;
-        color: #1a1a1a;
+        color: white;
         margin-bottom: 20px;
         font-family: 'Georgia', serif;
         letter-spacing: 1px;
     }
     
     .box-content {
-        color: #666;
+        color: rgba(255,255,255,0.7);
         font-size: 15px;
         line-height: 1.8;
     }
     
     .history-section {
-        background: #f8f9fa;
+        background: #111;
     }
     
     .empty-state {
         text-align: center;
         padding: 60px 20px;
-        color: #999;
+        color: rgba(255,255,255,0.4);
     }
     
     .empty-state i {
@@ -154,7 +156,7 @@
     .empty-state h3 {
         font-size: 24px;
         font-weight: 300;
-        color: #666;
+        color: rgba(255,255,255,0.6);
         margin-bottom: 10px;
         font-family: 'Georgia', serif;
     }

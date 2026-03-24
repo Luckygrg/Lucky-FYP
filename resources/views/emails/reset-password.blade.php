@@ -102,7 +102,7 @@
             </center>
             
             <div class="warning-box">
-                <p><strong>⚠ Important:</strong> This link will expire in 40 seconds for security reasons. If you don't reset your password within this time, you'll need to request a new link.</p>
+                <p><strong> Important:</strong> This link will expire in 40 seconds for security reasons. If you don't reset your password within this time, you'll need to request a new link.</p>
             </div>
             
             <p>If you didn't request a password reset, please ignore this email. Your password will remain unchanged.</p>

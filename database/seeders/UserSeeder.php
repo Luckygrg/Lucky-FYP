@@ -15,11 +15,11 @@ class UserSeeder extends Seeder
     {
         // ── Spa Owners ────────────────────────────────────────────────────────
         $spaOwners = [
-            ['name' => 'Rebika Gurung',   'email' => 'luckygrxx@gmail.com'],
-            ['name' => 'Anita Sharma',    'email' => 'anita@spalush.com'],
-            ['name' => 'Prakash Thapa',   'email' => 'prakash@spalush.com'],
-            ['name' => 'Sunita Rai',      'email' => 'sunita@spalush.com'],
-            ['name' => 'Bikash Karki',    'email' => 'bikash@spalush.com'],
+            ['name' => 'Lucky Gurung',   'email' => 'lucky@spalush.com'],
+            ['name' => 'Rebika Gurung',    'email' => 'rebika@spalush.com'],
+            ['name' => 'Kristi Shrees',   'email' => 'kristi@spalush.com'],
+            ['name' => 'Lancy Rai',      'email' => 'lancy@spalush.com'],
+            ['name' => 'Salina Shrestha',    'email' => 'salina@spalush.com'],
         ];
 
         foreach ($spaOwners as $owner) {
@@ -35,11 +35,11 @@ class UserSeeder extends Seeder
 
         // ── Customers ─────────────────────────────────────────────────────────
         $customers = [
-            ['name' => 'Priya Tamang',    'email' => 'priya@example.com'],
-            ['name' => 'Rohan Shrestha',  'email' => 'rohan@example.com'],
-            ['name' => 'Nisha Magar',     'email' => 'nisha@example.com'],
-            ['name' => 'Sanjay Pandey',   'email' => 'sanjay@example.com'],
-            ['name' => 'Kritika Basnet',  'email' => 'kritika@example.com'],
+            ['name' => 'Priya Tamang',    'email' => 'priya@gmail.com'],
+            ['name' => 'Rohan Shakya',  'email' => 'rohan@gmail.com'],
+            ['name' => 'Nisha Magar',     'email' => 'nisha@gmail.com'],
+            ['name' => 'Rhythm Guurng',   'email' => 'rhythm@gmail.com'],
+            ['name' => 'Kritika Basnet',  'email' => 'kritika@gmail.com'],
         ];
 
         foreach ($customers as $customer) {

@@ -1,26 +1,26 @@
-@extends('layouts.main')
+﻿@extends('layouts.main')
 @section('title', 'My Services - SpaLush')
 
 @section('content')
 <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    .dashboard-container { display: flex; min-height: 100vh; background: #f8f9fa; font-family: Arial, sans-serif; }
+    .dashboard-container { display: flex; min-height: 100vh; background: #1a1a1a; font-family: Arial, sans-serif; }
     .main-content { flex: 1; padding: 40px; overflow-y: auto; }
     .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px; }
-    .page-header h1 { font-size: 28px; color: #1a1a1a; font-weight: 300; font-family: 'Georgia', serif; letter-spacing: 1px; }
+    .page-header h1 { font-size: 28px; color: white; font-weight: 300; font-family: 'Georgia', serif; letter-spacing: 1px; }
     .btn-gold { padding: 11px 24px; background: #c9a961; color: white; text-decoration: none; border-radius: 6px; font-size: 14px; font-weight: 600; transition: all 0.3s; display: inline-flex; align-items: center; gap: 7px; }
     .btn-gold:hover { background: #b8985a; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(201,169,97,0.3); }
     .alert-success { background: rgba(201,169,97,0.1); color: #8b7644; padding: 14px 20px; border-radius: 6px; margin-bottom: 25px; border-left: 4px solid #c9a961; font-size: 14px; }
     .alert-error { background: #fce4ec; color: #c62828; padding: 14px 20px; border-radius: 6px; margin-bottom: 25px; border-left: 4px solid #e53935; font-size: 14px; }
-    .no-spa { background: white; border-radius: 10px; padding: 60px 30px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+    .no-spa { background: #2a2a2a; border-radius: 10px; padding: 60px 30px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.3); border: 1px solid rgba(201,169,97,0.15); }
     .no-spa p { color: #999; margin-bottom: 20px; font-size: 15px; }
-    .card { background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); overflow: hidden; }
+    .card { background: #2a2a2a; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); overflow: hidden; border: 1px solid rgba(201,169,97,0.15); }
     table { width: 100%; border-collapse: collapse; }
     thead { background: #1a1a1a; color: white; }
-    th, td { padding: 14px 18px; text-align: left; border-bottom: 1px solid #f0f0f0; }
+    th, td { padding: 14px 18px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.08); }
     th { font-weight: 500; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
-    td { color: #555; font-size: 14px; }
-    tbody tr:hover { background: #fafafa; }
+    td { color: rgba(255,255,255,0.7); font-size: 14px; }
+    tbody tr:hover { background: rgba(201,169,97,0.05); }
     .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
     .badge-green { background: #e8f5e9; color: #2e7d32; }
     .badge-gray { background: #f0f0f0; color: #888; }
@@ -30,7 +30,7 @@
     .btn-del { background: none; border: none; color: #e53935; font-size: 13px; cursor: pointer; padding: 0; }
     .btn-del:hover { text-decoration: underline; }
     .empty-row td { text-align: center; color: #bbb; padding: 40px; }
-    .category-chip { background: #f5f5f5; color: #666; padding: 3px 10px; border-radius: 10px; font-size: 12px; }
+    .category-chip { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); padding: 3px 10px; border-radius: 10px; font-size: 12px; }
 </style>
 
 <div class="dashboard-container">
@@ -38,9 +38,9 @@
 
     <div class="main-content">
         <div class="page-header">
-            <h1>💆 Services</h1>
+            <h1> Services</h1>
             @if($spa)
-                <a href="{{ route('spa_owner.services.create') }}" class="btn-gold">➕ Add New Service</a>
+                <a href="{{ route('spa_owner.services.create') }}" class="btn-gold"> Add New Service</a>
             @endif
         </div>
 
@@ -54,7 +54,7 @@
         @if(!$spa)
             <div class="no-spa">
                 <p>You need to register a spa before adding services.</p>
-                <a href="{{ route('spa_owner.spas.create') }}" class="btn-gold">➕ Create Your Spa First</a>
+                <a href="{{ route('spa_owner.spas.create') }}" class="btn-gold"> Create Your Spa First</a>
             </div>
         @else
             <div class="card">

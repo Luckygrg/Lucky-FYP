@@ -14,7 +14,7 @@
     .dashboard-container {
         display: flex;
         min-height: 100vh;
-        background: #f8f9fa;
+        background: #1a1a1a;
         font-family: Arial, sans-serif;
     }
     
@@ -100,7 +100,7 @@
     
     .header h1 {
         font-size: 32px;
-        color: #1a1a1a;
+        color: white;
         font-weight: 300;
         margin-bottom: 10px;
         font-family: 'Georgia', serif;
@@ -108,7 +108,7 @@
     }
     
     .header p {
-        color: #666;
+        color: rgba(255,255,255,0.6);
         font-size: 15px;
     }
     
@@ -120,10 +120,10 @@
     }
     
     .stat-card {
-        background: white;
+        background: #2a2a2a;
         padding: 30px;
         border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         border-left: 4px solid #c9a961;
         transition: all 0.3s;
     }
@@ -134,7 +134,7 @@
     }
     
     .stat-card h3 {
-        color: #666;
+        color: rgba(255,255,255,0.6);
         font-size: 13px;
         font-weight: normal;
         margin-bottom: 12px;
@@ -150,15 +150,15 @@
     }
     
     .quick-actions {
-        background: white;
+        background: #2a2a2a;
         padding: 30px;
         border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         margin-bottom: 40px;
     }
     
     .quick-actions h2 {
-        color: #1a1a1a;
+        color: white;
         margin-bottom: 25px;
         font-size: 20px;
         font-weight: 300;
@@ -192,14 +192,14 @@
     }
     
     .admin-features {
-        background: white;
+        background: #2a2a2a;
         padding: 30px;
         border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
     
     .admin-features h2 {
-        color: #1a1a1a;
+        color: white;
         margin-bottom: 25px;
         font-size: 20px;
         font-weight: 300;
@@ -213,9 +213,9 @@
     }
     
     .admin-features li {
-        color: #666;
+        color: rgba(255,255,255,0.6);
         padding: 12px 0;
-        border-bottom: 1px solid #f0f0f0;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
         font-size: 14px;
         line-height: 1.6;
     }
@@ -255,25 +255,28 @@
         <div class="logo">SPA<span>LUSH</span></div>
         
         <a href="{{ route('admin.admin') }}" class="menu-item active">
-            <span>📊</span> Dashboard
+            <span></span> Dashboard
         </a>
         <a href="{{ route('admin.spa_owners') }}" class="menu-item">
-            <span>🏢</span> Spa Owners
+            <span></span> Spa Owners
         </a>
         <a href="{{ route('admin.services') }}" class="menu-item">
-            <span>💆</span> Services
+            <span></span> Services
+        </a>
+        <a href="{{ route('admin.categories.index') }}" class="menu-item">
+            <span></span> Spa Categories
         </a>
         <a href="#" class="menu-item">
-            <span>📈</span> System Activity
+            <span></span> System Activity
         </a>
         <a href="#" class="menu-item">
-            <span>⚙️</span> Settings
+            <span></span> Settings
         </a>
         
         <form action="{{ route('logout') }}" method="POST" style="margin-top: auto;">
             @csrf
             <button type="submit" class="logout-btn">
-                <span>🚪</span> Log Out
+                <span></span> Log Out
             </button>
         </form>
     </div>
@@ -315,10 +318,10 @@
         <div class="quick-actions">
             <h2>Quick Actions</h2>
             <div class="actions-grid">
-                <a href="{{ route('admin.spa_owners') }}" class="action-btn">🏢 Manage Spa Owners</a>
-                <a href="{{ route('admin.services') }}" class="action-btn">💆 Manage Services</a>
-                <a href="#" class="action-btn">📈 View System Activity</a>
-                <a href="#" class="action-btn">⚙️ Settings</a>
+                <a href="{{ route('admin.spa_owners') }}" class="action-btn">Manage Spa Owners</a>
+                <a href="{{ route('admin.services') }}" class="action-btn">Manage Services</a>
+                <a href="#" class="action-btn">View System Activity</a>
+                <a href="#" class="action-btn">Settings</a>
             </div>
         </div>
         
@@ -326,12 +329,12 @@
         <div class="admin-features">
             <h2>Administrator Capabilities</h2>
             <ul>
-                <li>✓ Login to admin panel with secure authentication</li>
-                <li>✓ Manage spa owners (view, approve, suspend accounts)</li>
-                <li>✓ Manage all services across the platform</li>
-                <li>✓ Monitor system activity and access logs</li>
-                <li>✓ View platform statistics and generate reports</li>
-                <li>✓ System configuration and global settings management</li>
+                <li> Login to admin panel with secure authentication</li>
+                <li> Manage spa owners (view, approve, suspend accounts)</li>
+                <li> Manage all services across the platform</li>
+                <li> Monitor system activity and access logs</li>
+                <li> View platform statistics and generate reports</li>
+                <li> System configuration and global settings management</li>
             </ul>
         </div>
     </div>

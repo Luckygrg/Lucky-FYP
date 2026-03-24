@@ -1,4 +1,4 @@
-<style>
+﻿<style>
     .sidebar {
         width: 260px;
         min-width: 260px;
@@ -81,39 +81,39 @@
 
     <a href="{{ route('spa_owner.dashboard') }}"
        class="menu-item {{ request()->routeIs('spa_owner.dashboard') ? 'active' : '' }}">
-        <span>📊</span> Dashboard
+        <span></span> Dashboard
     </a>
 
     <a href="{{ route('spa_owner.services') }}"
        class="menu-item {{ request()->routeIs('spa_owner.services*') ? 'active' : '' }}">
-        <span>💆</span> Services
+        <span></span> Services
     </a>
 
     <a href="{{ route('spa_owner.bookings') }}"
        class="menu-item {{ request()->routeIs('spa_owner.bookings') ? 'active' : '' }}">
-        <span>📅</span> Bookings
+        <span></span> Bookings
     </a>
 
     <a href="{{ route('spa_owner.schedule') }}"
        class="menu-item {{ request()->routeIs('spa_owner.schedule') ? 'active' : '' }}">
-        <span>🕐</span> Schedule
+        <span></span> Schedule
     </a>
 
     <a href="{{ route('spa_owner.customers') }}"
        class="menu-item {{ request()->routeIs('spa_owner.customers') ? 'active' : '' }}">
-        <span>👥</span> Customers
+        <span></span> Customers
     </a>
 
     <a href="{{ route('spa_owner.settings') }}"
        class="menu-item {{ request()->routeIs('spa_owner.settings') ? 'active' : '' }}">
-        <span>⚙️</span> Settings
+        <span></span> Settings
     </a>
 
     <div class="sidebar-logout-form" style="margin-top: auto;">
         <form action="{{ route('logout') }}" method="POST">
             @csrf
             <button type="submit" class="logout-btn">
-                <span>🚪</span> Log Out
+                <span></span> Log Out
             </button>
         </form>
     </div>

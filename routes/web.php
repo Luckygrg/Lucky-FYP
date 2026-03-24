@@ -6,6 +6,7 @@ use App\Http\Controllers\SpaOwnerController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SpaController;
 use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\SpaCategoryController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -52,6 +53,14 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::post('/spas/{spa}/approve', [AdminController::class, 'approveSpa'])->name('spa.approve');
     Route::post('/spas/{spa}/disapprove', [AdminController::class, 'disapproveSpa'])->name('spa.disapprove');
     Route::get('/services', [AdminController::class, 'services'])->name('services');
+
+    // Spa Categories CRUD
+    Route::get('/categories', [SpaCategoryController::class, 'index'])->name('categories.index');
+    Route::get('/categories/create', [SpaCategoryController::class, 'create'])->name('categories.create');
+    Route::post('/categories', [SpaCategoryController::class, 'store'])->name('categories.store');
+    Route::get('/categories/{spaCategory}/edit', [SpaCategoryController::class, 'edit'])->name('categories.edit');
+    Route::put('/categories/{spaCategory}', [SpaCategoryController::class, 'update'])->name('categories.update');
+    Route::delete('/categories/{spaCategory}', [SpaCategoryController::class, 'destroy'])->name('categories.destroy');
 });
 
 // Spa Owner Routes

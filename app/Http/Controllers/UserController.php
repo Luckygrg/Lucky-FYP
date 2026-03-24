@@ -94,7 +94,7 @@ class UserController extends Controller
                 case 'spa_owner':
                     return redirect()->route('spa_owner.dashboard')->with('success', 'Welcome, ' . $user->name . '!');
                 case 'customer':
-                    return redirect()->route('customer.dashboard')->with('success', 'Welcome, ' . $user->name . '!');
+                    return redirect('/')->with('success', 'Welcome, ' . $user->name . '!');
                 default:
                     return redirect('/')->with('success', 'Welcome back, ' . $user->name . '!');
             }

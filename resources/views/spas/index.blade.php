@@ -42,10 +42,10 @@
     }
     
     .spa-card {
-        background: white;
+        background: #2a2a2a;
         border-radius: 12px;
         overflow: hidden;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         transition: all 0.3s ease;
         position: relative;
     }
@@ -86,8 +86,8 @@
         position: absolute;
         top: 15px;
         right: 15px;
-        background: white;
-        color: #1a1a1a;
+        background: #1a1a1a;
+        color: #c9a961;
         padding: 6px 12px;
         border-radius: 20px;
         font-size: 13px;
@@ -100,7 +100,7 @@
         right: 15px;
         width: 40px;
         height: 40px;
-        background: white;
+        background: rgba(26,26,26,0.8);
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -127,8 +127,8 @@
     
     .spa-tag {
         font-size: 12px;
-        color: #666;
-        background: #f5f5f5;
+        color: rgba(255,255,255,0.6);
+        background: rgba(255,255,255,0.08);
         padding: 4px 12px;
         border-radius: 12px;
     }
@@ -136,7 +136,7 @@
     .spa-name {
         font-size: 22px;
         font-weight: 600;
-        color: #1a1a1a;
+        color: white;
         margin-bottom: 8px;
         font-family: 'Georgia', serif;
     }
@@ -145,13 +145,13 @@
         display: flex;
         align-items: center;
         gap: 6px;
-        color: #666;
+        color: rgba(255,255,255,0.6);
         font-size: 14px;
         margin-bottom: 12px;
     }
     
     .spa-description {
-        color: #666;
+        color: rgba(255,255,255,0.6);
         font-size: 14px;
         line-height: 1.6;
         margin-bottom: 15px;
@@ -166,7 +166,7 @@
         justify-content: space-between;
         align-items: center;
         padding-top: 15px;
-        border-top: 1px solid #f0f0f0;
+        border-top: 1px solid rgba(255,255,255,0.08);
     }
     
     .spa-rating {
@@ -182,12 +182,12 @@
     
     .rating-number {
         font-weight: 600;
-        color: #1a1a1a;
+        color: white;
         font-size: 15px;
     }
     
     .rating-count {
-        color: #999;
+        color: rgba(255,255,255,0.5);
         font-size: 13px;
     }
     
@@ -209,7 +209,7 @@
     .no-spas {
         text-align: center;
         padding: 80px 20px;
-        color: #666;
+        color: rgba(255,255,255,0.6);
     }
     
     .no-spas h2 {
@@ -285,7 +285,7 @@
                                 <span class="rating-count">({{ $spa->review_count }} reviews)</span>
                             </div>
                             
-                            <a href="{{ route('spas.show', $spa->id) }}" class="book-btn">Book Now</a>
+                            <a href="{{ route('spas.show', $spa->id) }}" class="book-btn">See More</a>
                         </div>
                     </div>
                 </div>

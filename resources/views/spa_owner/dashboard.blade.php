@@ -1,4 +1,4 @@
-@extends('layouts.main')
+﻿@extends('layouts.main')
 
 @section('title', 'Spa Owner Dashboard - SpaLush')
 
@@ -14,7 +14,7 @@
     .dashboard-container {
         display: flex;
         min-height: 100vh;
-        background: #f8f9fa;
+        background: #1a1a1a;
         font-family: Arial, sans-serif;
     }
     
@@ -32,7 +32,7 @@
     
     .header h1 {
         font-size: 32px;
-        color: #1a1a1a;
+        color: white;
         font-weight: 300;
         margin-bottom: 10px;
         font-family: 'Georgia', serif;
@@ -40,7 +40,7 @@
     }
     
     .header p {
-        color: #666;
+        color: rgba(255,255,255,0.6);
         font-size: 15px;
     }
     
@@ -52,10 +52,10 @@
     }
     
     .stat-card {
-        background: white;
+        background: #2a2a2a;
         padding: 30px;
         border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         border-left: 4px solid #c9a961;
         transition: all 0.3s;
     }
@@ -66,7 +66,7 @@
     }
     
     .stat-card h3 {
-        color: #666;
+        color: rgba(255,255,255,0.6);
         font-size: 13px;
         font-weight: normal;
         margin-bottom: 12px;
@@ -82,15 +82,15 @@
     }
     
     .quick-actions {
-        background: white;
+        background: #2a2a2a;
         padding: 30px;
         border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         margin-bottom: 40px;
     }
     
     .quick-actions h2 {
-        color: #1a1a1a;
+        color: white;
         margin-bottom: 25px;
         font-size: 20px;
         font-weight: 300;
@@ -124,14 +124,14 @@
     }
     
     .customer-list {
-        background: white;
+        background: #2a2a2a;
         padding: 30px;
         border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
     
     .customer-list h2 {
-        color: #1a1a1a;
+        color: white;
         margin-bottom: 25px;
         font-size: 20px;
         font-weight: 300;
@@ -156,7 +156,7 @@
     th, td {
         padding: 15px;
         text-align: left;
-        border-bottom: 1px solid #e8e8e8;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
     }
     
     th {
@@ -167,12 +167,12 @@
     }
     
     td {
-        color: #666;
+        color: rgba(255,255,255,0.7);
         font-size: 14px;
     }
     
     tbody tr:hover {
-        background: #f8f9fa;
+        background: rgba(201,169,97,0.05);
     }
     
     .success-message {
@@ -241,16 +241,16 @@
             <h2>Quick Actions</h2>
             <div class="actions-grid">
                 @if(!$spa)
-                    <a href="{{ route('spa_owner.spas.create') }}" class="action-btn">➕ Add Your Spa</a>
+                    <a href="{{ route('spa_owner.spas.create') }}" class="action-btn"> Add Your Spa</a>
                 @else
-                    <a href="{{ route('spas.show', $spa) }}" class="action-btn">🏠 View My Spa</a>
-                    <a href="{{ route('spa_owner.spa.edit') }}" class="action-btn">✏️ Edit My Spa</a>
+                    <a href="{{ route('spas.show', $spa) }}" class="action-btn"> View My Spa</a>
+                    <a href="{{ route('spa_owner.spa.edit') }}" class="action-btn"> Edit My Spa</a>
                 @endif
-                <a href="{{ route('spa_owner.services.create') }}" class="action-btn">➕ Add New Service</a>
-                <a href="{{ route('spa_owner.services') }}" class="action-btn">💆 Manage Services</a>
-                <a href="{{ route('spa_owner.bookings') }}" class="action-btn">📅 View All Bookings</a>
-                <a href="{{ route('spa_owner.schedule') }}" class="action-btn">🕐 Update Schedule</a>
-                <a href="{{ route('spa_owner.customers') }}" class="action-btn">👥 View Customers</a>
+                <a href="{{ route('spa_owner.services.create') }}" class="action-btn"> Add New Service</a>
+                <a href="{{ route('spa_owner.services') }}" class="action-btn"> Manage Services</a>
+                <a href="{{ route('spa_owner.bookings') }}" class="action-btn"> View All Bookings</a>
+                <a href="{{ route('spa_owner.schedule') }}" class="action-btn"> Update Schedule</a>
+                <a href="{{ route('spa_owner.customers') }}" class="action-btn"> View Customers</a>
             </div>
         </div>
         

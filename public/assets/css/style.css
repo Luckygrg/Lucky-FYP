@@ -9,21 +9,21 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: #f8f9fa;
+    background: #1a1a1a;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    color: #333;
+    color: rgba(255,255,255,0.9);
 }
 
 /* =================================
-   NAVBAR STYLES - GREEN
+   NAVBAR STYLES - DARK & GOLD
    ================================= */
 .navbar {
-    background: #28a745;
+    background: #1a1a1a;
     color: white;
     padding: 20px 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 .nav-container {
@@ -63,14 +63,14 @@ body {
 }
 
 .nav-links a:hover {
-    background: white;
-    color: #28a745;
+    background: rgba(201,169,97,0.1);
+    color: #c9a961;
 }
 
 .logout-btn {
-    background: white;
-    color: #28a745;
-    border: none;
+    background: transparent;
+    color: rgba(255,255,255,0.8);
+    border: 1px solid rgba(255,255,255,0.3);
     padding: 8px 20px;
     border-radius: 4px;
     cursor: pointer;
@@ -80,7 +80,9 @@ body {
 }
 
 .logout-btn:hover {
-    background: #f0f0f0;
+    background: #c9a961;
+    border-color: #c9a961;
+    color: #1a1a1a;
 }
 
 /* =================================
@@ -89,14 +91,14 @@ body {
 main {
     flex: 1;
     width: 100%;
-    background: white;
+    background: #1a1a1a;
 }
 
 /* =================================
-   HERO SECTION - GREEN
+   HERO SECTION - DARK & GOLD
    ================================= */
 .hero-section {
-    background: #28a745;
+    background: #c9a961;
     color: white;
     padding: 80px 20px;
     text-align: center;
@@ -119,17 +121,19 @@ main {
 
 .cta-button {
     display: inline-block;
-    background: white;
-    color: #28a745;
+    background: #1a1a1a;
+    color: #c9a961;
     padding: 12px 30px;
     border-radius: 4px;
     text-decoration: none;
     font-weight: bold;
     transition: all 0.3s;
+    border: 1px solid #1a1a1a;
 }
 
 .cta-button:hover {
-    background: #f8f9fa;
+    background: #2a2a2a;
+    color: white;
 }
 
 /* =================================
@@ -147,19 +151,19 @@ main {
 .feature-card {
     text-align: center;
     padding: 30px 20px;
-    background: white;
-    border: 1px solid #ddd;
+    background: #2a2a2a;
+    border: 1px solid rgba(201,169,97,0.2);
     border-radius: 8px;
 }
 
 .feature-card h3 {
-    color: #28a745;
+    color: #c9a961;
     margin-bottom: 15px;
     font-size: 20px;
 }
 
 .feature-card p {
-    color: #666;
+    color: rgba(255,255,255,0.6);
     line-height: 1.6;
     font-size: 15px;
 }
@@ -168,13 +172,13 @@ main {
    STATS SECTION
    ================================= */
 .stats-section {
-    background: #f8f9fa;
+    background: #111111;
     padding: 60px 20px;
     text-align: center;
 }
 
 .stats-section h2 {
-    color: #333;
+    color: white;
     margin-bottom: 40px;
     font-size: 32px;
 }
@@ -188,21 +192,21 @@ main {
 }
 
 .stat-item h2 {
-    color: #28a745;
+    color: #c9a961;
     font-size: 42px;
     margin-bottom: 10px;
 }
 
 .stat-item p {
-    color: #666;
+    color: rgba(255,255,255,0.6);
     font-size: 16px;
 }
 
 /* =================================
-   CTA SECTION - GREEN
+   CTA SECTION - DARK & GOLD
    ================================= */
 .cta-section {
-    background: #28a745;
+    background: #c9a961;
     color: white;
     padding: 60px 20px;
     text-align: center;
@@ -219,11 +223,11 @@ main {
 }
 
 /* =================================
-   FOOTER STYLES - DARK GREEN
+   FOOTER STYLES - DARK
    ================================= */
 footer {
-    background: #155724;
-    color: white;
+    background: #1a1a1a;
+    color: rgba(255,255,255,0.7);
     padding: 40px 0 20px;
     margin-top: auto;
 }
@@ -249,7 +253,7 @@ footer h3 {
 
 footer p,
 footer li {
-    color: #d4edda;
+    color: rgba(255,255,255,0.6);
     line-height: 1.8;
     font-size: 14px;
 }
@@ -264,13 +268,13 @@ footer li {
 }
 
 footer a {
-    color: #d4edda;
+    color: rgba(255,255,255,0.6);
     text-decoration: none;
     transition: color 0.3s;
 }
 
 footer a:hover {
-    color: white;
+    color: #c9a961;
 }
 
 footer .social-links {
@@ -282,19 +286,20 @@ footer .social-links a {
     display: inline-block;
     width: 40px;
     height: 40px;
-    background: #28a745;
+    background: #c9a961;
     border-radius: 4px;
     text-align: center;
     line-height: 40px;
     font-weight: bold;
+    color: #1a1a1a;
 }
 
 footer .social-links a:hover {
-    background: #218838;
+    background: #b8985a;
 }
 
 footer .copyright {
-    border-top: 1px solid #28a745;
+    border-top: 1px solid rgba(255,255,255,0.1);
     padding-top: 20px;
     text-align: center;
 }
