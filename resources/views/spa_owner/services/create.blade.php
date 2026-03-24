@@ -23,6 +23,7 @@
     .form-check input { width: auto; }
     .form-check label { text-transform: none; font-size: 14px; letter-spacing: 0; }
     .invalid-feedback { color: #e53935; font-size: 12px; margin-top: 4px; }
+    .image-preview { margin-top: 10px; max-width: 200px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); display: none; }
     .btn-gold { padding: 12px 28px; background: #c9a961; color: white; border: none; border-radius: 6px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
     .btn-gold:hover { background: #b8985a; transform: translateY(-1px); }
     .btn-outline { padding: 12px 24px; background: transparent; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.3s; margin-left: 12px; }
@@ -40,7 +41,7 @@
         </div>
 
         <div class="form-card">
-            <form action="{{ route('spa_owner.services.store') }}" method="POST">
+            <form action="{{ route('spa_owner.services.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-group">
@@ -70,13 +71,21 @@
 
                 <div class="form-group">
                     <label>Category</label>
-                    <select name="category">
+                    <select name="spa_category_id">
                         <option value="">— Select Category —</option>
-                        @foreach(['Massage', 'Facial', 'Body Treatment', 'Hydrotherapy', 'Yoga', 'Meditation', 'Nail Care', 'Hair Care', 'Other'] as $cat)
-                            <option value="{{ $cat }}" {{ old('category') == $cat ? 'selected' : '' }}>{{ $cat }}</option>
+                        @foreach($categories as $cat)
+                            <option value="{{ $cat->id }}" {{ old('spa_category_id') == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>
                         @endforeach
                     </select>
-                    @error('category')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                    @error('spa_category_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                </div>
+
+                <div class="form-group">
+                    <label>Service Image</label>
+                    <input type="file" name="image" id="image" accept="image/jpeg,image/png,image/jpg,image/webp"
+                           onchange="previewImage(this)">
+                    <img id="image-preview" class="image-preview" src="" alt="Preview">
+                    @error('image')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
 
                 <div class="form-group">
@@ -95,4 +104,16 @@
         </div>
     </div>
 </div>
+@push('scripts')
+<script>
+function previewImage(input) {
+    const preview = document.getElementById('image-preview');
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = e => { preview.src = e.target.result; preview.style.display = 'block'; };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
+@endpush
 @endsection

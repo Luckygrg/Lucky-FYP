@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Spa;
 use App\Models\Service;
+use App\Models\SpaCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -83,7 +84,7 @@ class SpaOwnerController extends Controller
     public function services()
     {
         $spa = $this->ownedSpa();
-        $services = $spa->services()->orderBy('category')->orderBy('name')->get();
+        $services = $spa->services()->with('spaCategory')->orderBy('name')->get();
 
         return view('spa_owner.services.index', compact('spa', 'services'));
     }
@@ -91,7 +92,8 @@ class SpaOwnerController extends Controller
     public function createService()
     {
         $spa = $this->ownedSpa();
-        return view('spa_owner.services.create', compact('spa'));
+        $categories = SpaCategory::all();
+        return view('spa_owner.services.create', compact('spa', 'categories'));
     }
 
     public function storeService(Request $request)
@@ -103,17 +105,24 @@ class SpaOwnerController extends Controller
             'description'      => 'nullable|string',
             'price'            => 'nullable|numeric|min:0',
             'duration_minutes' => 'nullable|integer|min:1',
-            'category'         => 'nullable|string|max:100',
+            'spa_category_id'  => 'nullable|exists:spa_categories,id',
+            'image'            => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
 
-        $spa->services()->create([
+        $data = [
             'name'             => $request->name,
             'description'      => $request->description,
             'price'            => $request->price,
             'duration_minutes' => $request->duration_minutes,
-            'category'         => $request->category,
+            'spa_category_id'  => $request->spa_category_id ?: null,
             'is_available'     => $request->boolean('is_available', true),
-        ]);
+        ];
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('services', 'public');
+        }
+
+        $spa->services()->create($data);
 
         return redirect()->route('spa_owner.services')
             ->with('success', 'Service added successfully!');
@@ -123,8 +132,8 @@ class SpaOwnerController extends Controller
     {
         $spa = $this->ownedSpa();
         abort_unless($service->spa_id === $spa->id, 403);
-
-        return view('spa_owner.services.edit', compact('spa', 'service'));
+        $categories = SpaCategory::all();
+        return view('spa_owner.services.edit', compact('spa', 'service', 'categories'));
     }
 
     public function updateService(Request $request, Service $service)
@@ -137,17 +146,32 @@ class SpaOwnerController extends Controller
             'description'      => 'nullable|string',
             'price'            => 'nullable|numeric|min:0',
             'duration_minutes' => 'nullable|integer|min:1',
-            'category'         => 'nullable|string|max:100',
+            'spa_category_id'  => 'nullable|exists:spa_categories,id',
+            'image'            => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
 
-        $service->update([
+        $data = [
             'name'             => $request->name,
             'description'      => $request->description,
             'price'            => $request->price,
             'duration_minutes' => $request->duration_minutes,
-            'category'         => $request->category,
+            'spa_category_id'  => $request->spa_category_id ?: null,
             'is_available'     => $request->boolean('is_available', true),
-        ]);
+        ];
+
+        if ($request->hasFile('image')) {
+            if ($service->image) {
+                Storage::disk('public')->delete($service->image);
+            }
+            $data['image'] = $request->file('image')->store('services', 'public');
+        }
+
+        if ($request->boolean('remove_image') && $service->image) {
+            Storage::disk('public')->delete($service->image);
+            $data['image'] = null;
+        }
+
+        $service->update($data);
 
         return redirect()->route('spa_owner.services')
             ->with('success', 'Service updated successfully!');
@@ -157,6 +181,10 @@ class SpaOwnerController extends Controller
     {
         $spa = $this->ownedSpa();
         abort_unless($service->spa_id === $spa->id, 403);
+
+        if ($service->image) {
+            Storage::disk('public')->delete($service->image);
+        }
 
         $service->delete();
 

@@ -21,6 +21,8 @@
     th { font-weight: 500; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
     td { color: rgba(255,255,255,0.7); font-size: 14px; }
     tbody tr:hover { background: rgba(201,169,97,0.05); }
+    .service-img { width: 48px; height: 48px; border-radius: 6px; object-fit: cover; border: 1px solid rgba(255,255,255,0.1); }
+    .service-img-placeholder { width: 48px; height: 48px; border-radius: 6px; background: #333; display: flex; align-items: center; justify-content: center; color: #666; font-size: 18px; border: 1px solid rgba(255,255,255,0.08); }
     .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
     .badge-green { background: #e8f5e9; color: #2e7d32; }
     .badge-gray { background: #f0f0f0; color: #888; }
@@ -62,6 +64,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Image</th>
                             <th>Service Name</th>
                             <th>Category</th>
                             <th>Duration</th>
@@ -75,14 +78,21 @@
                             <tr>
                                 <td>{{ $i + 1 }}</td>
                                 <td>
+                                    @if($service->image)
+                                        <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}" class="service-img">
+                                    @else
+                                        <div class="service-img-placeholder">&#9752;</div>
+                                    @endif
+                                </td>
+                                <td>
                                     <strong>{{ $service->name }}</strong>
                                     @if($service->description)
                                         <br><small style="color:#aaa;">{{ Str::limit($service->description, 60) }}</small>
                                     @endif
                                 </td>
                                 <td>
-                                    @if($service->category)
-                                        <span class="category-chip">{{ $service->category }}</span>
+                                    @if($service->spaCategory)
+                                        <span class="category-chip">{{ $service->spaCategory->name }}</span>
                                     @else
                                         <span style="color:#ccc;">—</span>
                                     @endif
@@ -105,7 +115,7 @@
                             </tr>
                         @empty
                             <tr class="empty-row">
-                                <td colspan="7">No services yet. <a href="{{ route('spa_owner.services.create') }}" style="color:#c9a961;">Add your first service →</a></td>
+                                <td colspan="8">No services yet. <a href="{{ route('spa_owner.services.create') }}" style="color:#c9a961;">Add your first service →</a></td>
                             </tr>
                         @endforelse
                     </tbody>

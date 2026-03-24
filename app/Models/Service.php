@@ -13,6 +13,8 @@ class Service extends Model
         'price',
         'duration_minutes',
         'is_available',
+        'spa_category_id',
+        'image',
     ];
 
     protected $casts = [
@@ -23,5 +25,10 @@ class Service extends Model
     public function spa()
     {
         return $this->belongsTo(Spa::class);
+    }
+
+    public function spaCategory()
+    {
+        return $this->belongsTo(SpaCategory::class);
     }
 }
