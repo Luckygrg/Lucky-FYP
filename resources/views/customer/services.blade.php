@@ -6,8 +6,238 @@
 
 <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body { background: #1a1a1a; }
+
+    .page-wrapper { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+
+    /* ── Header ── */
+    .back-link {
+        display: inline-flex; align-items: center; gap: 7px;
+        color: #c9a961; text-decoration: none; font-size: 14px; margin-bottom: 22px;
+    }
+    .back-link:hover { color: #b8985a; }
+
+    .page-header { margin-bottom: 28px; }
+    .page-header h1 {
+        font-size: 32px; color: white; font-weight: 300;
+        font-family: 'Georgia', serif; letter-spacing: 1px; margin-bottom: 6px;
+    }
+    .page-header p { color: rgba(255,255,255,0.5); font-size: 15px; }
+
+    /* ── Stats Row ── */
+    .stats-row { display: flex; gap: 14px; margin-bottom: 32px; flex-wrap: wrap; }
+    .stat-pill {
+        background: #2a2a2a; border-radius: 8px;
+        padding: 14px 22px; border-left: 4px solid #c9a961; min-width: 140px;
+    }
+    .stat-pill .label { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+    .stat-pill .value { font-size: 24px; font-weight: 300; color: #c9a961; font-family: 'Georgia', serif; }
+
+    /* ── Category Filter Bar ── */
+    .filter-bar {
+        display: flex; flex-wrap: wrap; gap: 10px;
+        margin-bottom: 36px; align-items: center;
+    }
+    .filter-label {
+        font-size: 12px; color: rgba(255,255,255,0.4);
+        text-transform: uppercase; letter-spacing: 1px; margin-right: 6px; align-self: center;
+    }
+    .filter-btn {
+        padding: 8px 18px; border-radius: 20px; font-size: 13px; font-weight: 500;
+        text-decoration: none; border: 1px solid rgba(255,255,255,0.15);
+        color: rgba(255,255,255,0.6); background: #2a2a2a; transition: all 0.2s;
+    }
+    .filter-btn:hover { border-color: #c9a961; color: #c9a961; background: rgba(201,169,97,0.08); }
+    .filter-btn.active { background: #c9a961; border-color: #c9a961; color: #1a1a1a; font-weight: 700; }
+
+    /* ── Section Heading ── */
+    .section-heading {
+        font-size: 20px; color: white; font-weight: 300;
+        font-family: 'Georgia', serif; margin-bottom: 20px;
+        padding-bottom: 10px; border-bottom: 1px solid rgba(201,169,97,0.2);
+        display: flex; align-items: center; gap: 10px;
+    }
+    .section-heading .count {
+        font-size: 13px; color: #c9a961; background: rgba(201,169,97,0.15);
+        border: 1px solid rgba(201,169,97,0.3); padding: 2px 10px; border-radius: 12px;
+        font-family: Arial, sans-serif; font-weight: 600;
+    }
+
+    /* ── Services Grid ── */
+    .services-section { margin-bottom: 48px; }
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+        gap: 20px;
+    }
+
+    .service-card {
+        background: #2a2a2a; border-radius: 10px; overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.07);
+        transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .service-card:hover {
+        transform: translateY(-4px); box-shadow: 0 10px 24px rgba(0,0,0,0.5);
+        border-color: rgba(201,169,97,0.35);
+    }
+
+    .service-img-wrap {
+        height: 170px; overflow: hidden; background: #333;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .service-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .service-img-placeholder {
+        width: 100%; height: 100%;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 52px; color: #555;
+        background: linear-gradient(135deg, #2a2a2a, #333);
+    }
+
+    .service-body { padding: 18px; }
+    .service-title { font-size: 15px; font-weight: 600; color: white; margin-bottom: 6px; }
+    .service-desc {
+        font-size: 13px; color: rgba(255,255,255,0.5);
+        line-height: 1.55; margin-bottom: 14px; min-height: 40px;
+    }
+
+    .service-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+    .tag {
+        padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: 500;
+        background: rgba(201,169,97,0.12); color: #c9a961;
+        border: 1px solid rgba(201,169,97,0.25);
+    }
+    .tag.duration {
+        background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.55);
+        border-color: rgba(255,255,255,0.1);
+    }
+
+    .service-footer {
+        display: flex; justify-content: space-between; align-items: center;
+        border-top: 1px solid rgba(255,255,255,0.07); padding-top: 12px;
+    }
+    .service-price { font-size: 17px; font-weight: 700; color: #c9a961; }
+    .service-available { font-size: 12px; color: #5cb85c; }
+
+    /* ── Empty State ── */
+    .empty-state {
+        background: #2a2a2a; border-radius: 10px; padding: 70px 20px;
+        text-align: center; color: rgba(255,255,255,0.35);
+        border: 1px solid rgba(255,255,255,0.06);
+    }
+    .empty-state .icon { font-size: 50px; margin-bottom: 14px; }
+    .empty-state p { font-size: 16px; }
+
+    @media (max-width: 640px) {
+        .services-grid { grid-template-columns: 1fr; }
+        .page-header h1 { font-size: 24px; }
+    }
+</style>
+
+<div class="page-wrapper">
+
+    <a href="{{ route('customer.dashboard') }}" class="back-link">← Back to Dashboard</a>
+
+    <div class="page-header">
+        <h1>Browse Services</h1>
+        <p>Filter by category to find the treatment you're looking for.</p>
+    </div>
+
+    <div class="stats-row">
+        <div class="stat-pill">
+            <div class="label">Total Services</div>
+            <div class="value">{{ $totalServices }}</div>
+        </div>
+        <div class="stat-pill">
+            <div class="label">Categories</div>
+            <div class="value">{{ $categories->count() }}</div>
+        </div>
+    </div>
+
+    {{-- ── Category Filter Bar ── --}}
+    <div class="filter-bar">
+        <span class="filter-label">Filter by:</span>
+        <a href="{{ route('customer.services') }}"
+           class="filter-btn {{ !$selectedCategory ? 'active' : '' }}">
+            All Services
+        </a>
+        @foreach($categories as $cat)
+            <a href="{{ route('customer.services', ['category' => $cat->id]) }}"
+               class="filter-btn {{ $selectedCategory == $cat->id ? 'active' : '' }}">
+                {{ $cat->name }}
+            </a>
+        @endforeach
+    </div>
+
+    {{-- ── Services ── --}}
+    @if($services->isEmpty())
+        <div class="empty-state">
+            <div class="icon">🌿</div>
+            <p>No services found{{ $selectedCategory ? ' in this category' : '' }}. Please check back soon.</p>
+        </div>
+    @else
+        @php
+            $grouped = $selectedCategory
+                ? collect(['Services' => $services])
+                : $services->groupBy(fn($s) => $s->spaCategory?->name ?? 'Uncategorized');
+        @endphp
+
+        @foreach($grouped as $categoryName => $items)
+        <div class="services-section">
+            @if(!$selectedCategory)
+            <div class="section-heading">
+                {{ $categoryName }}
+                <span class="count">{{ $items->count() }} {{ Str::plural('service', $items->count()) }}</span>
+            </div>
+            @endif
+
+            <div class="services-grid">
+                @foreach($items as $service)
+                <div class="service-card">
+                    <div class="service-img-wrap">
+                        @if($service->image)
+                            <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}">
+                        @else
+                            <div class="service-img-placeholder">🌿</div>
+                        @endif
+                    </div>
+                    <div class="service-body">
+                        <div class="service-title">{{ $service->name }}</div>
+                        @if($service->description)
+                            <div class="service-desc">{{ Str::limit($service->description, 90) }}</div>
+                        @else
+                            <div class="service-desc"></div>
+                        @endif
+
+                        <div class="service-tags">
+                            @if($service->spaCategory)
+                                <span class="tag">{{ $service->spaCategory->name }}</span>
+                            @endif
+                            @if($service->duration_minutes)
+                                <span class="tag duration">⏱ {{ $service->duration_minutes }} min</span>
+                            @endif
+                        </div>
+
+                        <div class="service-footer">
+                            <span class="service-price">
+                                @if($service->price)
+                                    Rs. {{ number_format($service->price, 2) }}
+                                @else
+                                    Price on request
+                                @endif
+                            </span>
+                            <span class="service-available">✓ Available</span>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        @endforeach
+    @endif
+
+</div>
+
+@endsection
 
     .page-wrapper {
         max-width: 1200px;

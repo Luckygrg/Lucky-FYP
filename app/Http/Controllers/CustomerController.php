@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Spa;
 use App\Models\Service;
+use App\Models\SpaCategory;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -16,7 +17,7 @@ class CustomerController extends Controller
         return view('customer.dashboard');
     }
 
-    public function services()
+    public function services(Request $request)
     {
         // Auto-sync any approved spa that has zero services
         $masterServices = Service::whereHas('spa', fn($q) => $q->where('status', 'approved'))
@@ -43,13 +44,27 @@ class CustomerController extends Controller
             }
         }
 
-        $spas = Spa::where('status', 'approved')
-            ->with(['services' => function ($q) {
-                $q->where('is_available', true)->with('spaCategory')->orderBy('name');
-            }])
-            ->orderBy('name')
-            ->get();
+        $categories = SpaCategory::orderBy('name')->get();
 
-        return view('customer.services', compact('spas'));
+        $selectedCategory = $request->query('category');
+
+        // Get unique services (by name) that are available, filtered by category if selected
+        $servicesQuery = Service::whereHas('spa', fn($q) => $q->where('status', 'approved'))
+            ->where('is_available', true)
+            ->with('spaCategory');
+
+        if ($selectedCategory) {
+            $servicesQuery->whereHas('spaCategory', fn($q) => $q->where('id', $selectedCategory));
+        }
+
+        // One entry per unique service name
+        $services = $servicesQuery->get()->unique('name')->sortBy('name')->values();
+
+        $totalServices = Service::whereHas('spa', fn($q) => $q->where('status', 'approved'))
+            ->where('is_available', true)
+            ->distinct('name')
+            ->count('name');
+
+        return view('customer.services', compact('categories', 'services', 'selectedCategory', 'totalServices'));
     }
 }

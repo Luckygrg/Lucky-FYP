@@ -309,6 +309,31 @@
         font-size: 15px;
     }
 
+    /* ── Category Filter Bar ── */
+    .cat-filter-bar {
+        display: flex; flex-wrap: wrap; gap: 10px;
+        margin-bottom: 28px; align-items: center;
+    }
+    .cat-filter-label {
+        font-size: 11px; color: rgba(255,255,255,0.4);
+        text-transform: uppercase; letter-spacing: 1px; margin-right: 4px;
+    }
+    .cat-btn {
+        padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 500;
+        text-decoration: none; border: 1px solid rgba(255,255,255,0.15);
+        color: rgba(255,255,255,0.6); background: #222; transition: all 0.2s; cursor: pointer;
+    }
+    .cat-btn:hover { border-color: #c9a961; color: #c9a961; background: rgba(201,169,97,0.08); }
+    .cat-btn.active { background: #c9a961; border-color: #c9a961; color: #1a1a1a; font-weight: 700; }
+
+    .cat-section-heading {
+        font-size: 14px; font-weight: 600; color: #c9a961;
+        text-transform: uppercase; letter-spacing: 1px;
+        margin-bottom: 14px; margin-top: 8px;
+        padding-bottom: 8px; border-bottom: 1px solid rgba(201,169,97,0.2);
+    }
+    .cat-section { margin-bottom: 30px; }
+
     /* Owner actions */
     .owner-actions {
         background: rgba(201,169,97,0.08);
@@ -520,26 +545,66 @@
         <h3>Our Services</h3>
 
         @if($spa->services && $spa->services->count() > 0)
-            <div class="services-grid">
-                @foreach($spa->services as $service)
-                    <div class="service-card">
-                        <div class="service-name">{{ $service->name }}</div>
-                        @if($service->description)
-                            <div class="service-desc">{{ Str::limit($service->description, 90) }}</div>
-                        @endif
-                        <div class="service-meta">
-                            @if($service->duration_minutes)
-                                <div class="service-duration">
-                                    <i class="fas fa-clock"></i> {{ $service->duration_minutes }} min
-                                </div>
-                            @endif
-                            @if($service->price)
-                                <div class="service-price">Rs. {{ number_format($service->price, 0) }}</div>
-                            @endif
-                        </div>
-                    </div>
+            @php
+                $activeCategory = request()->query('cat');
+                $allCategories = $spa->services
+                    ->filter(fn($s) => $s->spaCategory)
+                    ->pluck('spaCategory')
+                    ->unique('id')
+                    ->sortBy('name');
+
+                $filtered = $activeCategory
+                    ? $spa->services->filter(fn($s) => optional($s->spaCategory)->id == $activeCategory)
+                    : $spa->services;
+
+                $grouped = $activeCategory
+                    ? collect(['Services' => $filtered])
+                    : $filtered->groupBy(fn($s) => $s->spaCategory?->name ?? 'Uncategorized');
+            @endphp
+
+            {{-- Filter Bar --}}
+            @if($allCategories->count() > 1)
+            <div class="cat-filter-bar">
+                <span class="cat-filter-label">Filter:</span>
+                <a href="{{ request()->url() }}"
+                   class="cat-btn {{ !$activeCategory ? 'active' : '' }}">
+                    All
+                </a>
+                @foreach($allCategories as $cat)
+                    <a href="{{ request()->url() }}?cat={{ $cat->id }}"
+                       class="cat-btn {{ $activeCategory == $cat->id ? 'active' : '' }}">
+                        {{ $cat->name }}
+                    </a>
                 @endforeach
             </div>
+            @endif
+
+            {{-- Grouped Services --}}
+            @foreach($grouped as $catName => $services)
+                @if(!$activeCategory && $grouped->count() > 1)
+                    <div class="cat-section-heading">{{ $catName }}</div>
+                @endif
+                <div class="services-grid {{ !$loop->last ? 'cat-section' : '' }}">
+                    @foreach($services as $service)
+                        <div class="service-card">
+                            <div class="service-name">{{ $service->name }}</div>
+                            @if($service->description)
+                                <div class="service-desc">{{ Str::limit($service->description, 90) }}</div>
+                            @endif
+                            <div class="service-meta">
+                                @if($service->duration_minutes)
+                                    <div class="service-duration">
+                                        <i class="fas fa-clock"></i> {{ $service->duration_minutes }} min
+                                    </div>
+                                @endif
+                                @if($service->price)
+                                    <div class="service-price">Rs. {{ number_format($service->price, 0) }}</div>
+                                @endif
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @endforeach
         @else
             <div class="no-services">
                 <i class="fas fa-spa" style="font-size:36px; margin-bottom:12px; display:block; color:#ddd;"></i>
