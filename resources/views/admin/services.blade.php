@@ -295,7 +295,7 @@
                                 </td>
                                 <td class="price">
                                     @if($service->price)
-                                        ${{ number_format($service->price, 2) }}
+                                        Rs. {{ number_format($service->price, 2) }}
                                     @else
                                         <span style="color:#ccc;">—</span>
                                     @endif

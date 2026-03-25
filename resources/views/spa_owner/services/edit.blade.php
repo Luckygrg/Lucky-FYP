@@ -66,7 +66,7 @@
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Price ($)</label>
+                        <label>Price (Rs.)</label>
                         <input type="number" name="price" value="{{ old('price', $service->price) }}" min="0" step="0.01">
                         @error('price')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>

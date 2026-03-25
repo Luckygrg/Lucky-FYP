@@ -66,6 +66,7 @@
                             <th>#</th>
                             <th>Image</th>
                             <th>Service Name</th>
+                            <th>Spa</th>
                             <th>Category</th>
                             <th>Duration</th>
                             <th>Price</th>
@@ -90,6 +91,9 @@
                                         <br><small style="color:#aaa;">{{ Str::limit($service->description, 60) }}</small>
                                     @endif
                                 </td>
+                                <td style="color:rgba(255,255,255,0.5);font-size:13px;">
+                                    {{ $service->spa->name ?? '—' }}
+                                </td>
                                 <td>
                                     @if($service->spaCategory)
                                         <span class="category-chip">{{ $service->spaCategory->name }}</span>
@@ -98,7 +102,7 @@
                                     @endif
                                 </td>
                                 <td>{{ $service->duration_minutes ? $service->duration_minutes . ' min' : '—' }}</td>
-                                <td>{{ $service->price ? '$' . number_format($service->price, 2) : '—' }}</td>
+                                <td>{{ $service->price ? 'Rs. ' . number_format($service->price, 2) : '—' }}</td>
                                 <td>
                                     <span class="badge {{ $service->is_available ? 'badge-green' : 'badge-gray' }}">
                                         {{ $service->is_available ? 'Available' : 'Unavailable' }}
@@ -115,7 +119,7 @@
                             </tr>
                         @empty
                             <tr class="empty-row">
-                                <td colspan="8">No services yet. <a href="{{ route('spa_owner.services.create') }}" style="color:#c9a961;">Add your first service →</a></td>
+                                <td colspan="9">No services yet. <a href="{{ route('spa_owner.services.create') }}" style="color:#c9a961;">Add your first service →</a></td>
                             </tr>
                         @endforelse
                     </tbody>

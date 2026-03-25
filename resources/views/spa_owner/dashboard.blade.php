@@ -232,7 +232,7 @@
             </div>
             <div class="stat-card">
                 <h3>Total Earning</h3>
-                <div class="number">$0</div>
+                <div class="number">Rs. 0</div>
             </div>
         </div>
         

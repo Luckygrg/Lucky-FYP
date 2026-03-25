@@ -84,7 +84,7 @@
                     <div class="form-group">
                         <label>Price Range *</label>
                         <select name="price_range" required>
-                            @foreach(['$' => 'Budget ($)', '$$' => 'Mid-range ($$)', '$$$' => 'Upscale ($$$)', '$$$$' => 'Luxury ($$$$)'] as $val => $label)
+                            @foreach(['$' => 'Budget (Rs.)', '$$' => 'Mid-range (Rs. Rs.)', '$$$' => 'Upscale (Rs. Rs. Rs.)', '$$$$' => 'Luxury (Rs. Rs. Rs. Rs.)'] as $val => $label)
                                 <option value="{{ $val }}" {{ old('price_range', $spa->price_range) == $val ? 'selected' : '' }}>{{ $label }}</option>
                             @endforeach
                         </select>

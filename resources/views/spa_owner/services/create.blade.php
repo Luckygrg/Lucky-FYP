@@ -58,8 +58,8 @@
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Price ($)</label>
-                        <input type="number" name="price" value="{{ old('price') }}" placeholder="e.g. 80" min="0" step="0.01">
+                        <label>Price (Rs.)</label>
+                        <input type="number" name="price" value="{{ old('price') }}" placeholder="e.g. 800" min="0" step="0.01">
                         @error('price')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                     <div class="form-group">

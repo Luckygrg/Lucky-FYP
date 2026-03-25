@@ -209,10 +209,10 @@
                 <label for="price_range">Price Range *</label>
                 <select id="price_range" name="price_range" required>
                     <option value="">Select price range</option>
-                    <option value="$" {{ old('price_range') == '$' ? 'selected' : '' }}>$ - Budget Friendly</option>
-                    <option value="$$" {{ old('price_range') == '$$' ? 'selected' : '' }}>$$ - Moderate</option>
-                    <option value="$$$" {{ old('price_range') == '$$$' ? 'selected' : '' }}>$$$ - Premium</option>
-                    <option value="$$$$" {{ old('price_range') == '$$$$' ? 'selected' : '' }}>$$$$ - Luxury</option>
+                    <option value="$" {{ old('price_range') == '$' ? 'selected' : '' }}>Rs. - Budget Friendly</option>
+                    <option value="$$" {{ old('price_range') == '$$' ? 'selected' : '' }}>Rs. Rs. - Moderate</option>
+                    <option value="$$$" {{ old('price_range') == '$$$' ? 'selected' : '' }}>Rs. Rs. Rs. - Premium</option>
+                    <option value="$$$$" {{ old('price_range') == '$$$$' ? 'selected' : '' }}>Rs. Rs. Rs. Rs. - Luxury</option>
                 </select>
             </div>
             

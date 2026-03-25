@@ -22,7 +22,7 @@ class SpaOwnerController extends Controller
     public function dashboard()
     {
         $spa = Spa::where('user_id', Auth::id())->first();
-        $servicesCount = $spa ? $spa->services()->count() : 0;
+        $servicesCount = Service::count();
 
         return view('spa_owner.dashboard', compact('spa', 'servicesCount'));
     }
@@ -84,7 +84,7 @@ class SpaOwnerController extends Controller
     public function services()
     {
         $spa = $this->ownedSpa();
-        $services = $spa->services()->with('spaCategory')->orderBy('name')->get();
+        $services = Service::with(['spaCategory', 'spa'])->orderBy('name')->get();
 
         return view('spa_owner.services.index', compact('spa', 'services'));
     }
@@ -131,7 +131,6 @@ class SpaOwnerController extends Controller
     public function editService(Service $service)
     {
         $spa = $this->ownedSpa();
-        abort_unless($service->spa_id === $spa->id, 403);
         $categories = SpaCategory::all();
         return view('spa_owner.services.edit', compact('spa', 'service', 'categories'));
     }
@@ -139,7 +138,6 @@ class SpaOwnerController extends Controller
     public function updateService(Request $request, Service $service)
     {
         $spa = $this->ownedSpa();
-        abort_unless($service->spa_id === $spa->id, 403);
 
         $request->validate([
             'name'             => 'required|string|max:255',
@@ -180,7 +178,6 @@ class SpaOwnerController extends Controller
     public function destroyService(Service $service)
     {
         $spa = $this->ownedSpa();
-        abort_unless($service->spa_id === $spa->id, 403);
 
         if ($service->image) {
             Storage::disk('public')->delete($service->image);

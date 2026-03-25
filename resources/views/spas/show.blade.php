@@ -534,7 +534,7 @@
                                 </div>
                             @endif
                             @if($service->price)
-                                <div class="service-price">${{ number_format($service->price, 0) }}</div>
+                                <div class="service-price">Rs. {{ number_format($service->price, 0) }}</div>
                             @endif
                         </div>
                     </div>
