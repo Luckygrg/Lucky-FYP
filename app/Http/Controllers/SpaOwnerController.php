@@ -22,7 +22,7 @@ class SpaOwnerController extends Controller
     public function dashboard()
     {
         $spa = Spa::where('user_id', Auth::id())->first();
-        $servicesCount = Service::count();
+        $servicesCount = $spa ? $spa->services()->count() : 0;
 
         return view('spa_owner.dashboard', compact('spa', 'servicesCount'));
     }
@@ -84,7 +84,28 @@ class SpaOwnerController extends Controller
     public function services()
     {
         $spa = $this->ownedSpa();
-        $services = Service::with(['spaCategory', 'spa'])->orderBy('name')->get();
+
+        // If this approved spa has no services yet, sync from other approved spas
+        if ($spa->status === 'approved' && $spa->services()->count() === 0) {
+            $existingServices = Service::whereHas('spa', fn($q) => $q->where('status', 'approved'))
+                ->where('spa_id', '!=', $spa->id)
+                ->get()
+                ->unique('name');
+
+            foreach ($existingServices as $source) {
+                $spa->services()->create([
+                    'name'             => $source->name,
+                    'description'      => $source->description,
+                    'price'            => $source->price,
+                    'duration_minutes' => $source->duration_minutes,
+                    'spa_category_id'  => $source->spa_category_id,
+                    'is_available'     => $source->is_available,
+                    'image'            => $source->image,
+                ]);
+            }
+        }
+
+        $services = $spa->services()->with('spaCategory')->orderBy('name')->get();
 
         return view('spa_owner.services.index', compact('spa', 'services'));
     }
@@ -122,10 +143,26 @@ class SpaOwnerController extends Controller
             $data['image'] = $request->file('image')->store('services', 'public');
         }
 
+        // Create the service for the owner's spa
         $spa->services()->create($data);
 
+        // Replicate to all other approved spas that don't already have a service with this name
+        $otherApprovedSpas = Spa::where('status', 'approved')
+            ->where('id', '!=', $spa->id)
+            ->get();
+
+        foreach ($otherApprovedSpas as $approvedSpa) {
+            $alreadyExists = $approvedSpa->services()
+                ->where('name', $data['name'])
+                ->exists();
+
+            if (!$alreadyExists) {
+                $approvedSpa->services()->create($data);
+            }
+        }
+
         return redirect()->route('spa_owner.services')
-            ->with('success', 'Service added successfully!');
+            ->with('success', 'Service added successfully to all approved spas!');
     }
 
     public function editService(Service $service)
@@ -169,24 +206,53 @@ class SpaOwnerController extends Controller
             $data['image'] = null;
         }
 
+        $oldName = $service->name;
+
         $service->update($data);
 
+        // Propagate update to the same-named service across all other approved spas
+        Service::whereHas('spa', fn($q) => $q->where('status', 'approved'))
+            ->where('spa_id', '!=', $service->spa_id)
+            ->where('name', $oldName)
+            ->get()
+            ->each(function ($replica) use ($data) {
+                // Keep each spa's own image unless a new one was uploaded
+                $updateData = $data;
+                if (!isset($updateData['image'])) {
+                    unset($updateData['image']);
+                }
+                $replica->update($updateData);
+            });
+
         return redirect()->route('spa_owner.services')
-            ->with('success', 'Service updated successfully!');
+            ->with('success', 'Service updated successfully across all approved spas!');
     }
 
     public function destroyService(Service $service)
     {
         $spa = $this->ownedSpa();
 
-        if ($service->image) {
-            Storage::disk('public')->delete($service->image);
+        $serviceName = $service->name;
+        $serviceImage = $service->image;
+
+        // Delete matching services from all other approved spas first
+        Service::whereHas('spa', fn($q) => $q->where('status', 'approved'))
+            ->where('spa_id', '!=', $service->spa_id)
+            ->where('name', $serviceName)
+            ->get()
+            ->each(function ($replica) {
+                // Don't delete the image file here — the primary record handles it
+                $replica->delete();
+            });
+
+        if ($serviceImage) {
+            Storage::disk('public')->delete($serviceImage);
         }
 
         $service->delete();
 
         return redirect()->route('spa_owner.services')
-            ->with('success', 'Service deleted successfully!');
+            ->with('success', 'Service deleted from all approved spas!');
     }
 
     /* ── Placeholder Pages ───────────────────────────────────────────────────── */

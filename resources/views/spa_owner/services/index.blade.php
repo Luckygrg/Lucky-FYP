@@ -66,7 +66,6 @@
                             <th>#</th>
                             <th>Image</th>
                             <th>Service Name</th>
-                            <th>Spa</th>
                             <th>Category</th>
                             <th>Duration</th>
                             <th>Price</th>
@@ -90,9 +89,6 @@
                                     @if($service->description)
                                         <br><small style="color:#aaa;">{{ Str::limit($service->description, 60) }}</small>
                                     @endif
-                                </td>
-                                <td style="color:rgba(255,255,255,0.5);font-size:13px;">
-                                    {{ $service->spa->name ?? '—' }}
                                 </td>
                                 <td>
                                     @if($service->spaCategory)
@@ -119,7 +115,7 @@
                             </tr>
                         @empty
                             <tr class="empty-row">
-                                <td colspan="9">No services yet. <a href="{{ route('spa_owner.services.create') }}" style="color:#c9a961;">Add your first service →</a></td>
+                                <td colspan="8">No services yet. <a href="{{ route('spa_owner.services.create') }}" style="color:#c9a961;">Add your first service →</a></td>
                             </tr>
                         @endforelse
                     </tbody>

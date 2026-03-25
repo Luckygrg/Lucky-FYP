@@ -280,8 +280,8 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if($service->category)
-                                        <span class="category-chip">{{ $service->category }}</span>
+                                    @if($service->spaCategory)
+                                        <span class="category-chip">{{ $service->spaCategory->name }}</span>
                                     @else
                                         <span style="color:#ccc;">—</span>
                                     @endif

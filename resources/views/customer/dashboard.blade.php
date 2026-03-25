@@ -20,7 +20,7 @@
         <div style="background: #2a2a2a; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); border: 1px solid rgba(201,169,97,0.15);">
             <h3 style="color: #c9a961; margin-bottom: 15px;"> Book Services</h3>
             <p style="color: rgba(255,255,255,0.6); margin-bottom: 15px;">Browse and book spa services</p>
-            <a href="#" style="display: inline-block; padding: 10px 20px; background: #c9a961; color: #1a1a1a; text-decoration: none; border-radius: 4px; font-weight: 600;">Browse Services</a>
+            <a href="{{ route('customer.services') }}" style="display: inline-block; padding: 10px 20px; background: #c9a961; color: #1a1a1a; text-decoration: none; border-radius: 4px; font-weight: 600;">Browse Services</a>
         </div>
 
         <div style="background: #2a2a2a; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); border: 1px solid rgba(201,169,97,0.15);">

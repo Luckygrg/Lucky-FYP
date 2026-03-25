@@ -96,4 +96,5 @@ Route::post('/spas', [SpaController::class, 'store'])->name('spas.store')->middl
 // Customer Routes
 Route::middleware(['auth', 'role:customer'])->prefix('customer')->name('customer.')->group(function () {
     Route::get('/dashboard', [CustomerController::class, 'dashboard'])->name('dashboard');
+    Route::get('/services', [CustomerController::class, 'services'])->name('services');
 });
