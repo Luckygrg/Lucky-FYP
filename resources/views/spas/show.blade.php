@@ -258,9 +258,11 @@
     .service-card {
         border: 1px solid rgba(255,255,255,0.1);
         border-radius: 8px;
-        padding: 22px;
+        overflow: hidden;
         transition: all 0.3s;
         background: #333;
+        display: flex;
+        flex-direction: column;
     }
 
     .service-card:hover {
@@ -268,11 +270,41 @@
         box-shadow: 0 4px 12px rgba(201,169,97,0.15);
     }
 
+    .service-card.selected {
+        border-color: #c9a961;
+        box-shadow: 0 0 0 2px rgba(201,169,97,0.4);
+    }
+
+    .service-img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        display: block;
+    }
+
+    .service-img-placeholder {
+        width: 100%;
+        height: 150px;
+        background: linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255,255,255,0.2);
+        font-size: 36px;
+    }
+
+    .service-body {
+        padding: 18px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
     .service-name {
         font-size: 16px;
         font-weight: 600;
         color: white;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
     }
 
     .service-desc {
@@ -280,6 +312,7 @@
         color: rgba(255,255,255,0.5);
         line-height: 1.6;
         margin-bottom: 14px;
+        flex: 1;
     }
 
     .service-meta {
@@ -287,6 +320,7 @@
         justify-content: space-between;
         align-items: center;
         font-size: 13px;
+        margin-bottom: 12px;
     }
 
     .service-duration {
@@ -302,11 +336,276 @@
         font-size: 15px;
     }
 
+    .service-select-btn {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid rgba(201,169,97,0.4);
+        border-radius: 5px;
+        background: transparent;
+        color: #c9a961;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        letter-spacing: 0.5px;
+    }
+
+    .service-select-btn:hover,
+    .service-card.selected .service-select-btn {
+        background: #c9a961;
+        color: #1a1a1a;
+    }
+
     .no-services {
         text-align: center;
         padding: 40px 20px;
         color: #bbb;
         font-size: 15px;
+    }
+
+    /* Book Now floating bar */
+    .book-bar {
+        position: fixed;
+        bottom: 0; left: 0; right: 0;
+        background: #1a1a1a;
+        border-top: 1px solid rgba(201,169,97,0.3);
+        padding: 14px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 900;
+        gap: 20px;
+        transition: transform 0.3s;
+        transform: translateY(100%);
+    }
+
+    .book-bar.visible { transform: translateY(0); }
+
+    .book-bar-info {
+        color: rgba(255,255,255,0.7);
+        font-size: 14px;
+    }
+
+    .book-bar-info strong {
+        color: #c9a961;
+        font-size: 16px;
+    }
+
+    .book-bar-btn {
+        padding: 12px 32px;
+        background: #c9a961;
+        color: #1a1a1a;
+        border: none;
+        border-radius: 6px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        letter-spacing: 0.5px;
+        transition: background 0.2s;
+        white-space: nowrap;
+    }
+
+    .book-bar-btn:hover { background: #b8985a; }
+
+    /* Booking Modal */
+    .booking-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.75);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .booking-overlay.open { display: flex; }
+
+    .booking-modal {
+        background: #2a2a2a;
+        border-radius: 12px;
+        border: 1px solid rgba(201,169,97,0.25);
+        width: 100%;
+        max-width: 560px;
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 36px 40px;
+        position: relative;
+    }
+
+    .booking-modal h2 {
+        font-size: 22px;
+        font-weight: 300;
+        color: white;
+        font-family: 'Georgia', serif;
+        margin-bottom: 6px;
+    }
+
+    .booking-modal .modal-subtitle {
+        color: rgba(255,255,255,0.5);
+        font-size: 14px;
+        margin-bottom: 28px;
+    }
+
+    .modal-close {
+        position: absolute;
+        top: 16px; right: 20px;
+        background: none;
+        border: none;
+        color: rgba(255,255,255,0.5);
+        font-size: 22px;
+        cursor: pointer;
+        line-height: 1;
+    }
+
+    .modal-close:hover { color: white; }
+
+    .modal-section-title {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        color: #c9a961;
+        margin-bottom: 10px;
+        margin-top: 20px;
+    }
+
+    .selected-services-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 6px;
+    }
+
+    .selected-service-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 14px;
+        background: rgba(255,255,255,0.05);
+        border-radius: 6px;
+        font-size: 14px;
+        color: rgba(255,255,255,0.85);
+    }
+
+    .selected-service-row span { color: #c9a961; font-weight: 600; }
+
+    .modal-total {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 14px;
+        background: rgba(201,169,97,0.08);
+        border: 1px solid rgba(201,169,97,0.2);
+        border-radius: 6px;
+        font-size: 15px;
+        font-weight: 600;
+        color: white;
+        margin-bottom: 6px;
+    }
+
+    .modal-total span { color: #c9a961; }
+
+    .form-group {
+        margin-bottom: 18px;
+    }
+
+    .form-group label {
+        display: block;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        color: rgba(255,255,255,0.6);
+        margin-bottom: 7px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 11px 14px;
+        background: #1a1a1a;
+        border: 1px solid rgba(255,255,255,0.15);
+        border-radius: 6px;
+        color: white;
+        font-size: 14px;
+        transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: #c9a961;
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    .payment-options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 18px;
+    }
+
+    .payment-opt {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 16px;
+        background: #1a1a1a;
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .payment-opt input[type=radio] { display: none; }
+
+    .payment-opt.selected,
+    .payment-opt:has(input:checked) {
+        border-color: #c9a961;
+        background: rgba(201,169,97,0.08);
+    }
+
+    .payment-opt i { font-size: 20px; flex-shrink: 0; }
+
+    .pay-opt-title { font-size: 14px; font-weight: 700; color: white; }
+    .pay-opt-sub   { font-size: 11px; color: rgba(255,255,255,0.45); margin-top: 2px; }
+
+    .btn-submit-booking {
+        width: 100%;
+        padding: 14px;
+        background: #c9a961;
+        color: #1a1a1a;
+        border: none;
+        border-radius: 7px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        letter-spacing: 0.5px;
+        margin-top: 8px;
+        transition: background 0.2s;
+    }
+
+    .btn-submit-booking:hover { background: #b8985a; }
+
+    .alert-success {
+        background: rgba(67,160,71,0.12);
+        color: #6fcf72;
+        border: 1px solid rgba(67,160,71,0.3);
+        border-radius: 6px;
+        padding: 12px 18px;
+        margin-bottom: 22px;
+        font-size: 14px;
+    }
+
+    .alert-error {
+        background: rgba(229,57,53,0.12);
+        color: #ef9a9a;
+        border: 1px solid rgba(229,57,53,0.3);
+        border-radius: 6px;
+        padding: 12px 18px;
+        margin-bottom: 14px;
+        font-size: 14px;
     }
 
     /* ── Category Filter Bar ── */
@@ -560,6 +859,9 @@
                 $grouped = $activeCategory
                     ? collect(['Services' => $filtered])
                     : $filtered->groupBy(fn($s) => $s->spaCategory?->name ?? 'Uncategorized');
+
+                $isCustomer = auth()->check() && auth()->user()->role === 'customer';
+                $isApproved = $spa->status === 'approved';
             @endphp
 
             {{-- Filter Bar --}}
@@ -567,9 +869,7 @@
             <div class="cat-filter-bar">
                 <span class="cat-filter-label">Filter:</span>
                 <a href="{{ request()->url() }}"
-                   class="cat-btn {{ !$activeCategory ? 'active' : '' }}">
-                    All
-                </a>
+                   class="cat-btn {{ !$activeCategory ? 'active' : '' }}">All</a>
                 @foreach($allCategories as $cat)
                     <a href="{{ request()->url() }}?cat={{ $cat->id }}"
                        class="cat-btn {{ $activeCategory == $cat->id ? 'active' : '' }}">
@@ -579,6 +879,12 @@
             </div>
             @endif
 
+            @if($isCustomer && $isApproved)
+                <p style="font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:20px;">
+                    <i class="fas fa-hand-pointer"></i> Select services you'd like to book, then click <strong style="color:#c9a961;">Book Now</strong>.
+                </p>
+            @endif
+
             {{-- Grouped Services --}}
             @foreach($grouped as $catName => $services)
                 @if(!$activeCategory && $grouped->count() > 1)
@@ -586,25 +892,48 @@
                 @endif
                 <div class="services-grid {{ !$loop->last ? 'cat-section' : '' }}">
                     @foreach($services as $service)
-                        <div class="service-card">
-                            <div class="service-name">{{ $service->name }}</div>
-                            @if($service->description)
-                                <div class="service-desc">{{ Str::limit($service->description, 90) }}</div>
+                        <div class="service-card {{ $isCustomer && $isApproved ? 'bookable' : '' }}"
+                             data-id="{{ $service->id }}"
+                             data-name="{{ $service->name }}"
+                             data-price="{{ $service->price ?? 0 }}"
+                             data-duration="{{ $service->duration_minutes ?? 0 }}"
+                             onclick="{{ $isCustomer && $isApproved ? 'toggleService(this)' : '' }}">
+
+                            {{-- Image --}}
+                            @if($service->image)
+                                <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}" class="service-img">
+                            @else
+                                <div class="service-img-placeholder"><i class="fas fa-spa"></i></div>
                             @endif
-                            <div class="service-meta">
-                                @if($service->duration_minutes)
-                                    <div class="service-duration">
-                                        <i class="fas fa-clock"></i> {{ $service->duration_minutes }} min
-                                    </div>
+
+                            <div class="service-body">
+                                <div class="service-name">{{ $service->name }}</div>
+                                @if($service->description)
+                                    <div class="service-desc">{{ Str::limit($service->description, 90) }}</div>
                                 @endif
-                                @if($service->price)
-                                    <div class="service-price">Rs. {{ number_format($service->price, 0) }}</div>
+                                <div class="service-meta">
+                                    @if($service->duration_minutes)
+                                        <div class="service-duration">
+                                            <i class="fas fa-clock"></i> {{ $service->duration_minutes }} min
+                                        </div>
+                                    @else
+                                        <span></span>
+                                    @endif
+                                    @if($service->price)
+                                        <div class="service-price">Rs. {{ number_format($service->price, 0) }}</div>
+                                    @endif
+                                </div>
+                                @if($isCustomer && $isApproved)
+                                    <button class="service-select-btn" type="button">
+                                        <i class="fas fa-plus"></i> Add to Booking
+                                    </button>
                                 @endif
                             </div>
                         </div>
                     @endforeach
                 </div>
             @endforeach
+
         @else
             <div class="no-services">
                 <i class="fas fa-spa" style="font-size:36px; margin-bottom:12px; display:block; color:#ddd;"></i>
@@ -614,5 +943,214 @@
     </div>
 
 </div>
+
+{{-- Floating Book Bar (customers only) --}}
+@auth
+    @if(auth()->user()->role === 'customer' && $spa->status === 'approved')
+        <div class="book-bar" id="bookBar">
+            <div class="book-bar-info">
+                <div><span id="barCount">0</span> service(s) selected &nbsp;·&nbsp; <strong id="barTotal">Rs. 0</strong> &nbsp;·&nbsp; <span id="barDuration">0 min</span></div>
+            </div>
+            <button class="book-bar-btn" onclick="openModal()">
+                <i class="fas fa-calendar-check"></i> Book Now
+            </button>
+        </div>
+
+        {{-- Booking Modal --}}
+        <div class="booking-overlay" id="bookingOverlay">
+            <div class="booking-modal">
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+                <h2>Book Your Experience</h2>
+                <p class="modal-subtitle">at {{ $spa->name }}</p>
+
+                @if(session('success'))
+                    <div class="alert-success"><i class="fas fa-check-circle"></i> {{ session('success') }}</div>
+                @endif
+
+                @if($errors->any())
+                    <div class="alert-error">
+                        <div style="font-weight:700;margin-bottom:6px;font-size:13px;">
+                            <i class="fas fa-exclamation-circle"></i> Could not complete booking:
+                        </div>
+                        @foreach($errors->all() as $e)
+                            <div style="margin-top:4px;">&#8226; {{ $e }}</div>
+                        @endforeach
+                    </div>
+                @endif
+
+                <form method="POST" action="{{ route('bookings.store', $spa) }}" id="bookingForm">
+                    @csrf
+
+                    {{-- Hidden service ids --}}
+                    <div id="serviceInputs"></div>
+
+                    <div class="modal-section-title">Selected Services</div>
+                    <div class="selected-services-list" id="modalServiceList"></div>
+                    <div class="modal-total">
+                        <span>Total</span>
+                        <span id="modalTotal">Rs. 0 &nbsp;·&nbsp; 0 min</span>
+                    </div>
+
+                    <div class="modal-section-title">Your Details</div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="text" name="phone" placeholder="+977-98XXXXXXXX"
+                               value="{{ old('phone') }}" required>
+                    </div>
+
+                    <div class="modal-section-title">Appointment</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input type="date" name="booking_date"
+                                   min="{{ date('Y-m-d') }}"
+                                   value="{{ old('booking_date') }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Time</label>
+                            <input type="time" name="booking_time"
+                                   value="{{ old('booking_time') }}" required>
+                        </div>
+                    </div>
+
+                    <div class="modal-section-title">Payment Option</div>
+                    <div class="payment-options">
+                        <label class="payment-opt {{ old('payment_option', 'pay_later') === 'pay_now' ? 'selected' : '' }}">
+                            <input type="radio" name="payment_option" value="pay_now"
+                                   {{ old('payment_option', 'pay_later') === 'pay_now' ? 'checked' : '' }}
+                                   onchange="updatePayBtn(this)">
+                            <i class="fas fa-credit-card" style="color:#c9a961;"></i>
+                            <div>
+                                <div class="pay-opt-title">Pay Now</div>
+                                <div class="pay-opt-sub">Pay online while booking</div>
+                            </div>
+                        </label>
+                        <label class="payment-opt {{ old('payment_option', 'pay_later') === 'pay_later' ? 'selected' : '' }}">
+                            <input type="radio" name="payment_option" value="pay_later"
+                                   {{ old('payment_option', 'pay_later') === 'pay_later' ? 'checked' : '' }}
+                                   onchange="updatePayBtn(this)">
+                            <i class="fas fa-hand-holding-usd" style="color:#c9a961;"></i>
+                            <div>
+                                <div class="pay-opt-title">Pay Later</div>
+                                <div class="pay-opt-sub">Pay at the spa after service</div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Special Notes (optional)</label>
+                        <textarea name="notes" rows="3" placeholder="Any preferences or special requests...">{{ old('notes') }}</textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit-booking" id="submitBookingBtn">
+                        <i class="fas fa-calendar-check"></i> <span id="submitBtnText">Confirm &amp; Pay Later</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <script>
+            const selected = {};
+
+            function toggleService(card) {
+                const id       = card.dataset.id;
+                const name     = card.dataset.name;
+                const price    = parseFloat(card.dataset.price) || 0;
+                const duration = parseInt(card.dataset.duration) || 0;
+                const btn      = card.querySelector('.service-select-btn');
+
+                if (selected[id]) {
+                    delete selected[id];
+                    card.classList.remove('selected');
+                    btn.innerHTML = '<i class="fas fa-plus"></i> Add to Booking';
+                } else {
+                    selected[id] = { name, price, duration };
+                    card.classList.add('selected');
+                    btn.innerHTML = '<i class="fas fa-check"></i> Selected';
+                }
+                updateBar();
+            }
+
+            function updateBar() {
+                const ids = Object.keys(selected);
+                const total    = ids.reduce((s, id) => s + selected[id].price, 0);
+                const duration = ids.reduce((s, id) => s + selected[id].duration, 0);
+
+                document.getElementById('barCount').textContent    = ids.length;
+                document.getElementById('barTotal').textContent    = 'Rs. ' + total.toLocaleString();
+                document.getElementById('barDuration').textContent = duration + ' min';
+
+                const bar = document.getElementById('bookBar');
+                ids.length > 0 ? bar.classList.add('visible') : bar.classList.remove('visible');
+            }
+
+            function openModal() {
+                const ids = Object.keys(selected);
+                if (ids.length === 0) return;
+
+                // Populate modal service list
+                const list = document.getElementById('modalServiceList');
+                const inputs = document.getElementById('serviceInputs');
+                list.innerHTML = '';
+                inputs.innerHTML = '';
+
+                let total = 0, duration = 0;
+                ids.forEach(id => {
+                    const s = selected[id];
+                    total    += s.price;
+                    duration += s.duration;
+
+                    const row = document.createElement('div');
+                    row.className = 'selected-service-row';
+                    row.innerHTML = `<div>${s.name} <small style="color:rgba(255,255,255,0.4)">${s.duration} min</small></div><span>Rs. ${s.price.toLocaleString()}</span>`;
+                    list.appendChild(row);
+
+                    const inp = document.createElement('input');
+                    inp.type  = 'hidden';
+                    inp.name  = 'services[]';
+                    inp.value = id;
+                    inputs.appendChild(inp);
+                });
+
+                document.getElementById('modalTotal').innerHTML =
+                    'Rs. ' + total.toLocaleString() + ' &nbsp;·&nbsp; ' + duration + ' min';
+
+                document.getElementById('bookingOverlay').classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeModal() {
+                document.getElementById('bookingOverlay').classList.remove('open');
+                document.body.style.overflow = '';
+            }
+
+            // Close on overlay click
+            document.getElementById('bookingOverlay').addEventListener('click', function(e) {
+                if (e.target === this) closeModal();
+            });
+
+            function updatePayBtn(radio) {
+                document.querySelectorAll('.payment-opt').forEach(el => el.classList.remove('selected'));
+                radio.closest('.payment-opt').classList.add('selected');
+                const txt = document.getElementById('submitBtnText');
+                txt.textContent = radio.value === 'pay_now' ? 'Confirm & Pay Now' : 'Confirm & Pay Later';
+            }
+
+            // Init button label on page load
+            document.addEventListener('DOMContentLoaded', function() {
+                const checked = document.querySelector('input[name="payment_option"]:checked');
+                if (checked) updatePayBtn(checked);
+            });
+
+            // If there are validation errors, re-open modal
+            @if($errors->any())
+                document.addEventListener('DOMContentLoaded', function() {
+                    document.getElementById('bookingOverlay').classList.add('open');
+                    document.body.style.overflow = 'hidden';
+                });
+            @endif
+        </script>
+    @endif
+@endauth
 
 @endsection

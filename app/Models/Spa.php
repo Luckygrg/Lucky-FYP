@@ -50,4 +50,9 @@ class Spa extends Model
     {
         return $this->hasMany(Service::class);
     }
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
 }

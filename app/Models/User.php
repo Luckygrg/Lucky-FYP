@@ -54,5 +54,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(Spa::class, 'user_id');
     }
-} 
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+}
 

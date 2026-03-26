@@ -7,6 +7,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SpaController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\SpaCategoryController;
+use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -80,8 +81,11 @@ Route::middleware(['auth', 'role:spa_owner'])->prefix('spa-owner')->name('spa_ow
     Route::put('/services/{service}', [SpaOwnerController::class, 'updateService'])->name('services.update');
     Route::delete('/services/{service}', [SpaOwnerController::class, 'destroyService'])->name('services.destroy');
 
+    // Bookings
+    Route::get('/bookings', [BookingController::class, 'ownerBookings'])->name('bookings');
+    Route::patch('/bookings/{booking}/status', [BookingController::class, 'updateStatus'])->name('bookings.status');
+
     // Other pages
-    Route::get('/bookings', [SpaOwnerController::class, 'bookings'])->name('bookings');
     Route::get('/schedule', [SpaOwnerController::class, 'schedule'])->name('schedule');
     Route::get('/customers', [SpaOwnerController::class, 'customers'])->name('customers');
     Route::get('/settings', [SpaOwnerController::class, 'settings'])->name('settings');
@@ -97,4 +101,11 @@ Route::post('/spas', [SpaController::class, 'store'])->name('spas.store')->middl
 Route::middleware(['auth', 'role:customer'])->prefix('customer')->name('customer.')->group(function () {
     Route::get('/dashboard', [CustomerController::class, 'dashboard'])->name('dashboard');
     Route::get('/services', [CustomerController::class, 'services'])->name('services');
+    Route::get('/bookings', [BookingController::class, 'myBookings'])->name('bookings');
+    Route::patch('/bookings/{booking}/cancel', [BookingController::class, 'cancel'])->name('bookings.cancel');
 });
+
+// Booking submission (customer only)
+Route::post('/spas/{spa}/book', [BookingController::class, 'store'])
+    ->name('bookings.store')
+    ->middleware(['auth', 'role:customer']);

@@ -19,7 +19,11 @@
                     <a href="/" class="luxury-nav-link">Home</a>
                     <a href="{{ route('spas.index') }}" class="luxury-nav-link">Our Spas</a>
                     <a href="{{ route('about') }}" class="luxury-nav-link">About</a>
-                    <a href="#" class="luxury-nav-link">My Bookings</a>
+                    @if(Auth::user()->role === 'customer')
+                        <a href="{{ route('customer.bookings') }}" class="luxury-nav-link">My Bookings</a>
+                    @elseif(Auth::user()->role === 'spa_owner')
+                        <a href="{{ route('spa_owner.bookings') }}" class="luxury-nav-link">Bookings</a>
+                    @endif
                     <span class="luxury-nav-welcome">{{ Auth::user()->name }}</span>
                     <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                         @csrf

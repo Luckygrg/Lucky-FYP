@@ -81,26 +81,6 @@ class SpaController extends Controller
      */
     public function show(Spa $spa)
     {
-        // If this approved spa has no services, sync from other approved spas
-        if ($spa->status === 'approved' && $spa->services()->count() === 0) {
-            $masterServices = Service::whereHas('spa', fn($q) => $q->where('status', 'approved'))
-                ->where('spa_id', '!=', $spa->id)
-                ->get()
-                ->unique('name');
-
-            foreach ($masterServices as $source) {
-                $spa->services()->create([
-                    'name'             => $source->name,
-                    'description'      => $source->description,
-                    'price'            => $source->price,
-                    'duration_minutes' => $source->duration_minutes,
-                    'spa_category_id'  => $source->spa_category_id,
-                    'is_available'     => $source->is_available,
-                    'image'            => $source->image,
-                ]);
-            }
-        }
-
         $spa->load('services.spaCategory');
 
         return view('spas.show', compact('spa'));
