@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Spa;
-use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -56,28 +55,7 @@ class AdminController extends Controller
     {
         $spa->update(['status' => 'approved', 'is_active' => true]);
 
-        // Collect one representative copy of each service (by name) from all currently approved spas
-        $existingServices = Service::whereHas('spa', fn($q) => $q->where('status', 'approved'))
-            ->where('spa_id', '!=', $spa->id)
-            ->get()
-            ->unique('name');
-
-        foreach ($existingServices as $source) {
-            $alreadyExists = $spa->services()->where('name', $source->name)->exists();
-            if (!$alreadyExists) {
-                $spa->services()->create([
-                    'name'             => $source->name,
-                    'description'      => $source->description,
-                    'price'            => $source->price,
-                    'duration_minutes' => $source->duration_minutes,
-                    'spa_category_id'  => $source->spa_category_id,
-                    'is_available'     => $source->is_available,
-                    'image'            => $source->image,
-                ]);
-            }
-        }
-
-        return back()->with('success', "Spa '{$spa->name}' has been approved and synced with all existing services.");
+        return back()->with('success', "Spa '{$spa->name}' has been approved.");
     }
 
     /**
@@ -95,31 +73,6 @@ class AdminController extends Controller
      */
     public function services()
     {
-        $approvedSpas = Spa::where('status', 'approved')->with('services')->get();
-
-        // Get one copy of every distinct service name from spas that DO have services
-        $masterServices = Service::whereHas('spa', fn($q) => $q->where('status', 'approved'))
-            ->get()
-            ->unique('name');
-
-        if ($masterServices->isNotEmpty()) {
-            foreach ($approvedSpas as $spa) {
-                if ($spa->services->isEmpty()) {
-                    foreach ($masterServices as $source) {
-                        $spa->services()->create([
-                            'name'             => $source->name,
-                            'description'      => $source->description,
-                            'price'            => $source->price,
-                            'duration_minutes' => $source->duration_minutes,
-                            'spa_category_id'  => $source->spa_category_id,
-                            'is_available'     => $source->is_available,
-                            'image'            => $source->image,
-                        ]);
-                    }
-                }
-            }
-        }
-
         $spas = Spa::where('status', 'approved')
             ->with('services.spaCategory')
             ->orderBy('name')
