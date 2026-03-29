@@ -94,9 +94,9 @@
         <span></span> Bookings
     </a>
 
-    <a href="{{ route('spa_owner.schedule') }}"
-       class="menu-item {{ request()->routeIs('spa_owner.schedule') ? 'active' : '' }}">
-        <span></span> Schedule
+    <a href="{{ route('spa_owner.payments') }}"
+       class="menu-item {{ request()->routeIs('spa_owner.payments') ? 'active' : '' }}">
+        <span></span> Payments
     </a>
 
     <a href="{{ route('spa_owner.customers') }}"

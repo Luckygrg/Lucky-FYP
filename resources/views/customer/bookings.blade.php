@@ -244,6 +244,14 @@
         <div class="alert-success"><i class="fas fa-check-circle"></i> {{ session('success') }}</div>
     @endif
 
+    @if(session('error'))
+        <div class="alert-error"><i class="fas fa-exclamation-circle"></i> {{ session('error') }}</div>
+    @endif
+
+    @if(session('info'))
+        <div class="alert-success" style="background:rgba(201,169,97,0.12);color:#c9a961;border-color:rgba(201,169,97,0.3);"><i class="fas fa-info-circle"></i> {{ session('info') }}</div>
+    @endif
+
     @if($errors->any())
         <div class="alert-error">{{ $errors->first() }}</div>
     @endif
@@ -299,13 +307,22 @@
                     <span>Total Amount</span>
                     <span>Rs. {{ number_format($booking->total_price, 0) }}</span>
                 </div>
-                <div style="margin-top:10px;display:flex;align-items:center;gap:8px;font-size:13px;">
+                <div style="margin-top:10px;display:flex;align-items:center;gap:8px;font-size:13px;flex-wrap:wrap;">
                     @if($booking->payment_option === 'pay_now')
-                        <span style="background:rgba(67,160,71,0.12);color:#6fcf72;border:1px solid rgba(67,160,71,0.3);padding:4px 12px;border-radius:12px;font-weight:600;">
-                            <i class="fas fa-credit-card"></i> Pay Now
-                        </span>
                         @if($booking->payment_status === 'paid')
-                            <span style="color:rgba(255,255,255,0.4);font-size:12px;"><i class="fas fa-check-circle" style="color:#6fcf72;"></i> Paid</span>
+                            <span style="background:rgba(67,160,71,0.12);color:#6fcf72;border:1px solid rgba(67,160,71,0.3);padding:4px 12px;border-radius:12px;font-weight:600;">
+                                <i class="fas fa-check-circle"></i> Paid via eSewa
+                            </span>
+                        @else
+                            <span style="background:rgba(201,169,97,0.1);color:#c9a961;border:1px solid rgba(201,169,97,0.25);padding:4px 12px;border-radius:12px;font-weight:600;">
+                                <i class="fas fa-clock"></i> Payment Pending
+                            </span>
+                            @if(in_array($booking->status, ['pending', 'confirmed']))
+                                <a href="{{ route('payment.pay', $booking) }}"
+                                   style="background:#c9a961;color:#1a1a1a;padding:4px 12px;border-radius:12px;font-weight:700;text-decoration:none;font-size:12px;">
+                                    <i class="fas fa-credit-card"></i> Pay with eSewa
+                                </a>
+                            @endif
                         @endif
                     @else
                         <span style="background:rgba(201,169,97,0.1);color:#c9a961;border:1px solid rgba(201,169,97,0.25);padding:4px 12px;border-radius:12px;font-weight:600;">

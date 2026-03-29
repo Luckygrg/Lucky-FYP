@@ -8,6 +8,7 @@ use App\Http\Controllers\SpaController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\SpaCategoryController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -86,7 +87,7 @@ Route::middleware(['auth', 'role:spa_owner'])->prefix('spa-owner')->name('spa_ow
     Route::patch('/bookings/{booking}/status', [BookingController::class, 'updateStatus'])->name('bookings.status');
 
     // Other pages
-    Route::get('/schedule', [SpaOwnerController::class, 'schedule'])->name('schedule');
+    Route::get('/payments', [SpaOwnerController::class, 'payments'])->name('payments');
     Route::get('/customers', [SpaOwnerController::class, 'customers'])->name('customers');
     Route::get('/settings', [SpaOwnerController::class, 'settings'])->name('settings');
     Route::put('/settings', [SpaOwnerController::class, 'updateSettings'])->name('settings.update');
@@ -109,3 +110,9 @@ Route::middleware(['auth', 'role:customer'])->prefix('customer')->name('customer
 Route::post('/spas/{spa}/book', [BookingController::class, 'store'])
     ->name('bookings.store')
     ->middleware(['auth', 'role:customer']);
+
+// Payment routes (customer only) — static routes BEFORE the dynamic {booking} route
+Route::middleware(['auth', 'role:customer'])->group(function () {
+    Route::get('/payment/esewa/check', [PaymentController::class, 'check'])->name('esewa.check');
+    Route::get('/payment/{booking}/pay', [PaymentController::class, 'pay'])->name('payment.pay');
+});

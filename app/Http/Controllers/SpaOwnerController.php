@@ -24,7 +24,37 @@ class SpaOwnerController extends Controller
         $spa = Spa::where('user_id', Auth::id())->first();
         $servicesCount = $spa ? $spa->services()->count() : 0;
 
-        return view('spa_owner.dashboard', compact('spa', 'servicesCount'));
+        $bookingsCount   = 0;
+        $customersCount  = 0;
+        $totalEarning    = 0;
+        $recentCustomers = collect();
+
+        if ($spa) {
+            $bookingsQuery = \App\Models\Booking::where('spa_id', $spa->id);
+
+            $bookingsCount  = $bookingsQuery->count();
+            $customersCount = $bookingsQuery->distinct('user_id')->count('user_id');
+            $totalEarning   = \App\Models\Booking::where('spa_id', $spa->id)
+                                ->where('payment_status', 'paid')
+                                ->sum('total_price');
+
+            // Recent unique customers with their last booking date and total booking count
+            $recentCustomers = \App\Models\Booking::where('spa_id', $spa->id)
+                ->with('customer')
+                ->select('user_id',
+                    \Illuminate\Support\Facades\DB::raw('MAX(booking_date) as last_booking'),
+                    \Illuminate\Support\Facades\DB::raw('COUNT(*) as total_bookings')
+                )
+                ->groupBy('user_id')
+                ->orderByDesc('last_booking')
+                ->limit(10)
+                ->get();
+        }
+
+        return view('spa_owner.dashboard', compact(
+            'spa', 'servicesCount', 'bookingsCount',
+            'customersCount', 'totalEarning', 'recentCustomers'
+        ));
     }
 
     /* ── Edit / Update Spa ───────────────────────────────────────────────────── */
@@ -199,10 +229,20 @@ class SpaOwnerController extends Controller
         return view('spa_owner.bookings', compact('spa'));
     }
 
-    public function schedule()
+    public function payments()
     {
         $spa = Spa::where('user_id', Auth::id())->first();
-        return view('spa_owner.schedule', compact('spa'));
+
+        $payments = \App\Models\Payment::with(['booking.bookingServices', 'user'])
+            ->whereHas('booking', fn($q) => $q->where('spa_id', optional($spa)->id))
+            ->latest('paid_at')
+            ->get();
+
+        $totalRevenue    = $payments->where('status', 'completed')->sum('amount');
+        $totalPaid       = $payments->where('status', 'completed')->count();
+        $totalPending    = $payments->where('status', 'pending')->count();
+
+        return view('spa_owner.payments', compact('spa', 'payments', 'totalRevenue', 'totalPaid', 'totalPending'));
     }
 
     public function customers()

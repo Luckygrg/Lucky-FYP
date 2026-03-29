@@ -86,7 +86,7 @@ class BookingController extends Controller
                 'total_duration_minutes' => $totalDuration,
                 'total_price'            => $totalPrice,
                 'status'                 => 'pending',
-                'payment_status'         => $request->payment_option === 'pay_now' ? 'paid' : 'unpaid',
+                'payment_status'         => 'unpaid',
                 'payment_option'         => $request->payment_option,
                 'notes'                  => $request->notes,
             ]);
@@ -101,6 +101,16 @@ class BookingController extends Controller
                 ]);
             }
         });
+
+        $booking = Booking::where('user_id', Auth::id())
+            ->where('spa_id', $spa->id)
+            ->latest()
+            ->first();
+
+        // If pay_now, redirect to eSewa payment
+        if ($request->payment_option === 'pay_now') {
+            return redirect()->route('payment.pay', $booking);
+        }
 
         return redirect()->route('customer.bookings')
             ->with('success', 'Your booking at ' . $spa->name . ' has been placed! We will confirm it shortly.');

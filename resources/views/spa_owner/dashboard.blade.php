@@ -224,15 +224,15 @@
             </div>
             <div class="stat-card">
                 <h3>Total Bookings</h3>
-                <div class="number">0</div>
+                <div class="number">{{ $bookingsCount }}</div>
             </div>
             <div class="stat-card">
                 <h3>Total Customers</h3>
-                <div class="number">0</div>
+                <div class="number">{{ $customersCount }}</div>
             </div>
             <div class="stat-card">
                 <h3>Total Earning</h3>
-                <div class="number">Rs. 0</div>
+                <div class="number">Rs. {{ number_format($totalEarning, 0) }}</div>
             </div>
         </div>
         
@@ -249,7 +249,7 @@
                 <a href="{{ route('spa_owner.services.create') }}" class="action-btn"> Add New Service</a>
                 <a href="{{ route('spa_owner.services') }}" class="action-btn"> Manage Services</a>
                 <a href="{{ route('spa_owner.bookings') }}" class="action-btn"> View All Bookings</a>
-                <a href="{{ route('spa_owner.schedule') }}" class="action-btn"> Update Schedule</a>
+                <a href="{{ route('spa_owner.payments') }}" class="action-btn"> View Payments</a>
                 <a href="{{ route('spa_owner.customers') }}" class="action-btn"> View Customers</a>
             </div>
         </div>
@@ -270,19 +270,22 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @forelse($recentCustomers as $i => $row)
                         <tr>
-                            <td>C001</td>
-                            <td>Sample Customer</td>
-                            <td>customer@example.com</td>
-                            <td>2024-02-20</td>
-                            <td>3</td>
+                            <td style="color:rgba(255,255,255,0.4);font-size:12px;">C{{ str_pad($i + 1, 3, '0', STR_PAD_LEFT) }}</td>
+                            <td>{{ $row->customer?->name ?? '—' }}</td>
+                            <td>{{ $row->customer?->email ?? '—' }}</td>
+                            <td>{{ \Carbon\Carbon::parse($row->last_booking)->format('d M Y') }}</td>
+                            <td>{{ $row->total_bookings }}</td>
                             <td>
-                                <a href="#" style="color: #c9a961; text-decoration: none;">View</a>
+                                <a href="{{ route('spa_owner.bookings') }}" style="color:#c9a961;text-decoration:none;">View Bookings</a>
                             </td>
                         </tr>
+                        @empty
                         <tr>
-                            <td colspan="6" style="text-align: center; color: #999;">No customer records yet</td>
+                            <td colspan="6" style="text-align:center;color:rgba(255,255,255,0.35);padding:30px;">No customer records yet</td>
                         </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
