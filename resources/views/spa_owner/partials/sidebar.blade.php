@@ -99,6 +99,11 @@
         <span></span> Payments
     </a>
 
+    <a href="{{ route('spa_owner.reviews') }}"
+       class="menu-item {{ request()->routeIs('spa_owner.reviews') ? 'active' : '' }}">
+        <span></span> Reviews
+    </a>
+
     <a href="{{ route('spa_owner.customers') }}"
        class="menu-item {{ request()->routeIs('spa_owner.customers') ? 'active' : '' }}">
         <span></span> Customers

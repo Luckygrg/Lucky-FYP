@@ -89,6 +89,7 @@ Route::middleware(['auth', 'role:spa_owner'])->prefix('spa-owner')->name('spa_ow
 
     // Other pages
     Route::get('/payments', [SpaOwnerController::class, 'payments'])->name('payments');
+    Route::get('/reviews', [SpaOwnerController::class, 'reviews'])->name('reviews');
     Route::get('/customers', [SpaOwnerController::class, 'customers'])->name('customers');
     Route::get('/settings', [SpaOwnerController::class, 'settings'])->name('settings');
     Route::put('/settings', [SpaOwnerController::class, 'updateSettings'])->name('settings.update');

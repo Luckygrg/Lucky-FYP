@@ -258,6 +258,27 @@ class SpaOwnerController extends Controller
         return view('spa_owner.payments', compact('spa', 'payments', 'totalRevenue', 'totalPaid', 'totalPending'));
     }
 
+    public function reviews()
+    {
+        $spa = Spa::where('user_id', Auth::id())->first();
+
+        $reviews = $spa
+            ? \App\Models\Review::where('spa_id', $spa->id)
+                ->with(['customer:id,name,email', 'booking:id,booking_date,total_price'])
+                ->latest()
+                ->get()
+            : collect();
+
+        $avgRating   = $reviews->avg('rating') ?? 0;
+        $totalCount  = $reviews->count();
+        $starCounts  = [];
+        for ($i = 5; $i >= 1; $i--) {
+            $starCounts[$i] = $reviews->where('rating', $i)->count();
+        }
+
+        return view('spa_owner.reviews', compact('spa', 'reviews', 'avgRating', 'totalCount', 'starCounts'));
+    }
+
     public function customers()
     {
         $spa = Spa::where('user_id', Auth::id())->first();
