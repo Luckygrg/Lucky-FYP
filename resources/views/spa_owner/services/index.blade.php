@@ -22,7 +22,7 @@
     td { color: rgba(255,255,255,0.7); font-size: 14px; }
     tbody tr:hover { background: rgba(201,169,97,0.05); }
     .service-img { width: 48px; height: 48px; border-radius: 6px; object-fit: cover; border: 1px solid rgba(255,255,255,0.1); }
-    .service-img-placeholder { width: 48px; height: 48px; border-radius: 6px; background: #333; display: flex; align-items: center; justify-content: center; color: #666; font-size: 18px; border: 1px solid rgba(255,255,255,0.08); }
+    .service-img-placeholder { width: 48px; height: 48px; border-radius: 6px; background: #2d2d2d; display: flex; align-items: center; justify-content: center; color: #666; font-size: 18px; border: 1px solid rgba(255,255,255,0.08); }
     .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
     .badge-green { background: #e8f5e9; color: #2e7d32; }
     .badge-gray { background: #f0f0f0; color: #888; }

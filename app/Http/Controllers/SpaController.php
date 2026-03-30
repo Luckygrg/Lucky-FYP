@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Spa;
 use App\Models\Service;
+use App\Models\Booking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -83,6 +84,31 @@ class SpaController extends Controller
     {
         $spa->load('services.spaCategory');
 
-        return view('spas.show', compact('spa'));
+        // Load reviews with the reviewer's name
+        $reviews = $spa->reviews()
+            ->with('customer:id,name')
+            ->latest()
+            ->get();
+
+        // For authenticated customers: find completed bookings at this spa
+        // that don't already have a review (they can still write one)
+        $reviewableBookings = collect();
+        $existingReview     = null;
+
+        if (Auth::check() && Auth::user()->role === 'customer') {
+            $reviewedBookingIds = $reviews
+                ->where('user_id', Auth::id())
+                ->pluck('booking_id');
+
+            $reviewableBookings = Booking::where('user_id', Auth::id())
+                ->where('spa_id', $spa->id)
+                ->where('status', 'completed')
+                ->whereNotIn('id', $reviewedBookingIds)
+                ->get();
+
+            $existingReview = $reviews->where('user_id', Auth::id())->first();
+        }
+
+        return view('spas.show', compact('spa', 'reviews', 'reviewableBookings', 'existingReview'));
     }
 }

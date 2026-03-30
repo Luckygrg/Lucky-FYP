@@ -1,4 +1,4 @@
-@extends('layouts.main')
+﻿@extends('layouts.main')
 
 @section('title', 'Spa Owners - Admin | SpaLush')
 
@@ -150,7 +150,7 @@
 
     table { width: 100%; border-collapse: collapse; }
     thead th {
-        background: #111;
+        background: #111111;
         padding: 14px 16px;
         text-align: left;
         font-size: 12px;
@@ -211,7 +211,7 @@
         letter-spacing: 0.3px;
     }
     .btn-view     { background: #1a1a1a; color: white; }
-    .btn-view:hover { background: #333; }
+    .btn-view:hover { background: #2d2d2d; }
     .btn-approve  { background: #198754; color: white; }
     .btn-approve:hover { background: #157347; }
     .btn-disapprove { background: #dc3545; color: white; }

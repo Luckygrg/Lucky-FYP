@@ -160,6 +160,9 @@ class BookingController extends Controller
                 ->withErrors(['error' => 'No spa found for your account.']);
         }
 
+        // Auto-complete confirmed bookings whose date+time has already passed
+        $this->autoCompletePassedBookings($spa->id);
+
         $bookings = Booking::where('spa_id', $spa->id)
             ->with(['customer', 'bookingServices'])
             ->orderByDesc('booking_date')
@@ -167,6 +170,25 @@ class BookingController extends Controller
             ->get();
 
         return view('spa_owner.bookings', compact('spa', 'bookings'));
+    }
+
+    /**
+     * Mark confirmed bookings as completed if their date+time has passed.
+     */
+    private function autoCompletePassedBookings(int $spaId): void
+    {
+        $now = now();
+
+        Booking::where('spa_id', $spaId)
+            ->where('status', 'confirmed')
+            ->where(function ($q) use ($now) {
+                $q->where('booking_date', '<', $now->toDateString())
+                  ->orWhere(function ($q2) use ($now) {
+                      $q2->where('booking_date', '=', $now->toDateString())
+                         ->where('booking_time', '<=', $now->toTimeString());
+                  });
+            })
+            ->update(['status' => 'completed']);
     }
 
     /**

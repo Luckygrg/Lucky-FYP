@@ -18,7 +18,7 @@
     .form-group input, .form-group textarea, .form-group select {
         width: 100%; padding: 11px 14px; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; font-size: 14px; color: rgba(255,255,255,0.9); transition: border-color 0.2s; background: #2d2d2d;
     }
-    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: #c9a961; background: #333; }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: #c9a961; background: #2d2d2d; }
     .form-group textarea { min-height: 120px; resize: vertical; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .invalid-feedback { color: #e53935; font-size: 12px; margin-top: 4px; }

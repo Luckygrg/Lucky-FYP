@@ -1,4 +1,4 @@
-@extends('layouts.main')
+﻿@extends('layouts.main')
 
 @section('title', 'About Us - SpaLush')
 
@@ -138,7 +138,7 @@
     }
     
     .history-section {
-        background: #111;
+        background: #111111;
     }
     
     .empty-state {

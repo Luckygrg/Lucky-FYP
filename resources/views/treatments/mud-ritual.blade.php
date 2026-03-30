@@ -1,4 +1,4 @@
-@extends('layouts.main')
+﻿@extends('layouts.main')
 
 @section('title', 'Mud Ritual - SpaLush')
 
@@ -115,7 +115,7 @@
     .cta-section {
         text-align: center;
         padding: 80px 20px;
-        background: #111;
+        background: #111111;
     }
     
     .cta-section h2 {

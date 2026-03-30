@@ -1,4 +1,4 @@
-@extends('layouts.main')
+﻿@extends('layouts.main')
 
 @section('title', 'Spa Categories - Admin | SpaLush')
 
@@ -93,7 +93,7 @@
 
     table { width: 100%; border-collapse: collapse; }
     thead th {
-        background: #111; padding: 13px 18px;
+        background: #111111; padding: 13px 18px;
         text-align: left; font-size: 11px; font-weight: 600;
         color: rgba(255,255,255,0.5); text-transform: uppercase;
         letter-spacing: 0.8px; border-bottom: 1px solid rgba(255,255,255,0.08);

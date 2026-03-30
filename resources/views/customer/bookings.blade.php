@@ -1,4 +1,4 @@
-@extends('layouts.main')
+﻿@extends('layouts.main')
 @section('title', 'My Bookings - SpaLush')
 
 @section('content')

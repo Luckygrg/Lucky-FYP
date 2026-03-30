@@ -117,7 +117,7 @@
 
     table { width: 100%; border-collapse: collapse; }
     thead th {
-        background: #111;
+        background: #111111;
         padding: 12px 16px;
         text-align: left;
         font-size: 11px;

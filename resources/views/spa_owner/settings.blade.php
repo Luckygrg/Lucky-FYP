@@ -17,7 +17,7 @@
     .form-group input {
         width: 100%; padding: 11px 14px; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; font-size: 14px; color: rgba(255,255,255,0.9); transition: border-color 0.2s; background: #2d2d2d;
     }
-    .form-group input:focus { outline: none; border-color: #c9a961; background: #333; }
+    .form-group input:focus { outline: none; border-color: #c9a961; background: #2d2d2d; }
     .invalid-feedback { color: #e53935; font-size: 12px; margin-top: 4px; }
     .hint { color: #aaa; font-size: 12px; margin-top: 4px; }
     .avatar-row { display: flex; align-items: center; gap: 18px; margin-bottom: 25px; }

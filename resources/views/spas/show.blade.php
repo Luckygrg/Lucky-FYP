@@ -1,4 +1,4 @@
-@extends('layouts.main')
+﻿@extends('layouts.main')
 
 @section('title', $spa->name . ' - SpaLush')
 
@@ -260,7 +260,7 @@
         border-radius: 8px;
         overflow: hidden;
         transition: all 0.3s;
-        background: #333;
+        background: #2d2d2d;
         display: flex;
         flex-direction: column;
     }
@@ -693,7 +693,7 @@
     }
 
     .btn-dark:hover {
-        background: #333;
+        background: #2d2d2d;
         transform: translateY(-1px);
     }
 
@@ -703,6 +703,253 @@
         .services-section { padding: 25px 20px; }
         .owner-actions { flex-direction: column; }
     }
+
+    /* ── Reviews ── */
+    .reviews-section {
+        background: #2a2a2a;
+        border-radius: 12px;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.4);
+        padding: 35px 40px;
+        margin-bottom: 35px;
+        border: 1px solid rgba(201,169,97,0.15);
+    }
+
+    .reviews-section h3 {
+        font-size: 22px;
+        font-weight: 300;
+        color: white;
+        font-family: 'Georgia', serif;
+        margin-bottom: 6px;
+        letter-spacing: 1px;
+    }
+
+    .reviews-summary {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 28px;
+    }
+
+    .reviews-big-rating {
+        font-size: 48px;
+        font-weight: 700;
+        color: #c9a961;
+        line-height: 1;
+    }
+
+    .reviews-stars-block .stars-row { color: #c9a961; font-size: 20px; letter-spacing: 2px; }
+    .reviews-stars-block .review-total { color: rgba(255,255,255,0.45); font-size: 13px; margin-top: 4px; }
+
+    /* Write review form */
+    .write-review-box {
+        background: rgba(201,169,97,0.06);
+        border: 1px solid rgba(201,169,97,0.2);
+        border-radius: 10px;
+        padding: 24px 28px;
+        margin-bottom: 30px;
+    }
+
+    .write-review-box h4 {
+        font-size: 15px;
+        font-weight: 600;
+        color: #c9a961;
+        margin-bottom: 16px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .star-picker {
+        display: flex;
+        gap: 6px;
+        margin-bottom: 16px;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+    }
+
+    .star-picker input { display: none; }
+
+    .star-picker label {
+        font-size: 28px;
+        color: rgba(255,255,255,0.2);
+        cursor: pointer;
+        transition: color 0.15s;
+    }
+
+    .star-picker label:hover,
+    .star-picker label:hover ~ label,
+    .star-picker input:checked ~ label {
+        color: #c9a961;
+    }
+
+    .review-textarea {
+        width: 100%;
+        padding: 11px 14px;
+        background: #1a1a1a;
+        border: 1px solid rgba(255,255,255,0.15);
+        border-radius: 6px;
+        color: white;
+        font-size: 14px;
+        resize: vertical;
+        min-height: 90px;
+        transition: border-color 0.2s;
+        margin-bottom: 14px;
+    }
+
+    .review-textarea:focus { outline: none; border-color: #c9a961; }
+
+    .review-booking-select {
+        width: 100%;
+        padding: 10px 14px;
+        background: #1a1a1a;
+        border: 1px solid rgba(255,255,255,0.15);
+        border-radius: 6px;
+        color: white;
+        font-size: 14px;
+        margin-bottom: 14px;
+        appearance: none;
+        cursor: pointer;
+        transition: border-color 0.2s;
+    }
+
+    .review-booking-select:focus { outline: none; border-color: #c9a961; }
+
+    .btn-submit-review {
+        padding: 10px 26px;
+        background: #c9a961;
+        color: #1a1a1a;
+        border: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        letter-spacing: 0.4px;
+        transition: background 0.2s;
+    }
+
+    .btn-submit-review:hover { background: #b8985a; }
+
+    /* Review cards */
+    .reviews-list {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .review-card {
+        background: #222;
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 10px;
+        padding: 20px 24px;
+        position: relative;
+    }
+
+    .review-card-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 10px;
+    }
+
+    .reviewer-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .reviewer-avatar {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #c9a961, #8b7644);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 15px;
+        font-weight: 700;
+        flex-shrink: 0;
+    }
+
+    .reviewer-name {
+        font-size: 14px;
+        font-weight: 600;
+        color: white;
+    }
+
+    .review-date {
+        font-size: 12px;
+        color: rgba(255,255,255,0.35);
+        margin-top: 2px;
+    }
+
+    .review-stars {
+        color: #c9a961;
+        font-size: 14px;
+        letter-spacing: 1px;
+        white-space: nowrap;
+    }
+
+    .review-comment {
+        font-size: 14px;
+        color: rgba(255,255,255,0.65);
+        line-height: 1.7;
+    }
+
+    .review-delete-btn {
+        background: none;
+        border: none;
+        color: rgba(255,255,255,0.25);
+        font-size: 13px;
+        cursor: pointer;
+        padding: 0;
+        transition: color 0.2s;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    .review-delete-btn:hover { color: #ef9a9a; }
+
+    .no-reviews {
+        text-align: center;
+        padding: 40px 20px;
+        color: rgba(255,255,255,0.35);
+        font-size: 15px;
+    }
+
+    .alert-review-success {
+        background: rgba(67,160,71,0.12);
+        color: #6fcf72;
+        border: 1px solid rgba(67,160,71,0.3);
+        border-radius: 6px;
+        padding: 12px 18px;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+
+    .alert-review-error {
+        background: rgba(229,57,53,0.12);
+        color: #ef9a9a;
+        border: 1px solid rgba(229,57,53,0.3);
+        border-radius: 6px;
+        padding: 12px 18px;
+        margin-bottom: 14px;
+        font-size: 14px;
+    }
+
+    .review-login-prompt {
+        background: rgba(255,255,255,0.04);
+        border: 1px dashed rgba(255,255,255,0.12);
+        border-radius: 8px;
+        padding: 18px 22px;
+        text-align: center;
+        color: rgba(255,255,255,0.45);
+        font-size: 14px;
+        margin-bottom: 28px;
+    }
+
+    .review-login-prompt a { color: #c9a961; text-decoration: none; }
+    .review-login-prompt a:hover { text-decoration: underline; }
 </style>
 
 <!-- Hero -->
@@ -941,6 +1188,150 @@
             </div>
         @endif
     </div>
+
+    {{-- ── Reviews Section ── --}}
+    @if($spa->status === 'approved')
+    <div class="reviews-section">
+        <h3>Guest Reviews</h3>
+
+        {{-- Summary row --}}
+        <div class="reviews-summary">
+            <div class="reviews-big-rating">{{ number_format($spa->rating ?? 0, 1) }}</div>
+            <div class="reviews-stars-block">
+                <div class="stars-row">
+                    @for($i = 1; $i <= 5; $i++)
+                        {!! $i <= round($spa->rating ?? 0) ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>' !!}
+                    @endfor
+                </div>
+                <div class="review-total">{{ $spa->review_count ?? 0 }} {{ Str::plural('review', $spa->review_count ?? 0) }}</div>
+            </div>
+        </div>
+
+        {{-- Flash messages --}}
+        @if(session('review_success'))
+            <div class="alert-review-success"><i class="fas fa-check-circle"></i> {{ session('review_success') }}</div>
+        @endif
+        @if(session('review_error'))
+            <div class="alert-review-error"><i class="fas fa-exclamation-circle"></i> {{ session('review_error') }}</div>
+        @endif
+
+        {{-- Write Review Box --}}
+        @auth
+            @if(auth()->user()->role === 'customer')
+                @if($reviewableBookings->count() > 0)
+                    <div class="write-review-box">
+                        <h4><i class="fas fa-pen"></i> &nbsp;Write a Review</h4>
+                        <form method="POST" action="{{ route('reviews.store', $spa) }}">
+                            @csrf
+
+                            {{-- Booking selector --}}
+                            <label style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:rgba(255,255,255,0.5);display:block;margin-bottom:7px;">
+                                Your Visit
+                            </label>
+                            <select name="booking_id" class="review-booking-select" required>
+                                <option value="" disabled selected>Select a completed visit…</option>
+                                @foreach($reviewableBookings as $bk)
+                                    <option value="{{ $bk->id }}">
+                                        {{ $bk->booking_date->format('M d, Y') }} — Rs. {{ number_format($bk->total_price, 0) }}
+                                    </option>
+                                @endforeach
+                            </select>
+
+                            {{-- Star rating --}}
+                            <label style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:rgba(255,255,255,0.5);display:block;margin-bottom:7px;">
+                                Rating
+                            </label>
+                            <div class="star-picker">
+                                @for($i = 5; $i >= 1; $i--)
+                                    <input type="radio" name="rating" id="star{{ $i }}" value="{{ $i }}"
+                                           {{ old('rating') == $i ? 'checked' : '' }} required>
+                                    <label for="star{{ $i }}" title="{{ $i }} star{{ $i > 1 ? 's' : '' }}">
+                                        <i class="fas fa-star"></i>
+                                    </label>
+                                @endfor
+                            </div>
+
+                            {{-- Comment --}}
+                            <label style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:rgba(255,255,255,0.5);display:block;margin-bottom:7px;">
+                                Comment <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span>
+                            </label>
+                            <textarea name="comment" class="review-textarea"
+                                      placeholder="Share your experience…"
+                                      maxlength="1000">{{ old('comment') }}</textarea>
+
+                            <button type="submit" class="btn-submit-review">
+                                <i class="fas fa-paper-plane"></i> Submit Review
+                            </button>
+                        </form>
+                    </div>
+                @elseif($existingReview)
+                    <div class="write-review-box" style="text-align:center;color:rgba(255,255,255,0.45);font-size:14px;">
+                        <i class="fas fa-check-circle" style="color:#c9a961;font-size:18px;"></i>
+                        &nbsp;You have already reviewed this spa. Thank you for your feedback!
+                    </div>
+                @else
+                    <div class="review-login-prompt">
+                        <i class="fas fa-info-circle"></i>
+                        Reviews are only available after a completed visit at this spa.
+                    </div>
+                @endif
+            @endif
+        @else
+            <div class="review-login-prompt">
+                <i class="fas fa-sign-in-alt"></i>
+                <a href="{{ route('userlogin') }}">Log in</a> or <a href="{{ route('usersignup') }}">sign up</a> to leave a review after your visit.
+            </div>
+        @endauth
+
+        {{-- Reviews list --}}
+        @if($reviews->count() > 0)
+            <div class="reviews-list">
+                @foreach($reviews as $review)
+                    <div class="review-card">
+                        <div class="review-card-header">
+                            <div class="reviewer-info">
+                                <div class="reviewer-avatar">
+                                    {{ strtoupper(substr($review->customer->name, 0, 1)) }}
+                                </div>
+                                <div>
+                                    <div class="reviewer-name">{{ $review->customer->name }}</div>
+                                    <div class="review-date">{{ $review->created_at->format('M d, Y') }}</div>
+                                </div>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:14px;">
+                                <div class="review-stars">
+                                    @for($i = 1; $i <= 5; $i++)
+                                        {!! $i <= $review->rating ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>' !!}
+                                    @endfor
+                                </div>
+                                @auth
+                                    @if(auth()->user()->id === $review->user_id)
+                                        <form method="POST" action="{{ route('reviews.destroy', [$spa, $review]) }}"
+                                              onsubmit="return confirm('Remove your review?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="review-delete-btn">
+                                                <i class="fas fa-trash-alt"></i> Delete
+                                            </button>
+                                        </form>
+                                    @endif
+                                @endauth
+                            </div>
+                        </div>
+                        @if($review->comment)
+                            <p class="review-comment">{{ $review->comment }}</p>
+                        @endif
+                    </div>
+                @endforeach
+            </div>
+        @else
+            <div class="no-reviews">
+                <i class="fas fa-comment-slash" style="font-size:32px;margin-bottom:10px;display:block;"></i>
+                No reviews yet. Be the first to share your experience!
+            </div>
+        @endif
+    </div>
+    @endif
 
 </div>
 

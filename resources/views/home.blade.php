@@ -1,4 +1,4 @@
-@extends('layouts.main')
+﻿@extends('layouts.main')
 @section('content')
 
 <style>
@@ -94,7 +94,7 @@
     .welcome-section h2 {
         font-size: 46px;
         font-weight: 300;
-        color: #ffffff;
+        color: white;
         margin-bottom: 16px;
         font-family: 'Georgia', serif;
         letter-spacing: 2px;
@@ -358,7 +358,7 @@
 <style>
     .spa-treatments-section {
         padding: 40px 20px 100px;
-        background: #111;
+        background: #111111;
     }
     
     .treatments-container {

@@ -30,6 +30,19 @@ class SpaOwnerController extends Controller
         $recentCustomers = collect();
 
         if ($spa) {
+            // Auto-complete confirmed bookings whose date+time has passed
+            $now = now();
+            \App\Models\Booking::where('spa_id', $spa->id)
+                ->where('status', 'confirmed')
+                ->where(function ($q) use ($now) {
+                    $q->where('booking_date', '<', $now->toDateString())
+                      ->orWhere(function ($q2) use ($now) {
+                          $q2->where('booking_date', '=', $now->toDateString())
+                             ->where('booking_time', '<=', $now->toTimeString());
+                      });
+                })
+                ->update(['status' => 'completed']);
+
             $bookingsQuery = \App\Models\Booking::where('spa_id', $spa->id);
 
             $bookingsCount  = $bookingsQuery->count();

@@ -1,4 +1,4 @@
-@extends('layouts.main')
+﻿@extends('layouts.main')
 
 @section('title', '{{ $user->name }} - Admin | SpaLush')
 

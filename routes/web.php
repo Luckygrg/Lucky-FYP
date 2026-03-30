@@ -9,6 +9,7 @@ use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\SpaCategoryController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -115,4 +116,10 @@ Route::post('/spas/{spa}/book', [BookingController::class, 'store'])
 Route::middleware(['auth', 'role:customer'])->group(function () {
     Route::get('/payment/esewa/check', [PaymentController::class, 'check'])->name('esewa.check');
     Route::get('/payment/{booking}/pay', [PaymentController::class, 'pay'])->name('payment.pay');
+});
+
+// Review routes (customer only)
+Route::middleware(['auth', 'role:customer'])->group(function () {
+    Route::post('/spas/{spa}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+    Route::delete('/spas/{spa}/reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
 });

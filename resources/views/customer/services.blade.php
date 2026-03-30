@@ -1,4 +1,4 @@
-@extends('layouts.main')
+﻿@extends('layouts.main')
 
 @section('title', 'Browse Services - SpaLush')
 
@@ -82,7 +82,7 @@
     }
 
     .service-img-wrap {
-        height: 170px; overflow: hidden; background: #333;
+        height: 170px; overflow: hidden; background: #2d2d2d;
         display: flex; align-items: center; justify-content: center;
     }
     .service-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
@@ -90,7 +90,7 @@
         width: 100%; height: 100%;
         display: flex; align-items: center; justify-content: center;
         font-size: 52px; color: #555;
-        background: linear-gradient(135deg, #2a2a2a, #333);
+        background: linear-gradient(135deg, #2a2a2a, #2d2d2d);
     }
 
     .service-body { padding: 18px; }
@@ -285,7 +285,7 @@
         align-items: center;
         justify-content: space-between;
         padding: 20px 24px;
-        background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
         flex-wrap: wrap;
         gap: 12px;
     }
@@ -325,7 +325,7 @@
     }
 
     .service-card {
-        background: #1e1e1e;
+        background: #1a1a1a;
         border-radius: 8px;
         overflow: hidden;
         border: 1px solid rgba(255,255,255,0.07);
