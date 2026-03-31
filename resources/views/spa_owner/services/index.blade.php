@@ -4,35 +4,35 @@
 @section('content')
 <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    .dashboard-container { display: flex; min-height: 100vh; background: #1a1a1a; font-family: Arial, sans-serif; }
+    .dashboard-container { display: flex; min-height: 100vh; background: #FAF7F2; font-family: Arial, sans-serif; }
     .main-content { flex: 1; padding: 40px; overflow-y: auto; }
     .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px; }
-    .page-header h1 { font-size: 28px; color: white; font-weight: 300; font-family: 'Georgia', serif; letter-spacing: 1px; }
-    .btn-gold { padding: 11px 24px; background: #c9a961; color: white; text-decoration: none; border-radius: 6px; font-size: 14px; font-weight: 600; transition: all 0.3s; display: inline-flex; align-items: center; gap: 7px; }
-    .btn-gold:hover { background: #b8985a; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(201,169,97,0.3); }
-    .alert-success { background: rgba(201,169,97,0.1); color: #8b7644; padding: 14px 20px; border-radius: 6px; margin-bottom: 25px; border-left: 4px solid #c9a961; font-size: 14px; }
+    .page-header h1 { font-size: 28px; color: #1C1008; font-weight: 300; font-family: 'Georgia', serif; letter-spacing: 1px; }
+    .btn-gold { padding: 11px 24px; background: #C8916A; color: #1C1008; text-decoration: none; border-radius: 6px; font-size: 14px; font-weight: 600; transition: all 0.3s; display: inline-flex; align-items: center; gap: 7px; }
+    .btn-gold:hover { background: #AE7A55; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(200,145,106,0.3); }
+    .alert-success { background: rgba(200,145,106,0.1); color: #895D3E; padding: 14px 20px; border-radius: 6px; margin-bottom: 25px; border-left: 4px solid #C8916A; font-size: 14px; }
     .alert-error { background: #fce4ec; color: #c62828; padding: 14px 20px; border-radius: 6px; margin-bottom: 25px; border-left: 4px solid #e53935; font-size: 14px; }
-    .no-spa { background: #2a2a2a; border-radius: 10px; padding: 60px 30px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.3); border: 1px solid rgba(201,169,97,0.15); }
+    .no-spa { background: #FFFFFF; border-radius: 10px; padding: 60px 30px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.3); border: 1px solid rgba(200,145,106,0.15); }
     .no-spa p { color: #999; margin-bottom: 20px; font-size: 15px; }
-    .card { background: #2a2a2a; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); overflow: hidden; border: 1px solid rgba(201,169,97,0.15); }
+    .card { background: #FFFFFF; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); overflow: hidden; border: 1px solid rgba(200,145,106,0.15); }
     table { width: 100%; border-collapse: collapse; }
-    thead { background: #1a1a1a; color: white; }
-    th, td { padding: 14px 18px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    thead { background: #FAF7F2; color: #1C1008; }
+    th, td { padding: 14px 18px; text-align: left; border-bottom: 1px solid rgba(28,16,8,0.08); }
     th { font-weight: 500; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
-    td { color: rgba(255,255,255,0.7); font-size: 14px; }
-    tbody tr:hover { background: rgba(201,169,97,0.05); }
-    .service-img { width: 48px; height: 48px; border-radius: 6px; object-fit: cover; border: 1px solid rgba(255,255,255,0.1); }
-    .service-img-placeholder { width: 48px; height: 48px; border-radius: 6px; background: #2d2d2d; display: flex; align-items: center; justify-content: center; color: #666; font-size: 18px; border: 1px solid rgba(255,255,255,0.08); }
+    td { color: rgba(28,16,8,0.7); font-size: 14px; }
+    tbody tr:hover { background: rgba(200,145,106,0.05); }
+    .service-img { width: 48px; height: 48px; border-radius: 6px; object-fit: cover; border: 1px solid rgba(28,16,8,0.1); }
+    .service-img-placeholder { width: 48px; height: 48px; border-radius: 6px; background: #F5EEE4; display: flex; align-items: center; justify-content: center; color: #666; font-size: 18px; border: 1px solid rgba(28,16,8,0.08); }
     .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
     .badge-green { background: #e8f5e9; color: #2e7d32; }
     .badge-gray { background: #f0f0f0; color: #888; }
-    .action-links a { color: #c9a961; text-decoration: none; font-size: 13px; margin-right: 12px; }
-    .action-links a:hover { color: #b8985a; text-decoration: underline; }
+    .action-links a { color: #C8916A; text-decoration: none; font-size: 13px; margin-right: 12px; }
+    .action-links a:hover { color: #AE7A55; text-decoration: underline; }
     .action-links form { display: inline; }
     .btn-del { background: none; border: none; color: #e53935; font-size: 13px; cursor: pointer; padding: 0; }
     .btn-del:hover { text-decoration: underline; }
-    .empty-row td { text-align: center; color: #bbb; padding: 40px; }
-    .category-chip { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); padding: 3px 10px; border-radius: 10px; font-size: 12px; }
+    .empty-row td { text-align: center; color: #666; padding: 40px; }
+    .category-chip { background: rgba(28,16,8,0.1); color: rgba(28,16,8,0.7); padding: 3px 10px; border-radius: 10px; font-size: 12px; }
 </style>
 
 <div class="dashboard-container">
@@ -115,7 +115,7 @@
                             </tr>
                         @empty
                             <tr class="empty-row">
-                                <td colspan="8">No services yet. <a href="{{ route('spa_owner.services.create') }}" style="color:#c9a961;">Add your first service →</a></td>
+                                <td colspan="8">No services yet. <a href="{{ route('spa_owner.services.create') }}" style="color:#C8916A;">Add your first service →</a></td>
                             </tr>
                         @endforelse
                     </tbody>

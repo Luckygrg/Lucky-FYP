@@ -6,19 +6,20 @@
     .luxury-hero {
         position: relative;
         height: 90vh;
-        background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
-                    url("{{ asset('assets/img/11.jpg') }}") center/cover;
+        background: linear-gradient(rgba(0,0,0,0.40), rgba(0,0,0,0.40)), url("{{ asset('assets/img/spa.jpg') }}") center/cover;
         display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
-        color: white;
+        color: #FAF7F2;
+        margin-bottom: 40px;
     }
     
     .luxury-hero-content {
         max-width: 800px;
         padding: 0 20px;
         animation: fadeInUp 1s ease-out;
+        margin: 0 auto;
     }
     
     .luxury-hero h1 {
@@ -42,8 +43,8 @@
         display: inline-block;
         padding: 16px 50px;
         background: transparent;
-        color: white;
-        border: 2px solid white;
+        color: #FAF7F2;
+        border: 2px solid #FAF7F2;
         text-decoration: none;
         font-size: 14px;
         letter-spacing: 2px;
@@ -53,17 +54,18 @@
     }
     
     .luxury-btn:hover {
-        background: white;
-        color: #1a1a1a;
+        background: #FAF7F2;
+        color: #1C1008;
     }
     
     /* Welcome Section */
     .welcome-section {
-        padding: 100px 40px 80px;
+        padding: 60px 20px 50px;
         text-align: center;
-        background: #1a1a1a;
+        background: #FAF7F2;
         position: relative;
         overflow: hidden;
+        margin-bottom: 40px;
     }
 
     .welcome-section::before {
@@ -71,7 +73,7 @@
         position: absolute;
         top: 0; left: 0; right: 0;
         height: 1px;
-        background: linear-gradient(to right, transparent, #c9a961, transparent);
+        background: linear-gradient(to right, transparent, #C8916A, transparent);
     }
 
     .welcome-section::after {
@@ -79,14 +81,14 @@
         position: absolute;
         bottom: 0; left: 0; right: 0;
         height: 1px;
-        background: linear-gradient(to right, transparent, #c9a961, transparent);
+        background: linear-gradient(to right, transparent, #C8916A, transparent);
     }
 
     .welcome-eyebrow {
         font-size: 11px;
         letter-spacing: 4px;
         text-transform: uppercase;
-        color: #c9a961;
+        color: #C8916A;
         margin-bottom: 22px;
         font-weight: 400;
     }
@@ -94,7 +96,7 @@
     .welcome-section h2 {
         font-size: 46px;
         font-weight: 300;
-        color: white;
+        color: #1C1008;
         margin-bottom: 16px;
         font-family: 'Georgia', serif;
         letter-spacing: 2px;
@@ -103,7 +105,7 @@
 
     .welcome-subtitle {
         font-size: 15px;
-        color: #c9a961;
+        color: #C8916A;
         letter-spacing: 2px;
         text-transform: uppercase;
         font-weight: 300;
@@ -113,13 +115,13 @@
     .welcome-divider {
         width: 60px;
         height: 1px;
-        background: #c9a961;
+        background: #C8916A;
         margin: 0 auto 36px;
     }
 
     .welcome-section .welcome-body {
         font-size: 16px;
-        color: rgba(255,255,255,0.65);
+        color: rgba(28,16,8,0.65);
         max-width: 760px;
         margin: 0 auto 20px;
         line-height: 1.95;
@@ -128,63 +130,61 @@
 
     /* Services Grid */
     .services-luxury {
-        max-width: 100%;
-        margin: 0 auto;
-        padding: 80px 40px;
+        max-width: 1200px;
+        margin: 0 auto 40px auto;
+        padding: 50px 20px;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
+        gap: 32px;
     }
     
     .service-luxury-card {
-        position: relative;
-        height: 350px;
         overflow: hidden;
         cursor: pointer;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        background: #FFFFFF;
+        border-radius: 4px;
+    }
+    
+    .service-card-photo {
+        height: 300px;
+        overflow: hidden;
     }
     
     .service-luxury-card img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        display: block;
         transition: transform 0.6s ease;
     }
     
     .service-luxury-card:hover img {
-        transform: scale(1.1);
+        transform: scale(1.08);
     }
     
-    .service-overlay {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: linear-gradient(transparent, rgba(0,0,0,0.8));
-        padding: 40px 30px;
-        color: white;
+    .service-card-name {
+        padding: 18px 20px;
+        text-align: center;
+        background: #FFFFFF;
     }
     
-    .service-overlay h3 {
-        font-size: 28px;
-        font-weight: 300;
-        margin-bottom: 10px;
-        letter-spacing: 1px;
+    .service-card-name h3 {
+        font-size: 20px;
+        font-weight: 400;
+        letter-spacing: 1.5px;
         font-family: 'Georgia', serif;
-    }
-    
-    .service-overlay p {
-        font-size: 15px;
-        font-weight: 300;
-        opacity: 0.9;
-        line-height: 1.6;
+        color: #C8916A;
+        margin: 0;
+        text-transform: uppercase;
     }
     
     /* Experience Section */
     /* Stats Luxury */
     .stats-luxury {
-        padding: 100px 20px;
-        background: #1a1a1a;
+        padding: 60px 20px 50px;
+        background: #FAF7F2;
+        margin-bottom: 40px;
     }
     
     .stats-luxury-grid {
@@ -192,21 +192,21 @@
         margin: 0 auto;
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 60px;
+        gap: 32px;
         text-align: center;
     }
     
     .stat-luxury-item h3 {
         font-size: 56px;
         font-weight: 300;
-        color: #c9a961;
+        color: #C8916A;
         margin-bottom: 10px;
         font-family: 'Georgia', serif;
     }
     
     .stat-luxury-item p {
         font-size: 16px;
-        color: rgba(255,255,255,0.6);
+        color: rgba(28,16,8,0.6);
         letter-spacing: 1px;
         text-transform: uppercase;
         font-size: 13px;
@@ -214,11 +214,11 @@
     
     /* CTA Luxury */
     .cta-luxury {
-        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                    url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=1920') center/cover fixed;
-        padding: 120px 20px;
+        background: linear-gradient(rgba(0,0,0,0.40), rgba(0,0,0,0.40)), url("{{ asset('assets/img/spa2.jpg') }}") center/cover fixed;
+        padding: 70px 20px 70px 20px;
         text-align: center;
-        color: white;
+        color: #FAF7F2;
+        margin-bottom: 0;
     }
     
     .cta-luxury h2 {
@@ -250,22 +250,29 @@
         }
     }
     
+    @media (max-width: 1024px) {
+        .services-luxury {
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+    }
     @media (max-width: 768px) {
         .luxury-hero h1 {
             font-size: 36px;
         }
-        
         .luxury-hero p {
             font-size: 16px;
         }
-        
         .services-luxury {
             grid-template-columns: 1fr;
+            gap: 16px;
         }
-        
         .welcome-section h2,
         .cta-luxury h2 {
             font-size: 32px;
+        }
+        .stats-luxury-grid {
+            gap: 16px;
         }
     }
 </style>
@@ -290,7 +297,7 @@
     <p class="welcome-subtitle">Your one-stop destination for relaxation &amp; wellness</p>
     <div class="welcome-divider"></div>
     <p class="welcome-body">
-        Discover and book the finest spa and wellness services across Nepal — all in one place. Spa Lush makes it effortless to browse treatments, check availability and secure your appointment online in just a few clicks.
+        Discover and book the finest spa and wellness services across Nepal - all in one place. Spa Lush makes it effortless to browse treatments, check availability and secure your appointment online in just a few clicks.
     </p>
     <p class="welcome-body">
         Whether you're looking for a soothing massage, a therapeutic treatment or a full wellness experience, Spa Lush connects you with trusted spa professionals near you. No more phone calls, no more waiting just seamless, stress-free booking at your fingertips.
@@ -358,7 +365,7 @@
 <style>
     .spa-treatments-section {
         padding: 40px 20px 100px;
-        background: #111111;
+        background: #FAF7F2;
     }
     
     .treatments-container {
@@ -369,7 +376,7 @@
     .treatments-title {
         font-size: 42px;
         font-weight: 300;
-        color: white;
+        color: #1C1008;
         text-align: center;
         margin-bottom: 30px;
         font-family: 'Georgia', serif;
@@ -378,7 +385,7 @@
     
     .treatments-intro {
         font-size: 16px;
-        color: rgba(255,255,255,0.7);
+        color: rgba(28,16,8,0.7);
         text-align: center;
         max-width: 900px;
         margin: 0 auto 40px;
@@ -394,12 +401,12 @@
     }
     
     .treatment-card {
-        background: #2a2a2a;
+        background: #FFFFFF;
         border-radius: 8px;
         overflow: hidden;
         box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-        border: 1px solid rgba(201,169,97,0.15);
+        border: 1px solid rgba(200,145,106,0.15);
     }
     
     .treatment-card:hover {
@@ -431,7 +438,7 @@
     .treatment-name {
         font-size: 26px;
         font-weight: 400;
-        color: white;
+        color: #1C1008;
         margin-bottom: 15px;
         font-family: 'Georgia', serif;
         letter-spacing: 1px;
@@ -439,15 +446,15 @@
     
     .treatment-preview {
         font-size: 15px;
-        color: rgba(255,255,255,0.6);
+        color: rgba(28,16,8,0.6);
         line-height: 1.7;
         margin-bottom: 20px;
     }
     
     .read-more-btn {
         background: transparent;
-        color: #c9a961;
-        border: 2px solid #c9a961;
+        color: #C8916A;
+        border: 2px solid #C8916A;
         padding: 12px 35px;
         font-size: 13px;
         letter-spacing: 1.5px;
@@ -461,8 +468,8 @@
     }
     
     .read-more-btn:hover {
-        background: #c9a961;
-        color: white;
+        background: #C8916A;
+        color: #1C1008;
     }
     
     @media (max-width: 768px) {
@@ -483,34 +490,38 @@
 <!-- Services Grid -->
 <section class="services-luxury">
     <div class="service-luxury-card">
-        <img src="{{ asset('assets/img/Massage.jpg') }}" alt="Massage Therapy">
-        <div class="service-overlay">
+        <div class="service-card-photo">
+            <img src="{{ asset('assets/img/Massage.jpg') }}" alt="Massage Therapy">
+        </div>
+        <div class="service-card-name">
             <h3>Massage Therapy</h3>
-            <p>Indulge in our signature massage treatments designed to release tension and restore balance.</p>
         </div>
     </div>
     
     <div class="service-luxury-card">
-        <img src="{{ asset('assets/img/Facial.jpg') }}" alt="Facial Treatments">
-        <div class="service-overlay">
+        <div class="service-card-photo">
+            <img src="{{ asset('assets/img/Facial.jpg') }}" alt="Facial Treatments">
+        </div>
+        <div class="service-card-name">
             <h3>Facial Treatments</h3>
-            <p>Rejuvenate your skin with our luxurious facial treatments using premium organic products.</p>
         </div>
     </div>
     
     <div class="service-luxury-card">
-        <img src="{{ asset('assets/img/Body.jpg') }}" alt="Body Treatments">
-        <div class="service-overlay">
+        <div class="service-card-photo">
+            <img src="{{ asset('assets/img/Body.jpg') }}" alt="Body Treatments">
+        </div>
+        <div class="service-card-name">
             <h3>Body Treatments</h3>
-            <p>Experience complete body renewal with our exclusive body wraps and scrubs.</p>
         </div>
     </div>
     
     <div class="service-luxury-card">
-        <img src="{{ asset('assets/img/Stone.jpg') }}" alt="Hot Stone Therapy">
-        <div class="service-overlay">
+        <div class="service-card-photo">
+            <img src="{{ asset('assets/img/Stone.jpg') }}" alt="Hot Stone Therapy">
+        </div>
+        <div class="service-card-name">
             <h3>Hot Stone Therapy</h3>
-            <p>Melt away stress with heated volcanic stones that penetrate deep into muscles, easing tension and restoring warmth.</p>
         </div>
     </div>
 </section>
@@ -541,15 +552,11 @@
 
 <!-- CTA Section -->
 <section class="cta-luxury">
-    @guest
-        <h2>Begin Your Wellness Journey</h2>
-        <p>Join our community of wellness enthusiasts and discover the transformative power of self-care.</p>
-        <a href="{{ route('role.selection') }}" class="luxury-btn">Reserve Your Experience</a>
-    @else
-        <h2>Welcome Back, {{ Auth::user()->name }}</h2>
-        <p>Your next moment of tranquility awaits. Explore our collection of premium spa experiences.</p>
-        <a href="{{ route('spas.index') }}" class="luxury-btn">View Available Spas</a>
-    @endguest
+    
+    <h2 style="font-size: 44px; font-family: 'Georgia', serif; font-weight: 400; margin-bottom: 18px;">Leave as someone who<br>finally exhaled.</h2>
+    <div style="color: #e6e0da; font-size: 17px; margin-bottom: 6px;">One visit changes how you carry yourself.</div>
+    <div style="color: #e6e0da; font-size: 17px; margin-bottom: 28px;">Your restoration begins the moment you choose it.</div>
+    <a href="{{ route('role.selection') }}" class="luxury-btn" style="margin-top: 10px;">Claim Your Moment &rarr;</a>
 </section>
 
 @endsection

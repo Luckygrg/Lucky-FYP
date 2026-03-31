@@ -19,23 +19,23 @@
     .create-spa-header h1 {
         font-size: 36px;
         font-weight: 300;
-        color: white;
+        color: #1C1008;
         margin-bottom: 10px;
         font-family: 'Georgia', serif;
         letter-spacing: 1px;
     }
     
     .create-spa-header p {
-        color: rgba(255,255,255,0.6);
+        color: rgba(28,16,8,0.6);
         font-size: 16px;
     }
     
     .spa-form {
-        background: #2a2a2a;
+        background: #FFFFFF;
         padding: 40px;
         border-radius: 12px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        border: 1px solid rgba(201,169,97,0.15);
+        border: 1px solid rgba(200,145,106,0.15);
     }
     
     .form-group {
@@ -44,7 +44,7 @@
     
     .form-group label {
         display: block;
-        color: rgba(255,255,255,0.7);
+        color: rgba(28,16,8,0.7);
         font-size: 14px;
         font-weight: 600;
         margin-bottom: 8px;
@@ -55,11 +55,11 @@
     .form-group select {
         width: 100%;
         padding: 12px 16px;
-        border: 1px solid rgba(255,255,255,0.15);
+        border: 1px solid rgba(28,16,8,0.15);
         border-radius: 8px;
         font-size: 15px;
-        color: rgba(255,255,255,0.9);
-        background: #2d2d2d;
+        color: rgba(28,16,8,0.9);
+        background: #F5EEE4;
         transition: all 0.3s ease;
     }
     
@@ -67,8 +67,8 @@
     .form-group textarea:focus,
     .form-group select:focus {
         outline: none;
-        border-color: #c9a961;
-        box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.1);
+        border-color: #C8916A;
+        box-shadow: 0 0 0 3px rgba(200, 145, 106, 0.1);
     }
     
     .form-group textarea {
@@ -78,7 +78,7 @@
     
     .form-group small {
         display: block;
-        color: rgba(255,255,255,0.4);
+        color: rgba(28,16,8,0.4);
         font-size: 13px;
         margin-top: 6px;
     }
@@ -92,8 +92,8 @@
     .submit-btn {
         width: 100%;
         padding: 16px;
-        background: #c9a961;
-        color: white;
+        background: #C8916A;
+        color: #1C1008;
         border: none;
         border-radius: 8px;
         font-size: 16px;
@@ -106,9 +106,9 @@
     }
     
     .submit-btn:hover {
-        background: #b8985a;
+        background: #AE7A55;
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(201, 169, 97, 0.3);
+        box-shadow: 0 4px 12px rgba(200, 145, 106, 0.3);
     }
     
     .alert {

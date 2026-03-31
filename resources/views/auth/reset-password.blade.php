@@ -13,7 +13,7 @@
     
     .reset-wrapper {
         min-height: 100vh;
-        background: #1a1a1a;
+        background: #FAF7F2;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -21,10 +21,10 @@
     }
     
     .reset-container {
-        background: #2a2a2a;
+        background: #FFFFFF;
         border-radius: 16px;
         box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-        border: 2px solid rgba(201,169,97,0.2);
+        border: 2px solid rgba(200,145,106,0.2);
         max-width: 450px;
         width: 100%;
         padding: 45px 40px;
@@ -36,14 +36,14 @@
     }
     
     .reset-header h2 {
-        color: white;
+        color: #1C1008;
         font-size: 32px;
         font-weight: 700;
         margin-bottom: 10px;
     }
     
     .reset-header p {
-        color: rgba(255,255,255,0.6);
+        color: rgba(28,16,8,0.6);
         font-size: 15px;
     }
     
@@ -67,7 +67,7 @@
     
     .form-group label {
         display: block;
-        color: rgba(255,255,255,0.7);
+        color: rgba(28,16,8,0.7);
         font-size: 14px;
         font-weight: 600;
         margin-bottom: 8px;
@@ -76,29 +76,29 @@
     .form-group input {
         width: 100%;
         padding: 14px 16px;
-        border: 1px solid rgba(255,255,255,0.15);
+        border: 1px solid rgba(28,16,8,0.15);
         border-radius: 10px;
         font-size: 15px;
-        color: rgba(255,255,255,0.9);
+        color: rgba(28,16,8,0.9);
         transition: all 0.3s ease;
-        background: #2d2d2d;
+        background: #F5EEE4;
     }
     
     .form-group input:focus {
         outline: none;
-        border-color: #c9a961;
-        box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.1);
+        border-color: #C8916A;
+        box-shadow: 0 0 0 3px rgba(200, 145, 106, 0.1);
     }
     
     .form-group input::placeholder {
-        color: rgba(255,255,255,0.3);
+        color: rgba(28,16,8,0.3);
     }
     
     .submit-btn {
         width: 100%;
         padding: 16px;
-        background: #c9a961;
-        color: white;
+        background: #C8916A;
+        color: #1C1008;
         border: none;
         border-radius: 10px;
         font-size: 16px;
@@ -107,14 +107,14 @@
         transition: all 0.3s ease;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        box-shadow: 0 4px 12px rgba(201, 169, 97, 0.3);
+        box-shadow: 0 4px 12px rgba(200, 145, 106, 0.3);
         margin-top: 10px;
     }
     
     .submit-btn:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(201, 169, 97, 0.4);
-        background: #b8985a;
+        box-shadow: 0 6px 16px rgba(200, 145, 106, 0.4);
+        background: #AE7A55;
     }
     
     @media (max-width: 576px) {

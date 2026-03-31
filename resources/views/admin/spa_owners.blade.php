@@ -10,14 +10,14 @@
     .dashboard-container {
         display: flex;
         min-height: 100vh;
-        background: #1a1a1a;
+        background: #FAF7F2;
         font-family: Arial, sans-serif;
     }
 
     /* ── Sidebar ── */
     .sidebar {
         width: 260px;
-        background: #1a1a1a;
+        background: #FAF7F2;
         padding: 30px 0;
         display: flex;
         flex-direction: column;
@@ -27,16 +27,16 @@
     .logo {
         font-size: 24px;
         font-weight: 300;
-        color: white;
+        color: #1C1008;
         margin: 0 30px 50px;
         letter-spacing: 3px;
         font-family: 'Georgia', serif;
     }
-    .logo span { color: #c9a961; }
+    .logo span { color: #C8916A; }
     .menu-item {
         padding: 15px 30px;
         margin-bottom: 5px;
-        color: rgba(255,255,255,0.7);
+        color: rgba(28,16,8,0.7);
         text-decoration: none;
         display: flex;
         align-items: center;
@@ -45,19 +45,19 @@
         font-size: 14px;
         letter-spacing: 0.5px;
     }
-    .menu-item:hover { background: rgba(201,169,97,0.1); color: #c9a961; }
+    .menu-item:hover { background: rgba(200,145,106,0.1); color: #C8916A; }
     .menu-item.active {
-        background: rgba(201,169,97,0.15);
-        color: #c9a961;
-        border-left: 3px solid #c9a961;
+        background: rgba(200,145,106,0.15);
+        color: #C8916A;
+        border-left: 3px solid #C8916A;
     }
     .logout-btn {
         margin: auto 30px 0;
         padding: 12px 20px;
         border-radius: 4px;
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 1px solid rgba(28,16,8,0.2);
         background: transparent;
-        color: rgba(255,255,255,0.7);
+        color: rgba(28,16,8,0.7);
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -67,20 +67,20 @@
         letter-spacing: 0.5px;
         width: calc(100% - 60px);
     }
-    .logout-btn:hover { background: #c9a961; border-color: #c9a961; color: white; }
+    .logout-btn:hover { background: #C8916A; border-color: #C8916A; color: #1C1008; }
 
     /* ── Main Content ── */
     .main-content { flex: 1; padding: 40px; overflow-y: auto; }
     .header { margin-bottom: 30px; }
     .header h1 {
         font-size: 32px;
-        color: white;
+        color: #1C1008;
         font-weight: 300;
         margin-bottom: 8px;
         font-family: 'Georgia', serif;
         letter-spacing: 1px;
     }
-    .header p { color: rgba(255,255,255,0.6); font-size: 15px; }
+    .header p { color: rgba(28,16,8,0.6); font-size: 15px; }
 
     /* ── Alert Messages ── */
     .alert {
@@ -90,7 +90,7 @@
         font-size: 14px;
         border-left: 4px solid;
     }
-    .alert-success { background: rgba(201,169,97,0.1); color: #8b7644; border-color: #c9a961; }
+    .alert-success { background: rgba(200,145,106,0.1); color: #895D3E; border-color: #C8916A; }
     .alert-error   { background: rgba(220,53,69,0.08); color: #842029; border-color: #dc3545; }
 
     /* ── Filter Bar ── */
@@ -102,32 +102,32 @@
     }
     .filter-btn {
         padding: 8px 18px;
-        border: 1px solid rgba(255,255,255,0.15);
+        border: 1px solid rgba(28,16,8,0.15);
         border-radius: 20px;
-        background: #2a2a2a;
-        color: rgba(255,255,255,0.6);
+        background: #FFFFFF;
+        color: rgba(28,16,8,0.6);
         cursor: pointer;
         font-size: 13px;
         text-decoration: none;
         transition: all 0.2s;
     }
     .filter-btn:hover, .filter-btn.active {
-        background: #c9a961;
-        border-color: #c9a961;
-        color: white;
+        background: #C8916A;
+        border-color: #C8916A;
+        color: #1C1008;
     }
 
     /* ── Table Card ── */
     .table-card {
-        background: #2a2a2a;
+        background: #FFFFFF;
         border-radius: 8px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         overflow: hidden;
-        border: 1px solid rgba(201,169,97,0.15);
+        border: 1px solid rgba(200,145,106,0.15);
     }
     .table-card-header {
         padding: 20px 25px;
-        border-bottom: 1px solid rgba(255,255,255,0.08);
+        border-bottom: 1px solid rgba(28,16,8,0.08);
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -135,13 +135,13 @@
     .table-card-header h2 {
         font-size: 18px;
         font-weight: 300;
-        color: white;
+        color: #1C1008;
         font-family: 'Georgia', serif;
         letter-spacing: 0.5px;
     }
     .badge-count {
-        background: #c9a961;
-        color: white;
+        background: #C8916A;
+        color: #1C1008;
         padding: 3px 10px;
         border-radius: 12px;
         font-size: 12px;
@@ -150,34 +150,34 @@
 
     table { width: 100%; border-collapse: collapse; }
     thead th {
-        background: #111111;
+        background: #FAF7F2;
         padding: 14px 16px;
         text-align: left;
         font-size: 12px;
         font-weight: 600;
-        color: rgba(255,255,255,0.5);
+        color: rgba(28,16,8,0.5);
         text-transform: uppercase;
         letter-spacing: 0.8px;
-        border-bottom: 1px solid rgba(255,255,255,0.08);
+        border-bottom: 1px solid rgba(28,16,8,0.08);
     }
-    tbody tr { border-bottom: 1px solid rgba(255,255,255,0.06); transition: background 0.15s; }
-    tbody tr:hover { background: rgba(201,169,97,0.05); }
+    tbody tr { border-bottom: 1px solid rgba(28,16,8,0.06); transition: background 0.15s; }
+    tbody tr:hover { background: rgba(200,145,106,0.05); }
     tbody tr:last-child { border-bottom: none; }
-    td { padding: 16px; font-size: 14px; color: rgba(255,255,255,0.7); vertical-align: middle; }
+    td { padding: 16px; font-size: 14px; color: rgba(28,16,8,0.7); vertical-align: middle; }
 
     .owner-info { display: flex; align-items: center; gap: 12px; }
     .avatar {
         width: 38px; height: 38px;
-        background: linear-gradient(135deg, #c9a961, #b8985a);
+        background: linear-gradient(135deg, #C8916A, #AE7A55);
         border-radius: 50%;
         display: flex; align-items: center; justify-content: center;
-        color: white; font-size: 15px; font-weight: 600; flex-shrink: 0;
+        color: #1C1008; font-size: 15px; font-weight: 600; flex-shrink: 0;
     }
-    .owner-name { font-weight: 500; color: white; }
-    .owner-email { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+    .owner-name { font-weight: 500; color: #1C1008; }
+    .owner-email { font-size: 12px; color: rgba(28,16,8,0.5); margin-top: 2px; }
 
-    .spa-name { font-weight: 500; color: white; }
-    .no-spa { color: rgba(255,255,255,0.3); font-style: italic; font-size: 13px; }
+    .spa-name { font-weight: 500; color: #1C1008; }
+    .no-spa { color: rgba(28,16,8,0.3); font-style: italic; font-size: 13px; }
 
     /* Status badges */
     .badge {
@@ -189,7 +189,7 @@
         text-transform: capitalize;
         letter-spacing: 0.3px;
     }
-    .badge-pending      { background: rgba(201,169,97,0.15); color: #c9a961; }
+    .badge-pending      { background: rgba(200,145,106,0.15); color: #C8916A; }
     .badge-approved     { background: rgba(52,168,83,0.15); color: #5cb85c; }
     .badge-disapproved  { background: rgba(220,53,69,0.15); color: #e07070; }
     .badge-no-spa       { background: #e2e8f0; color: #64748b; }
@@ -210,19 +210,19 @@
         gap: 5px;
         letter-spacing: 0.3px;
     }
-    .btn-view     { background: #1a1a1a; color: white; }
-    .btn-view:hover { background: #2d2d2d; }
-    .btn-approve  { background: #198754; color: white; }
+    .btn-view     { background: #FAF7F2; color: #1C1008; }
+    .btn-view:hover { background: #F5EEE4; }
+    .btn-approve  { background: #198754; color: #1C1008; }
     .btn-approve:hover { background: #157347; }
-    .btn-disapprove { background: #dc3545; color: white; }
+    .btn-disapprove { background: #dc3545; color: #1C1008; }
     .btn-disapprove:hover { background: #bb2d3b; }
 
-    .joined-date { color: rgba(255,255,255,0.5); font-size: 13px; }
+    .joined-date { color: rgba(28,16,8,0.5); font-size: 13px; }
 
     .empty-state {
         text-align: center;
         padding: 60px 20px;
-        color: rgba(255,255,255,0.4);
+        color: rgba(28,16,8,0.4);
     }
     .empty-state p { font-size: 15px; margin-top: 10px; }
 
@@ -340,7 +340,11 @@
 
                         <td>
                             <div class="owner-info">
-                                <div class="avatar">{{ strtoupper(substr($owner->name, 0, 1)) }}</div>
+                                @if($owner->photo)
+                                    <img src="{{ asset('storage/' . $owner->photo) }}" class="avatar" style="width:48px;height:48px;object-fit:cover;border-radius:50%;border:2px solid #C8916A;" />
+                                @else
+                                    <div class="avatar">{{ strtoupper(substr($owner->name, 0, 1)) }}</div>
+                                @endif
                                 <div>
                                     <div class="owner-name">{{ $owner->name }}</div>
                                     <div class="owner-email">{{ $owner->email }}</div>

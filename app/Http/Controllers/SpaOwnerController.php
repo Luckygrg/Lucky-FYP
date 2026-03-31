@@ -292,12 +292,14 @@ class SpaOwnerController extends Controller
 
     public function updateSettings(Request $request)
     {
+        // dd($request);
         $user = Auth::user();
 
         $request->validate([
             'name'  => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'password' => 'nullable|min:8|confirmed',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $user->name  = $request->name;
@@ -305,6 +307,12 @@ class SpaOwnerController extends Controller
 
         if ($request->filled('password')) {
             $user->password = bcrypt($request->password);
+        }
+
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $path = $photo->store('avatars', 'public');
+            $user->photo = $path;
         }
 
         $user->save();

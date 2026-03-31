@@ -9,11 +9,11 @@
 
 <style>
     .spa-hero {
-        background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+        background: linear-gradient(rgba(0,0,0,0.40), rgba(0,0,0,0.40)),
                     url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1920') center/cover;
         padding: 100px 20px;
         text-align: center;
-        color: white;
+        color: #FAF7F2;
     }
 
     .spa-hero h1 {
@@ -41,7 +41,7 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        color: #c9a961;
+        color: #C8916A;
         text-decoration: none;
         font-size: 14px;
         margin-bottom: 30px;
@@ -49,7 +49,7 @@
     }
 
     .back-link:hover {
-        color: #b8985a;
+        color: #AE7A55;
     }
 
     /* Status banner */
@@ -65,9 +65,9 @@
     }
 
     .status-banner.pending {
-        background: rgba(201,169,97,0.12);
-        color: #c9a961;
-        border-left: 4px solid #c9a961;
+        background: rgba(200,145,106,0.12);
+        color: #C8916A;
+        border-left: 4px solid #C8916A;
     }
 
     .status-banner.approved {
@@ -84,18 +84,18 @@
 
     /* Main card */
     .spa-card-main {
-        background: #2a2a2a;
+        background: #FFFFFF;
         border-radius: 12px;
         box-shadow: 0 4px 18px rgba(0,0,0,0.4);
         overflow: hidden;
         margin-bottom: 35px;
-        border: 1px solid rgba(201,169,97,0.15);
+        border: 1px solid rgba(200,145,106,0.15);
     }
 
     .spa-image-wrap {
         width: 100%;
         height: 340px;
-        background: linear-gradient(135deg, #c9a961 0%, #8b7644 100%);
+        background: linear-gradient(135deg, #C8916A 0%, #895D3E 100%);
         overflow: hidden;
         position: relative;
     }
@@ -103,7 +103,7 @@
     .spa-image-wrap img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit:cover;
     }
 
     .spa-image-placeholder {
@@ -113,15 +113,15 @@
         align-items: center;
         justify-content: center;
         font-size: 80px;
-        color: rgba(255,255,255,0.5);
+        color: rgba(28,16,8,0.5);
     }
 
     .featured-badge {
         position: absolute;
         top: 20px;
         left: 20px;
-        background: #c9a961;
-        color: white;
+        background: #C8916A;
+        color: #1C1008;
         padding: 7px 16px;
         border-radius: 20px;
         font-size: 12px;
@@ -133,8 +133,8 @@
         position: absolute;
         top: 20px;
         right: 20px;
-        background: #1a1a1a;
-        color: #c9a961;
+        background: #FAF7F2;
+        color: #C8916A;
         padding: 7px 14px;
         border-radius: 20px;
         font-size: 14px;
@@ -156,7 +156,7 @@
     .spa-meta-row h2 {
         font-size: 32px;
         font-weight: 400;
-        color: white;
+        color: #1C1008;
         font-family: 'Georgia', serif;
         flex: 1;
     }
@@ -168,9 +168,9 @@
         white-space: nowrap;
     }
 
-    .rating-star { color: #c9a961; font-size: 18px; }
-    .rating-number { font-weight: 700; font-size: 18px; color: white; }
-    .rating-count { color: rgba(255,255,255,0.5); font-size: 14px; }
+    .rating-star { color: #C8916A; font-size: 18px; }
+    .rating-number { font-weight: 700; font-size: 18px; color: #1C1008; }
+    .rating-count { color: rgba(28,16,8,0.5); font-size: 14px; }
 
     .spa-info-grid {
         display: grid;
@@ -183,12 +183,12 @@
         display: flex;
         align-items: flex-start;
         gap: 10px;
-        color: rgba(255,255,255,0.6);
+        color: rgba(28,16,8,0.6);
         font-size: 14px;
     }
 
     .spa-info-item i {
-        color: #c9a961;
+        color: #C8916A;
         margin-top: 2px;
         width: 16px;
         flex-shrink: 0;
@@ -202,8 +202,8 @@
     }
 
     .spa-tag {
-        background: rgba(255,255,255,0.08);
-        color: rgba(255,255,255,0.6);
+        background: rgba(28,16,8,0.08);
+        color: rgba(28,16,8,0.6);
         padding: 5px 14px;
         border-radius: 14px;
         font-size: 13px;
@@ -211,7 +211,7 @@
 
     .section-divider {
         border: none;
-        border-top: 1px solid rgba(255,255,255,0.1);
+        border-top: 1px solid rgba(28,16,8,0.1);
         margin: 25px 0;
     }
 
@@ -220,30 +220,30 @@
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 1.2px;
-        color: #c9a961;
+        color: #C8916A;
         margin-bottom: 12px;
     }
 
     .spa-description-text {
-        color: rgba(255,255,255,0.6);
+        color: rgba(28,16,8,0.6);
         font-size: 15px;
         line-height: 1.8;
     }
 
     /* Services */
     .services-section {
-        background: #2a2a2a;
+        background: #FFFFFF;
         border-radius: 12px;
         box-shadow: 0 4px 18px rgba(0,0,0,0.4);
         padding: 35px 40px;
         margin-bottom: 35px;
-        border: 1px solid rgba(201,169,97,0.15);
+        border: 1px solid rgba(200,145,106,0.15);
     }
 
     .services-section h3 {
         font-size: 22px;
         font-weight: 300;
-        color: white;
+        color: #1C1008;
         font-family: 'Georgia', serif;
         margin-bottom: 25px;
         letter-spacing: 1px;
@@ -256,23 +256,23 @@
     }
 
     .service-card {
-        border: 1px solid rgba(255,255,255,0.1);
+        border: 1px solid rgba(28,16,8,0.1);
         border-radius: 8px;
         overflow: hidden;
         transition: all 0.3s;
-        background: #2d2d2d;
+        background: #F5EEE4;
         display: flex;
         flex-direction: column;
     }
 
     .service-card:hover {
-        border-color: #c9a961;
-        box-shadow: 0 4px 12px rgba(201,169,97,0.15);
+        border-color: #C8916A;
+        box-shadow: 0 4px 12px rgba(200,145,106,0.15);
     }
 
     .service-card.selected {
-        border-color: #c9a961;
-        box-shadow: 0 0 0 2px rgba(201,169,97,0.4);
+        border-color: #C8916A;
+        box-shadow: 0 0 0 2px rgba(200,145,106,0.4);
     }
 
     .service-img {
@@ -285,11 +285,11 @@
     .service-img-placeholder {
         width: 100%;
         height: 150px;
-        background: linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 100%);
+        background: linear-gradient(135deg, #E8DDD0 0%, #FFFFFF 100%);
         display: flex;
         align-items: center;
         justify-content: center;
-        color: rgba(255,255,255,0.2);
+        color: rgba(28,16,8,0.2);
         font-size: 36px;
     }
 
@@ -303,13 +303,13 @@
     .service-name {
         font-size: 16px;
         font-weight: 600;
-        color: white;
+        color: #1C1008;
         margin-bottom: 6px;
     }
 
     .service-desc {
         font-size: 13px;
-        color: rgba(255,255,255,0.5);
+        color: rgba(28,16,8,0.5);
         line-height: 1.6;
         margin-bottom: 14px;
         flex: 1;
@@ -324,7 +324,7 @@
     }
 
     .service-duration {
-        color: rgba(255,255,255,0.5);
+        color: rgba(28,16,8,0.5);
         display: flex;
         align-items: center;
         gap: 5px;
@@ -332,17 +332,17 @@
 
     .service-price {
         font-weight: 700;
-        color: #c9a961;
+        color: #C8916A;
         font-size: 15px;
     }
 
     .service-select-btn {
         width: 100%;
         padding: 8px;
-        border: 1px solid rgba(201,169,97,0.4);
+        border: 1px solid rgba(200,145,106,0.4);
         border-radius: 5px;
         background: transparent;
-        color: #c9a961;
+        color: #C8916A;
         font-size: 13px;
         font-weight: 600;
         cursor: pointer;
@@ -352,14 +352,14 @@
 
     .service-select-btn:hover,
     .service-card.selected .service-select-btn {
-        background: #c9a961;
-        color: #1a1a1a;
+        background: #C8916A;
+        color: #1C1008;
     }
 
     .no-services {
         text-align: center;
         padding: 40px 20px;
-        color: #bbb;
+        color: #666;
         font-size: 15px;
     }
 
@@ -367,8 +367,8 @@
     .book-bar {
         position: fixed;
         bottom: 0; left: 0; right: 0;
-        background: #1a1a1a;
-        border-top: 1px solid rgba(201,169,97,0.3);
+        background: #FAF7F2;
+        border-top: 1px solid rgba(200,145,106,0.3);
         padding: 14px 40px;
         display: flex;
         align-items: center;
@@ -382,19 +382,19 @@
     .book-bar.visible { transform: translateY(0); }
 
     .book-bar-info {
-        color: rgba(255,255,255,0.7);
+        color: rgba(28,16,8,0.7);
         font-size: 14px;
     }
 
     .book-bar-info strong {
-        color: #c9a961;
+        color: #C8916A;
         font-size: 16px;
     }
 
     .book-bar-btn {
         padding: 12px 32px;
-        background: #c9a961;
-        color: #1a1a1a;
+        background: #C8916A;
+        color: #1C1008;
         border: none;
         border-radius: 6px;
         font-size: 15px;
@@ -405,7 +405,7 @@
         white-space: nowrap;
     }
 
-    .book-bar-btn:hover { background: #b8985a; }
+    .book-bar-btn:hover { background: #AE7A55; }
 
     /* Booking Modal */
     .booking-overlay {
@@ -422,9 +422,9 @@
     .booking-overlay.open { display: flex; }
 
     .booking-modal {
-        background: #2a2a2a;
+        background: #FFFFFF;
         border-radius: 12px;
-        border: 1px solid rgba(201,169,97,0.25);
+        border: 1px solid rgba(200,145,106,0.25);
         width: 100%;
         max-width: 560px;
         max-height: 90vh;
@@ -436,13 +436,13 @@
     .booking-modal h2 {
         font-size: 22px;
         font-weight: 300;
-        color: white;
+        color: #1C1008;
         font-family: 'Georgia', serif;
         margin-bottom: 6px;
     }
 
     .booking-modal .modal-subtitle {
-        color: rgba(255,255,255,0.5);
+        color: rgba(28,16,8,0.5);
         font-size: 14px;
         margin-bottom: 28px;
     }
@@ -452,20 +452,20 @@
         top: 16px; right: 20px;
         background: none;
         border: none;
-        color: rgba(255,255,255,0.5);
+        color: rgba(28,16,8,0.5);
         font-size: 22px;
         cursor: pointer;
         line-height: 1;
     }
 
-    .modal-close:hover { color: white; }
+    .modal-close:hover { color: #1C1008; }
 
     .modal-section-title {
         font-size: 11px;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 1.2px;
-        color: #c9a961;
+        color: #C8916A;
         margin-bottom: 10px;
         margin-top: 20px;
     }
@@ -482,28 +482,28 @@
         justify-content: space-between;
         align-items: center;
         padding: 8px 14px;
-        background: rgba(255,255,255,0.05);
+        background: rgba(28,16,8,0.05);
         border-radius: 6px;
         font-size: 14px;
-        color: rgba(255,255,255,0.85);
+        color: rgba(28,16,8,0.85);
     }
 
-    .selected-service-row span { color: #c9a961; font-weight: 600; }
+    .selected-service-row span { color: #C8916A; font-weight: 600; }
 
     .modal-total {
         display: flex;
         justify-content: space-between;
         padding: 12px 14px;
-        background: rgba(201,169,97,0.08);
-        border: 1px solid rgba(201,169,97,0.2);
+        background: rgba(200,145,106,0.08);
+        border: 1px solid rgba(200,145,106,0.2);
         border-radius: 6px;
         font-size: 15px;
         font-weight: 600;
-        color: white;
+        color: #1C1008;
         margin-bottom: 6px;
     }
 
-    .modal-total span { color: #c9a961; }
+    .modal-total span { color: #C8916A; }
 
     .form-group {
         margin-bottom: 18px;
@@ -515,7 +515,7 @@
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.8px;
-        color: rgba(255,255,255,0.6);
+        color: rgba(28,16,8,0.6);
         margin-bottom: 7px;
     }
 
@@ -523,10 +523,10 @@
     .form-group textarea {
         width: 100%;
         padding: 11px 14px;
-        background: #1a1a1a;
-        border: 1px solid rgba(255,255,255,0.15);
+        background: #FAF7F2;
+        border: 1px solid rgba(28,16,8,0.15);
         border-radius: 6px;
-        color: white;
+        color: #1C1008;
         font-size: 14px;
         transition: border-color 0.2s;
     }
@@ -534,7 +534,7 @@
     .form-group input:focus,
     .form-group textarea:focus {
         outline: none;
-        border-color: #c9a961;
+        border-color: #C8916A;
     }
 
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
@@ -551,8 +551,8 @@
         align-items: center;
         gap: 12px;
         padding: 14px 16px;
-        background: #1a1a1a;
-        border: 1px solid rgba(255,255,255,0.12);
+        background: #FAF7F2;
+        border: 1px solid rgba(28,16,8,0.12);
         border-radius: 8px;
         cursor: pointer;
         transition: all 0.2s;
@@ -562,20 +562,20 @@
 
     .payment-opt.selected,
     .payment-opt:has(input:checked) {
-        border-color: #c9a961;
-        background: rgba(201,169,97,0.08);
+        border-color: #C8916A;
+        background: rgba(200,145,106,0.08);
     }
 
     .payment-opt i { font-size: 20px; flex-shrink: 0; }
 
-    .pay-opt-title { font-size: 14px; font-weight: 700; color: white; }
-    .pay-opt-sub   { font-size: 11px; color: rgba(255,255,255,0.45); margin-top: 2px; }
+    .pay-opt-title { font-size: 14px; font-weight: 700; color: #1C1008; }
+    .pay-opt-sub   { font-size: 11px; color: rgba(28,16,8,0.45); margin-top: 2px; }
 
     .btn-submit-booking {
         width: 100%;
         padding: 14px;
-        background: #c9a961;
-        color: #1a1a1a;
+        background: #C8916A;
+        color: #1C1008;
         border: none;
         border-radius: 7px;
         font-size: 15px;
@@ -586,7 +586,7 @@
         transition: background 0.2s;
     }
 
-    .btn-submit-booking:hover { background: #b8985a; }
+    .btn-submit-booking:hover { background: #AE7A55; }
 
     .alert-success {
         background: rgba(67,160,71,0.12);
@@ -614,29 +614,29 @@
         margin-bottom: 28px; align-items: center;
     }
     .cat-filter-label {
-        font-size: 11px; color: rgba(255,255,255,0.4);
+        font-size: 11px; color: rgba(28,16,8,0.4);
         text-transform: uppercase; letter-spacing: 1px; margin-right: 4px;
     }
     .cat-btn {
         padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 500;
-        text-decoration: none; border: 1px solid rgba(255,255,255,0.15);
-        color: rgba(255,255,255,0.6); background: #222; transition: all 0.2s; cursor: pointer;
+        text-decoration: none; border: 1px solid rgba(28,16,8,0.15);
+        color: rgba(28,16,8,0.6); background: #F0E6D8; transition: all 0.2s; cursor: pointer;
     }
-    .cat-btn:hover { border-color: #c9a961; color: #c9a961; background: rgba(201,169,97,0.08); }
-    .cat-btn.active { background: #c9a961; border-color: #c9a961; color: #1a1a1a; font-weight: 700; }
+    .cat-btn:hover { border-color: #C8916A; color: #C8916A; background: rgba(200,145,106,0.08); }
+    .cat-btn.active { background: #C8916A; border-color: #C8916A; color: #1C1008; font-weight: 700; }
 
     .cat-section-heading {
-        font-size: 14px; font-weight: 600; color: #c9a961;
+        font-size: 14px; font-weight: 600; color: #C8916A;
         text-transform: uppercase; letter-spacing: 1px;
         margin-bottom: 14px; margin-top: 8px;
-        padding-bottom: 8px; border-bottom: 1px solid rgba(201,169,97,0.2);
+        padding-bottom: 8px; border-bottom: 1px solid rgba(200,145,106,0.2);
     }
     .cat-section { margin-bottom: 30px; }
 
     /* Owner actions */
     .owner-actions {
-        background: rgba(201,169,97,0.08);
-        border: 1px solid rgba(201,169,97,0.25);
+        background: rgba(200,145,106,0.08);
+        border: 1px solid rgba(200,145,106,0.25);
         border-radius: 10px;
         padding: 25px 30px;
         margin-bottom: 35px;
@@ -649,7 +649,7 @@
 
     .owner-actions p {
         font-size: 14px;
-        color: rgba(201,169,97,0.8);
+        color: rgba(200,145,106,0.8);
     }
 
     .owner-actions-buttons {
@@ -660,8 +660,8 @@
 
     .btn-gold {
         padding: 10px 22px;
-        background: #c9a961;
-        color: white;
+        background: #C8916A;
+        color: #1C1008;
         text-decoration: none;
         border-radius: 6px;
         font-size: 14px;
@@ -673,15 +673,15 @@
     }
 
     .btn-gold:hover {
-        background: #b8985a;
+        background: #AE7A55;
         transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(201,169,97,0.3);
+        box-shadow: 0 4px 12px rgba(200,145,106,0.3);
     }
 
     .btn-dark {
         padding: 10px 22px;
-        background: #1a1a1a;
-        color: white;
+        background: #FAF7F2;
+        color: #1C1008;
         text-decoration: none;
         border-radius: 6px;
         font-size: 14px;
@@ -693,7 +693,7 @@
     }
 
     .btn-dark:hover {
-        background: #2d2d2d;
+        background: #F5EEE4;
         transform: translateY(-1px);
     }
 
@@ -706,18 +706,18 @@
 
     /* ── Reviews ── */
     .reviews-section {
-        background: #2a2a2a;
+        background: #FFFFFF;
         border-radius: 12px;
         box-shadow: 0 4px 18px rgba(0,0,0,0.4);
         padding: 35px 40px;
         margin-bottom: 35px;
-        border: 1px solid rgba(201,169,97,0.15);
+        border: 1px solid rgba(200,145,106,0.15);
     }
 
     .reviews-section h3 {
         font-size: 22px;
         font-weight: 300;
-        color: white;
+        color: #1C1008;
         font-family: 'Georgia', serif;
         margin-bottom: 6px;
         letter-spacing: 1px;
@@ -733,17 +733,17 @@
     .reviews-big-rating {
         font-size: 48px;
         font-weight: 700;
-        color: #c9a961;
+        color: #C8916A;
         line-height: 1;
     }
 
-    .reviews-stars-block .stars-row { color: #c9a961; font-size: 20px; letter-spacing: 2px; }
-    .reviews-stars-block .review-total { color: rgba(255,255,255,0.45); font-size: 13px; margin-top: 4px; }
+    .reviews-stars-block .stars-row { color: #C8916A; font-size: 20px; letter-spacing: 2px; }
+    .reviews-stars-block .review-total { color: rgba(28,16,8,0.45); font-size: 13px; margin-top: 4px; }
 
     /* Write review form */
     .write-review-box {
-        background: rgba(201,169,97,0.06);
-        border: 1px solid rgba(201,169,97,0.2);
+        background: rgba(200,145,106,0.06);
+        border: 1px solid rgba(200,145,106,0.2);
         border-radius: 10px;
         padding: 24px 28px;
         margin-bottom: 30px;
@@ -752,7 +752,7 @@
     .write-review-box h4 {
         font-size: 15px;
         font-weight: 600;
-        color: #c9a961;
+        color: #C8916A;
         margin-bottom: 16px;
         text-transform: uppercase;
         letter-spacing: 1px;
@@ -770,7 +770,7 @@
 
     .star-picker label {
         font-size: 28px;
-        color: rgba(255,255,255,0.2);
+        color: rgba(28,16,8,0.2);
         cursor: pointer;
         transition: color 0.15s;
     }
@@ -778,16 +778,16 @@
     .star-picker label:hover,
     .star-picker label:hover ~ label,
     .star-picker input:checked ~ label {
-        color: #c9a961;
+        color: #C8916A;
     }
 
     .review-textarea {
         width: 100%;
         padding: 11px 14px;
-        background: #1a1a1a;
-        border: 1px solid rgba(255,255,255,0.15);
+        background: #FAF7F2;
+        border: 1px solid rgba(28,16,8,0.15);
         border-radius: 6px;
-        color: white;
+        color: #1C1008;
         font-size: 14px;
         resize: vertical;
         min-height: 90px;
@@ -795,15 +795,15 @@
         margin-bottom: 14px;
     }
 
-    .review-textarea:focus { outline: none; border-color: #c9a961; }
+    .review-textarea:focus { outline: none; border-color: #C8916A; }
 
     .review-booking-select {
         width: 100%;
         padding: 10px 14px;
-        background: #1a1a1a;
-        border: 1px solid rgba(255,255,255,0.15);
+        background: #FAF7F2;
+        border: 1px solid rgba(28,16,8,0.15);
         border-radius: 6px;
-        color: white;
+        color: #1C1008;
         font-size: 14px;
         margin-bottom: 14px;
         appearance: none;
@@ -811,12 +811,12 @@
         transition: border-color 0.2s;
     }
 
-    .review-booking-select:focus { outline: none; border-color: #c9a961; }
+    .review-booking-select:focus { outline: none; border-color: #C8916A; }
 
     .btn-submit-review {
         padding: 10px 26px;
-        background: #c9a961;
-        color: #1a1a1a;
+        background: #C8916A;
+        color: #1C1008;
         border: none;
         border-radius: 6px;
         font-size: 14px;
@@ -826,7 +826,7 @@
         transition: background 0.2s;
     }
 
-    .btn-submit-review:hover { background: #b8985a; }
+    .btn-submit-review:hover { background: #AE7A55; }
 
     /* Review cards */
     .reviews-list {
@@ -836,8 +836,8 @@
     }
 
     .review-card {
-        background: #222;
-        border: 1px solid rgba(255,255,255,0.07);
+        background: #F0E6D8;
+        border: 1px solid rgba(28,16,8,0.07);
         border-radius: 10px;
         padding: 20px 24px;
         position: relative;
@@ -861,11 +861,11 @@
         width: 38px;
         height: 38px;
         border-radius: 50%;
-        background: linear-gradient(135deg, #c9a961, #8b7644);
+        background: linear-gradient(135deg, #C8916A, #895D3E);
         display: flex;
         align-items: center;
         justify-content: center;
-        color: white;
+        color: #1C1008;
         font-size: 15px;
         font-weight: 700;
         flex-shrink: 0;
@@ -874,17 +874,17 @@
     .reviewer-name {
         font-size: 14px;
         font-weight: 600;
-        color: white;
+        color: #1C1008;
     }
 
     .review-date {
         font-size: 12px;
-        color: rgba(255,255,255,0.35);
+        color: rgba(28,16,8,0.35);
         margin-top: 2px;
     }
 
     .review-stars {
-        color: #c9a961;
+        color: #C8916A;
         font-size: 14px;
         letter-spacing: 1px;
         white-space: nowrap;
@@ -892,14 +892,14 @@
 
     .review-comment {
         font-size: 14px;
-        color: rgba(255,255,255,0.65);
+        color: rgba(28,16,8,0.65);
         line-height: 1.7;
     }
 
     .review-delete-btn {
         background: none;
         border: none;
-        color: rgba(255,255,255,0.25);
+        color: rgba(28,16,8,0.25);
         font-size: 13px;
         cursor: pointer;
         padding: 0;
@@ -913,7 +913,7 @@
     .no-reviews {
         text-align: center;
         padding: 40px 20px;
-        color: rgba(255,255,255,0.35);
+        color: rgba(28,16,8,0.35);
         font-size: 15px;
     }
 
@@ -938,17 +938,17 @@
     }
 
     .review-login-prompt {
-        background: rgba(255,255,255,0.04);
-        border: 1px dashed rgba(255,255,255,0.12);
+        background: rgba(28,16,8,0.04);
+        border: 1px dashed rgba(28,16,8,0.12);
         border-radius: 8px;
         padding: 18px 22px;
         text-align: center;
-        color: rgba(255,255,255,0.45);
+        color: rgba(28,16,8,0.45);
         font-size: 14px;
         margin-bottom: 28px;
     }
 
-    .review-login-prompt a { color: #c9a961; text-decoration: none; }
+    .review-login-prompt a { color: #C8916A; text-decoration: none; }
     .review-login-prompt a:hover { text-decoration: underline; }
 </style>
 
@@ -1127,8 +1127,8 @@
             @endif
 
             @if($isCustomer && $isApproved)
-                <p style="font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:20px;">
-                    <i class="fas fa-hand-pointer"></i> Select services you'd like to book, then click <strong style="color:#c9a961;">Book Now</strong>.
+                <p style="font-size:13px;color:rgba(28,16,8,0.45);margin-bottom:20px;">
+                    <i class="fas fa-hand-pointer"></i> Select services you'd like to book, then click <strong style="color:#C8916A;">Book Now</strong>.
                 </p>
             @endif
 
@@ -1183,7 +1183,7 @@
 
         @else
             <div class="no-services">
-                <i class="fas fa-spa" style="font-size:36px; margin-bottom:12px; display:block; color:#ddd;"></i>
+                <i class="fas fa-spa" style="font-size:36px; margin-bottom:12px; display:block; color:#999;"></i>
                 No services listed yet.
             </div>
         @endif
@@ -1225,7 +1225,7 @@
                             @csrf
 
                             {{-- Booking selector --}}
-                            <label style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:rgba(255,255,255,0.5);display:block;margin-bottom:7px;">
+                            <label style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:rgba(28,16,8,0.5);display:block;margin-bottom:7px;">
                                 Your Visit
                             </label>
                             <select name="booking_id" class="review-booking-select" required>
@@ -1238,7 +1238,7 @@
                             </select>
 
                             {{-- Star rating --}}
-                            <label style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:rgba(255,255,255,0.5);display:block;margin-bottom:7px;">
+                            <label style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:rgba(28,16,8,0.5);display:block;margin-bottom:7px;">
                                 Rating
                             </label>
                             <div class="star-picker">
@@ -1252,7 +1252,7 @@
                             </div>
 
                             {{-- Comment --}}
-                            <label style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:rgba(255,255,255,0.5);display:block;margin-bottom:7px;">
+                            <label style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:rgba(28,16,8,0.5);display:block;margin-bottom:7px;">
                                 Comment <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span>
                             </label>
                             <textarea name="comment" class="review-textarea"
@@ -1265,8 +1265,8 @@
                         </form>
                     </div>
                 @elseif($existingReview)
-                    <div class="write-review-box" style="text-align:center;color:rgba(255,255,255,0.45);font-size:14px;">
-                        <i class="fas fa-check-circle" style="color:#c9a961;font-size:18px;"></i>
+                    <div class="write-review-box" style="text-align:center;color:rgba(28,16,8,0.45);font-size:14px;">
+                        <i class="fas fa-check-circle" style="color:#C8916A;font-size:18px;"></i>
                         &nbsp;You have already reviewed this spa. Thank you for your feedback!
                     </div>
                 @else
@@ -1410,7 +1410,7 @@
                             <input type="radio" name="payment_option" value="pay_now"
                                    {{ old('payment_option', 'pay_later') === 'pay_now' ? 'checked' : '' }}
                                    onchange="updatePayBtn(this)">
-                            <i class="fas fa-credit-card" style="color:#c9a961;"></i>
+                            <i class="fas fa-credit-card" style="color:#C8916A;"></i>
                             <div>
                                 <div class="pay-opt-title">Pay Now</div>
                                 <div class="pay-opt-sub">Pay online while booking</div>
@@ -1420,7 +1420,7 @@
                             <input type="radio" name="payment_option" value="pay_later"
                                    {{ old('payment_option', 'pay_later') === 'pay_later' ? 'checked' : '' }}
                                    onchange="updatePayBtn(this)">
-                            <i class="fas fa-hand-holding-usd" style="color:#c9a961;"></i>
+                            <i class="fas fa-hand-holding-usd" style="color:#C8916A;"></i>
                             <div>
                                 <div class="pay-opt-title">Pay Later</div>
                                 <div class="pay-opt-sub">Pay at the spa after service</div>
@@ -1493,7 +1493,7 @@
 
                     const row = document.createElement('div');
                     row.className = 'selected-service-row';
-                    row.innerHTML = `<div>${s.name} <small style="color:rgba(255,255,255,0.4)">${s.duration} min</small></div><span>Rs. ${s.price.toLocaleString()}</span>`;
+                    row.innerHTML = `<div>${s.name} <small style="color:rgba(28,16,8,0.4)">${s.duration} min</small></div><span>Rs. ${s.price.toLocaleString()}</span>`;
                     list.appendChild(row);
 
                     const inp = document.createElement('input');

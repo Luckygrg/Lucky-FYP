@@ -1,4 +1,4 @@
-/* =================================
+﻿/* =================================
    RESET AND BASE STYLES
    ================================= */
 * {
@@ -9,19 +9,19 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: #1a1a1a;
+    background: #FAF7F2;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    color: rgba(255,255,255,0.9);
+    color: rgba(28,16,8,0.9);
 }
 
 /* =================================
    NAVBAR STYLES - DARK & GOLD
    ================================= */
 .navbar {
-    background: #1a1a1a;
-    color: white;
+    background: #FAF7F2;
+    color: #1C1008;
     padding: 20px 0;
     box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
@@ -38,7 +38,7 @@ body {
 .logo {
     font-size: 24px;
     font-weight: bold;
-    color: white;
+    color: #1C1008;
     text-decoration: none;
 }
 
@@ -49,28 +49,28 @@ body {
 }
 
 .nav-links span {
-    color: white;
+    color: #1C1008;
     margin-right: 10px;
 }
 
 .nav-links a {
-    color: white;
+    color: #1C1008;
     text-decoration: none;
     padding: 8px 20px;
-    border: 1px solid white;
+    border: 1px solid rgba(28,16,8,0.20);
     border-radius: 4px;
     transition: all 0.3s;
 }
 
 .nav-links a:hover {
-    background: rgba(201,169,97,0.1);
-    color: #c9a961;
+    background: rgba(200,145,106,0.1);
+    color: #C8916A;
 }
 
 .logout-btn {
     background: transparent;
-    color: rgba(255,255,255,0.8);
-    border: 1px solid rgba(255,255,255,0.3);
+    color: rgba(28,16,8,0.8);
+    border: 1px solid rgba(28,16,8,0.3);
     padding: 8px 20px;
     border-radius: 4px;
     cursor: pointer;
@@ -80,9 +80,9 @@ body {
 }
 
 .logout-btn:hover {
-    background: #c9a961;
-    border-color: #c9a961;
-    color: #1a1a1a;
+    background: #C8916A;
+    border-color: #C8916A;
+    color: #1C1008;
 }
 
 /* =================================
@@ -91,15 +91,15 @@ body {
 main {
     flex: 1;
     width: 100%;
-    background: #1a1a1a;
+    background: #FAF7F2;
 }
 
 /* =================================
    HERO SECTION - DARK & GOLD
    ================================= */
 .hero-section {
-    background: #c9a961;
-    color: white;
+    background: #C8916A;
+    color: #1C1008;
     padding: 80px 20px;
     text-align: center;
 }
@@ -121,19 +121,19 @@ main {
 
 .cta-button {
     display: inline-block;
-    background: #1a1a1a;
-    color: #c9a961;
+    background: #FAF7F2;
+    color: #C8916A;
     padding: 12px 30px;
     border-radius: 4px;
     text-decoration: none;
     font-weight: bold;
     transition: all 0.3s;
-    border: 1px solid #1a1a1a;
+    border: 1px solid #FAF7F2;
 }
 
 .cta-button:hover {
-    background: #2a2a2a;
-    color: white;
+    background: #FFFFFF;
+    color: #1C1008;
 }
 
 /* =================================
@@ -151,19 +151,19 @@ main {
 .feature-card {
     text-align: center;
     padding: 30px 20px;
-    background: #2a2a2a;
-    border: 1px solid rgba(201,169,97,0.2);
+    background: #FFFFFF;
+    border: 1px solid rgba(200,145,106,0.2);
     border-radius: 8px;
 }
 
 .feature-card h3 {
-    color: #c9a961;
+    color: #C8916A;
     margin-bottom: 15px;
     font-size: 20px;
 }
 
 .feature-card p {
-    color: rgba(255,255,255,0.6);
+    color: rgba(28,16,8,0.6);
     line-height: 1.6;
     font-size: 15px;
 }
@@ -172,13 +172,13 @@ main {
    STATS SECTION
    ================================= */
 .stats-section {
-    background: #111111;
+    background: #FAF7F2;
     padding: 60px 20px;
     text-align: center;
 }
 
 .stats-section h2 {
-    color: white;
+    color: #1C1008;
     margin-bottom: 40px;
     font-size: 32px;
 }
@@ -192,13 +192,13 @@ main {
 }
 
 .stat-item h2 {
-    color: #c9a961;
+    color: #C8916A;
     font-size: 42px;
     margin-bottom: 10px;
 }
 
 .stat-item p {
-    color: rgba(255,255,255,0.6);
+    color: rgba(28,16,8,0.6);
     font-size: 16px;
 }
 
@@ -206,8 +206,8 @@ main {
    CTA SECTION - DARK & GOLD
    ================================= */
 .cta-section {
-    background: #c9a961;
-    color: white;
+    background: #C8916A;
+    color: #1C1008;
     padding: 60px 20px;
     text-align: center;
 }
@@ -226,8 +226,8 @@ main {
    FOOTER STYLES - DARK
    ================================= */
 footer {
-    background: #1a1a1a;
-    color: rgba(255,255,255,0.7);
+    background: #FAF7F2;
+    color: rgba(28,16,8,0.7);
     padding: 40px 0 20px;
     margin-top: auto;
 }
@@ -253,7 +253,7 @@ footer h3 {
 
 footer p,
 footer li {
-    color: rgba(255,255,255,0.6);
+    color: rgba(28,16,8,0.6);
     line-height: 1.8;
     font-size: 14px;
 }
@@ -268,13 +268,13 @@ footer li {
 }
 
 footer a {
-    color: rgba(255,255,255,0.6);
+    color: rgba(28,16,8,0.6);
     text-decoration: none;
     transition: color 0.3s;
 }
 
 footer a:hover {
-    color: #c9a961;
+    color: #C8916A;
 }
 
 footer .social-links {
@@ -286,20 +286,20 @@ footer .social-links a {
     display: inline-block;
     width: 40px;
     height: 40px;
-    background: #c9a961;
+    background: #C8916A;
     border-radius: 4px;
     text-align: center;
     line-height: 40px;
     font-weight: bold;
-    color: #1a1a1a;
+    color: #1C1008;
 }
 
 footer .social-links a:hover {
-    background: #b8985a;
+    background: #AE7A55;
 }
 
 footer .copyright {
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid rgba(28,16,8,0.1);
     padding-top: 20px;
     text-align: center;
 }

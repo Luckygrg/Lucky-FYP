@@ -16,7 +16,7 @@
     
     .role-selection-wrapper {
         min-height: 100vh;
-        background: #1a1a1a;
+        background: #FAF7F2;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -34,14 +34,14 @@
     }
     
     .header-section h1 {
-        color: white;
+        color: #1C1008;
         font-size: 42px;
         font-weight: 700;
         margin-bottom: 15px;
     }
     
     .header-section p {
-        color: rgba(255,255,255,0.6);
+        color: rgba(28,16,8,0.6);
         font-size: 18px;
         font-weight: 400;
     }
@@ -54,11 +54,11 @@
     }
     
     .role-card {
-        background: #2a2a2a;
+        background: #FFFFFF;
         border-radius: 16px;
         padding: 45px 35px;
         box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-        border: 2px solid rgba(201,169,97,0.2);
+        border: 2px solid rgba(200,145,106,0.2);
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         position: relative;
         overflow: hidden;
@@ -73,7 +73,7 @@
         left: 0;
         right: 0;
         height: 5px;
-        background: #c9a961;
+        background: #C8916A;
         transform: scaleX(0);
         transition: transform 0.3s ease;
     }
@@ -84,26 +84,26 @@
     
     .role-card:hover {
         transform: translateY(-10px);
-        box-shadow: 0 12px 40px rgba(201, 169, 97, 0.2);
-        border-color: #c9a961;
+        box-shadow: 0 12px 40px rgba(200, 145, 106, 0.2);
+        border-color: #C8916A;
     }
     
     .role-icon {
         width: 80px;
         height: 80px;
-        background: #c9a961;
+        background: #C8916A;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 32px;
         margin: 0 auto 25px;
-        box-shadow: 0 4px 12px rgba(201, 169, 97, 0.3);
-        color: white;
+        box-shadow: 0 4px 12px rgba(200, 145, 106, 0.3);
+        color: #1C1008;
     }
     
     .role-card h2 {
-        color: white;
+        color: #1C1008;
         font-size: 28px;
         font-weight: 700;
         text-align: center;
@@ -111,7 +111,7 @@
     }
     
     .role-description {
-        color: rgba(255,255,255,0.6);
+        color: rgba(28,16,8,0.6);
         font-size: 16px;
         text-align: center;
         margin-bottom: 30px;
@@ -124,7 +124,7 @@
     }
     
     .features-list li {
-        color: rgba(255,255,255,0.8);
+        color: rgba(28,16,8,0.8);
         font-size: 15px;
         padding: 12px 0;
         padding-left: 35px;
@@ -139,8 +139,8 @@
         top: 12px;
         width: 24px;
         height: 24px;
-        background: #c9a961;
-        color: white;
+        background: #C8916A;
+        color: #1C1008;
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -152,8 +152,8 @@
     .select-role-btn {
         width: 100%;
         padding: 16px 30px;
-        background: #c9a961;
-        color: white;
+        background: #C8916A;
+        color: #1C1008;
         border: none;
         border-radius: 10px;
         font-size: 16px;
@@ -162,13 +162,13 @@
         transition: all 0.3s ease;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        box-shadow: 0 4px 12px rgba(201, 169, 97, 0.3);
+        box-shadow: 0 4px 12px rgba(200, 145, 106, 0.3);
     }
     
     .select-role-btn:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(201, 169, 97, 0.4);
-        background: #b8985a;
+        box-shadow: 0 6px 16px rgba(200, 145, 106, 0.4);
+        background: #AE7A55;
     }
     
     .footer-links {
@@ -177,22 +177,22 @@
     }
     
     .footer-links p {
-        color: rgba(255,255,255,0.6);
+        color: rgba(28,16,8,0.6);
         font-size: 16px;
     }
     
     .footer-links a {
-        color: #c9a961;
+        color: #C8916A;
         text-decoration: none;
         font-weight: 600;
-        border-bottom: 2px solid #c9a961;
+        border-bottom: 2px solid #C8916A;
         padding-bottom: 2px;
         transition: all 0.3s ease;
     }
     
     .footer-links a:hover {
-        color: #b8985a;
-        border-bottom-color: #b8985a;
+        color: #AE7A55;
+        border-bottom-color: #AE7A55;
     }
     
     @media (max-width: 768px) {

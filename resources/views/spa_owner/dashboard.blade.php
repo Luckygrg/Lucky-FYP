@@ -14,7 +14,7 @@
     .dashboard-container {
         display: flex;
         min-height: 100vh;
-        background: #1a1a1a;
+        background: #FAF7F2;
         font-family: Arial, sans-serif;
     }
     
@@ -32,7 +32,7 @@
     
     .header h1 {
         font-size: 32px;
-        color: white;
+        color: #1C1008;
         font-weight: 300;
         margin-bottom: 10px;
         font-family: 'Georgia', serif;
@@ -40,7 +40,7 @@
     }
     
     .header p {
-        color: rgba(255,255,255,0.6);
+        color: rgba(28,16,8,0.6);
         font-size: 15px;
     }
     
@@ -52,21 +52,21 @@
     }
     
     .stat-card {
-        background: #2a2a2a;
+        background: #FFFFFF;
         padding: 30px;
         border-radius: 8px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        border-left: 4px solid #c9a961;
+        border-left: 4px solid #C8916A;
         transition: all 0.3s;
     }
     
     .stat-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 4px 16px rgba(201, 169, 97, 0.15);
+        box-shadow: 0 4px 16px rgba(200, 145, 106, 0.15);
     }
     
     .stat-card h3 {
-        color: rgba(255,255,255,0.6);
+        color: rgba(28,16,8,0.6);
         font-size: 13px;
         font-weight: normal;
         margin-bottom: 12px;
@@ -77,12 +77,12 @@
     .stat-card .number {
         font-size: 36px;
         font-weight: 300;
-        color: #c9a961;
+        color: #C8916A;
         font-family: 'Georgia', serif;
     }
     
     .quick-actions {
-        background: #2a2a2a;
+        background: #FFFFFF;
         padding: 30px;
         border-radius: 8px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.3);
@@ -90,7 +90,7 @@
     }
     
     .quick-actions h2 {
-        color: white;
+        color: #1C1008;
         margin-bottom: 25px;
         font-size: 20px;
         font-weight: 300;
@@ -106,8 +106,8 @@
     
     .action-btn {
         padding: 15px 20px;
-        background: #c9a961;
-        color: white;
+        background: #C8916A;
+        color: #1C1008;
         text-decoration: none;
         border-radius: 4px;
         text-align: center;
@@ -118,20 +118,20 @@
     }
     
     .action-btn:hover {
-        background: #b8985a;
+        background: #AE7A55;
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(201, 169, 97, 0.3);
+        box-shadow: 0 4px 12px rgba(200, 145, 106, 0.3);
     }
     
     .customer-list {
-        background: #2a2a2a;
+        background: #FFFFFF;
         padding: 30px;
         border-radius: 8px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
     
     .customer-list h2 {
-        color: white;
+        color: #1C1008;
         margin-bottom: 25px;
         font-size: 20px;
         font-weight: 300;
@@ -149,14 +149,14 @@
     }
     
     thead {
-        background: #1a1a1a;
-        color: white;
+        background: #FAF7F2;
+        color: #1C1008;
     }
     
     th, td {
         padding: 15px;
         text-align: left;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
+        border-bottom: 1px solid rgba(28,16,8,0.1);
     }
     
     th {
@@ -167,21 +167,21 @@
     }
     
     td {
-        color: rgba(255,255,255,0.7);
+        color: rgba(28,16,8,0.7);
         font-size: 14px;
     }
     
     tbody tr:hover {
-        background: rgba(201,169,97,0.05);
+        background: rgba(200,145,106,0.05);
     }
     
     .success-message {
-        background: rgba(201, 169, 97, 0.1);
-        color: #8b7644;
+        background: rgba(200, 145, 106, 0.1);
+        color: #895D3E;
         padding: 15px 20px;
         border-radius: 4px;
         margin-bottom: 25px;
-        border-left: 4px solid #c9a961;
+        border-left: 4px solid #C8916A;
         font-size: 14px;
     }
     
@@ -272,18 +272,18 @@
                     <tbody>
                         @forelse($recentCustomers as $i => $row)
                         <tr>
-                            <td style="color:rgba(255,255,255,0.4);font-size:12px;">C{{ str_pad($i + 1, 3, '0', STR_PAD_LEFT) }}</td>
+                            <td style="color:rgba(28,16,8,0.4);font-size:12px;">C{{ str_pad($i + 1, 3, '0', STR_PAD_LEFT) }}</td>
                             <td>{{ $row->customer?->name ?? '—' }}</td>
                             <td>{{ $row->customer?->email ?? '—' }}</td>
                             <td>{{ \Carbon\Carbon::parse($row->last_booking)->format('d M Y') }}</td>
                             <td>{{ $row->total_bookings }}</td>
                             <td>
-                                <a href="{{ route('spa_owner.bookings') }}" style="color:#c9a961;text-decoration:none;">View Bookings</a>
+                                <a href="{{ route('spa_owner.bookings') }}" style="color:#C8916A;text-decoration:none;">View Bookings</a>
                             </td>
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="6" style="text-align:center;color:rgba(255,255,255,0.35);padding:30px;">No customer records yet</td>
+                            <td colspan="6" style="text-align:center;color:rgba(28,16,8,0.35);padding:30px;">No customer records yet</td>
                         </tr>
                         @endforelse
                     </tbody>

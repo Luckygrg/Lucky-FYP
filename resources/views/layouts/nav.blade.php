@@ -3,7 +3,7 @@
     <nav class="luxury-navbar">
         <div class="luxury-nav-container">
             <a class="luxury-logo" href="/">
-                <img src="{{ asset('assets/img/logo.png') }}" alt="SpaLush Logo" style="height: 86px; width: auto; object-fit: contain;">
+                <img src="{{ asset('assets/img/logo.png') }}" alt="SpaLush Logo" style="height: 54px; width: auto; object-fit: contain;">
             </a>
 
             <div class="luxury-nav-menu">
@@ -37,19 +37,19 @@
     <style>
         /* Luxury Navigation Styles */
         .luxury-navbar {
-            background: rgba(26, 26, 26, 0.95);
+            background: rgba(250, 247, 242, 0.95);
             backdrop-filter: blur(10px);
-            padding: 7px 0;
+            padding: 0.5rem 0 0.5rem 0;
             position: sticky;
             top: 0;
             z-index: 1000;
             box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-            border-bottom: 1px solid rgba(201, 169, 97, 0.35);
+            border-bottom: 1px solid rgba(200, 145, 106, 0.35);
         }
         
         .luxury-nav-container {
             width: 100%;
-            padding: 0 40px 0 20px;
+            padding: 0 20px 0 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -60,31 +60,31 @@
             align-items: center;
             gap: 10px;
             text-decoration: none;
-            color: white;
+            color: #1C1008;
             padding: 4px 8px;
         }
         
         .logo-icon {
             font-size: 32px;
-            color: #c9a961;
+            color: #C8916A;
         }
         
         .logo-text {
             font-size: 22px;
             font-weight: 300;
             letter-spacing: 3px;
-            color: white;
+            color: #1C1008;
             font-family: 'Georgia', serif;
         }
         
         .luxury-nav-menu {
             display: flex;
             align-items: center;
-            gap: 45px;
+            gap: 22px;
         }
         
         .luxury-nav-link {
-            color: rgba(255,255,255,0.85);
+            color: rgba(28,16,8,0.85);
             text-decoration: none;
             font-size: 14px;
             letter-spacing: 1.8px;
@@ -101,12 +101,12 @@
             left: 0;
             width: 0;
             height: 1px;
-            background: #c9a961;
+            background: #C8916A;
             transition: width 0.3s ease;
         }
         
         .luxury-nav-link:hover {
-            color: #c9a961;
+            color: #C8916A;
         }
         
         .luxury-nav-link:hover::after {
@@ -114,12 +114,12 @@
         }
         
         .luxury-nav-btn {
-            padding: 12px 32px;
+            padding: 7px 18px;
             background: transparent;
-            color: rgba(255,255,255,0.9);
-            border: 1px solid rgba(255,255,255,0.25);
+            color: rgba(28,16,8,0.9);
+            border: 1px solid rgba(28,16,8,0.25);
             text-decoration: none;
-            font-size: 13px;
+            font-size: 12px;
             letter-spacing: 2px;
             text-transform: uppercase;
             transition: all 0.3s ease;
@@ -127,24 +127,24 @@
         }
         
         .luxury-nav-btn:hover {
-            background: rgba(255,255,255,0.05);
-            border-color: rgba(255,255,255,0.5);
-            color: white;
+            background: rgba(28,16,8,0.05);
+            border-color: rgba(28,16,8,0.5);
+            color: #1C1008;
         }
         
         .luxury-nav-welcome {
-            color: rgba(255,255,255,0.7);
+            color: rgba(28,16,8,0.7);
             font-size: 13px;
             letter-spacing: 1px;
             font-weight: 300;
         }
         
         .luxury-logout-btn {
-            padding: 10px 28px;
+            padding: 6px 16px;
             background: transparent;
-            color: white;
-            border: 1px solid rgba(255,255,255,0.3);
-            font-size: 12px;
+            color: #1C1008;
+            border: 1px solid rgba(28,16,8,0.3);
+            font-size: 11px;
             letter-spacing: 2px;
             text-transform: uppercase;
             cursor: pointer;
@@ -153,9 +153,9 @@
         }
         
         .luxury-logout-btn:hover {
-            background: #c9a961;
-            border-color: #c9a961;
-            color: #1a1a1a;
+            background: #C8916A;
+            border-color: #C8916A;
+            color: #1C1008;
         }
         
         @media (max-width: 768px) {

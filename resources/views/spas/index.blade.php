@@ -9,19 +9,35 @@
 
 <style>
     .spas-hero {
-        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                    url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1920') center/cover;
+        background: linear-gradient(rgba(0,0,0,0.40), rgba(0,0,0,0.40)), 
+        url('{{ asset('assets/img/OurSpa.jpg') }}') center/cover;
         padding: 100px 20px;
         text-align: center;
-        color: white;
+        color: #FAF7F2;
     }
     
     .spas-hero h1 {
-        font-size: 48px;
+        font-size: 56px;
         font-weight: 300;
-        letter-spacing: 2px;
-        margin-bottom: 15px;
+        letter-spacing: 3px;
+        margin-bottom: 32px;
         font-family: 'Georgia', serif;
+        text-transform: uppercase;
+        line-height: 1.08;
+    }
+    .spas-hero h1 em {
+        font-style: normal;
+    }
+    .spas-hero p {
+        font-size: 20px;
+        font-weight: 300;
+        color: #fff;
+        margin-bottom: 36px;
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+        letter-spacing: 1px;
+
     }
     
     .spas-hero p {
@@ -42,7 +58,7 @@
     }
     
     .spa-card {
-        background: #2a2a2a;
+        background: #FFFFFF;
         border-radius: 12px;
         overflow: hidden;
         box-shadow: 0 4px 12px rgba(0,0,0,0.3);
@@ -58,7 +74,7 @@
     .spa-image {
         width: 100%;
         height: 250px;
-        background: linear-gradient(135deg, #c9a961 0%, #8b7644 100%);
+        background: linear-gradient(135deg, #C8916A 0%, #895D3E 100%);
         position: relative;
         overflow: hidden;
     }
@@ -73,8 +89,8 @@
         position: absolute;
         top: 15px;
         left: 15px;
-        background: #c9a961;
-        color: white;
+        background: #C8916A;
+        color: #1C1008;
         padding: 6px 15px;
         border-radius: 20px;
         font-size: 12px;
@@ -86,8 +102,8 @@
         position: absolute;
         top: 15px;
         right: 15px;
-        background: #1a1a1a;
-        color: #c9a961;
+        background: #FAF7F2;
+        color: #C8916A;
         padding: 6px 12px;
         border-radius: 20px;
         font-size: 13px;
@@ -100,7 +116,7 @@
         right: 15px;
         width: 40px;
         height: 40px;
-        background: rgba(26,26,26,0.8);
+        background: rgba(250,247,242,0.8);
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -110,8 +126,8 @@
     }
     
     .favorite-btn:hover {
-        background: #c9a961;
-        color: white;
+        background: #C8916A;
+        color: #1C1008;
     }
     
     .spa-content {
@@ -127,8 +143,8 @@
     
     .spa-tag {
         font-size: 12px;
-        color: rgba(255,255,255,0.6);
-        background: rgba(255,255,255,0.08);
+        color: rgba(28,16,8,0.6);
+        background: rgba(28,16,8,0.08);
         padding: 4px 12px;
         border-radius: 12px;
     }
@@ -136,7 +152,7 @@
     .spa-name {
         font-size: 22px;
         font-weight: 600;
-        color: white;
+        color: #1C1008;
         margin-bottom: 8px;
         font-family: 'Georgia', serif;
     }
@@ -145,13 +161,13 @@
         display: flex;
         align-items: center;
         gap: 6px;
-        color: rgba(255,255,255,0.6);
+        color: rgba(28,16,8,0.6);
         font-size: 14px;
         margin-bottom: 12px;
     }
     
     .spa-description {
-        color: rgba(255,255,255,0.6);
+        color: rgba(28,16,8,0.6);
         font-size: 14px;
         line-height: 1.6;
         margin-bottom: 15px;
@@ -166,7 +182,7 @@
         justify-content: space-between;
         align-items: center;
         padding-top: 15px;
-        border-top: 1px solid rgba(255,255,255,0.08);
+        border-top: 1px solid rgba(28,16,8,0.08);
     }
     
     .spa-rating {
@@ -176,25 +192,25 @@
     }
     
     .rating-star {
-        color: #c9a961;
+        color: #C8916A;
         font-size: 16px;
     }
     
     .rating-number {
         font-weight: 600;
-        color: white;
+        color: #1C1008;
         font-size: 15px;
     }
     
     .rating-count {
-        color: rgba(255,255,255,0.5);
+        color: rgba(28,16,8,0.5);
         font-size: 13px;
     }
     
     .book-btn {
         padding: 10px 24px;
-        background: #1a1a1a;
-        color: white;
+        background: #FAF7F2;
+        color: #1C1008;
         text-decoration: none;
         border-radius: 6px;
         font-size: 14px;
@@ -203,13 +219,13 @@
     }
     
     .book-btn:hover {
-        background: #c9a961;
+        background: #C8916A;
     }
     
     .no-spas {
         text-align: center;
         padding: 80px 20px;
-        color: rgba(255,255,255,0.6);
+        color: rgba(28,16,8,0.6);
     }
     
     .no-spas h2 {
@@ -228,16 +244,36 @@
             font-size: 32px;
         }
     }
+
+    .explore-btn {
+        display: inline-block;
+        padding: 16px 50px;
+        background: transparent;
+        color: #FAF7F2;
+        border: 2px solid #FAF7F2;
+        text-decoration: none;
+        font-size: 14px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        transition: all 0.4s ease;
+        font-weight: 500;
+        cursor: pointer;
+    }
+    .explore-btn:hover {
+        background: #FAF7F2;
+        color: #1C1008;
+    }
 </style>
 
 <!-- Hero Section -->
 <section class="spas-hero">
-    <h1>Discover Our Spas</h1>
-    <p>Explore premium wellness destinations across Nepal</p>
+    <h1><em>Feel it before you book it.<br>Warm oils. Soft hands. Deep silence.</em></h1>
+    <p>Nepal's best spas await - handpicked sanctuaries where ancient healing tradition meets modern luxury.</p>
+    <button class="explore-btn" onclick="document.getElementById('spas-list').scrollIntoView({behavior: 'smooth'});">EXPLORE SPAS</button>
 </section>
 
 <!-- Spas Grid -->
-<section class="spas-container">
+<section id="spas-list" class="spas-container">
     @if($spas->count() > 0)
         <div class="spas-grid">
             @foreach($spas as $spa)

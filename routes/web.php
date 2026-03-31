@@ -16,9 +16,15 @@ Route::get('/', function () {
     return view('home');
 });
 
+
 Route::get('/about', function () {
     return view('about');
 })->name('about');
+
+// Experiences Page
+Route::get('/experiences', function () {
+    return view('experiences');
+})->name('experiences');
 
 // Treatment Pages
 Route::get('/treatments/celestial-floatation', function () {

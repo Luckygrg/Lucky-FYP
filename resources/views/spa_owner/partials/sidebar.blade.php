@@ -2,7 +2,7 @@
     .sidebar {
         width: 260px;
         min-width: 260px;
-        background: #1a1a1a;
+        background: #FAF7F2;
         padding: 30px 0;
         display: flex;
         flex-direction: column;
@@ -13,7 +13,7 @@
     .sidebar .logo {
         font-size: 24px;
         font-weight: 300;
-        color: white;
+        color: #1C1008;
         margin: 0 30px 50px;
         letter-spacing: 3px;
         font-family: 'Georgia', serif;
@@ -21,12 +21,12 @@
         display: block;
     }
 
-    .sidebar .logo span { color: #c9a961; }
+    .sidebar .logo span { color: #C8916A; }
 
     .menu-item {
         padding: 15px 30px;
         margin-bottom: 3px;
-        color: rgba(255,255,255,0.7);
+        color: rgba(28,16,8,0.7);
         text-decoration: none;
         display: flex;
         align-items: center;
@@ -38,14 +38,14 @@
     }
 
     .menu-item:hover {
-        background: rgba(201, 169, 97, 0.1);
-        color: #c9a961;
+        background: rgba(200, 145, 106, 0.1);
+        color: #C8916A;
     }
 
     .menu-item.active {
-        background: rgba(201, 169, 97, 0.15);
-        color: #c9a961;
-        border-left-color: #c9a961;
+        background: rgba(200, 145, 106, 0.15);
+        color: #C8916A;
+        border-left-color: #C8916A;
     }
 
     .sidebar-logout-form {
@@ -57,9 +57,9 @@
         width: 100%;
         padding: 12px 20px;
         border-radius: 4px;
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 1px solid rgba(28,16,8,0.2);
         background: transparent;
-        color: rgba(255,255,255,0.7);
+        color: rgba(28,16,8,0.7);
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -70,9 +70,9 @@
     }
 
     .logout-btn:hover {
-        background: #c9a961;
-        border-color: #c9a961;
-        color: white;
+        background: #C8916A;
+        border-color: #C8916A;
+        color: #1C1008;
     }
 </style>
 

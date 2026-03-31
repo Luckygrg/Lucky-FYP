@@ -6,11 +6,11 @@
 
 <style>
     .about-hero {
-        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+        background: linear-gradient(rgba(0,0,0,0.40), rgba(0,0,0,0.40)), 
                     url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1920') center/cover;
         padding: 100px 20px;
         text-align: center;
-        color: white;
+        color: #FAF7F2;
     }
     
     .about-hero h1 {
@@ -22,12 +22,12 @@
     }
     
     .about-nav {
-        background: #1a1a1a;
+        background: #FAF7F2;
         box-shadow: 0 2px 8px rgba(0,0,0,0.4);
         position: sticky;
         top: 80px;
         z-index: 100;
-        border-bottom: 1px solid rgba(201,169,97,0.15);
+        border-bottom: 1px solid rgba(200,145,106,0.15);
     }
     
     .about-nav-container {
@@ -40,7 +40,7 @@
     }
     
     .about-nav-link {
-        color: rgba(255,255,255,0.6);
+        color: rgba(28,16,8,0.6);
         text-decoration: none;
         font-size: 14px;
         letter-spacing: 1px;
@@ -53,8 +53,8 @@
     
     .about-nav-link:hover,
     .about-nav-link.active {
-        color: #c9a961;
-        border-bottom-color: #c9a961;
+        color: #C8916A;
+        border-bottom-color: #C8916A;
     }
     
     .about-section {
@@ -67,7 +67,7 @@
     .section-title {
         font-size: 42px;
         font-weight: 300;
-        color: white;
+        color: #1C1008;
         margin-bottom: 40px;
         font-family: 'Georgia', serif;
         letter-spacing: 2px;
@@ -75,7 +75,7 @@
     }
     
     .section-content {
-        color: rgba(255,255,255,0.7);
+        color: rgba(28,16,8,0.7);
         font-size: 16px;
         line-height: 1.8;
         text-align: justify;
@@ -95,11 +95,11 @@
     .mission-box,
     .vision-box {
         padding: 40px;
-        background: #2a2a2a;
+        background: #FFFFFF;
         border-radius: 8px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         position: relative;
-        border: 1px solid rgba(201,169,97,0.15);
+        border: 1px solid rgba(200,145,106,0.15);
     }
     
     .mission-box::before {
@@ -109,7 +109,7 @@
         top: 0;
         bottom: 0;
         width: 4px;
-        background: #c9a961;
+        background: #C8916A;
     }
     
     .vision-box::before {
@@ -119,44 +119,44 @@
         top: 0;
         bottom: 0;
         width: 4px;
-        background: #1a1a1a;
+        background: #FAF7F2;
     }
     
     .box-title {
         font-size: 28px;
         font-weight: 400;
-        color: white;
+        color: #1C1008;
         margin-bottom: 20px;
         font-family: 'Georgia', serif;
         letter-spacing: 1px;
     }
     
     .box-content {
-        color: rgba(255,255,255,0.7);
+        color: rgba(28,16,8,0.7);
         font-size: 15px;
         line-height: 1.8;
     }
     
     .history-section {
-        background: #111111;
+        background: #FAF7F2;
     }
     
     .empty-state {
         text-align: center;
         padding: 60px 20px;
-        color: rgba(255,255,255,0.4);
+        color: rgba(28,16,8,0.4);
     }
     
     .empty-state i {
         font-size: 64px;
-        color: #c9a961;
+        color: #C8916A;
         margin-bottom: 20px;
     }
     
     .empty-state h3 {
         font-size: 24px;
         font-weight: 300;
-        color: rgba(255,255,255,0.6);
+        color: rgba(28,16,8,0.6);
         margin-bottom: 10px;
         font-family: 'Georgia', serif;
     }

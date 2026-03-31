@@ -4,16 +4,16 @@
 @section('content')
 <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    .dashboard-container { display: flex; min-height: 100vh; background: #1a1a1a; font-family: Arial, sans-serif; }
+    .dashboard-container { display: flex; min-height: 100vh; background: #FAF7F2; font-family: Arial, sans-serif; }
     .main-content { flex: 1; padding: 40px; overflow-y: auto; }
     .page-header { margin-bottom: 30px; }
-    .page-header h1 { font-size: 28px; color: white; font-weight: 300; font-family: 'Georgia', serif; letter-spacing: 1px; }
-    .page-header p { color: rgba(255,255,255,0.6); font-size: 15px; margin-top: 8px; }
-    .placeholder-card { background: #2a2a2a; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); padding: 80px 40px; text-align: center; border: 1px solid rgba(201,169,97,0.15); }
+    .page-header h1 { font-size: 28px; color: #1C1008; font-weight: 300; font-family: 'Georgia', serif; letter-spacing: 1px; }
+    .page-header p { color: rgba(28,16,8,0.6); font-size: 15px; margin-top: 8px; }
+    .placeholder-card { background: #FFFFFF; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); padding: 80px 40px; text-align: center; border: 1px solid rgba(200,145,106,0.15); }
     .placeholder-icon { font-size: 64px; margin-bottom: 20px; }
-    .placeholder-card h2 { font-size: 24px; color: white; font-weight: 300; font-family: 'Georgia', serif; margin-bottom: 12px; }
-    .placeholder-card p { color: rgba(255,255,255,0.6); font-size: 15px; }
-    .badge-coming { display: inline-block; background: rgba(201,169,97,0.12); color: #c9a961; border: 1px solid rgba(201,169,97,0.3); padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; margin-top: 20px; }
+    .placeholder-card h2 { font-size: 24px; color: #1C1008; font-weight: 300; font-family: 'Georgia', serif; margin-bottom: 12px; }
+    .placeholder-card p { color: rgba(28,16,8,0.6); font-size: 15px; }
+    .badge-coming { display: inline-block; background: rgba(200,145,106,0.12); color: #C8916A; border: 1px solid rgba(200,145,106,0.3); padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; margin-top: 20px; }
 </style>
 
 <div class="dashboard-container">

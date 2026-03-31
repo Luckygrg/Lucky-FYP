@@ -5,13 +5,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #1a1a1a; }
-    .dashboard-container { display: flex; min-height: 100vh; background: #1a1a1a; font-family: Arial, sans-serif; }
+    body { background: #FAF7F2; }
+    .dashboard-container { display: flex; min-height: 100vh; background: #FAF7F2; font-family: Arial, sans-serif; }
     .main-content { flex: 1; padding: 40px; overflow-y: auto; }
 
     .page-header { margin-bottom: 30px; }
-    .page-header h1 { font-size: 28px; color: white; font-weight: 300; font-family: 'Georgia', serif; letter-spacing: 1px; }
-    .page-header p { color: rgba(255,255,255,0.6); font-size: 15px; margin-top: 8px; }
+    .page-header h1 { font-size: 28px; color: #1C1008; font-weight: 300; font-family: 'Georgia', serif; letter-spacing: 1px; }
+    .page-header p { color: rgba(28,16,8,0.6); font-size: 15px; margin-top: 8px; }
 
     .alert-success {
         background: rgba(67,160,71,0.12); color: #6fcf72;
@@ -28,9 +28,9 @@
     }
 
     .stat-card {
-        background: #2a2a2a;
+        background: #FFFFFF;
         border-radius: 10px;
-        border: 1px solid rgba(255,255,255,0.07);
+        border: 1px solid rgba(28,16,8,0.07);
         padding: 20px;
         text-align: center;
     }
@@ -38,13 +38,13 @@
     .stat-card .stat-num {
         font-size: 30px;
         font-weight: 700;
-        color: #c9a961;
+        color: #C8916A;
         margin-bottom: 4px;
     }
 
     .stat-card .stat-label {
         font-size: 12px;
-        color: rgba(255,255,255,0.45);
+        color: rgba(28,16,8,0.45);
         text-transform: uppercase;
         letter-spacing: 0.8px;
     }
@@ -62,22 +62,22 @@
         border-radius: 20px;
         font-size: 13px;
         font-weight: 600;
-        border: 1px solid rgba(255,255,255,0.15);
-        color: rgba(255,255,255,0.6);
+        border: 1px solid rgba(28,16,8,0.15);
+        color: rgba(28,16,8,0.6);
         background: transparent;
         cursor: pointer;
         transition: all 0.2s;
         text-transform: capitalize;
     }
 
-    .filter-tab:hover { border-color: #c9a961; color: #c9a961; }
-    .filter-tab.active { background: #c9a961; border-color: #c9a961; color: #1a1a1a; }
+    .filter-tab:hover { border-color: #C8916A; color: #C8916A; }
+    .filter-tab.active { background: #C8916A; border-color: #C8916A; color: #1C1008; }
 
     /* Booking table */
     .bookings-table-wrap {
-        background: #2a2a2a;
+        background: #FFFFFF;
         border-radius: 12px;
-        border: 1px solid rgba(201,169,97,0.12);
+        border: 1px solid rgba(200,145,106,0.12);
         overflow: hidden;
     }
 
@@ -94,27 +94,27 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.8px;
-        color: rgba(255,255,255,0.45);
-        border-bottom: 1px solid rgba(255,255,255,0.07);
-        background: rgba(255,255,255,0.02);
+        color: rgba(28,16,8,0.45);
+        border-bottom: 1px solid rgba(28,16,8,0.07);
+        background: rgba(28,16,8,0.02);
     }
 
     tbody tr {
-        border-bottom: 1px solid rgba(255,255,255,0.05);
+        border-bottom: 1px solid rgba(28,16,8,0.05);
         transition: background 0.15s;
     }
 
     tbody tr:last-child { border-bottom: none; }
-    tbody tr:hover { background: rgba(255,255,255,0.03); }
+    tbody tr:hover { background: rgba(28,16,8,0.03); }
 
     tbody td {
         padding: 14px 18px;
-        color: rgba(255,255,255,0.8);
+        color: rgba(28,16,8,0.8);
         vertical-align: middle;
     }
 
-    .customer-name { font-weight: 600; color: white; }
-    .customer-phone { font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 2px; }
+    .customer-name { font-weight: 600; color: #1C1008; }
+    .customer-phone { font-size: 12px; color: rgba(28,16,8,0.45); margin-top: 2px; }
 
     .svc-tags {
         display: flex;
@@ -123,15 +123,15 @@
     }
 
     .svc-tag {
-        background: rgba(201,169,97,0.1);
-        color: #c9a961;
+        background: rgba(200,145,106,0.1);
+        color: #C8916A;
         font-size: 11px;
         padding: 3px 9px;
         border-radius: 10px;
         white-space: nowrap;
     }
 
-    .price-cell { color: #c9a961; font-weight: 700; }
+    .price-cell { color: #C8916A; font-weight: 700; }
 
     .status-badge {
         padding: 4px 12px;
@@ -143,7 +143,7 @@
         white-space: nowrap;
     }
 
-    .status-pending   { background: rgba(201,169,97,0.15); color: #c9a961; }
+    .status-pending   { background: rgba(200,145,106,0.15); color: #C8916A; }
     .status-confirmed { background: rgba(67,160,71,0.15);  color: #6fcf72; }
     .status-completed { background: rgba(100,181,246,0.15); color: #90caf9; }
     .status-cancelled { background: rgba(229,57,53,0.12);  color: #ef9a9a; }
@@ -172,7 +172,7 @@
     .empty-row td {
         text-align: center;
         padding: 60px 20px;
-        color: rgba(255,255,255,0.3);
+        color: rgba(28,16,8,0.3);
         font-size: 15px;
     }
 </style>
@@ -182,7 +182,7 @@
 
     <div class="main-content">
         <div class="page-header">
-            <h1><i class="fas fa-calendar-check" style="color:#c9a961;"></i> Bookings</h1>
+            <h1><i class="fas fa-calendar-check" style="color:#C8916A;"></i> Bookings</h1>
             <p>Manage customer appointments for {{ $spa->name }}</p>
         </div>
 
@@ -208,7 +208,7 @@
                 <div class="stat-label">Total</div>
             </div>
             <div class="stat-card">
-                <div class="stat-num" style="color:#c9a961;">{{ $counts['pending'] }}</div>
+                <div class="stat-num" style="color:#C8916A;">{{ $counts['pending'] }}</div>
                 <div class="stat-label">Pending</div>
             </div>
             <div class="stat-card">
@@ -253,11 +253,11 @@
                         <tr data-status="{{ $booking->status }}">
                             <td>
                                 <div class="customer-name">{{ $booking->customer->name }}</div>
-                                <div class="customer-phone"><i class="fas fa-phone" style="font-size:10px;color:#c9a961;"></i> {{ $booking->phone }}</div>
+                                <div class="customer-phone"><i class="fas fa-phone" style="font-size:10px;color:#C8916A;"></i> {{ $booking->phone }}</div>
                             </td>
                             <td>
                                 <div>{{ $booking->booking_date->format('d M Y') }}</div>
-                                <div style="color:rgba(255,255,255,0.45);font-size:12px;">
+                                <div style="color:rgba(28,16,8,0.45);font-size:12px;">
                                     {{ \Carbon\Carbon::parse($booking->booking_time)->format('h:i A') }}
                                 </div>
                             </td>
@@ -267,7 +267,7 @@
                                         <span class="svc-tag">{{ $bs->service_name }}</span>
                                     @endforeach
                                 </div>
-                                <div style="font-size:11px;color:rgba(255,255,255,0.35);margin-top:4px;">
+                                <div style="font-size:11px;color:rgba(28,16,8,0.35);margin-top:4px;">
                                     {{ $booking->total_duration_minutes }} min total
                                 </div>
                             </td>
@@ -276,7 +276,7 @@
                                 @if($booking->payment_option === 'pay_now')
                                     <div style="font-size:11px;color:#6fcf72;margin-top:3px;"><i class="fas fa-credit-card"></i> Pay Now</div>
                                 @else
-                                    <div style="font-size:11px;color:#c9a961;margin-top:3px;"><i class="fas fa-hand-holding-usd"></i> Pay at Spa</div>
+                                    <div style="font-size:11px;color:#C8916A;margin-top:3px;"><i class="fas fa-hand-holding-usd"></i> Pay at Spa</div>
                                 @endif
                             </td>
                             <td>
@@ -313,14 +313,14 @@
                                         </button>
                                     </form>
                                 @else
-                                    <span style="color:rgba(255,255,255,0.25);font-size:12px;">—</span>
+                                    <span style="color:rgba(28,16,8,0.25);font-size:12px;">—</span>
                                 @endif
                             </td>
                         </tr>
                     @empty
                         <tr class="empty-row">
                             <td colspan="6">
-                                <i class="fas fa-calendar-times" style="font-size:32px;margin-bottom:10px;display:block;color:rgba(201,169,97,0.3);"></i>
+                                <i class="fas fa-calendar-times" style="font-size:32px;margin-bottom:10px;display:block;color:rgba(200,145,106,0.3);"></i>
                                 No bookings yet
                             </td>
                         </tr>

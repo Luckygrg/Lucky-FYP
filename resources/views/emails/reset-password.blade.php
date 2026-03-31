@@ -8,7 +8,7 @@
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            color: #2d2d2d;
+            color: #F5EEE4;
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
@@ -22,12 +22,12 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         .email-header {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            background: linear-gradient(135deg, #FAF7F2 0%, #F5EEE4 100%);
             padding: 40px 30px;
             text-align: center;
         }
         .email-header h1 {
-            color: #c9a961;
+            color: #C8916A;
             margin: 0;
             font-size: 28px;
             font-weight: 300;
@@ -38,7 +38,7 @@
             padding: 40px 30px;
         }
         .email-body h2 {
-            color: #1a1a1a;
+            color: #1C1008;
             font-size: 24px;
             margin-bottom: 20px;
         }
@@ -50,8 +50,8 @@
         .reset-button {
             display: inline-block;
             padding: 15px 40px;
-            background: #c9a961;
-            color: white;
+            background: #C8916A;
+            color: #1C1008;
             text-decoration: none;
             border-radius: 6px;
             font-weight: 600;
@@ -61,7 +61,7 @@
         }
         .warning-box {
             background: #fff3cd;
-            border-left: 4px solid #c9a961;
+            border-left: 4px solid #C8916A;
             padding: 15px;
             margin: 20px 0;
             border-radius: 4px;
@@ -109,7 +109,7 @@
             
             <p style="color: #999; font-size: 14px; margin-top: 30px;">
                 If the button doesn't work, copy and paste this link into your browser:<br>
-                <span style="color: #c9a961; word-break: break-all;">{{ $resetLink }}</span>
+                <span style="color: #C8916A; word-break: break-all;">{{ $resetLink }}</span>
             </p>
         </div>
         

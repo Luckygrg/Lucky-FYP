@@ -1,4 +1,4 @@
-@extends('layouts.main')
+﻿@extends('layouts.main')
 
 @section('title', 'Customer Reviews - SpaLush')
 
@@ -12,7 +12,7 @@
     .dashboard-container {
         display: flex;
         min-height: 100vh;
-        background: #1a1a1a;
+        background: #FAF7F2;
         font-family: Arial, sans-serif;
     }
 
@@ -28,7 +28,7 @@
 
     .page-header h1 {
         font-size: 30px;
-        color: white;
+        color: #1C1008;
         font-weight: 300;
         font-family: 'Georgia', serif;
         letter-spacing: 1px;
@@ -36,7 +36,7 @@
     }
 
     .page-header p {
-        color: rgba(255,255,255,0.45);
+        color: rgba(28,16,8,0.45);
         font-size: 14px;
     }
 
@@ -46,8 +46,8 @@
         grid-template-columns: auto 1fr;
         gap: 36px;
         align-items: center;
-        background: #2a2a2a;
-        border: 1px solid rgba(201,169,97,0.18);
+        background: #FFFFFF;
+        border: 1px solid rgba(200,145,106,0.18);
         border-radius: 12px;
         padding: 30px 36px;
         margin-bottom: 30px;
@@ -60,13 +60,13 @@
     .summary-score .big-num {
         font-size: 56px;
         font-weight: 700;
-        color: #c9a961;
+        color: #C8916A;
         line-height: 1;
         font-family: 'Georgia', serif;
     }
 
     .summary-score .stars-row {
-        color: #c9a961;
+        color: #C8916A;
         font-size: 18px;
         letter-spacing: 3px;
         margin: 6px 0 4px;
@@ -74,7 +74,7 @@
 
     .summary-score .total-label {
         font-size: 12px;
-        color: rgba(255,255,255,0.4);
+        color: rgba(28,16,8,0.4);
         text-transform: uppercase;
         letter-spacing: 1px;
     }
@@ -87,7 +87,7 @@
         gap: 10px;
         margin-bottom: 8px;
         font-size: 13px;
-        color: rgba(255,255,255,0.55);
+        color: rgba(28,16,8,0.55);
     }
 
     .bar-row .star-label {
@@ -96,21 +96,21 @@
         display: flex;
         align-items: center;
         gap: 4px;
-        color: #c9a961;
+        color: #C8916A;
         font-size: 12px;
     }
 
     .bar-track {
         flex: 1;
         height: 7px;
-        background: rgba(255,255,255,0.08);
+        background: rgba(28,16,8,0.08);
         border-radius: 4px;
         overflow: hidden;
     }
 
     .bar-fill {
         height: 100%;
-        background: #c9a961;
+        background: #C8916A;
         border-radius: 4px;
         transition: width 0.6s ease;
     }
@@ -120,7 +120,7 @@
         text-align: right;
         flex-shrink: 0;
         font-size: 12px;
-        color: rgba(255,255,255,0.4);
+        color: rgba(28,16,8,0.4);
     }
 
     /* ── Filter tabs ── */
@@ -137,15 +137,15 @@
         font-size: 13px;
         font-weight: 500;
         text-decoration: none;
-        border: 1px solid rgba(255,255,255,0.12);
-        color: rgba(255,255,255,0.55);
-        background: #222;
+        border: 1px solid rgba(28,16,8,0.12);
+        color: rgba(28,16,8,0.55);
+        background: #F0E6D8;
         transition: all 0.2s;
         cursor: pointer;
     }
 
-    .filter-tab:hover { border-color: #c9a961; color: #c9a961; }
-    .filter-tab.active { background: #c9a961; border-color: #c9a961; color: #1a1a1a; font-weight: 700; }
+    .filter-tab:hover { border-color: #C8916A; color: #C8916A; }
+    .filter-tab.active { background: #C8916A; border-color: #C8916A; color: #1C1008; font-weight: 700; }
 
     /* ── Review cards ── */
     .reviews-list {
@@ -155,14 +155,14 @@
     }
 
     .review-card {
-        background: #2a2a2a;
-        border: 1px solid rgba(255,255,255,0.07);
+        background: #FFFFFF;
+        border: 1px solid rgba(28,16,8,0.07);
         border-radius: 10px;
         padding: 22px 26px;
         transition: border-color 0.2s;
     }
 
-    .review-card:hover { border-color: rgba(201,169,97,0.25); }
+    .review-card:hover { border-color: rgba(200,145,106,0.25); }
 
     .review-card-top {
         display: flex;
@@ -182,11 +182,11 @@
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        background: linear-gradient(135deg, #c9a961, #8b7644);
+        background: linear-gradient(135deg, #C8916A, #895D3E);
         display: flex;
         align-items: center;
         justify-content: center;
-        color: white;
+        color: #1C1008;
         font-size: 16px;
         font-weight: 700;
         flex-shrink: 0;
@@ -195,12 +195,12 @@
     .reviewer-name {
         font-size: 14px;
         font-weight: 600;
-        color: white;
+        color: #1C1008;
     }
 
     .reviewer-meta {
         font-size: 12px;
-        color: rgba(255,255,255,0.35);
+        color: rgba(28,16,8,0.35);
         margin-top: 2px;
     }
 
@@ -213,23 +213,23 @@
     }
 
     .review-stars {
-        color: #c9a961;
+        color: #C8916A;
         font-size: 14px;
         letter-spacing: 1px;
     }
 
     .review-date {
         font-size: 12px;
-        color: rgba(255,255,255,0.3);
+        color: rgba(28,16,8,0.3);
     }
 
     .visit-badge {
         display: inline-flex;
         align-items: center;
         gap: 5px;
-        background: rgba(201,169,97,0.1);
-        border: 1px solid rgba(201,169,97,0.2);
-        color: rgba(201,169,97,0.8);
+        background: rgba(200,145,106,0.1);
+        border: 1px solid rgba(200,145,106,0.2);
+        color: rgba(200,145,106,0.8);
         font-size: 11px;
         padding: 3px 10px;
         border-radius: 12px;
@@ -238,14 +238,14 @@
 
     .review-comment {
         font-size: 14px;
-        color: rgba(255,255,255,0.6);
+        color: rgba(28,16,8,0.6);
         line-height: 1.75;
     }
 
     .no-reviews {
         text-align: center;
         padding: 60px 20px;
-        color: rgba(255,255,255,0.3);
+        color: rgba(28,16,8,0.3);
         font-size: 15px;
     }
 
@@ -253,7 +253,7 @@
         font-size: 40px;
         display: block;
         margin-bottom: 14px;
-        color: rgba(255,255,255,0.15);
+        color: rgba(28,16,8,0.15);
     }
 
     @media (max-width: 768px) {
@@ -273,7 +273,7 @@
         </div>
 
         @if(!$spa)
-            <div style="text-align:center;padding:60px 20px;color:rgba(255,255,255,0.4);">
+            <div style="text-align:center;padding:60px 20px;color:rgba(28,16,8,0.4);">
                 <i class="fas fa-spa" style="font-size:40px;display:block;margin-bottom:14px;"></i>
                 You haven't set up a spa yet.
             </div>
@@ -314,7 +314,7 @@
             @for($s = 5; $s >= 1; $s--)
                 <a href="{{ request()->url() }}?star={{ $s }}"
                    class="filter-tab {{ $filterStar == $s ? 'active' : '' }}">
-                    {{ $s }} <i class="fas fa-star" style="font-size:11px;color:{{ $filterStar == $s ? '#1a1a1a' : '#c9a961' }};"></i>
+                    {{ $s }} <i class="fas fa-star" style="font-size:11px;color:{{ $filterStar == $s ? '#FAF7F2' : '#C8916A' }};"></i>
                     ({{ $starCounts[$s] }})
                 </a>
             @endfor
@@ -362,7 +362,7 @@
                         @if($review->comment)
                             <p class="review-comment">{{ $review->comment }}</p>
                         @else
-                            <p class="review-comment" style="color:rgba(255,255,255,0.25);font-style:italic;">No written comment.</p>
+                            <p class="review-comment" style="color:rgba(28,16,8,0.25);font-style:italic;">No written comment.</p>
                         @endif
                     </div>
                 @endforeach

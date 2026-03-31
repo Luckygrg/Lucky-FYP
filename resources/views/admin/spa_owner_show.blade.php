@@ -10,56 +10,56 @@
     .dashboard-container {
         display: flex;
         min-height: 100vh;
-        background: #1a1a1a;
+        background: #FAF7F2;
         font-family: Arial, sans-serif;
     }
 
     /* Sidebar */
     .sidebar {
         width: 260px;
-        background: #1a1a1a;
+        background: #FAF7F2;
         padding: 30px 0;
         display: flex;
         flex-direction: column;
         box-shadow: 2px 0 10px rgba(0,0,0,0.1);
         flex-shrink: 0;
     }
-    .logo { font-size: 24px; font-weight: 300; color: white; margin: 0 30px 50px; letter-spacing: 3px; font-family: 'Georgia', serif; }
-    .logo span { color: #c9a961; }
+    .logo { font-size: 24px; font-weight: 300; color: #1C1008; margin: 0 30px 50px; letter-spacing: 3px; font-family: 'Georgia', serif; }
+    .logo span { color: #C8916A; }
     .menu-item {
-        padding: 15px 30px; margin-bottom: 5px; color: rgba(255,255,255,0.7);
+        padding: 15px 30px; margin-bottom: 5px; color: rgba(28,16,8,0.7);
         text-decoration: none; display: flex; align-items: center; gap: 12px;
         transition: all 0.3s; font-size: 14px; letter-spacing: 0.5px;
     }
-    .menu-item:hover { background: rgba(201,169,97,0.1); color: #c9a961; }
-    .menu-item.active { background: rgba(201,169,97,0.15); color: #c9a961; border-left: 3px solid #c9a961; }
+    .menu-item:hover { background: rgba(200,145,106,0.1); color: #C8916A; }
+    .menu-item.active { background: rgba(200,145,106,0.15); color: #C8916A; border-left: 3px solid #C8916A; }
     .logout-btn {
         margin: auto 30px 0; padding: 12px 20px; border-radius: 4px;
-        border: 1px solid rgba(255,255,255,0.2); background: transparent;
-        color: rgba(255,255,255,0.7); cursor: pointer; display: flex;
+        border: 1px solid rgba(28,16,8,0.2); background: transparent;
+        color: rgba(28,16,8,0.7); cursor: pointer; display: flex;
         align-items: center; gap: 10px; transition: all 0.3s; font-size: 14px; width: calc(100% - 60px);
     }
-    .logout-btn:hover { background: #c9a961; border-color: #c9a961; color: white; }
+    .logout-btn:hover { background: #C8916A; border-color: #C8916A; color: #1C1008; }
 
     /* Main */
     .main-content { flex: 1; padding: 40px; overflow-y: auto; }
 
     .back-link {
         display: inline-flex; align-items: center; gap: 6px;
-        color: #c9a961; text-decoration: none; font-size: 14px;
+        color: #C8916A; text-decoration: none; font-size: 14px;
         margin-bottom: 24px; transition: color 0.2s;
     }
-    .back-link:hover { color: #b8985a; }
+    .back-link:hover { color: #AE7A55; }
 
     .page-header { margin-bottom: 30px; }
     .page-header h1 {
-        font-size: 28px; color: white; font-weight: 300;
+        font-size: 28px; color: #1C1008; font-weight: 300;
         font-family: 'Georgia', serif; letter-spacing: 1px; margin-bottom: 6px;
     }
-    .page-header p { color: rgba(255,255,255,0.6); font-size: 14px; }
+    .page-header p { color: rgba(28,16,8,0.6); font-size: 14px; }
 
     .alert { padding: 14px 18px; border-radius: 4px; margin-bottom: 20px; font-size: 14px; border-left: 4px solid; }
-    .alert-success { background: rgba(201,169,97,0.1); color: #8b7644; border-color: #c9a961; }
+    .alert-success { background: rgba(200,145,106,0.1); color: #895D3E; border-color: #C8916A; }
     .alert-error   { background: rgba(220,53,69,0.08); color: #842029; border-color: #dc3545; }
 
     /* Cards grid */
@@ -67,21 +67,21 @@
     @media (max-width: 900px) { .detail-grid { grid-template-columns: 1fr; } }
 
     .card {
-        background: #2a2a2a; border-radius: 8px;
+        background: #FFFFFF; border-radius: 8px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.3); overflow: hidden;
-        border: 1px solid rgba(201,169,97,0.15);
+        border: 1px solid rgba(200,145,106,0.15);
     }
     .card-header {
-        padding: 18px 24px; border-bottom: 1px solid rgba(255,255,255,0.08);
+        padding: 18px 24px; border-bottom: 1px solid rgba(28,16,8,0.08);
         display: flex; justify-content: space-between; align-items: center;
     }
-    .card-header h2 { font-size: 16px; font-weight: 500; color: white; }
+    .card-header h2 { font-size: 16px; font-weight: 500; color: #1C1008; }
     .card-body { padding: 24px; }
 
-    .detail-row { display: flex; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 14px; }
+    .detail-row { display: flex; padding: 10px 0; border-bottom: 1px solid rgba(28,16,8,0.06); font-size: 14px; }
     .detail-row:last-child { border-bottom: none; }
-    .detail-label { width: 140px; color: rgba(255,255,255,0.5); flex-shrink: 0; }
-    .detail-value { color: white; font-weight: 500; flex: 1; }
+    .detail-label { width: 140px; color: rgba(28,16,8,0.5); flex-shrink: 0; }
+    .detail-value { color: #1C1008; font-weight: 500; flex: 1; }
 
     /* Owner profile card */
     .owner-profile {
@@ -89,29 +89,29 @@
     }
     .avatar-lg {
         width: 60px; height: 60px;
-        background: linear-gradient(135deg, #c9a961, #b8985a);
+        background: linear-gradient(135deg, #C8916A, #AE7A55);
         border-radius: 50%; display: flex; align-items: center; justify-content: center;
-        color: white; font-size: 24px; font-weight: 600; flex-shrink: 0;
+        color: #1C1008; font-size: 24px; font-weight: 600; flex-shrink: 0;
     }
-    .owner-meta .owner-name { font-size: 20px; font-weight: 500; color: white; }
-    .owner-meta .owner-email { color: rgba(255,255,255,0.5); font-size: 14px; margin-top: 4px; }
+    .owner-meta .owner-name { font-size: 20px; font-weight: 500; color: #1C1008; }
+    .owner-meta .owner-email { color: rgba(28,16,8,0.5); font-size: 14px; margin-top: 4px; }
 
     /* Badge */
     .badge {
         display: inline-block; padding: 4px 12px; border-radius: 12px;
         font-size: 12px; font-weight: 600; text-transform: capitalize;
     }
-    .badge-pending     { background: rgba(201,169,97,0.15); color: #c9a961; }
+    .badge-pending     { background: rgba(200,145,106,0.15); color: #C8916A; }
     .badge-approved    { background: rgba(52,168,83,0.15); color: #5cb85c; }
     .badge-disapproved { background: rgba(220,53,69,0.15); color: #e07070; }
-    .badge-no-spa      { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); }
+    .badge-no-spa      { background: rgba(28,16,8,0.1); color: rgba(28,16,8,0.5); }
 
     /* Spa status big section */
     .spa-status-section {
         display: flex; align-items: center; justify-content: space-between;
         padding: 16px; border-radius: 6px; margin-bottom: 20px;
     }
-    .spa-status-section.pending     { background: rgba(201,169,97,0.1); border: 1px solid rgba(201,169,97,0.3); }
+    .spa-status-section.pending     { background: rgba(200,145,106,0.1); border: 1px solid rgba(200,145,106,0.3); }
     .spa-status-section.approved    { background: rgba(52,168,83,0.1); border: 1px solid rgba(52,168,83,0.25); }
     .spa-status-section.disapproved { background: rgba(220,53,69,0.1); border: 1px solid rgba(220,53,69,0.25); }
     .status-text { font-size: 14px; font-weight: 500; }
@@ -122,14 +122,14 @@
         text-decoration: none; cursor: pointer; border: none; transition: all 0.2s;
         display: inline-flex; align-items: center; gap: 5px;
     }
-    .btn-approve    { background: #198754; color: white; }
+    .btn-approve    { background: #198754; color: #1C1008; }
     .btn-approve:hover { background: #157347; }
-    .btn-disapprove { background: #dc3545; color: white; }
+    .btn-disapprove { background: #dc3545; color: #1C1008; }
     .btn-disapprove:hover { background: #bb2d3b; }
 
     .tags-list { display: flex; flex-wrap: wrap; gap: 6px; }
     .tag-chip {
-        background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7);
+        background: rgba(28,16,8,0.1); color: rgba(28,16,8,0.7);
         padding: 3px 10px; border-radius: 12px; font-size: 12px;
     }
 

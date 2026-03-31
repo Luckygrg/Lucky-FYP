@@ -6,11 +6,11 @@
 
 <style>
     .treatment-detail-hero {
-        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                    url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=1920') center/cover;
+        background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), 
+                    url('{{ asset('assets/img/celestial_floatation.jpg') }}') center/cover;
         padding: 120px 20px 80px;
         text-align: center;
-        color: white;
+        color: #FAF7F2;
     }
     
     .treatment-detail-hero h1 {
@@ -42,7 +42,7 @@
     .treatment-section h2 {
         font-size: 36px;
         font-weight: 300;
-        color: white;
+        color: #1C1008;
         margin-bottom: 25px;
         font-family: 'Georgia', serif;
         letter-spacing: 1px;
@@ -50,7 +50,7 @@
     
     .treatment-section p {
         font-size: 16px;
-        color: rgba(255,255,255,0.7);
+        color: rgba(28,16,8,0.7);
         line-height: 1.9;
         margin-bottom: 20px;
     }
@@ -63,29 +63,29 @@
     }
     
     .benefit-card {
-        background: #2a2a2a;
+        background: #FFFFFF;
         padding: 30px;
         border-radius: 8px;
-        border-left: 4px solid #c9a961;
+        border-left: 4px solid #C8916A;
     }
     
     .benefit-card h3 {
         font-size: 20px;
-        color: white;
+        color: #1C1008;
         margin-bottom: 15px;
         font-weight: 500;
     }
     
     .benefit-card p {
         font-size: 15px;
-        color: rgba(255,255,255,0.6);
+        color: rgba(28,16,8,0.6);
         line-height: 1.7;
         margin: 0;
     }
     
     .treatment-details-box {
-        background: #1a1a1a;
-        color: white;
+        background: #FAF7F2;
+        color: #1C1008;
         padding: 50px;
         border-radius: 8px;
         margin-top: 60px;
@@ -99,7 +99,7 @@
     
     .detail-item h3 {
         font-size: 14px;
-        color: #c9a961;
+        color: #C8916A;
         text-transform: uppercase;
         letter-spacing: 2px;
         margin-bottom: 10px;
@@ -108,20 +108,20 @@
     
     .detail-item p {
         font-size: 18px;
-        color: white;
+        color: #1C1008;
         margin: 0;
     }
     
     .cta-section {
         text-align: center;
         padding: 80px 20px;
-        background: #111111;
+        background: #FAF7F2;
     }
     
     .cta-section h2 {
         font-size: 38px;
         font-weight: 300;
-        color: white;
+        color: #1C1008;
         margin-bottom: 30px;
         font-family: 'Georgia', serif;
     }
@@ -129,8 +129,8 @@
     .cta-btn {
         display: inline-block;
         padding: 16px 50px;
-        background: #c9a961;
-        color: white;
+        background: #C8916A;
+        color: #1C1008;
         text-decoration: none;
         font-size: 14px;
         letter-spacing: 2px;
@@ -141,7 +141,7 @@
     }
     
     .cta-btn:hover {
-        background: #1a1a1a;
+        background: #FAF7F2;
     }
 </style>
 

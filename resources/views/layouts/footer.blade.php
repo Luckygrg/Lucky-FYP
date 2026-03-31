@@ -1,81 +1,151 @@
-﻿<footer class="luxury-footer">
-        <div class="luxury-footer-container">
-            <div class="luxury-footer-grid">
-                
-                <!-- About Section -->
-                <div class="luxury-footer-section">
-                    <h3>About SpaLush</h3>
-                    <p>Your premier destination for wellness and relaxation in Nepal. We connect you with the finest spa and wellness experiences, curated for those who seek tranquility and rejuvenation.</p>
-                </div>
-
-                <!-- Quick Links -->
-                <div class="luxury-footer-section">
-                    <h3>Explore</h3>
-                    <ul>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="#services">Our Spas</a></li>
-                        <li><a href="#experiences">Experiences</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-
-                <!-- Contact Info -->
-                <div class="luxury-footer-section">
-                    <h3>Contact</h3>
-                    <ul>
-                        <li>Pokhara, Nepal</li>
-                        <li>+977-9800000000</li>
-                        <li>info@spalush.com</li>
-                    </ul>
-                </div>
-
-                <!-- Newsletter -->
-                <div class="luxury-footer-section">
-                    <h3>Stay Connected</h3>
-                    <p style="margin-bottom: 15px; font-size: 13px;">Be the first to discover our latest offerings and exclusive wellness experiences.</p>
-                    <div class="luxury-social-links">
-                        <a href="#" aria-label="Facebook">FB</a>
-                        <a href="#" aria-label="Instagram">IG</a>
-                        <a href="#" aria-label="Twitter">TW</a>
-                        <a href="#" aria-label="LinkedIn">IN</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Copyright -->
-            <div class="luxury-copyright">
-                <p>&copy; {{ date('Y') }} SpaLush. All rights reserved.</p>
-            </div>
+﻿
+<footer class="luxury-footer minimal-footer">
+    <div class="luxury-footer-container minimal-footer-container">
+        <div class="footer-brand">
+            <div class="footer-logo" style="font-family:'Georgia',serif;font-size:2.1rem;color:#C8916A;font-weight:500;">SpaLush</div>
+            <div class="footer-tagline" style="color:#9c8b7a;letter-spacing:1.5px;font-size:1rem;margin-top:2px;">RESTORE. RENEW. RETURN.</div>
         </div>
-    </footer>
+        <nav class="footer-nav">
+            <a href="/" class="footer-link">Home</a>
+            <a href="{{ route('spas.index') }}" class="footer-link">Our Spas</a>
+            <a href="{{ route('about') }}" class="footer-link">About</a>
+        </nav>
+        <div class="footer-social">
+            <a href="#" aria-label="Facebook" class="footer-social-btn">FB</a>
+            <a href="#" aria-label="Instagram" class="footer-social-btn">IG</a>
+            <a href="#" aria-label="Twitter" class="footer-social-btn">TW</a>
+            <a href="#" aria-label="LinkedIn" class="footer-social-btn">IN</a>
+        </div>
+        <div class="footer-divider"></div>
+        <div class="footer-copyright">
+            &copy; {{ date('Y') }} SpaLush · <a href="#" class="footer-legal">Privacy</a> · <a href="#" class="footer-legal">Terms</a>
+        </div>
+    </div>
+</footer>
+
+<style>
+.minimal-footer {
+    background: linear-gradient(rgba(250,247,242,0.92), rgba(250,247,242,0.92)), url("{{ asset('assets/img/spa2.jpg') }}") center/cover no-repeat;
+    color: #9c8b7a;
+    padding: 32px 0 0 0;
+    border-top: 1px solid #e5d8c8;
+    font-family: 'Georgia', serif;
+}
+.minimal-footer-container {
+    width: 100vw;
+    max-width: 100vw;
+    margin: 0;
+    text-align: center;
+    padding: 0;
+}
+.footer-brand {
+    margin-bottom: 8px;
+}
+.footer-tagline {
+    margin-bottom: 18px;
+    font-size: 1rem;
+    color: #9c8b7a;
+    letter-spacing: 2px;
+}
+.footer-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 32px;
+    margin-bottom: 18px;
+}
+.footer-link {
+    color: #9c8b7a;
+    text-decoration: none;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    font-weight: 400;
+    transition: color 0.2s;
+}
+.footer-link:hover {
+    color: #C8916A;
+}
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin-bottom: 18px;
+}
+.footer-social-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid #C8916A;
+    color: #C8916A;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 500;
+    background: transparent;
+    transition: background 0.2s, color 0.2s;
+}
+.footer-social-btn:hover {
+    background: #C8916A;
+    color: #fff;
+}
+.footer-divider {
+    border-top: 1px solid #e5d8c8;
+    margin: 18px 0 10px 0;
+}
+.footer-copyright {
+    color: #b9a892;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+.footer-legal {
+    color: #b9a892;
+    text-decoration: none;
+    margin: 0 4px;
+    font-size: 13px;
+}
+.footer-legal:hover {
+    color: #C8916A;
+}
+@media (max-width: 600px) {
+    .footer-nav {
+        gap: 12px;
+        font-size: 0.95rem;
+    }
+    .footer-social {
+        gap: 10px;
+    }
+}
+</style>
 
     <style>
         /* Luxury Footer Styles */
         .luxury-footer {
-            background: #1a1a1a;
-            color: rgba(255,255,255,0.7);
-            padding: 60px 0 24px;
+            background: #FAF7F2;
+            color: rgba(28,16,8,0.7);
+            padding: 32px 0 10px;
             margin-top: 0;
-            border-top: 1px solid rgba(201, 169, 97, 0.35);
+            border-top: 1px solid rgba(200, 145, 106, 0.35);
         }
         
         .luxury-footer-container {
             width: 100%;
-            padding: 0 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 16px;
         }
         
         .luxury-footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            margin-bottom: 12px;
         }
         
         .luxury-footer-section h3 {
-            color: #c9a961;
-            margin-bottom: 20px;
-            font-size: 16px;
+            color: #C8916A;
+            margin-bottom: 10px;
+            font-size: 14px;
             font-weight: 400;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -83,9 +153,9 @@
         }
         
         .luxury-footer-section p {
-            color: rgba(255,255,255,0.6);
-            line-height: 1.8;
-            font-size: 14px;
+            color: rgba(28,16,8,0.6);
+            line-height: 1.6;
+            font-size: 13px;
             font-weight: 300;
         }
         
@@ -95,74 +165,78 @@
         }
         
         .luxury-footer-section li {
-            margin-bottom: 12px;
-            color: rgba(255,255,255,0.6);
-            font-size: 14px;
+            margin-bottom: 7px;
+            color: rgba(28,16,8,0.6);
+            font-size: 13px;
             font-weight: 300;
         }
         
         .luxury-footer-section a {
-            color: rgba(255,255,255,0.6);
+            color: rgba(28,16,8,0.6);
             text-decoration: none;
             transition: color 0.3s ease;
             font-size: 14px;
         }
         
         .luxury-footer-section a:hover {
-            color: #c9a961;
+            color: #C8916A;
         }
         
         .luxury-social-links {
             display: flex;
-            gap: 15px;
+            gap: 8px;
         }
         
         .luxury-social-links a {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            width: 32px;
+            height: 32px;
             background: transparent;
-            border: 1px solid rgba(255,255,255,0.2);
-            color: rgba(255,255,255,0.6);
+            border: 1px solid rgba(28,16,8,0.2);
+            color: rgba(28,16,8,0.6);
             text-decoration: none;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 500;
             transition: all 0.3s ease;
         }
         
         .luxury-social-links a:hover {
-            background: #c9a961;
-            border-color: #c9a961;
-            color: #1a1a1a;
+            background: #C8916A;
+            border-color: #C8916A;
+            color: #1C1008;
         }
         
         .luxury-copyright {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 30px;
+            border-top: 1px solid rgba(28,16,8,0.1);
+            padding-top: 12px;
             text-align: center;
         }
         
         .luxury-copyright p {
-            color: rgba(255,255,255,0.4);
-            font-size: 13px;
+            color: rgba(28,16,8,0.4);
+            font-size: 11px;
             letter-spacing: 1px;
             font-weight: 300;
         }
         
+        @media (max-width: 1024px) {
+            .luxury-footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 18px;
+            }
+        }
         @media (max-width: 768px) {
             .luxury-footer {
                 padding: 60px 0 30px;
             }
-            
             .luxury-footer-container {
-                padding: 0 20px;
+                padding: 0 10px;
             }
-            
             .luxury-footer-grid {
                 grid-template-columns: 1fr;
-                gap: 40px;
+                gap: 18px;
             }
         }
     </style>
