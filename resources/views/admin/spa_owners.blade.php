@@ -252,7 +252,6 @@
             <span></span> Spa Categories
         </a>
         <a href="#" class="menu-item">
-            <span></span> System Activity
         </a>
         <a href="#" class="menu-item">
             <span></span> Settings

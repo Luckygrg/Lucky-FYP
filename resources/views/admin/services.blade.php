@@ -190,8 +190,7 @@
         <a href="{{ route('admin.spa_owners') }}" class="menu-item"><span></span> Spa Owners</a>
         <a href="{{ route('admin.services') }}" class="menu-item active"><span></span> Services</a>
         <a href="{{ route('admin.categories.index') }}" class="menu-item"><span></span> Spa Categories</a>
-        <a href="#" class="menu-item"><span></span> System Activity</a>
-        <a href="#" class="menu-item"><span></span> Settings</a>
+        <a href="#" class="menu-item" style="margin-top:0;"><span></span> Settings</a>
 
         <form action="{{ route('logout') }}" method="POST" style="margin-top: auto; padding: 0 30px;">
             @csrf
@@ -233,7 +232,11 @@
                 <!-- Spa Header -->
                 <div class="spa-header">
                     <div class="spa-header-left">
-                        <div class="spa-avatar">{{ strtoupper(substr($spa->name, 0, 1)) }}</div>
+                        @if($spa->image)
+                            <img src="{{ asset('storage/' . $spa->image) }}" class="spa-avatar" style="width:46px;height:46px;object-fit:cover;border-radius:8px;border:2px solid #C8916A;" />
+                        @else
+                            <div class="spa-avatar">{{ strtoupper(substr($spa->name, 0, 1)) }}</div>
+                        @endif
                         <div class="spa-info">
                             <div class="spa-name">{{ $spa->name }}</div>
                             <div class="spa-meta">

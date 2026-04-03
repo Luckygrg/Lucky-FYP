@@ -6,9 +6,21 @@
 
 <style>
     .bookings-page {
-        max-width: 900px;
+        max-width: 1200px;
         margin: 60px auto;
         padding: 0 24px 80px;
+    }
+
+    .bookings-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    @media (max-width: 768px) {
+        .bookings-grid {
+            grid-template-columns: 1fr;
+        }
     }
 
     .page-header {
@@ -98,7 +110,6 @@
         background: #FFFFFF;
         border-radius: 12px;
         border: 1px solid rgba(28,16,8,0.08);
-        margin-bottom: 20px;
         overflow: hidden;
         transition: border-color 0.2s;
     }
@@ -264,6 +275,7 @@
             <a href="{{ route('spas.index') }}" class="btn-gold"><i class="fas fa-spa"></i> Explore Spas</a>
         </div>
     @else
+        <div class="bookings-grid">
         @foreach($bookings as $booking)
         <div class="booking-card">
             <div class="booking-header">
@@ -353,6 +365,7 @@
             </div>
         </div>
         @endforeach
+        </div>
     @endif
 </div>
 @endsection

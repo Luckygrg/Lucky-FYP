@@ -267,9 +267,6 @@
             <span></span> Spa Categories
         </a>
         <a href="#" class="menu-item">
-            <span></span> System Activity
-        </a>
-        <a href="#" class="menu-item">
             <span></span> Settings
         </a>
         
@@ -320,8 +317,8 @@
             <div class="actions-grid">
                 <a href="{{ route('admin.spa_owners') }}" class="action-btn">Manage Spa Owners</a>
                 <a href="{{ route('admin.services') }}" class="action-btn">Manage Services</a>
-                <a href="#" class="action-btn">View System Activity</a>
-                <a href="#" class="action-btn">Settings</a>
+                <a href="{{ route('admin.categories.index') }}" class="action-btn">Manage Spa Categories</a>
+                <a href="#" class="action-btn">Manage Settings</a>
             </div>
         </div>
         
@@ -332,7 +329,6 @@
                 <li> Login to admin panel with secure authentication</li>
                 <li> Manage spa owners (view, approve, suspend accounts)</li>
                 <li> Manage all services across the platform</li>
-                <li> Monitor system activity and access logs</li>
                 <li> View platform statistics and generate reports</li>
                 <li> System configuration and global settings management</li>
             </ul>
