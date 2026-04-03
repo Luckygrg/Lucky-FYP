@@ -569,6 +569,21 @@
     .payment-opt i { font-size: 20px; flex-shrink: 0; }
 
     .pay-opt-title { font-size: 14px; font-weight: 700; color: #1C1008; }
+    .pay-opt-sub  { font-size: 12px; color: #9E7A5A; }
+
+    .booking-payment-note {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        background: rgba(200,145,106,0.10);
+        border: 1px solid #C8916A;
+        border-radius: 10px;
+        padding: 12px 14px;
+        font-size: 13px;
+        color: #7A4F2D;
+        margin-bottom: 8px;
+    }
+    .booking-payment-note i { color: #C8916A; margin-top: 2px; flex-shrink: 0; }
     .pay-opt-sub   { font-size: 11px; color: rgba(28,16,8,0.45); margin-top: 2px; }
 
     .btn-submit-booking {
@@ -1404,28 +1419,10 @@
                         </div>
                     </div>
 
-                    <div class="modal-section-title">Payment Option</div>
-                    <div class="payment-options">
-                        <label class="payment-opt {{ old('payment_option', 'pay_later') === 'pay_now' ? 'selected' : '' }}">
-                            <input type="radio" name="payment_option" value="pay_now"
-                                   {{ old('payment_option', 'pay_later') === 'pay_now' ? 'checked' : '' }}
-                                   onchange="updatePayBtn(this)">
-                            <i class="fas fa-credit-card" style="color:#C8916A;"></i>
-                            <div>
-                                <div class="pay-opt-title">Pay Now</div>
-                                <div class="pay-opt-sub">Pay online while booking</div>
-                            </div>
-                        </label>
-                        <label class="payment-opt {{ old('payment_option', 'pay_later') === 'pay_later' ? 'selected' : '' }}">
-                            <input type="radio" name="payment_option" value="pay_later"
-                                   {{ old('payment_option', 'pay_later') === 'pay_later' ? 'checked' : '' }}
-                                   onchange="updatePayBtn(this)">
-                            <i class="fas fa-hand-holding-usd" style="color:#C8916A;"></i>
-                            <div>
-                                <div class="pay-opt-title">Pay Later</div>
-                                <div class="pay-opt-sub">Pay at the spa after service</div>
-                            </div>
-                        </label>
+                    <input type="hidden" name="payment_option" value="pay_later">
+                    <div class="booking-payment-note">
+                        <i class="fas fa-info-circle"></i>
+                        Payment can only be processed after the spa owner approves your booking.
                     </div>
 
                     <div class="form-group">
@@ -1434,7 +1431,7 @@
                     </div>
 
                     <button type="submit" class="btn-submit-booking" id="submitBookingBtn">
-                        <i class="fas fa-calendar-check"></i> <span id="submitBtnText">Confirm &amp; Pay Later</span>
+                        <i class="fas fa-calendar-check"></i> Confirm Booking
                     </button>
                 </form>
             </div>
@@ -1518,19 +1515,6 @@
             // Close on overlay click
             document.getElementById('bookingOverlay').addEventListener('click', function(e) {
                 if (e.target === this) closeModal();
-            });
-
-            function updatePayBtn(radio) {
-                document.querySelectorAll('.payment-opt').forEach(el => el.classList.remove('selected'));
-                radio.closest('.payment-opt').classList.add('selected');
-                const txt = document.getElementById('submitBtnText');
-                txt.textContent = radio.value === 'pay_now' ? 'Confirm & Pay Now' : 'Confirm & Pay Later';
-            }
-
-            // Init button label on page load
-            document.addEventListener('DOMContentLoaded', function() {
-                const checked = document.querySelector('input[name="payment_option"]:checked');
-                if (checked) updatePayBtn(checked);
             });
 
             // If there are validation errors, re-open modal

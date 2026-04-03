@@ -21,8 +21,8 @@ class PaymentController extends Controller
             abort(403);
         }
 
-        // Only pay_now bookings that are still unpaid
-        if ($booking->payment_option !== 'pay_now' || $booking->payment_status === 'paid') {
+        // Only confirmed bookings that are still unpaid can pay via eSewa
+        if ($booking->status !== 'confirmed' || $booking->payment_status === 'paid') {
             return redirect()->route('customer.bookings')
                 ->with('info', 'This booking is not eligible for online payment.');
         }

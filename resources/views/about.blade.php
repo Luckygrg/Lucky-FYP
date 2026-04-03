@@ -7,7 +7,7 @@
 <style>
     .about-hero {
         background: linear-gradient(rgba(0,0,0,0.40), rgba(0,0,0,0.40)), 
-                    url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1920') center/cover;
+                    url('{{ asset("assets/img/aboutus.png") }}') center/cover;
         padding: 100px 20px;
         text-align: center;
         color: #FAF7F2;

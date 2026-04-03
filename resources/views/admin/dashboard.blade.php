@@ -1,23 +1,20 @@
-﻿@extends('layouts.main')
+@extends('layouts.main')
 
 @section('title', 'Admin Dashboard - SpaLush')
 
 @section('content')
 
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     .dashboard-container {
         display: flex;
         min-height: 100vh;
         background: #FAF7F2;
         font-family: Arial, sans-serif;
     }
-    
+
+    /* ── Sidebar ── */
     .sidebar {
         width: 260px;
         background: #FAF7F2;
@@ -25,8 +22,8 @@
         display: flex;
         flex-direction: column;
         box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        flex-shrink: 0;
     }
-    
     .logo {
         font-size: 24px;
         font-weight: 300;
@@ -35,11 +32,7 @@
         letter-spacing: 3px;
         font-family: 'Georgia', serif;
     }
-    
-    .logo span {
-        color: #C8916A;
-    }
-    
+    .logo span { color: #C8916A; }
     .menu-item {
         padding: 15px 30px;
         margin-bottom: 5px;
@@ -52,22 +45,14 @@
         font-size: 14px;
         letter-spacing: 0.5px;
     }
-    
-    .menu-item:hover {
-        background: rgba(200, 145, 106, 0.1);
-        color: #C8916A;
-    }
-    
+    .menu-item:hover { background: rgba(200,145,106,0.1); color: #C8916A; }
     .menu-item.active {
-        background: rgba(200, 145, 106, 0.15);
+        background: rgba(200,145,106,0.15);
         color: #C8916A;
         border-left: 3px solid #C8916A;
     }
-    
     .logout-btn {
-        margin-top: auto;
-        margin-left: 30px;
-        margin-right: 30px;
+        margin: auto 30px 0;
         padding: 12px 20px;
         border-radius: 4px;
         border: 1px solid rgba(28,16,8,0.2);
@@ -80,172 +65,149 @@
         transition: all 0.3s;
         font-size: 14px;
         letter-spacing: 0.5px;
+        width: calc(100% - 60px);
     }
-    
-    .logout-btn:hover {
-        background: #C8916A;
-        border-color: #C8916A;
-        color: #1C1008;
-    }
-    
-    .main-content {
-        flex: 1;
-        padding: 40px;
-        overflow-y: auto;
-    }
-    
-    .header {
-        margin-bottom: 40px;
-    }
-    
+    .logout-btn:hover { background: #C8916A; border-color: #C8916A; color: #1C1008; }
+
+    /* ── Main Content ── */
+    .main-content { flex: 1; padding: 40px; overflow-y: auto; }
+    .header { margin-bottom: 30px; }
     .header h1 {
         font-size: 32px;
         color: #1C1008;
         font-weight: 300;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
         font-family: 'Georgia', serif;
         letter-spacing: 1px;
     }
-    
-    .header p {
-        color: rgba(28,16,8,0.6);
-        font-size: 15px;
+    .header p { color: rgba(28,16,8,0.6); font-size: 15px; }
+
+    /* ── Alert ── */
+    .alert {
+        padding: 14px 18px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        border-left: 4px solid;
     }
-    
+    .alert-success { background: rgba(200,145,106,0.1); color: #895D3E; border-color: #C8916A; }
+
+    /* ── Stats Grid ── */
     .stats-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 25px;
-        margin-bottom: 40px;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        margin-bottom: 30px;
     }
-    
     .stat-card {
         background: #FFFFFF;
-        padding: 30px;
+        padding: 24px 28px;
         border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        border: 1px solid rgba(200,145,106,0.15);
         border-left: 4px solid #C8916A;
-        transition: all 0.3s;
+        transition: transform 0.2s, box-shadow 0.2s;
     }
-    
-    .stat-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 16px rgba(200, 145, 106, 0.15);
-    }
-    
+    .stat-card:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(200,145,106,0.15); }
     .stat-card h3 {
-        color: rgba(28,16,8,0.6);
-        font-size: 13px;
-        font-weight: normal;
-        margin-bottom: 12px;
+        color: rgba(28,16,8,0.5);
+        font-size: 12px;
+        font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 1px;
+        margin-bottom: 10px;
     }
-    
     .stat-card .number {
         font-size: 36px;
         font-weight: 300;
         color: #C8916A;
         font-family: 'Georgia', serif;
+        line-height: 1;
     }
-    
-    .quick-actions {
+
+    /* ── Chart Cards ── */
+    .charts-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    .chart-card {
         background: #FFFFFF;
-        padding: 30px;
         border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        margin-bottom: 40px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        border: 1px solid rgba(200,145,106,0.15);
+        overflow: hidden;
     }
-    
-    .quick-actions h2 {
-        color: #1C1008;
-        margin-bottom: 25px;
-        font-size: 20px;
+    .chart-card-header {
+        padding: 18px 24px;
+        border-bottom: 1px solid rgba(28,16,8,0.08);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .chart-card-header h2 {
+        font-size: 17px;
         font-weight: 300;
+        color: #1C1008;
         font-family: 'Georgia', serif;
-        letter-spacing: 1px;
+        letter-spacing: 0.5px;
     }
-    
+    .chart-card-header p {
+        font-size: 12px;
+        color: rgba(28,16,8,0.4);
+        margin: 0;
+    }
+    .chart-card-body { padding: 24px; height: 280px; }
+
+    /* ── Quick Actions Card ── */
+    .actions-card {
+        background: #FFFFFF;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        border: 1px solid rgba(200,145,106,0.15);
+        overflow: hidden;
+        margin-bottom: 0;
+    }
+    .actions-card-header {
+        padding: 18px 24px;
+        border-bottom: 1px solid rgba(28,16,8,0.08);
+    }
+    .actions-card-header h2 {
+        font-size: 17px;
+        font-weight: 300;
+        color: #1C1008;
+        font-family: 'Georgia', serif;
+        letter-spacing: 0.5px;
+    }
     .actions-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 15px;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 14px;
+        padding: 24px;
     }
-    
     .action-btn {
-        padding: 15px 20px;
+        padding: 13px 18px;
         background: #C8916A;
         color: #1C1008;
         text-decoration: none;
         border-radius: 4px;
         text-align: center;
-        transition: all 0.3s;
+        transition: all 0.2s;
         font-weight: 500;
-        font-size: 14px;
-        letter-spacing: 0.5px;
+        font-size: 13px;
+        letter-spacing: 0.4px;
     }
-    
-    .action-btn:hover {
-        background: #AE7A55;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(200, 145, 106, 0.3);
-    }
-    
-    .admin-features {
-        background: #FFFFFF;
-        padding: 30px;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    }
-    
-    .admin-features h2 {
-        color: #1C1008;
-        margin-bottom: 25px;
-        font-size: 20px;
-        font-weight: 300;
-        font-family: 'Georgia', serif;
-        letter-spacing: 1px;
-    }
-    
-    .admin-features ul {
-        list-style: none;
-        padding: 0;
-    }
-    
-    .admin-features li {
-        color: rgba(28,16,8,0.6);
-        padding: 12px 0;
-        border-bottom: 1px solid rgba(28,16,8,0.08);
-        font-size: 14px;
-        line-height: 1.6;
-    }
-    
-    .admin-features li:last-child {
-        border-bottom: none;
-    }
-    
-    .success-message {
-        background: rgba(200, 145, 106, 0.1);
-        color: #895D3E;
-        padding: 15px 20px;
-        border-radius: 4px;
-        margin-bottom: 25px;
-        border-left: 4px solid #C8916A;
-        font-size: 14px;
-    }
-    
+    .action-btn:hover { background: #AE7A55; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(200,145,106,0.3); }
+
+    @media (max-width: 1100px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 900px)  { .charts-grid { grid-template-columns: 1fr; } }
     @media (max-width: 768px) {
-        .dashboard-container {
-            flex-direction: column;
-        }
-        
-        .sidebar {
-            width: 100%;
-        }
-        
-        .main-content {
-            padding: 20px;
-        }
+        .dashboard-container { flex-direction: column; }
+        .sidebar { width: 100%; }
+        .main-content { padding: 20px; }
+        .stats-grid { grid-template-columns: repeat(2, 1fr); }
     }
 </style>
 
@@ -253,45 +215,31 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="logo">SPA<span>LUSH</span></div>
-        
-        <a href="{{ route('admin.admin') }}" class="menu-item active">
-            <span></span> Dashboard
-        </a>
-        <a href="{{ route('admin.spa_owners') }}" class="menu-item">
-            <span></span> Spa Owners
-        </a>
-        <a href="{{ route('admin.services') }}" class="menu-item">
-            <span></span> Services
-        </a>
-        <a href="{{ route('admin.categories.index') }}" class="menu-item">
-            <span></span> Spa Categories
-        </a>
-        <a href="#" class="menu-item">
-            <span></span> Settings
-        </a>
-        
-        <form action="{{ route('logout') }}" method="POST" style="margin-top: auto;">
+
+        <a href="{{ route('admin.admin') }}" class="menu-item active">Dashboard</a>
+        <a href="{{ route('admin.spa_owners') }}" class="menu-item">Spa Owners</a>
+        <a href="{{ route('admin.services') }}" class="menu-item">Services</a>
+        <a href="{{ route('admin.categories.index') }}" class="menu-item">Spa Categories</a>
+        <a href="#" class="menu-item">Settings</a>
+
+        <form action="{{ route('logout') }}" method="POST" style="margin-top: auto; padding: 0 30px;">
             @csrf
-            <button type="submit" class="logout-btn">
-                <span></span> Log Out
-            </button>
+            <button type="submit" class="logout-btn">Log Out</button>
         </form>
     </div>
-    
+
     <!-- Main Content -->
     <div class="main-content">
         <div class="header">
             <h1>Admin Dashboard</h1>
-            <p>Welcome, {{ Auth::user()->name }} - System Administrator</p>
+            <p>Welcome back, {{ Auth::user()->name }} — here's what's happening on SpaLush.</p>
         </div>
-        
+
         @if(session('success'))
-            <div class="success-message">
-                {{ session('success') }}
-            </div>
+            <div class="alert alert-success">{{ session('success') }}</div>
         @endif
-        
-        <!-- Stats Cards -->
+
+        <!-- Stats -->
         <div class="stats-grid">
             <div class="stat-card">
                 <h3>Total Spa Owners</h3>
@@ -310,30 +258,110 @@
                 <div class="number">{{ $pendingSpas }}</div>
             </div>
         </div>
-        
+
         <!-- Quick Actions -->
-        <div class="quick-actions">
-            <h2>Quick Actions</h2>
+        <div class="actions-card">
+            <div class="actions-card-header">
+                <h2>Quick Actions</h2>
+            </div>
             <div class="actions-grid">
                 <a href="{{ route('admin.spa_owners') }}" class="action-btn">Manage Spa Owners</a>
                 <a href="{{ route('admin.services') }}" class="action-btn">Manage Services</a>
                 <a href="{{ route('admin.categories.index') }}" class="action-btn">Manage Spa Categories</a>
-                <a href="#" class="action-btn">Manage Settings</a>
+                <a href="#" class="action-btn">Settings</a>
             </div>
         </div>
-        
-        <!-- Admin Features -->
-        <div class="admin-features">
-            <h2>Administrator Capabilities</h2>
-            <ul>
-                <li> Login to admin panel with secure authentication</li>
-                <li> Manage spa owners (view, approve, suspend accounts)</li>
-                <li> Manage all services across the platform</li>
-                <li> View platform statistics and generate reports</li>
-                <li> System configuration and global settings management</li>
-            </ul>
+
+        <!-- Charts -->
+        <div class="charts-grid">
+            <div class="chart-card">
+                <div class="chart-card-header">
+                    <h2>Bookings per Spa</h2>
+                    <p>Which spa has the most customers</p>
+                </div>
+                <div class="chart-card-body">
+                    @if($bookingsPerSpa->isEmpty())
+                        <div style="text-align:center;padding:40px 0;color:rgba(28,16,8,0.3);font-size:14px;">No booking data yet</div>
+                    @else
+                        <canvas id="spaChart"></canvas>
+                    @endif
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-card-header">
+                    <h2>Most Used Categories</h2>
+                    <p>Which service category is booked the most</p>
+                </div>
+                <div class="chart-card-body">
+                    @if($bookingsPerCategory->isEmpty())
+                        <div style="text-align:center;padding:40px 0;color:rgba(28,16,8,0.3);font-size:14px;">No category data yet</div>
+                    @else
+                        <canvas id="categoryChart"></canvas>
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+@if($bookingsPerSpa->isNotEmpty() || $bookingsPerCategory->isNotEmpty())
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+    const palette = ['#C8916A','#AE7A55','#D4A882','#8B5E3C','#E6C4A8','#7A4F2D','#BF8A6A','#9E6B45','#5C3A1E','#F0DDD0'];
+
+    @if($bookingsPerSpa->isNotEmpty())
+    new Chart(document.getElementById('spaChart'), {
+        type: 'bar',
+        data: {
+            labels: {!! json_encode($bookingsPerSpa->pluck('spa')) !!},
+            datasets: [{
+                label: 'Bookings',
+                data: {!! json_encode($bookingsPerSpa->pluck('total')) !!},
+                backgroundColor: palette,
+                borderRadius: 5,
+                borderSkipped: false,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: { callbacks: { label: ctx => ` ${ctx.parsed.y} bookings` } }
+            },
+            scales: {
+                y: { beginAtZero: true, ticks: { stepSize: 1, color: 'rgba(28,16,8,0.45)' }, grid: { color: 'rgba(0,0,0,0.05)' } },
+                x: { ticks: { color: 'rgba(28,16,8,0.55)' }, grid: { display: false } }
+            }
+        }
+    });
+    @endif
+
+    @if($bookingsPerCategory->isNotEmpty())
+    new Chart(document.getElementById('categoryChart'), {
+        type: 'doughnut',
+        data: {
+            labels: {!! json_encode($bookingsPerCategory->pluck('category')) !!},
+            datasets: [{
+                data: {!! json_encode($bookingsPerCategory->pluck('total')) !!},
+                backgroundColor: palette,
+                borderWidth: 2,
+                borderColor: '#fff',
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom', labels: { padding: 16, font: { size: 12 }, color: 'rgba(28,16,8,0.6)' } },
+                tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${ctx.parsed} bookings` } }
+            },
+            cutout: '62%',
+        }
+    });
+    @endif
+</script>
+@endif
 
 @endsection

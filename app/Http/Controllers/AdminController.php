@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
+use App\Models\BookingService;
 use App\Models\Spa;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -18,11 +21,28 @@ class AdminController extends Controller
         $totalSpas       = Spa::where('status', 'approved')->count();
         $pendingSpas     = Spa::where('status', 'pending')->count();
 
+        // Chart 1: bookings per spa
+        $bookingsPerSpa = Booking::select('spa_id', DB::raw('count(*) as total'))
+            ->groupBy('spa_id')
+            ->with('spa:id,name')
+            ->get()
+            ->map(fn($b) => ['spa' => $b->spa->name ?? 'Unknown', 'total' => $b->total]);
+
+        // Chart 2: most used categories (via booking_services -> services -> spa_categories)
+        $bookingsPerCategory = BookingService::join('services', 'booking_services.service_id', '=', 'services.id')
+            ->join('spa_categories', 'services.spa_category_id', '=', 'spa_categories.id')
+            ->select('spa_categories.name as category', DB::raw('count(*) as total'))
+            ->groupBy('spa_categories.name')
+            ->orderByDesc('total')
+            ->get();
+
         return view('admin.dashboard', compact(
             'totalSpaOwners',
             'totalCustomers',
             'totalSpas',
-            'pendingSpas'
+            'pendingSpas',
+            'bookingsPerSpa',
+            'bookingsPerCategory'
         ));
     }
 

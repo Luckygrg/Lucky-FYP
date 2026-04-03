@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\BookingConfirmed;
 use App\Models\Booking;
 use App\Models\BookingService;
 use App\Models\Service;
@@ -9,6 +10,7 @@ use App\Models\Spa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class BookingController extends Controller
 {
@@ -23,7 +25,7 @@ class BookingController extends Controller
             'booking_date'    => 'required|date|after_or_equal:today',
             'booking_time'    => 'required',
             'phone'           => 'required|string|max:20',
-            'payment_option'  => 'required|in:pay_now,pay_later',
+            'payment_option'  => 'required|in:pay_later',
             'notes'           => 'nullable|string|max:1000',
         ]);
 
@@ -106,11 +108,6 @@ class BookingController extends Controller
             ->where('spa_id', $spa->id)
             ->latest()
             ->first();
-
-        // If pay_now, redirect to eSewa payment
-        if ($request->payment_option === 'pay_now') {
-            return redirect()->route('payment.pay', $booking);
-        }
 
         return redirect()->route('customer.bookings')
             ->with('success', 'Your booking at ' . $spa->name . ' has been placed! We will confirm it shortly.');
@@ -207,6 +204,11 @@ class BookingController extends Controller
         ]);
 
         $booking->update(['status' => $request->status]);
+
+        if ($request->status === 'confirmed') {
+            $booking->load(['customer', 'spa', 'bookingServices']);
+            Mail::to($booking->customer->email)->send(new BookingConfirmed($booking));
+        }
 
         return back()->with('success', 'Booking status updated to ' . ucfirst($request->status) . '.');
     }
