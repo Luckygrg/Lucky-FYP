@@ -62,11 +62,20 @@ class SpaOwnerController extends Controller
                 ->orderByDesc('last_booking')
                 ->limit(10)
                 ->get();
+            // Most booked services for this spa
+            $topServices = \App\Models\BookingService::whereHas('booking', fn($q) => $q->where('spa_id', $spa->id))
+                ->select('service_name', \Illuminate\Support\Facades\DB::raw('count(*) as total'))
+                ->groupBy('service_name')
+                ->orderByDesc('total')
+                ->limit(8)
+                ->get();
+        } else {
+            $topServices = collect();
         }
 
         return view('spa_owner.dashboard', compact(
             'spa', 'servicesCount', 'bookingsCount',
-            'customersCount', 'totalEarning', 'recentCustomers'
+            'customersCount', 'totalEarning', 'recentCustomers', 'topServices'
         ));
     }
 
