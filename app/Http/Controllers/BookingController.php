@@ -92,6 +92,7 @@ class BookingController extends Controller
                 'status'                 => 'pending',
                 'payment_status'         => 'unpaid',
                 'payment_option'         => $request->input('payment_option', 'pay_later'),
+                'payment_choice_made'    => false,
                 'notes'                  => $request->notes,
             ]);
 

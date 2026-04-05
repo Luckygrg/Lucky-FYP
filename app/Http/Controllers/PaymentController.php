@@ -12,6 +12,29 @@ use Xentixar\EsewaSdk\Esewa;
 class PaymentController extends Controller
 {
     /**
+     * Customer explicitly chooses to pay at spa.
+     */
+    public function choosePayAtSpa(Booking $booking)
+    {
+        if ($booking->user_id !== Auth::id()) {
+            abort(403);
+        }
+
+        if ($booking->status !== 'confirmed' || $booking->payment_status === 'paid') {
+            return redirect()->route('customer.bookings')
+                ->with('info', 'This booking is not eligible for payment selection.');
+        }
+
+        $booking->update([
+            'payment_option' => 'pay_later',
+            'payment_choice_made' => true,
+        ]);
+
+        return redirect()->route('customer.bookings')
+            ->with('success', 'Payment option selected: Pay at Spa.');
+    }
+
+    /**
      * Initiate eSewa payment for a booking.
      */
     public function pay(Booking $booking)
@@ -26,6 +49,12 @@ class PaymentController extends Controller
             return redirect()->route('customer.bookings')
                 ->with('info', 'This booking is not eligible for online payment.');
         }
+
+        // Mark explicit customer choice before redirecting to gateway.
+        $booking->update([
+            'payment_option' => 'pay_now',
+            'payment_choice_made' => true,
+        ]);
 
         $transaction_uuid = strtoupper(bin2hex(random_bytes(10)));
 

@@ -17,12 +17,14 @@ class Booking extends Model
         'status',
         'payment_status',
         'payment_option',
+        'payment_choice_made',
         'notes',
     ];
 
     protected $casts = [
         'booking_date' => 'date',
         'total_price'  => 'decimal:2',
+        'payment_choice_made' => 'boolean',
     ];
 
     public function customer()

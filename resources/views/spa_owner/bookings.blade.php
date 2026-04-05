@@ -283,8 +283,12 @@
                             </td>
                             <td>
                                 <div class="price-cell">Rs. {{ number_format($booking->total_price, 0) }}</div>
-                                @if($booking->payment_option === 'pay_now')
-                                    <div style="font-size:11px;color:#6fcf72;margin-top:3px;"><i class="fas fa-credit-card"></i> Pay Now</div>
+                                @if($booking->payment_status === 'paid')
+                                    <div style="font-size:11px;color:#6fcf72;margin-top:3px;"><i class="fas fa-check-circle"></i> Paid via eSewa</div>
+                                @elseif(!$booking->payment_choice_made)
+                                    <div style="font-size:11px;color:rgba(28,16,8,0.45);margin-top:3px;"><i class="fas fa-hourglass-half"></i> Awaiting customer payment choice</div>
+                                @elseif($booking->payment_option === 'pay_now')
+                                    <div style="font-size:11px;color:#6fcf72;margin-top:3px;"><i class="fas fa-credit-card"></i> Pay via eSewa</div>
                                 @else
                                     <div style="font-size:11px;color:#C8916A;margin-top:3px;"><i class="fas fa-hand-holding-usd"></i> Pay at Spa</div>
                                 @endif

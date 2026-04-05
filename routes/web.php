@@ -122,6 +122,7 @@ Route::post('/spas/{spa}/book', [BookingController::class, 'store'])
 // Payment routes (customer only) — static routes BEFORE the dynamic {booking} route
 Route::middleware(['auth', 'role:customer'])->group(function () {
     Route::get('/payment/esewa/check', [PaymentController::class, 'check'])->name('esewa.check');
+    Route::post('/payment/{booking}/choose-at-spa', [PaymentController::class, 'choosePayAtSpa'])->name('payment.chooseAtSpa');
     Route::get('/payment/{booking}/pay', [PaymentController::class, 'pay'])->name('payment.pay');
 });
 
