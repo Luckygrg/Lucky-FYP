@@ -26,8 +26,8 @@ class BookingController extends Controller
             'services.*'      => 'exists:services,id',
             'booking_date'    => 'required|date|after_or_equal:today',
             'booking_time'    => 'required',
-            'phone'           => 'required|string|max:20',
-            'payment_option'  => 'required|in:pay_later',
+            'phone'           => 'required|digits:10',
+            'payment_option'  => 'nullable|in:pay_now,pay_later',
             'notes'           => 'nullable|string|max:1000',
         ]);
 
@@ -91,7 +91,7 @@ class BookingController extends Controller
                 'total_price'            => $totalPrice,
                 'status'                 => 'pending',
                 'payment_status'         => 'unpaid',
-                'payment_option'         => $request->payment_option,
+                'payment_option'         => $request->input('payment_option', 'pay_later'),
                 'notes'                  => $request->notes,
             ]);
 

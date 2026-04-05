@@ -1400,8 +1400,11 @@
                     <div class="modal-section-title">Your Details</div>
                     <div class="form-group">
                         <label>Phone Number</label>
-                        <input type="text" name="phone" placeholder="+977-98XXXXXXXX"
+                        <input type="tel" name="phone" id="phoneInput"
+                               placeholder="98XXXXXXXX"
+                               pattern="[0-9]{10}" maxlength="10"
                                value="{{ old('phone') }}" required>
+                        <small style="color:rgba(28,16,8,0.45);font-size:12px;">Enter 10-digit number (e.g. 9812345678)</small>
                     </div>
 
                     <div class="modal-section-title">Appointment</div>
@@ -1413,8 +1416,9 @@
                                    value="{{ old('booking_date') }}" required>
                         </div>
                         <div class="form-group">
-                            <label>Time</label>
-                            <input type="time" name="booking_time"
+                            <label>Time <small style="color:rgba(28,16,8,0.45);font-size:11px;">(Spa open 9:00 AM – 9:00 PM)</small></label>
+                            <input type="time" name="booking_time" id="bookingTimeInput"
+                                   min="09:00" max="21:00"
                                    value="{{ old('booking_time') }}" required>
                         </div>
                     </div>
@@ -1422,7 +1426,7 @@
                     <input type="hidden" name="payment_option" value="pay_later">
                     <div class="booking-payment-note">
                         <i class="fas fa-info-circle"></i>
-                        Payment can only be processed after the spa owner approves your booking.
+                        Payment is completed only after the spa owner approves your booking.
                     </div>
 
                     <div class="form-group">
@@ -1502,6 +1506,22 @@
 
                 document.getElementById('modalTotal').innerHTML =
                     'Rs. ' + total.toLocaleString() + ' &nbsp;·&nbsp; ' + duration + ' min';
+
+                // Set max booking time: spa closes 21:00, subtract service duration
+                const SPA_OPEN  = 9 * 60;       // 9:00 AM in minutes
+                const SPA_CLOSE = 21 * 60;      // 9:00 PM in minutes
+                const latestStart = SPA_CLOSE - duration;
+                const maxH = String(Math.floor(latestStart / 60)).padStart(2, '0');
+                const maxM = String(latestStart % 60).padStart(2, '0');
+                const timeInput = document.getElementById('bookingTimeInput');
+                timeInput.min = '09:00';
+                timeInput.max = maxH + ':' + maxM;
+                // Clear time if it violates new bounds
+                if (timeInput.value) {
+                    const [h, m] = timeInput.value.split(':').map(Number);
+                    const val = h * 60 + m;
+                    if (val < SPA_OPEN || val > latestStart) timeInput.value = '';
+                }
 
                 document.getElementById('bookingOverlay').classList.add('open');
                 document.body.style.overflow = 'hidden';

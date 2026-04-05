@@ -185,14 +185,24 @@
                     <span class="detail-label">Total Amount</span>
                     <span class="detail-value">Rs. {{ number_format($booking->total_price, 0) }}</span>
                 </div>
+                <div class="detail-row">
+                    <span class="detail-label">Payment Preference</span>
+                    <span class="detail-value">{{ $booking->payment_option === 'pay_now' ? 'Pay via eSewa' : 'Pay at Spa' }}</span>
+                </div>
             </div>
 
             <div class="payment-section">
-                <p><strong>Choose your payment method:</strong></p>
-                <div class="payment-options">
-                    <a href="{{ route('customer.bookings') }}" class="btn-esewa">Pay via eSewa</a>
-                    <a href="{{ route('customer.bookings') }}" class="btn-spa">Pay at the Spa</a>
-                </div>
+                @if($booking->payment_option === 'pay_now')
+                    <p><strong>You chose online payment:</strong></p>
+                    <div class="payment-options">
+                        <a href="{{ route('customer.bookings') }}" class="btn-esewa">Pay via eSewa</a>
+                    </div>
+                @else
+                    <p><strong>You chose to pay at the spa.</strong></p>
+                    <div class="payment-options">
+                        <a href="{{ route('customer.bookings') }}" class="btn-spa">View Booking Details</a>
+                    </div>
+                @endif
             </div>
 
             <div class="info-box">
