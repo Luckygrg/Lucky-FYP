@@ -35,18 +35,19 @@ class UserSeeder extends Seeder
 
         // ── Customers ─────────────────────────────────────────────────────────
         $customers = [
-            ['name' => 'Priya Tamang',    'email' => 'priya@gmail.com'],
-            ['name' => 'Rohan Shakya',  'email' => 'rohan@gmail.com'],
-            ['name' => 'Nisha Magar',     'email' => 'nisha@gmail.com'],
-            ['name' => 'Rhythm Guurng',   'email' => 'rhythm@gmail.com'],
-            ['name' => 'Kritika Basnet',  'email' => 'kritika@gmail.com'],
+            ['name' => 'Priya Tamang',    'email' => 'luckygrxx+priya@gmail.com'],
+            ['name' => 'Rohan Shakya',    'email' => 'luckygrxx+rohan@gmail.com'],
+            ['name' => 'Nisha Magar',     'email' => 'luckygrxx+nisha@gmail.com'],
+            ['name' => 'Rhythm Guurng',   'email' => 'luckygrxx+rhythm@gmail.com'],
+            ['name' => 'Kritika Basnet',  'email' => 'luckygrxx+kritika@gmail.com'],
         ];
 
         foreach ($customers as $customer) {
-            User::firstOrCreate(
-                ['email' => $customer['email']],
+            User::updateOrCreate(
+                ['name' => $customer['name'], 'role' => 'customer'],
                 [
                     'name'     => $customer['name'],
+                    'email'    => $customer['email'],
                     'password' => Hash::make('password123'),
                     'role'     => 'customer',
                 ]

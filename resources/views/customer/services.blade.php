@@ -171,7 +171,7 @@
     {{-- ── Services ── --}}
     @if($services->isEmpty())
         <div class="empty-state">
-            <div class="icon">🌿</div>
+                <div class="icon">Spa</div>
             <p>No services found{{ $selectedCategory ? ' in this category' : '' }}. Please check back soon.</p>
         </div>
     @else
@@ -197,7 +197,7 @@
                         @if($service->image)
                             <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}">
                         @else
-                            <div class="service-img-placeholder">🌿</div>
+                            <div class="service-img-placeholder">Spa</div>
                         @endif
                     </div>
                     <div class="service-body">
@@ -225,7 +225,7 @@
                                     Price on request
                                 @endif
                             </span>
-                            <span class="service-available">✓ Available</span>
+                            <span class="service-available">Available</span>
                         </div>
                     </div>
                 </div>
@@ -446,7 +446,7 @@
 
     @if($spas->isEmpty())
         <div class="empty-state">
-            <div class="icon">🛁</div>
+                <div class="icon">Bath</div>
             <p>No spa services are available at the moment. Please check back soon.</p>
         </div>
     @else
@@ -508,7 +508,7 @@
                                         Price on request
                                     @endif
                                 </span>
-                                <span class="service-duration" style="color: #5cb85c; font-size: 12px;">✓ Available</span>
+                                <span class="service-duration" style="color: #5cb85c; font-size: 12px;">Available</span>
                             </div>
                         </div>
                     </div>

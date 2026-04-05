@@ -152,7 +152,7 @@
 
         <div class="email-header">
             <h1>SPALUSH</h1>
-            <span class="confirmed-badge">✓ Booking Confirmed</span>
+            <span class="confirmed-badge">Booking Confirmed</span>
         </div>
 
         <div class="email-body">

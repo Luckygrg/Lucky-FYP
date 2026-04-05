@@ -108,7 +108,7 @@
                     <span>{{ $user->email }}</span>
                 </div>
 
-        <!-- ✅ MOVE THIS HERE -->
+        <!-- MOVE THIS HERE -->
         <input id="photo-upload" type="file" name="photo" accept="image/*" style="display:none;">
     </div>
 
