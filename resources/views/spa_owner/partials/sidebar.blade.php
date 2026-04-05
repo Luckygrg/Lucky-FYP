@@ -48,6 +48,22 @@
         border-left-color: #C8916A;
     }
 
+    .notification-badge {
+        margin-left: auto;
+        min-width: 22px;
+        height: 22px;
+        padding: 0 7px;
+        border-radius: 999px;
+        background: #C8916A;
+        color: #1C1008;
+        font-size: 11px;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+    }
+
     .sidebar-logout-form {
         margin-top: auto;
         padding: 0 30px 10px;
@@ -90,8 +106,16 @@
     </a>
 
     <a href="{{ route('spa_owner.bookings') }}"
-       class="menu-item {{ request()->routeIs('spa_owner.bookings') ? 'active' : '' }}">
+       class="menu-item {{ request()->routeIs('spa_owner.bookings') && request('status') !== 'pending' ? 'active' : '' }}">
         <span></span> Bookings
+    </a>
+
+    <a href="{{ route('spa_owner.bookings', ['status' => 'pending']) }}"
+       class="menu-item {{ request()->routeIs('spa_owner.bookings') && request('status') === 'pending' ? 'active' : '' }}">
+        <span></span> Notifications
+        @if(($newBookingsCount ?? 0) > 0)
+            <span class="notification-badge">{{ $newBookingsCount }}</span>
+        @endif
     </a>
 
     <a href="{{ route('spa_owner.payments') }}"

@@ -291,7 +291,22 @@ class SpaOwnerController extends Controller
     public function customers()
     {
         $spa = Spa::where('user_id', Auth::id())->first();
-        return view('spa_owner.customers', compact('spa'));
+
+        $customers = $spa
+            ? \App\Models\Booking::where('spa_id', $spa->id)
+                ->with('customer:id,name,email')
+                ->select(
+                    'user_id',
+                    \Illuminate\Support\Facades\DB::raw('MAX(booking_date) as last_booking_date'),
+                    \Illuminate\Support\Facades\DB::raw('COUNT(*) as bookings_count'),
+                    \Illuminate\Support\Facades\DB::raw('SUM(total_price) as total_spent')
+                )
+                ->groupBy('user_id')
+                ->orderByDesc('last_booking_date')
+                ->get()
+            : collect();
+
+        return view('spa_owner.customers', compact('spa', 'customers'));
     }
 
     public function settings()

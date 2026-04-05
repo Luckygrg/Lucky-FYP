@@ -239,6 +239,7 @@
         <div class="filter-tabs">
             @foreach(['all','pending','confirmed','completed','cancelled'] as $tab)
                 <button class="filter-tab {{ $tab === 'all' ? 'active' : '' }}"
+                        data-tab="{{ $tab }}"
                         onclick="filterBookings('{{ $tab }}', this)">
                     {{ ucfirst($tab) }} ({{ $counts[$tab] }})
                 </button>
@@ -358,6 +359,20 @@
             }
         });
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const allowed = ['all', 'pending', 'confirmed', 'completed', 'cancelled'];
+        const requestedStatus = new URLSearchParams(window.location.search).get('status');
+
+        if (!requestedStatus || !allowed.includes(requestedStatus)) {
+            return;
+        }
+
+        const tabBtn = document.querySelector(`.filter-tab[data-tab="${requestedStatus}"]`);
+        if (tabBtn) {
+            filterBookings(requestedStatus, tabBtn);
+        }
+    });
 </script>
 
 @endsection
