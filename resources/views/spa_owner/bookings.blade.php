@@ -19,6 +19,12 @@
         padding: 12px 18px; margin-bottom: 24px; font-size: 14px;
     }
 
+    .alert-warning {
+        background: rgba(251,192,45,0.15); color: #9b6a00;
+        border: 1px solid rgba(251,192,45,0.35); border-radius: 8px;
+        padding: 12px 18px; margin-bottom: 24px; font-size: 14px;
+    }
+
     /* Stats row */
     .stats-row {
         display: grid;
@@ -188,6 +194,10 @@
 
         @if(session('success'))
             <div class="alert-success"><i class="fas fa-check-circle"></i> {{ session('success') }}</div>
+        @endif
+
+        @if(session('warning'))
+            <div class="alert-warning"><i class="fas fa-exclamation-triangle"></i> {{ session('warning') }}</div>
         @endif
 
         @php

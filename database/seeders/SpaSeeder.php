@@ -9,7 +9,7 @@ use App\Models\User;
 class SpaSeeder extends Seeder
 {
     /**
-     * One spa per spa_owner user. Uses firstOrCreate so safe to re-run.
+     * One spa per spa_owner user. Uses updateOrCreate so values can be refreshed on re-run.
      */
     public function run(): void
     {
@@ -23,10 +23,10 @@ class SpaSeeder extends Seeder
                 'is_featured'   => true,
                 'rating'        => 4.8,
                 'review_count'  => 120,
-                'tags'          => ['Massage', 'Facial', 'Herbal Wrap', 'Himalayan'],
+                'tags'          => ['Massages', 'Facials', 'Wellness'],
                 'phone'         => '+977-9801234567',
                 'email'         => 'serenity@spalush.com',
-                'opening_hours' => 'Mon–Sun  9:00am – 8:00pm',
+                'opening_hours' => 'Daily 9:00am - 9:00pm',
                 'is_active'     => true,
                 'status'        => 'approved',
             ],
@@ -39,10 +39,10 @@ class SpaSeeder extends Seeder
                 'is_featured'   => true,
                 'rating'        => 4.9,
                 'review_count'  => 95,
-                'tags'          => ['Hot Stone', 'Aromatherapy', 'Yoga', 'Holistic'],
+                'tags'          => ['Massages', 'Facials', 'Wellness'],
                 'phone'         => '+977-9807654321',
                 'email'         => 'lotus@spalush.com',
-                'opening_hours' => 'Mon–Sat  10:00am – 9:00pm',
+                'opening_hours' => 'Daily 9:00am - 9:00pm',
                 'is_active'     => true,
                 'status'        => 'approved',
             ],
@@ -55,10 +55,10 @@ class SpaSeeder extends Seeder
                 'is_featured'   => false,
                 'rating'        => 4.7,
                 'review_count'  => 68,
-                'tags'          => ['Deep Tissue', 'Ayurvedic', 'Hydrotherapy', 'Lakeside'],
+                'tags'          => ['Massages', 'Facials', 'Wellness'],
                 'phone'         => '+977-9811223344',
                 'email'         => 'alpine@spalush.com',
-                'opening_hours' => 'Daily  8:00am – 7:00pm',
+                'opening_hours' => 'Daily 9:00am - 9:00pm',
                 'is_active'     => true,
                 'status'        => 'pending',
             ],
@@ -71,10 +71,10 @@ class SpaSeeder extends Seeder
                 'is_featured'   => false,
                 'rating'        => 4.5,
                 'review_count'  => 54,
-                'tags'          => ['Facial', 'Nail Care', 'Hair Care', 'Skin Brightening'],
+                'tags'          => ['Massages', 'Facials', 'Wellness'],
                 'phone'         => '+977-9855667788',
                 'email'         => 'goldenaura@spalush.com',
-                'opening_hours' => 'Tue–Sun  10:00am – 7:00pm',
+                'opening_hours' => 'Daily 9:00am - 9:00pm',
                 'is_active'     => true,
                 'status'        => 'pending',
             ],
@@ -87,10 +87,10 @@ class SpaSeeder extends Seeder
                 'is_featured'   => false,
                 'rating'        => 4.6,
                 'review_count'  => 42,
-                'tags'          => ['Singing Bowl', 'CBD Massage', 'Detox', 'Tibetan'],
+                'tags'          => ['Massages', 'Facials', 'Wellness'],
                 'phone'         => '+977-9899001122',
                 'email'         => 'tranquil@spalush.com',
-                'opening_hours' => 'Mon–Sun  9:00am – 9:00pm',
+                'opening_hours' => 'Daily 9:00am - 9:00pm',
                 'is_active'     => true,
                 'status'        => 'pending',
             ],
@@ -104,7 +104,7 @@ class SpaSeeder extends Seeder
                 continue;
             }
 
-            Spa::firstOrCreate(
+            Spa::updateOrCreate(
                 ['user_id' => $user->id],
                 $data
             );

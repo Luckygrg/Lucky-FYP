@@ -10,7 +10,9 @@ use App\Models\Spa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Throwable;
 
 class BookingController extends Controller
 {
@@ -205,9 +207,27 @@ class BookingController extends Controller
 
         $booking->update(['status' => $request->status]);
 
+        $mailFailed = false;
+
         if ($request->status === 'confirmed') {
             $booking->load(['customer', 'spa', 'bookingServices']);
-            Mail::to($booking->customer->email)->send(new BookingConfirmed($booking));
+
+            try {
+                Mail::to($booking->customer->email)->send(new BookingConfirmed($booking));
+            } catch (Throwable $e) {
+                $mailFailed = true;
+
+                Log::error('Booking confirmation email failed.', [
+                    'booking_id' => $booking->id,
+                    'customer_id' => $booking->user_id,
+                    'customer_email' => $booking->customer->email,
+                    'error' => $e->getMessage(),
+                ]);
+            }
+        }
+
+        if ($request->status === 'confirmed' && $mailFailed) {
+            return back()->with('success', 'Booking status updated to Confirmed.')->with('warning', 'Customer email could not be sent. Please check mail settings.');
         }
 
         return back()->with('success', 'Booking status updated to ' . ucfirst($request->status) . '.');
