@@ -190,7 +190,7 @@
         <a href="{{ route('admin.spa_owners') }}" class="menu-item"><span></span> Spa Owners</a>
         <a href="{{ route('admin.services') }}" class="menu-item active"><span></span> Services</a>
         <a href="{{ route('admin.categories.index') }}" class="menu-item"><span></span> Spa Categories</a>
-        <a href="#" class="menu-item" style="margin-top:0;"><span></span> Settings</a>
+        <a href="{{ route('admin.settings') }}" class="menu-item" style="margin-top:0;"><span></span> Settings</a>
 
         <form action="{{ route('logout') }}" method="POST" style="margin-top: auto; padding: 0 30px;">
             @csrf

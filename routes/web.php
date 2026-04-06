@@ -63,6 +63,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::post('/spas/{spa}/approve', [AdminController::class, 'approveSpa'])->name('spa.approve');
     Route::post('/spas/{spa}/disapprove', [AdminController::class, 'disapproveSpa'])->name('spa.disapprove');
     Route::get('/services', [AdminController::class, 'services'])->name('services');
+    Route::get('/settings', [AdminController::class, 'settings'])->name('settings');
+    Route::put('/settings/profile', [AdminController::class, 'updateProfile'])->name('settings.updateProfile');
+    Route::put('/settings/password', [AdminController::class, 'updatePassword'])->name('settings.updatePassword');
 
     // Spa Categories CRUD
     Route::get('/categories', [SpaCategoryController::class, 'index'])->name('categories.index');

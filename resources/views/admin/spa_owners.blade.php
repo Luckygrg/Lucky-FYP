@@ -253,7 +253,7 @@
         </a>
         {{-- <a href="#" class="menu-item"> --}}
         </a>
-        <a href="#" class="menu-item">
+        <a href="{{ route('admin.settings') }}" class="menu-item">
             <span></span> Settings
         </a>
 

@@ -253,7 +253,7 @@
         <a href="{{ route('admin.spa_owners') }}" class="menu-item">Spa Owners</a>
         <a href="{{ route('admin.services') }}" class="menu-item">Services</a>
         <a href="{{ route('admin.categories.index') }}" class="menu-item">Spa Categories</a>
-        <a href="#" class="menu-item">Settings</a>
+        <a href="{{ route('admin.settings') }}" class="menu-item">Settings</a>
 
         <form action="{{ route('logout') }}" method="POST" style="margin-top: auto; padding: 0 30px;">
             @csrf
@@ -301,7 +301,7 @@
                 <a href="{{ route('admin.spa_owners') }}" class="action-btn">Manage Spa Owners</a>
                 <a href="{{ route('admin.services') }}" class="action-btn">Manage Services</a>
                 <a href="{{ route('admin.categories.index') }}" class="action-btn">Manage Spa Categories</a>
-                <a href="#" class="action-btn">Settings</a>
+                <a href="{{ route('admin.settings') }}" class="action-btn">Settings</a>
             </div>
         </div>
 
