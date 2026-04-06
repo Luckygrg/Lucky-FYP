@@ -2,7 +2,9 @@
 <footer class="luxury-footer minimal-footer">
     <div class="luxury-footer-container minimal-footer-container">
         <div class="footer-brand">
-            <div class="footer-logo" style="font-family:'Georgia',serif;font-size:2.1rem;color:#C8916A;font-weight:500;">SpaLush</div>
+             <img src="{{ asset('assets/img/logo.png') }}" alt="SpaLush" style="height:60px;margin-bottom:4px;">
+            <div class="footer-logo" style="font-family:'Georgia',serif;font-size:1.6rem;color:#C8916A;font-weight:500;">SpaLush</div>
+
             <div class="footer-tagline" style="color:#9c8b7a;letter-spacing:1.5px;font-size:1rem;margin-top:2px;">RESTORE. RENEW. RETURN.</div>
         </div>
         <nav class="footer-nav">
@@ -10,11 +12,12 @@
             <a href="{{ route('spas.index') }}" class="footer-link">Our Spas</a>
             <a href="{{ route('about') }}" class="footer-link">About</a>
         </nav>
+       
         <div class="footer-social">
-            <a href="#" aria-label="Facebook" class="footer-social-btn">FB</a>
-            <a href="#" aria-label="Instagram" class="footer-social-btn">IG</a>
-            <a href="#" aria-label="Twitter" class="footer-social-btn">TW</a>
-            <a href="#" aria-label="LinkedIn" class="footer-social-btn">IN</a>
+            <a href="#" aria-label="Facebook" class="footer-social-btn"><img src="{{ asset('assets/img/Fb.jpg') }}" alt="Facebook"></a>
+            <a href="#" aria-label="Instagram" class="footer-social-btn"><img src="{{ asset('assets/img/Insta.jpg') }}" alt="Instagram"></a>
+            <a href="#" aria-label="Twitter" class="footer-social-btn"><img src="{{ asset('assets/img/TW.jpg') }}" alt="Twitter"></a>
+            <a href="#" aria-label="LinkedIn" class="footer-social-btn"><img src="{{ asset('assets/img/LINK.jpg') }}" alt="LinkedIn"></a>
         </div>
         <div class="footer-divider"></div>
         <div class="footer-copyright">
@@ -78,16 +81,20 @@
     width: 36px;
     height: 36px;
     border: 1px solid #C8916A;
-    color: #C8916A;
     border-radius: 50%;
-    font-size: 13px;
-    font-weight: 500;
+    overflow: hidden;
     background: transparent;
-    transition: background 0.2s, color 0.2s;
+    transition: border-color 0.2s, opacity 0.2s;
+}
+.footer-social-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
 }
 .footer-social-btn:hover {
-    background: #C8916A;
-    color: #fff;
+    border-color: #a0704e;
+    opacity: 0.85;
 }
 .footer-divider {
     border-top: 1px solid #e5d8c8;
