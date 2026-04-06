@@ -69,14 +69,135 @@ class SpaOwnerController extends Controller
                 ->orderByDesc('total')
                 ->limit(8)
                 ->get();
+
+            // Monthly revenue for the last 6 months
+            $monthlyRevenue = \App\Models\Booking::where('spa_id', $spa->id)
+                ->where('payment_status', 'paid')
+                ->where('booking_date', '>=', now()->subMonths(5)->startOfMonth())
+                ->select(
+                    \Illuminate\Support\Facades\DB::raw("DATE_FORMAT(booking_date, '%Y-%m') as month"),
+                    \Illuminate\Support\Facades\DB::raw('SUM(total_price) as revenue')
+                )
+                ->groupBy('month')
+                ->orderBy('month')
+                ->get()
+                ->keyBy('month');
+
+            // Build full 6-month array (fill missing months with 0)
+            $revenueLabels = [];
+            $revenueData   = [];
+            for ($i = 5; $i >= 0; $i--) {
+                $key = now()->subMonths($i)->format('Y-m');
+                $revenueLabels[] = now()->subMonths($i)->format('M Y');
+                $revenueData[]   = (float) ($monthlyRevenue[$key]->revenue ?? 0);
+            }
         } else {
-            $topServices = collect();
+            $topServices    = collect();
+            $revenueLabels  = [];
+            $revenueData    = [];
         }
 
         return view('spa_owner.dashboard', compact(
             'spa', 'servicesCount', 'bookingsCount',
-            'customersCount', 'totalEarning', 'recentCustomers', 'topServices'
+            'customersCount', 'totalEarning', 'recentCustomers', 'topServices',
+            'revenueLabels', 'revenueData'
         ));
+    }
+
+    /* ── Dashboard Chart Data (AJAX) ──────────────────────────────────────── */
+
+    public function chartData(Request $request)
+    {
+        $spa = Spa::where('user_id', Auth::id())->first();
+        $period = $request->query('period', 'monthly');
+
+        $revenueLabels = [];
+        $revenueData   = [];
+        $serviceLabels = [];
+        $serviceData   = [];
+
+        if ($spa) {
+            $DB = \Illuminate\Support\Facades\DB::class;
+
+            if ($period === 'daily') {
+                // Last 14 days
+                $rows = \App\Models\Booking::where('spa_id', $spa->id)
+                    ->where('payment_status', 'paid')
+                    ->where('booking_date', '>=', now()->subDays(13)->toDateString())
+                    ->select(
+                        $DB::raw("DATE(booking_date) as d"),
+                        $DB::raw('SUM(total_price) as revenue')
+                    )
+                    ->groupBy('d')->orderBy('d')->get()->keyBy('d');
+
+                for ($i = 13; $i >= 0; $i--) {
+                    $date = now()->subDays($i);
+                    $key  = $date->toDateString();
+                    $revenueLabels[] = $date->format('d M');
+                    $revenueData[]   = (float) ($rows[$key]->revenue ?? 0);
+                }
+
+                // Top services (last 14 days)
+                $svcRows = \App\Models\BookingService::whereHas('booking', fn($q) => $q->where('spa_id', $spa->id)->where('booking_date', '>=', now()->subDays(13)->toDateString()))
+                    ->select('service_name', $DB::raw('count(*) as total'))
+                    ->groupBy('service_name')->orderByDesc('total')->limit(8)->get();
+
+            } elseif ($period === 'weekly') {
+                // Last 8 weeks
+                $rows = \App\Models\Booking::where('spa_id', $spa->id)
+                    ->where('payment_status', 'paid')
+                    ->where('booking_date', '>=', now()->subWeeks(7)->startOfWeek()->toDateString())
+                    ->select(
+                        $DB::raw("DATE_FORMAT(booking_date, '%x-%v') as w"),
+                        $DB::raw('SUM(total_price) as revenue')
+                    )
+                    ->groupBy('w')->orderBy('w')->get()->keyBy('w');
+
+                for ($i = 7; $i >= 0; $i--) {
+                    $weekStart = now()->subWeeks($i)->startOfWeek();
+                    $key       = $weekStart->format('Y-W');
+                    $isoKey    = $weekStart->format('o') . '-' . $weekStart->format('W');
+                    $revenueLabels[] = $weekStart->format('d M');
+                    $revenueData[]   = (float) ($rows[$isoKey]->revenue ?? $rows[$key]->revenue ?? 0);
+                }
+
+                // Top services (last 8 weeks)
+                $svcRows = \App\Models\BookingService::whereHas('booking', fn($q) => $q->where('spa_id', $spa->id)->where('booking_date', '>=', now()->subWeeks(7)->startOfWeek()->toDateString()))
+                    ->select('service_name', $DB::raw('count(*) as total'))
+                    ->groupBy('service_name')->orderByDesc('total')->limit(8)->get();
+
+            } else {
+                // Monthly — last 6 months
+                $rows = \App\Models\Booking::where('spa_id', $spa->id)
+                    ->where('payment_status', 'paid')
+                    ->where('booking_date', '>=', now()->subMonths(5)->startOfMonth())
+                    ->select(
+                        $DB::raw("DATE_FORMAT(booking_date, '%Y-%m') as m"),
+                        $DB::raw('SUM(total_price) as revenue')
+                    )
+                    ->groupBy('m')->orderBy('m')->get()->keyBy('m');
+
+                for ($i = 5; $i >= 0; $i--) {
+                    $key = now()->subMonths($i)->format('Y-m');
+                    $revenueLabels[] = now()->subMonths($i)->format('M Y');
+                    $revenueData[]   = (float) ($rows[$key]->revenue ?? 0);
+                }
+
+                $svcRows = \App\Models\BookingService::whereHas('booking', fn($q) => $q->where('spa_id', $spa->id))
+                    ->select('service_name', $DB::raw('count(*) as total'))
+                    ->groupBy('service_name')->orderByDesc('total')->limit(8)->get();
+            }
+
+            $serviceLabels = $svcRows->pluck('service_name');
+            $serviceData   = $svcRows->pluck('total');
+        }
+
+        return response()->json([
+            'revenueLabels'  => $revenueLabels,
+            'revenueData'    => $revenueData,
+            'serviceLabels'  => $serviceLabels,
+            'serviceData'    => $serviceData,
+        ]);
     }
 
     /* ── Edit / Update Spa ───────────────────────────────────────────────────── */

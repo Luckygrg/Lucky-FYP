@@ -76,8 +76,52 @@
     }
     .action-btn:hover { background: #AE7A55; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(200,145,106,0.3); }
 
-    /* Chart */
-    .chart-body { padding: 20px 24px; height: 260px; }
+    /* Charts row */
+    .charts-section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+    }
+    .charts-section-header h2 {
+        font-size: 17px;
+        font-weight: 300;
+        color: #1C1008;
+        font-family: 'Georgia', serif;
+        letter-spacing: 0.5px;
+        margin: 0;
+    }
+    .period-filter {
+        display: flex;
+        gap: 6px;
+    }
+    .period-btn {
+        padding: 6px 16px;
+        border-radius: 18px;
+        font-size: 12px;
+        font-weight: 600;
+        border: 1px solid rgba(28,16,8,0.15);
+        color: rgba(28,16,8,0.55);
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-transform: capitalize;
+    }
+    .period-btn:hover { border-color: #C8916A; color: #C8916A; }
+    .period-btn.active { background: #C8916A; border-color: #C8916A; color: #1C1008; }
+    .charts-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+        margin-bottom: 25px;
+    }
+    .charts-row .card { margin-bottom: 0; }
+    .chart-body { padding: 20px 24px; height: 280px; }
+
+    @media (max-width: 1024px) {
+        .charts-row { grid-template-columns: 1fr; }
+        .charts-section-header { flex-direction: column; gap: 10px; align-items: flex-start; }
+    }
 
     /* Table */
     table { width: 100%; border-collapse: collapse; }
@@ -149,18 +193,40 @@
             </div>
         </div>
 
-        <!-- Most Booked Services Chart -->
-        @if($topServices->isNotEmpty())
-        <div class="card">
-            <div class="card-header">
-                <h2>Most Booked Services</h2>
-                <p>Top services booked at your spa</p>
-            </div>
-            <div class="chart-body">
-                <canvas id="servicesChart"></canvas>
+        <!-- Charts Section -->
+        <div class="charts-section-header">
+            <h2>Analytics</h2>
+            <div class="period-filter">
+                <button class="period-btn" data-period="daily" onclick="switchPeriod('daily', this)">Daily</button>
+                <button class="period-btn" data-period="weekly" onclick="switchPeriod('weekly', this)">Weekly</button>
+                <button class="period-btn active" data-period="monthly" onclick="switchPeriod('monthly', this)">Monthly</button>
             </div>
         </div>
-        @endif
+
+        <!-- Charts Row -->
+        <div class="charts-row">
+            <!-- Revenue Chart -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>Revenue Overview</h2>
+                    <p>Last 6 months</p>
+                </div>
+                <div class="chart-body">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Most Booked Services Chart -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>Most Booked Services</h2>
+                    <p>Top services at your spa</p>
+                </div>
+                <div class="chart-body">
+                    <canvas id="servicesChart"></canvas>
+                </div>
+            </div>
+        </div>
 
         <!-- Recent Customers -->
         <div class="card">
@@ -200,12 +266,47 @@
     </div>
 </div>
 
-@if($topServices->isNotEmpty())
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
     const palette = ['#C8916A','#AE7A55','#D4A882','#8B5E3C','#E6C4A8','#7A4F2D','#BF8A6A','#9E6B45'];
+    const chartUrl = @json(route('spa_owner.dashboard.chartData'));
 
-    new Chart(document.getElementById('servicesChart'), {
+    // Revenue Line Chart
+    const revenueCtx = document.getElementById('revenueChart');
+    let revenueChart = new Chart(revenueCtx, {
+        type: 'line',
+        data: {
+            labels: {!! json_encode($revenueLabels) !!},
+            datasets: [{
+                label: 'Revenue (Rs.)',
+                data: {!! json_encode($revenueData) !!},
+                borderColor: '#C8916A',
+                backgroundColor: 'rgba(200,145,106,0.15)',
+                fill: true,
+                tension: 0.35,
+                pointBackgroundColor: '#C8916A',
+                pointRadius: 5,
+                pointHoverRadius: 7,
+                borderWidth: 2.5,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: { callbacks: { label: ctx => ` Rs. ${ctx.parsed.y.toLocaleString()}` } }
+            },
+            scales: {
+                x: { ticks: { color: 'rgba(28,16,8,0.45)', font: { size: 12 } }, grid: { display: false } },
+                y: { beginAtZero: true, ticks: { color: 'rgba(28,16,8,0.45)', callback: v => 'Rs. ' + v.toLocaleString() }, grid: { color: 'rgba(0,0,0,0.05)' } }
+            }
+        }
+    });
+
+    // Most Booked Services Bar Chart
+    const svcCtx = document.getElementById('servicesChart');
+    let servicesChart = new Chart(svcCtx, {
         type: 'bar',
         data: {
             labels: {!! json_encode($topServices->pluck('service_name')) !!},
@@ -218,20 +319,38 @@
             }]
         },
         options: {
-            indexAxis: 'y',
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
                 legend: { display: false },
-                tooltip: { callbacks: { label: ctx => ` ${ctx.parsed.x} bookings` } }
+                tooltip: { callbacks: { label: ctx => ` ${ctx.parsed.y} bookings` } }
             },
             scales: {
-                x: { beginAtZero: true, ticks: { stepSize: 1, color: 'rgba(28,16,8,0.45)' }, grid: { color: 'rgba(0,0,0,0.05)' } },
-                y: { ticks: { color: 'rgba(28,16,8,0.65)', font: { size: 13 } }, grid: { display: false } }
+                x: { ticks: { color: 'rgba(28,16,8,0.65)', font: { size: 11 } }, grid: { display: false } },
+                y: { beginAtZero: true, ticks: { stepSize: 1, color: 'rgba(28,16,8,0.45)' }, grid: { color: 'rgba(0,0,0,0.05)' } }
             }
         }
     });
+
+    function switchPeriod(period, btn) {
+        document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        fetch(`${chartUrl}?period=${period}`)
+            .then(r => r.json())
+            .then(data => {
+                // Update revenue chart
+                revenueChart.data.labels = data.revenueLabels;
+                revenueChart.data.datasets[0].data = data.revenueData;
+                revenueChart.update();
+
+                // Update services chart
+                servicesChart.data.labels = data.serviceLabels;
+                servicesChart.data.datasets[0].data = data.serviceData;
+                servicesChart.data.datasets[0].backgroundColor = palette.slice(0, data.serviceLabels.length);
+                servicesChart.update();
+            });
+    }
 </script>
-@endif
 
 @endsection

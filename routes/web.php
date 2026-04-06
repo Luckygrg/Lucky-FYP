@@ -75,6 +75,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 // Spa Owner Routes
 Route::middleware(['auth', 'role:spa_owner'])->prefix('spa-owner')->name('spa_owner.')->group(function () {
     Route::get('/dashboard', [SpaOwnerController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard/chart-data', [SpaOwnerController::class, 'chartData'])->name('dashboard.chartData');
 
     // Spa management
     Route::get('/spas/create', [SpaController::class, 'create'])->name('spas.create');
