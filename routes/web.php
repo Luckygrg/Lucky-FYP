@@ -57,6 +57,7 @@ Route::post('/reset-password', [PasswordResetController::class, 'resetPassword']
 // Admin Routes
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin');
+    Route::get('/admin/chart-data', [AdminController::class, 'chartData'])->name('admin.chartData');
     Route::get('/spa-owners', [AdminController::class, 'spaOwners'])->name('spa_owners');
     Route::get('/spa-owners/{user}', [AdminController::class, 'showSpaOwner'])->name('spa_owner_show');
     Route::post('/spas/{spa}/approve', [AdminController::class, 'approveSpa'])->name('spa.approve');

@@ -126,6 +126,39 @@
     }
 
     /* ── Chart Cards ── */
+    .charts-section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 30px;
+        margin-bottom: 16px;
+    }
+    .charts-section-header h2 {
+        font-size: 17px;
+        font-weight: 300;
+        color: #1C1008;
+        font-family: 'Georgia', serif;
+        letter-spacing: 0.5px;
+        margin: 0;
+    }
+    .period-filter {
+        display: flex;
+        gap: 6px;
+    }
+    .period-btn {
+        padding: 6px 16px;
+        border-radius: 18px;
+        font-size: 12px;
+        font-weight: 600;
+        border: 1px solid rgba(28,16,8,0.15);
+        color: rgba(28,16,8,0.55);
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-transform: capitalize;
+    }
+    .period-btn:hover { border-color: #C8916A; color: #C8916A; }
+    .period-btn.active { background: #C8916A; border-color: #C8916A; color: #1C1008; }
     .charts-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -202,7 +235,7 @@
     .action-btn:hover { background: #AE7A55; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(200,145,106,0.3); }
 
     @media (max-width: 1100px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 900px)  { .charts-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 900px)  { .charts-grid { grid-template-columns: 1fr; } .charts-section-header { flex-direction: column; gap: 10px; align-items: flex-start; } }
     @media (max-width: 768px) {
         .dashboard-container { flex-direction: column; }
         .sidebar { width: 100%; }
@@ -273,6 +306,14 @@
         </div>
 
         <!-- Charts -->
+        <div class="charts-section-header">
+            <h2>Analytics</h2>
+            <div class="period-filter">
+                <button class="period-btn" data-period="daily" onclick="switchPeriod('daily', this)">Daily</button>
+                <button class="period-btn" data-period="weekly" onclick="switchPeriod('weekly', this)">Weekly</button>
+                <button class="period-btn active" data-period="monthly" onclick="switchPeriod('monthly', this)">Monthly</button>
+            </div>
+        </div>
         <div class="charts-grid">
             <div class="chart-card">
                 <div class="chart-card-header">
@@ -305,13 +346,14 @@
     </div>
 </div>
 
-@if($bookingsPerSpa->isNotEmpty() || $bookingsPerCategory->isNotEmpty())
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
     const palette = ['#C8916A','#AE7A55','#D4A882','#8B5E3C','#E6C4A8','#7A4F2D','#BF8A6A','#9E6B45','#5C3A1E','#F0DDD0'];
+    const chartUrl = @json(route('admin.admin.chartData'));
 
-    @if($bookingsPerSpa->isNotEmpty())
-    new Chart(document.getElementById('spaChart'), {
+    // Bookings per Spa bar chart
+    const spaCtx = document.getElementById('spaChart');
+    let spaChart = spaCtx ? new Chart(spaCtx, {
         type: 'bar',
         data: {
             labels: {!! json_encode($bookingsPerSpa->pluck('spa')) !!},
@@ -335,11 +377,11 @@
                 x: { ticks: { color: 'rgba(28,16,8,0.55)' }, grid: { display: false } }
             }
         }
-    });
-    @endif
+    }) : null;
 
-    @if($bookingsPerCategory->isNotEmpty())
-    new Chart(document.getElementById('categoryChart'), {
+    // Most Used Categories doughnut chart
+    const catCtx = document.getElementById('categoryChart');
+    let categoryChart = catCtx ? new Chart(catCtx, {
         type: 'doughnut',
         data: {
             labels: {!! json_encode($bookingsPerCategory->pluck('category')) !!},
@@ -359,9 +401,29 @@
             },
             cutout: '62%',
         }
-    });
-    @endif
+    }) : null;
+
+    function switchPeriod(period, btn) {
+        document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        fetch(`${chartUrl}?period=${period}`)
+            .then(r => r.json())
+            .then(data => {
+                if (spaChart) {
+                    spaChart.data.labels = data.spaLabels;
+                    spaChart.data.datasets[0].data = data.spaData;
+                    spaChart.data.datasets[0].backgroundColor = palette.slice(0, data.spaLabels.length);
+                    spaChart.update();
+                }
+                if (categoryChart) {
+                    categoryChart.data.labels = data.categoryLabels;
+                    categoryChart.data.datasets[0].data = data.categoryData;
+                    categoryChart.data.datasets[0].backgroundColor = palette.slice(0, data.categoryLabels.length);
+                    categoryChart.update();
+                }
+            });
+    }
 </script>
-@endif
 
 @endsection

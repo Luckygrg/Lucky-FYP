@@ -47,6 +47,47 @@ class AdminController extends Controller
     }
 
     /**
+     * Chart data for admin dashboard (AJAX)
+     */
+    public function chartData(Request $request)
+    {
+        $period = $request->query('period', 'monthly');
+
+        if ($period === 'daily') {
+            $dateFilter = now()->subDays(13)->toDateString();
+        } elseif ($period === 'weekly') {
+            $dateFilter = now()->subWeeks(7)->startOfWeek()->toDateString();
+        } else {
+            $dateFilter = now()->subMonths(5)->startOfMonth()->toDateString();
+        }
+
+        // Bookings per spa (filtered by period)
+        $spaData = Booking::where('booking_date', '>=', $dateFilter)
+            ->select('spa_id', DB::raw('count(*) as total'))
+            ->groupBy('spa_id')
+            ->with('spa:id,name')
+            ->get()
+            ->map(fn($b) => ['spa' => $b->spa->name ?? 'Unknown', 'total' => $b->total]);
+
+        // Most used categories (filtered by period)
+        $categoryData = BookingService::join('services', 'booking_services.service_id', '=', 'services.id')
+            ->join('spa_categories', 'services.spa_category_id', '=', 'spa_categories.id')
+            ->join('bookings', 'booking_services.booking_id', '=', 'bookings.id')
+            ->where('bookings.booking_date', '>=', $dateFilter)
+            ->select('spa_categories.name as category', DB::raw('count(*) as total'))
+            ->groupBy('spa_categories.name')
+            ->orderByDesc('total')
+            ->get();
+
+        return response()->json([
+            'spaLabels'      => $spaData->pluck('spa'),
+            'spaData'        => $spaData->pluck('total'),
+            'categoryLabels' => $categoryData->pluck('category'),
+            'categoryData'   => $categoryData->pluck('total'),
+        ]);
+    }
+
+    /**
      * List all spa owners with their spa
      */
     public function spaOwners(Request $request)

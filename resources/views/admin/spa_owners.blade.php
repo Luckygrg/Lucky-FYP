@@ -251,7 +251,7 @@
         <a href="{{ route('admin.categories.index') }}" class="menu-item">
             <span></span> Spa Categories
         </a>
-        <a href="#" class="menu-item">
+        {{-- <a href="#" class="menu-item"> --}}
         </a>
         <a href="#" class="menu-item">
             <span></span> Settings
