@@ -116,19 +116,6 @@
         color: rgba(28,16,8,0.5);
     }
 
-    .featured-badge {
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        background: #C8916A;
-        color: #1C1008;
-        padding: 7px 16px;
-        border-radius: 20px;
-        font-size: 12px;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-    }
-
     .price-badge {
         position: absolute;
         top: 20px;
@@ -781,7 +768,12 @@
         justify-content: flex-end;
     }
 
-    .star-picker input { display: none; }
+    .star-picker input {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
 
     .star-picker label {
         font-size: 28px;
@@ -1039,10 +1031,6 @@
                 </div>
             @endif
 
-            @if($spa->is_featured)
-                <div class="featured-badge"><i class="fas fa-star"></i> Featured</div>
-            @endif
-
             @if($spa->price_range)
                 <div class="price-badge">{{ $spa->price_range }}</div>
             @endif
@@ -1053,8 +1041,8 @@
                 <h2>{{ $spa->name }}</h2>
                 <div class="spa-rating">
                     <i class="fas fa-star rating-star"></i>
-                    <span class="rating-number">{{ number_format($spa->rating ?? 0, 1) }}</span>
-                    <span class="rating-count">({{ $spa->review_count ?? 0 }} reviews)</span>
+                    <span class="rating-number">{{ number_format($avgRating, 1) }}</span>
+                    <span class="rating-count">({{ $totalReviews }} {{ Str::plural('review', $totalReviews) }})</span>
                 </div>
             </div>
 
@@ -1211,14 +1199,14 @@
 
         {{-- Summary row --}}
         <div class="reviews-summary">
-            <div class="reviews-big-rating">{{ number_format($spa->rating ?? 0, 1) }}</div>
+            <div class="reviews-big-rating">{{ number_format($avgRating, 1) }}</div>
             <div class="reviews-stars-block">
                 <div class="stars-row">
                     @for($i = 1; $i <= 5; $i++)
-                        {!! $i <= round($spa->rating ?? 0) ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>' !!}
+                        {!! $i <= round($avgRating) ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>' !!}
                     @endfor
                 </div>
-                <div class="review-total">{{ $spa->review_count ?? 0 }} {{ Str::plural('review', $spa->review_count ?? 0) }}</div>
+                <div class="review-total">{{ $totalReviews }} {{ Str::plural('review', $totalReviews) }}</div>
             </div>
         </div>
 

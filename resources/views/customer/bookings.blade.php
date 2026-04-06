@@ -347,7 +347,7 @@
                             </a>
                         @else
                             <span style="background:rgba(200,145,106,0.1);color:#C8916A;border:1px solid rgba(200,145,106,0.35);padding:5px 14px;border-radius:12px;font-weight:600;">
-                                <i class="fas fa-hand-holding-usd"></i> Pay at Spa selected
+                                <i class="fas fa-hand-holding-usd"></i> Pay at Spa
                             </span>
                         @endif
                     @elseif($booking->status === 'pending')

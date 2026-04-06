@@ -79,6 +79,37 @@
     .filter-tab:hover { border-color: #C8916A; color: #C8916A; }
     .filter-tab.active { background: #C8916A; border-color: #C8916A; color: #1C1008; }
 
+    .filter-row {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+
+    .payment-filter-select {
+        padding: 7px 14px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        border: 1px solid rgba(28,16,8,0.15);
+        color: rgba(28,16,8,0.6);
+        background: #FAF7F2;
+        cursor: pointer;
+        transition: all 0.2s;
+        appearance: none;
+        -webkit-appearance: none;
+        padding-right: 32px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23C8916A'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+    }
+
+    .payment-filter-select:focus {
+        outline: none;
+        border-color: #C8916A;
+    }
+
     /* Booking table */
     .bookings-table-wrap {
         background: #FFFFFF;
@@ -235,15 +266,24 @@
             </div>
         </div>
 
-        {{-- Filter Tabs --}}
-        <div class="filter-tabs">
-            @foreach(['all','pending','confirmed','completed','cancelled'] as $tab)
-                <button class="filter-tab {{ $tab === 'all' ? 'active' : '' }}"
-                        data-tab="{{ $tab }}"
-                        onclick="filterBookings('{{ $tab }}', this)">
-                    {{ ucfirst($tab) }} ({{ $counts[$tab] }})
-                </button>
-            @endforeach
+        {{-- Filters --}}
+        <div class="filter-row">
+            <div class="filter-tabs" style="margin-bottom:0;">
+                @foreach(['all','pending','confirmed','completed','cancelled'] as $tab)
+                    <button class="filter-tab {{ $tab === 'all' ? 'active' : '' }}"
+                            data-tab="{{ $tab }}"
+                            onclick="filterByStatus('{{ $tab }}', this)">
+                        {{ ucfirst($tab) }} ({{ $counts[$tab] }})
+                    </button>
+                @endforeach
+            </div>
+
+            <select class="payment-filter-select" id="paymentFilter" onchange="applyFilters()">
+                <option value="all">All Payments</option>
+                <option value="paid">Paid</option>
+                <option value="at-spa">Pay at Spa</option>
+                <option value="awaiting">Awaiting Choice</option>
+            </select>
         </div>
 
         {{-- Bookings Table --}}
@@ -261,7 +301,18 @@
                 </thead>
                 <tbody>
                     @forelse($bookings as $booking)
-                        <tr data-status="{{ $booking->status }}">
+                        @php
+                            if ($booking->payment_status === 'paid') {
+                                $paymentKey = 'paid';
+                            } elseif (!$booking->payment_choice_made) {
+                                $paymentKey = 'awaiting';
+                            } elseif ($booking->payment_option === 'pay_now') {
+                                $paymentKey = 'esewa';
+                            } else {
+                                $paymentKey = 'at-spa';
+                            }
+                        @endphp
+                        <tr data-status="{{ $booking->status }}" data-payment="{{ $paymentKey }}">
                             <td>
                                 <div class="customer-name">{{ $booking->customer->name }}</div>
                                 <div class="customer-phone"><i class="fas fa-phone" style="font-size:10px;color:#C8916A;"></i> {{ $booking->phone }}</div>
@@ -347,30 +398,31 @@
 </div>
 
 <script>
-    function filterBookings(status, btn) {
+    let activeStatus = 'all';
+
+    function applyFilters() {
+        const activePayment = document.getElementById('paymentFilter').value;
+        document.querySelectorAll('#bookingsTable tbody tr[data-status]').forEach(row => {
+            const matchStatus  = activeStatus === 'all' || row.dataset.status === activeStatus;
+            const matchPayment = activePayment === 'all' || row.dataset.payment === activePayment;
+            row.style.display = (matchStatus && matchPayment) ? '' : 'none';
+        });
+    }
+
+    function filterByStatus(status, btn) {
         document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
         btn.classList.add('active');
-
-        document.querySelectorAll('#bookingsTable tbody tr[data-status]').forEach(row => {
-            if (status === 'all' || row.dataset.status === status) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
-        });
+        activeStatus = status;
+        applyFilters();
     }
 
     document.addEventListener('DOMContentLoaded', () => {
         const allowed = ['all', 'pending', 'confirmed', 'completed', 'cancelled'];
         const requestedStatus = new URLSearchParams(window.location.search).get('status');
 
-        if (!requestedStatus || !allowed.includes(requestedStatus)) {
-            return;
-        }
-
-        const tabBtn = document.querySelector(`.filter-tab[data-tab="${requestedStatus}"]`);
-        if (tabBtn) {
-            filterBookings(requestedStatus, tabBtn);
+        if (requestedStatus && allowed.includes(requestedStatus)) {
+            const tabBtn = document.querySelector(`.filter-tab[data-tab="${requestedStatus}"]`);
+            if (tabBtn) filterByStatus(requestedStatus, tabBtn);
         }
     });
 </script>

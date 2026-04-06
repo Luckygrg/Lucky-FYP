@@ -278,7 +278,7 @@
                         </div>
                         <div class="detail-row">
                             <span class="detail-label">Rating</span>
-                            <span class="detail-value">{{ $spa->rating }} ({{ $spa->review_count }} reviews)</span>
+                            <span class="detail-value">{{ number_format($spa->reviews()->avg('rating') ?? 0, 1) }} ({{ $spa->reviews()->count() }} {{ Str::plural('review', $spa->reviews()->count()) }})</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-label">Is Active</span>

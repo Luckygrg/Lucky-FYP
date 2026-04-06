@@ -85,19 +85,6 @@
         object-fit: cover;
     }
     
-    .featured-badge {
-        position: absolute;
-        top: 15px;
-        left: 15px;
-        background: #C8916A;
-        color: #1C1008;
-        padding: 6px 15px;
-        border-radius: 20px;
-        font-size: 12px;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-    }
-    
     .price-badge {
         position: absolute;
         top: 15px;
@@ -283,12 +270,6 @@
                             <img src="{{ asset('storage/' . $spa->image) }}" alt="{{ $spa->name }}">
                         @endif
                         
-                        @if($spa->is_featured)
-                            <div class="featured-badge">
-                                <i class="fas fa-star"></i> Featured
-                            </div>
-                        @endif
-                        
                         <div class="price-badge">{{ $spa->price_range }}</div>
                         
                         <div class="favorite-btn">
@@ -317,8 +298,8 @@
                         <div class="spa-footer">
                             <div class="spa-rating">
                                 <i class="fas fa-star rating-star"></i>
-                                <span class="rating-number">{{ number_format($spa->rating, 1) }}</span>
-                                <span class="rating-count">({{ $spa->review_count }} reviews)</span>
+                                <span class="rating-number">{{ number_format($spa->reviews_avg_rating ?? 0, 1) }}</span>
+                                <span class="rating-count">({{ $spa->reviews_count ?? 0 }} {{ Str::plural('review', $spa->reviews_count ?? 0) }})</span>
                             </div>
                             
                             <a href="{{ route('spas.show', $spa->id) }}" class="book-btn">See More</a>

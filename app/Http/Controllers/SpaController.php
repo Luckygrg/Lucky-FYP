@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Spa;
-use App\Models\Service;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,8 +16,10 @@ class SpaController extends Controller
     {
         $spas = Spa::where('is_active', true)
             ->where('status', 'approved')
+            ->withCount('reviews')
+            ->withAvg('reviews', 'rating')
             ->orderBy('is_featured', 'desc')
-            ->orderBy('rating', 'desc')
+            ->orderByDesc('reviews_avg_rating')
             ->get();
             
         return view('spas.index', compact('spas'));
@@ -90,6 +91,9 @@ class SpaController extends Controller
             ->latest()
             ->get();
 
+        $totalReviews = $reviews->count();
+        $avgRating = $totalReviews > 0 ? round($reviews->avg('rating'), 1) : 0;
+
         // For authenticated customers: find completed bookings at this spa
         // that don't already have a review (they can still write one)
         $reviewableBookings = collect();
@@ -109,6 +113,6 @@ class SpaController extends Controller
             $existingReview = $reviews->where('user_id', Auth::id())->first();
         }
 
-        return view('spas.show', compact('spa', 'reviews', 'reviewableBookings', 'existingReview'));
+        return view('spas.show', compact('spa', 'reviews', 'reviewableBookings', 'existingReview', 'avgRating', 'totalReviews'));
     }
 }
