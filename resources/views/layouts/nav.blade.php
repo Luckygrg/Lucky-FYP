@@ -11,6 +11,7 @@
                     <a href="/" class="luxury-nav-link">Home</a>
                     <a href="{{ route('spas.index') }}" class="luxury-nav-link">Our Spas</a>
                     <a href="{{ route('about') }}" class="luxury-nav-link">About</a>
+                    <a href="{{ route('contact') }}" class="luxury-nav-link">Contact</a>
                     <a href="{{ route('userlogin') }}" class="luxury-nav-link">Login</a>
                     <a href="{{ route('role.selection') }}" class="luxury-nav-btn">Register</a>
                 @endguest
@@ -19,6 +20,7 @@
                     <a href="/" class="luxury-nav-link">Home</a>
                     <a href="{{ route('spas.index') }}" class="luxury-nav-link">Our Spas</a>
                     <a href="{{ route('about') }}" class="luxury-nav-link">About</a>
+                    <a href="{{ route('contact') }}" class="luxury-nav-link">Contact</a>
                     @if(Auth::user()->role === 'customer')
                         <a href="{{ route('customer.bookings') }}" class="luxury-nav-link">My Bookings</a>
                     @elseif(Auth::user()->role === 'spa_owner')

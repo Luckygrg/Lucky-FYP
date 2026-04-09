@@ -11,6 +11,7 @@
             <a href="/" class="footer-link">Home</a>
             <a href="{{ route('spas.index') }}" class="footer-link">Our Spas</a>
             <a href="{{ route('about') }}" class="footer-link">About</a>
+            <a href="{{ route('contact') }}" class="footer-link">Contact</a>
         </nav>
        
         <div class="footer-social">
