@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\BookingService;
+use App\Models\ContactMessage;
 use App\Models\Spa;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -38,13 +39,18 @@ class AdminController extends Controller
             ->orderByDesc('total')
             ->get();
 
+        $recentMessages = ContactMessage::latest()->take(5)->get();
+        $unreadCount    = ContactMessage::where('is_read', false)->count();
+
         return view('admin.dashboard', compact(
             'totalSpaOwners',
             'totalCustomers',
             'totalSpas',
             'pendingSpas',
             'bookingsPerSpa',
-            'bookingsPerCategory'
+            'bookingsPerCategory',
+            'recentMessages',
+            'unreadCount'
         ));
     }
 

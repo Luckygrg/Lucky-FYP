@@ -242,6 +242,72 @@
         .main-content { padding: 20px; }
         .stats-grid { grid-template-columns: repeat(2, 1fr); }
     }
+
+    /* ── Contact Messages Section ── */
+    .messages-section { margin-top: 30px; margin-bottom: 30px; }
+    .messages-card {
+        background: #FFFFFF;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        border: 1px solid rgba(200,145,106,0.15);
+        overflow: hidden;
+    }
+    .messages-card-header {
+        padding: 18px 24px;
+        border-bottom: 1px solid rgba(28,16,8,0.08);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .messages-card-header h2 {
+        font-size: 17px;
+        font-weight: 300;
+        color: #1C1008;
+        font-family: 'Georgia', serif;
+        letter-spacing: 0.5px;
+        margin: 0;
+    }
+    .unread-badge {
+        background: #C8916A;
+        color: #fff;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 12px;
+        margin-left: 10px;
+    }
+    .msg-list { padding: 0; margin: 0; list-style: none; }
+    .msg-item {
+        padding: 16px 24px;
+        border-bottom: 1px solid rgba(28,16,8,0.06);
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        transition: background 0.2s;
+    }
+    .msg-item:last-child { border-bottom: none; }
+    .msg-item:hover { background: rgba(200,145,106,0.04); }
+    .msg-item.unread { background: rgba(200,145,106,0.06); }
+    .msg-avatar {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: rgba(200,145,106,0.15);
+        color: #C8916A;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 14px;
+        flex-shrink: 0;
+    }
+    .msg-content { flex: 1; min-width: 0; }
+    .msg-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+    .msg-name { font-weight: 600; font-size: 14px; color: #1C1008; }
+    .msg-time { font-size: 12px; color: rgba(28,16,8,0.35); }
+    .msg-subject { font-size: 13px; color: #555; margin-bottom: 2px; }
+    .msg-preview { font-size: 12px; color: rgba(28,16,8,0.4); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .msg-empty { padding: 40px; text-align: center; color: rgba(28,16,8,0.3); font-size: 14px; }
 </style>
 
 <div class="dashboard-container">
@@ -341,6 +407,34 @@
                         <canvas id="categoryChart"></canvas>
                     @endif
                 </div>
+            </div>
+        </div>
+
+        <!-- Contact Messages -->
+        <div class="messages-section">
+            <div class="messages-card">
+                <div class="messages-card-header">
+                    <h2>Recent Contact Messages @if($unreadCount > 0)<span class="unread-badge">{{ $unreadCount }} new</span>@endif</h2>
+                </div>
+                @if($recentMessages->isEmpty())
+                    <div class="msg-empty">No contact messages yet</div>
+                @else
+                    <ul class="msg-list">
+                        @foreach($recentMessages as $msg)
+                            <li class="msg-item {{ !$msg->is_read ? 'unread' : '' }}">
+                                <div class="msg-avatar">{{ strtoupper(substr($msg->name, 0, 1)) }}</div>
+                                <div class="msg-content">
+                                    <div class="msg-top">
+                                        <span class="msg-name">{{ $msg->name }}</span>
+                                        <span class="msg-time">{{ $msg->created_at->diffForHumans() }}</span>
+                                    </div>
+                                    <div class="msg-subject">{{ $msg->subject }}</div>
+                                    <div class="msg-preview">{{ Str::limit($msg->message, 80) }}</div>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
             </div>
         </div>
     </div>

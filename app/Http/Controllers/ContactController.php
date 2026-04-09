@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContactMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -21,6 +22,8 @@ class ContactController extends Controller
             'subject' => 'required|string|max:255',
             'message' => 'required|string|max:5000',
         ]);
+
+        ContactMessage::create($validated);
 
         Mail::raw(
             "Name: {$validated['name']}\nEmail: {$validated['email']}\nPhone: " . ($validated['phone'] ?? 'N/A') . "\n\n{$validated['message']}",
