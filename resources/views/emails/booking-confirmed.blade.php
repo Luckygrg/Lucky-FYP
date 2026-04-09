@@ -4,221 +4,130 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Confirmed</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        .email-container {
-            max-width: 600px;
-            margin: 40px auto;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .email-header {
-            background: linear-gradient(135deg, #FAF7F2 0%, #F5EEE4 100%);
-            padding: 40px 30px;
-            text-align: center;
-            border-bottom: 3px solid #C8916A;
-        }
-        .email-header h1 {
-            color: #C8916A;
-            margin: 0 0 8px;
-            font-size: 28px;
-            font-weight: 300;
-            letter-spacing: 3px;
-            font-family: Georgia, serif;
-        }
-        .email-header .confirmed-badge {
-            display: inline-block;
-            background: rgba(67,160,71,0.12);
-            color: #2e7d32;
-            border: 1px solid rgba(67,160,71,0.4);
-            padding: 5px 18px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-        .email-body {
-            padding: 36px 30px;
-        }
-        .email-body h2 {
-            color: #1C1008;
-            font-size: 22px;
-            margin-bottom: 12px;
-            font-family: Georgia, serif;
-            font-weight: 400;
-        }
-        .email-body p {
-            color: #555;
-            font-size: 15px;
-            margin-bottom: 16px;
-        }
-        .booking-details {
-            background: #FAF7F2;
-            border: 1px solid rgba(200,145,106,0.2);
-            border-radius: 8px;
-            padding: 20px 24px;
-            margin: 24px 0;
-        }
-        .booking-details h3 {
-            color: #C8916A;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin: 0 0 16px;
-            font-family: Georgia, serif;
-        }
-        .detail-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(200,145,106,0.1);
-            font-size: 14px;
-        }
-        .detail-row:last-child { border-bottom: none; }
-        .detail-label { color: #999; }
-        .detail-value { color: #1C1008; font-weight: 600; }
-        .payment-section {
-            margin: 24px 0;
-        }
-        .payment-section p {
-            font-size: 15px;
-            color: #444;
-            margin-bottom: 16px;
-        }
-        .payment-options {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .btn-esewa {
-            display: inline-block;
-            padding: 12px 28px;
-            background: #C8916A;
-            color: #1C1008 !important;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 14px;
-            letter-spacing: 0.5px;
-        }
-        .btn-spa {
-            display: inline-block;
-            padding: 12px 28px;
-            background: transparent;
-            color: #C8916A !important;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 14px;
-            border: 2px solid #C8916A;
-            letter-spacing: 0.5px;
-        }
-        .info-box {
-            background: rgba(200,145,106,0.08);
-            border-left: 4px solid #C8916A;
-            padding: 14px 18px;
-            border-radius: 4px;
-            margin: 20px 0;
-        }
-        .info-box p {
-            margin: 0;
-            color: #7A4F2D;
-            font-size: 14px;
-        }
-        .email-footer {
-            background: #f8f9fa;
-            padding: 28px 30px;
-            text-align: center;
-            border-top: 1px solid #e8e8e8;
-        }
-        .email-footer p {
-            color: #999;
-            font-size: 13px;
-            margin: 4px 0;
-        }
-    </style>
 </head>
-<body>
-    <div class="email-container">
+<body style="font-family: Arial, sans-serif; line-height: 1.6; background-color: #f4f4f4; margin: 0; padding: 0;">
 
-        <div class="email-header">
-            <h1>SPALUSH</h1>
-            <span class="confirmed-badge">Booking Confirmed</span>
-        </div>
+    {{-- Outer wrapper --}}
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f4f4f4; padding: 40px 0;">
+        <tr>
+            <td align="center">
 
-        <div class="email-body">
-            <h2>Great news, {{ $booking->customer->name }}!</h2>
-            <p>Your booking at <strong>{{ $booking->spa->name }}</strong> has been approved by the spa owner. You can now proceed with your payment.</p>
+                {{-- Main container --}}
+                <table width="600" cellpadding="0" cellspacing="0" border="0" style="background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
 
-            <div class="booking-details">
-                <h3>Booking Summary</h3>
-                <div class="detail-row">
-                    <span class="detail-label">Spa</span>
-                    <span class="detail-value">{{ $booking->spa->name }}</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Date</span>
-                    <span class="detail-value">{{ $booking->booking_date->format('D, d M Y') }}</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Time</span>
-                    <span class="detail-value">{{ \Carbon\Carbon::parse($booking->booking_time)->format('h:i A') }}</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Services</span>
-                    <span class="detail-value">{{ $booking->bookingServices->pluck('service_name')->join(', ') }}</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Duration</span>
-                    <span class="detail-value">{{ $booking->total_duration_minutes }} minutes</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Total Amount</span>
-                    <span class="detail-value">Rs. {{ number_format($booking->total_price, 0) }}</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Payment Preference</span>
-                    <span class="detail-value">{{ $booking->payment_option === 'pay_now' ? 'Pay via eSewa' : 'Pay at Spa' }}</span>
-                </div>
-            </div>
+                    {{-- Header --}}
+                    <tr>
+                        <td style="background: linear-gradient(135deg, #FAF7F2 0%, #F5EEE4 100%); padding: 44px 30px 36px; text-align: center; border-bottom: 3px solid #C8916A;">
+                            <h1 style="color: #C8916A; margin: 0 0 16px; font-size: 30px; font-weight: 300; letter-spacing: 4px; font-family: Georgia, serif;">SPALUSH</h1>
+                            <table cellpadding="0" cellspacing="0" border="0" align="center">
+                                <tr>
+                                    <td style="background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; padding: 6px 22px; border-radius: 20px; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;">
+                                        &#10003; Booking Confirmed
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
 
-            <div class="payment-section">
-                @if($booking->payment_option === 'pay_now')
-                    <p><strong>You chose online payment:</strong></p>
-                    <div class="payment-options">
-                        <a href="{{ route('customer.bookings') }}" class="btn-esewa">Pay via eSewa</a>
-                    </div>
-                @else
-                    <p><strong>You chose to pay at the spa.</strong></p>
-                    <div class="payment-options">
-                        <a href="{{ route('customer.bookings') }}" class="btn-spa">View Booking Details</a>
-                    </div>
-                @endif
-            </div>
+                    {{-- Body --}}
+                    <tr>
+                        <td style="padding: 40px 36px;">
 
-            <div class="info-box">
-                <p>You can also manage your payment anytime from your <strong>My Bookings</strong> page on SpaLush.</p>
-            </div>
+                            {{-- Greeting --}}
+                            <h2 style="color: #1C1008; font-size: 22px; margin: 0 0 10px; font-family: Georgia, serif; font-weight: 400;">Great news, {{ $booking->customer->name }}!</h2>
+                            <p style="color: #666; font-size: 15px; margin: 0 0 30px;">Your booking at <strong style="color: #333;">{{ $booking->spa->name }}</strong> has been approved by the spa owner. You can now proceed with your payment.</p>
 
-            <p style="color:#999;font-size:13px;margin-top:28px;">
-                If you have any questions, feel free to contact the spa directly.
-            </p>
-        </div>
+                            {{-- Booking Summary --}}
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: #FAF7F2; border: 1px solid #f0e0d0; border-radius: 10px; margin-bottom: 28px;">
+                                <tr>
+                                    <td style="padding: 22px 26px 6px;">
+                                        <h3 style="color: #C8916A; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 18px; font-family: Georgia, serif; font-weight: 700;">Booking Summary</h3>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0 26px 20px;">
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                            <tr>
+                                                <td style="padding: 10px 0; border-bottom: 1px solid #eedcc8; color: #999; font-size: 14px; width: 40%;">Spa</td>
+                                                <td style="padding: 10px 0; border-bottom: 1px solid #eedcc8; color: #1C1008; font-size: 14px; font-weight: 600; text-align: right;">{{ $booking->spa->name }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 10px 0; border-bottom: 1px solid #eedcc8; color: #999; font-size: 14px;">Date</td>
+                                                <td style="padding: 10px 0; border-bottom: 1px solid #eedcc8; color: #1C1008; font-size: 14px; font-weight: 600; text-align: right;">{{ $booking->booking_date->format('D, d M Y') }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 10px 0; border-bottom: 1px solid #eedcc8; color: #999; font-size: 14px;">Time</td>
+                                                <td style="padding: 10px 0; border-bottom: 1px solid #eedcc8; color: #1C1008; font-size: 14px; font-weight: 600; text-align: right;">{{ \Carbon\Carbon::parse($booking->booking_time)->format('h:i A') }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 10px 0; border-bottom: 1px solid #eedcc8; color: #999; font-size: 14px;">Services</td>
+                                                <td style="padding: 10px 0; border-bottom: 1px solid #eedcc8; color: #1C1008; font-size: 14px; font-weight: 600; text-align: right;">{{ $booking->bookingServices->pluck('service_name')->join(', ') }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 10px 0; border-bottom: 1px solid #eedcc8; color: #999; font-size: 14px;">Duration</td>
+                                                <td style="padding: 10px 0; border-bottom: 1px solid #eedcc8; color: #1C1008; font-size: 14px; font-weight: 600; text-align: right;">{{ $booking->total_duration_minutes }} minutes</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 10px 0; border-bottom: 1px solid #eedcc8; color: #999; font-size: 14px;">Total Amount</td>
+                                                <td style="padding: 10px 0; border-bottom: 1px solid #eedcc8; color: #1C1008; font-size: 14px; font-weight: 600; text-align: right;">Rs. {{ number_format($booking->total_price, 0) }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 10px 0; color: #999; font-size: 14px;">Payment Preference</td>
+                                                <td style="padding: 10px 0; color: #1C1008; font-size: 14px; font-weight: 600; text-align: right;">{{ $booking->payment_option === 'pay_now' ? 'Pay via eSewa' : 'Pay at Spa' }}</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
 
-        <div class="email-footer">
-            <p><strong>SpaLush</strong> - Your Premier Spa Booking Platform</p>
-            <p>&copy; {{ date('Y') }} SpaLush. All rights reserved.</p>
-        </div>
+                            {{-- Payment Action --}}
+                            @if($booking->payment_option === 'pay_now')
+                                <p style="color: #444; font-size: 15px; margin: 0 0 16px;"><strong>You chose online payment:</strong></p>
+                                <table cellpadding="0" cellspacing="0" border="0">
+                                    <tr>
+                                        <td style="border-radius: 8px; background: #C8916A;">
+                                            <a href="{{ route('customer.bookings') }}" style="display: inline-block; padding: 14px 32px; color: #ffffff !important; text-decoration: none; font-weight: 700; font-size: 14px; letter-spacing: 0.5px;">Pay via eSewa</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            @else
+                                <p style="color: #444; font-size: 15px; margin: 0 0 16px;"><strong>You chose to pay at the spa.</strong></p>
+                                <table cellpadding="0" cellspacing="0" border="0">
+                                    <tr>
+                                        <td style="border-radius: 8px; border: 2px solid #C8916A;">
+                                            <a href="{{ route('customer.bookings') }}" style="display: inline-block; padding: 12px 30px; color: #C8916A !important; text-decoration: none; font-weight: 700; font-size: 14px; letter-spacing: 0.5px;">View Booking Details</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            @endif
 
-    </div>
+                            {{-- Info Box --}}
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin: 28px 0;">
+                                <tr>
+                                    <td style="background: #fdf5ee; border-left: 4px solid #C8916A; padding: 16px 20px; border-radius: 0 6px 6px 0;">
+                                        <p style="margin: 0; color: #7A4F2D; font-size: 14px; line-height: 1.5;">You can also manage your payment anytime from your <strong>My Bookings</strong> page on SpaLush.</p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <p style="color: #aaa; font-size: 13px; margin: 10px 0 0; text-align: center;">
+                                If you have any questions, feel free to contact the spa directly.
+                            </p>
+                        </td>
+                    </tr>
+
+                    {{-- Footer --}}
+                    <tr>
+                        <td style="background: #fafafa; padding: 28px 30px; text-align: center; border-top: 1px solid #eee;">
+                            <p style="color: #888; font-size: 13px; margin: 0 0 4px;"><strong style="color: #666;">SpaLush</strong> &mdash; Your Premier Spa Booking Platform</p>
+                            <p style="color: #aaa; font-size: 12px; margin: 0;">&copy; {{ date('Y') }} SpaLush. All rights reserved.</p>
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+
 </body>
 </html>

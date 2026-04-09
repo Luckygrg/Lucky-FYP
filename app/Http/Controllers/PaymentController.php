@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PaymentSuccessful;
 use App\Models\Booking;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Xentixar\EsewaSdk\Esewa;
 
 class PaymentController extends Controller
@@ -107,7 +109,7 @@ class PaymentController extends Controller
         $transactionId = $data['transaction_code'] ?? $data['transaction_uuid'];
 
         DB::transaction(function () use ($booking, $data, $transactionId) {
-            Payment::create([
+            $payment = Payment::create([
                 'booking_id'     => $booking->id,
                 'user_id'        => $booking->user_id,
                 'amount'         => $booking->total_price,
@@ -118,6 +120,11 @@ class PaymentController extends Controller
             ]);
 
             $booking->update(['payment_status' => 'paid']);
+
+            $booking->load(['customer', 'spa', 'bookingServices']);
+
+            Mail::to($booking->customer->email)
+                ->send(new PaymentSuccessful($booking, $payment));
         });
 
         session()->forget(['esewa_booking_id', 'esewa_transaction_uuid']);

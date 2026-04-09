@@ -2,8 +2,8 @@
 <footer class="luxury-footer minimal-footer">
     <div class="luxury-footer-container minimal-footer-container">
         <div class="footer-brand">
-             <img src="{{ asset('assets/img/logo.png') }}" alt="SpaLush" style="height:60px;margin-bottom:4px;">
-            <div class="footer-logo" style="font-family:'Georgia',serif;font-size:1.6rem;color:#C8916A;font-weight:500;">SpaLush</div>
+             <img src="{{ asset('assets/img/logo2.png') }}" alt="SpaLush" style="height:60px;">
+            <div class="footer-logo" style="font-family:'Georgia',serif;font-size:1.6rem;color:#C8916A;font-weight:500;padding:15px;">SpaLush</div>
 
             <div class="footer-tagline" style="color:#9c8b7a;letter-spacing:1.5px;font-size:1rem;margin-top:2px;">RESTORE. RENEW. RETURN.</div>
         </div>
@@ -14,10 +14,10 @@
         </nav>
        
         <div class="footer-social">
-            <a href="#" aria-label="Facebook" class="footer-social-btn"><img src="{{ asset('assets/img/Fb.jpg') }}" alt="Facebook"></a>
-            <a href="#" aria-label="Instagram" class="footer-social-btn"><img src="{{ asset('assets/img/Insta.jpg') }}" alt="Instagram"></a>
-            <a href="#" aria-label="Twitter" class="footer-social-btn"><img src="{{ asset('assets/img/TW.jpg') }}" alt="Twitter"></a>
-            <a href="#" aria-label="LinkedIn" class="footer-social-btn"><img src="{{ asset('assets/img/LINK.jpg') }}" alt="LinkedIn"></a>
+            <a href="#" aria-label="Facebook" class="footer-social-btn"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" aria-label="Instagram" class="footer-social-btn"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter" class="footer-social-btn"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" aria-label="LinkedIn" class="footer-social-btn"><i class="fa-brands fa-linkedin"></i></a>
         </div>
         <div class="footer-divider"></div>
         <div class="footer-copyright">
@@ -41,9 +41,9 @@
     text-align: center;
     padding: 0;
 }
-.footer-brand {
+/* .footer-brand {
     margin-bottom: 8px;
-}
+} */
 .footer-tagline {
     margin-bottom: 18px;
     font-size: 1rem;
