@@ -7,6 +7,8 @@ use App\Models\Booking;
 use App\Models\BookingService;
 use App\Models\Service;
 use App\Models\Spa;
+use App\Notifications\BookingConfirmedNotification;
+use App\Notifications\BookingCreatedNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -109,8 +111,18 @@ class BookingController extends Controller
 
         $booking = Booking::where('user_id', Auth::id())
             ->where('spa_id', $spa->id)
+            ->with(['spa', 'bookingServices'])
             ->latest()
             ->first();
+
+        try {
+            $booking->customer->notify(new BookingCreatedNotification($booking));
+        } catch (Throwable $e) {
+            Log::error('Booking created notification failed.', [
+                'booking_id' => $booking->id,
+                'error' => $e->getMessage(),
+            ]);
+        }
 
         return redirect()->route('customer.bookings')
             ->with('success', 'Your booking at ' . $spa->name . ' has been placed! We will confirm it shortly.');
@@ -222,6 +234,15 @@ class BookingController extends Controller
                     'booking_id' => $booking->id,
                     'customer_id' => $booking->user_id,
                     'customer_email' => $booking->customer->email,
+                    'error' => $e->getMessage(),
+                ]);
+            }
+
+            try {
+                $booking->customer->notify(new BookingConfirmedNotification($booking));
+            } catch (Throwable $e) {
+                Log::error('Booking confirmed notification failed.', [
+                    'booking_id' => $booking->id,
                     'error' => $e->getMessage(),
                 ]);
             }

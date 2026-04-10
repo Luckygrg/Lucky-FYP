@@ -239,7 +239,7 @@
                 'completed' => $bookings->where('status','completed')->count(),
                 'cancelled' => $bookings->where('status','cancelled')->count(),
             ];
-            $totalRevenue = $bookings->where('status','completed')->sum('total_price');
+            $totalRevenue = $bookings->where('status','conpleted')->sum('total_price');
         @endphp
 
         {{-- Stats --}}

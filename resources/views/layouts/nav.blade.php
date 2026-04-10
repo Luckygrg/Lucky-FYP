@@ -18,9 +18,11 @@
 
                 @auth
                     <a href="/" class="luxury-nav-link">Home</a>
-                    @if(Auth::user()->role === 'customer')
+                    {{-- @if(Auth::user()->role === 'customer')
                         <a href="{{ route('customer.services') }}" class="luxury-nav-link">Services</a>
-                    @endif
+                    @endif --}}
+                    <a href="{{ route('spas.index') }}" class="luxury-nav-link">Our Spas</a>
+
                     <a href="{{ route('about') }}" class="luxury-nav-link">About</a>
                     <a href="{{ route('contact') }}" class="luxury-nav-link">Contact</a>
                     @if(Auth::user()->role === 'spa_owner')
