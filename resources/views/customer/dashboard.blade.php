@@ -26,13 +26,13 @@
         <div style="background: #FFFFFF; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); border: 1px solid rgba(200,145,106,0.15);">
             <h3 style="color: #C8916A; margin-bottom: 15px;"> My Bookings</h3>
             <p style="color: rgba(28,16,8,0.6); margin-bottom: 15px;">View and manage your bookings</p>
-            <a href="#" style="display: inline-block; padding: 10px 20px; background: #C8916A; color: #1C1008; text-decoration: none; border-radius: 4px; font-weight: 600;">View Bookings</a>
+            <a href="{{ route('customer.bookings') }}" style="display: inline-block; padding: 10px 20px; background: #C8916A; color: #1C1008; text-decoration: none; border-radius: 4px; font-weight: 600;">View Bookings</a>
         </div>
 
         <div style="background: #FFFFFF; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); border: 1px solid rgba(200,145,106,0.15);">
             <h3 style="color: #C8916A; margin-bottom: 15px;"> My Profile</h3>
             <p style="color: rgba(28,16,8,0.6); margin-bottom: 15px;">Update your profile information</p>
-            <a href="#" style="display: inline-block; padding: 10px 20px; background: #C8916A; color: #1C1008; text-decoration: none; border-radius: 4px; font-weight: 600;">Edit Profile</a>
+            <a href="{{ route('customer.profile') }}" style="display: inline-block; padding: 10px 20px; background: #C8916A; color: #1C1008; text-decoration: none; border-radius: 4px; font-weight: 600;">Edit Profile</a>
         </div>
 
     </div>

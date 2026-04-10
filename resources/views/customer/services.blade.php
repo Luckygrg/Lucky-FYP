@@ -135,7 +135,7 @@
 
 <div class="page-wrapper">
 
-    <a href="{{ route('customer.dashboard') }}" class="back-link">← Back to Dashboard</a>
+    <a href="/" class="back-link">← Back to Home</a>
 
     <div class="page-header">
         <h1>Browse Services</h1>
@@ -422,7 +422,7 @@
 
 <div class="page-wrapper">
 
-    <a href="{{ route('customer.dashboard') }}" class="back-link">← Back to Dashboard</a>
+    <a href="/" class="back-link">← Back to Home</a>
 
     <div class="page-header">
         <h1>Browse Services</h1>

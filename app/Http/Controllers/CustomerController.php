@@ -4,8 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Spa;
 use App\Models\Service;
+use App\Models\Payment;
+use App\Models\Booking;
+use App\Models\Review;
 use App\Models\SpaCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class CustomerController extends Controller
 {
@@ -14,7 +20,7 @@ class CustomerController extends Controller
      */
     public function dashboard()
     {
-        return view('customer.dashboard');
+        return redirect()->route('customer.profile');
     }
 
     public function services(Request $request)
@@ -41,5 +47,71 @@ class CustomerController extends Controller
             ->count('name');
 
         return view('customer.services', compact('categories', 'services', 'selectedCategory', 'totalServices'));
+    }
+
+    public function profile()
+    {
+        $user = Auth::user();
+        $bookingsCount = Booking::where('user_id', $user->id)->count();
+        $paymentsCount = Payment::where('user_id', $user->id)->count();
+        $reviewsCount = Review::where('user_id', $user->id)->count();
+
+        return view('customer.profile', compact('user', 'bookingsCount', 'paymentsCount', 'reviewsCount'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = Auth::user();
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+            'password' => 'nullable|min:8|confirmed',
+            'photo' => 'nullable|image|mimes:jpeg,png,webp|max:2048',
+        ]);
+
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+
+        if (!empty($validated['password'])) {
+            $user->password = Hash::make($validated['password']);
+        }
+
+        // Handle photo removal
+        if ($request->has('remove_photo') && $user->photo) {
+            Storage::disk('public')->delete($user->photo);
+            $user->photo = null;
+        }
+
+        // Handle photo upload
+        if ($request->hasFile('photo')) {
+            // Delete old photo if exists
+            if ($user->photo) {
+                Storage::disk('public')->delete($user->photo);
+            }
+            $user->photo = $request->file('photo')->store('profile-photos', 'public');
+        }
+
+        $user->save();
+
+        return back()->with('success', 'Profile updated successfully.');
+    }
+
+    public function paymentHistory()
+    {
+        $payments = Payment::where('user_id', Auth::id())
+            ->with(['booking.bookingServices', 'booking.spa'])
+            ->orderByDesc('created_at')
+            ->get();
+
+        return view('customer.payments', compact('payments'));
+    }
+
+    public function notifications()
+    {
+        $user = Auth::user();
+        $notifications = $user->notifications()->paginate(20);
+
+        return view('customer.notifications', compact('notifications'));
     }
 }

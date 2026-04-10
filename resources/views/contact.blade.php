@@ -7,7 +7,7 @@
 <style>
     .contact-hero {
         background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
-                    url('{{ asset("assets/img/aboutus.png") }}') center/cover;
+                    url('{{ asset("assets/img/CONTACT US.jpg") }}') center/cover;
         padding: 100px 20px;
         text-align: center;
         color: #FAF7F2;
