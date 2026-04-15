@@ -124,6 +124,32 @@
         color: rgba(28,16,8,0.3);
     }
     
+    .password-wrapper {
+        position: relative;
+    }
+    
+    .password-wrapper input {
+        padding-right: 48px;
+    }
+    
+    .toggle-password {
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: rgba(28,16,8,0.4);
+        font-size: 16px;
+        padding: 0;
+        transition: color 0.2s;
+    }
+    
+    .toggle-password:hover {
+        color: #C8916A;
+    }
+    
     .submit-btn {
         width: 100%;
         padding: 16px;
@@ -278,36 +304,63 @@
                     id="email"
                     name="email" 
                     value="{{ old('email') }}" 
-                    placeholder="Enter your email" 
+                    placeholder="Enter your Gmail (e.g. name@gmail.com)" 
+                    pattern="^[a-zA-Z0-9._%+\-]+@gmail\.com$"
+                    title="Only Gmail addresses are allowed (must end with @gmail.com)"
                     required
                 >
             </div>
             
             <div class="form-group">
                 <label for="password">Password</label>
-                <input 
-                    type="password" 
-                    id="password"
-                    name="password" 
-                    placeholder="Minimum 8 characters" 
-                    required
-                >
+                <div class="password-wrapper">
+                    <input 
+                        type="password" 
+                        id="password"
+                        name="password" 
+                        placeholder="Minimum 8 characters" 
+                        required
+                    >
+                    <button type="button" class="toggle-password" onclick="togglePwd('password', this)">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
             </div>
             
             <div class="form-group">
                 <label for="password_confirmation">Confirm Password</label>
-                <input 
-                    type="password" 
-                    id="password_confirmation"
-                    name="password_confirmation" 
-                    placeholder="Re-enter your password" 
-                    required
-                >
+                <div class="password-wrapper">
+                    <input 
+                        type="password" 
+                        id="password_confirmation"
+                        name="password_confirmation" 
+                        placeholder="Re-enter your password" 
+                        required
+                    >
+                    <button type="button" class="toggle-password" onclick="togglePwd('password_confirmation', this)">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
             </div>
             
             <button type="submit" class="submit-btn">Create Account</button>
         </form>
-        
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script>
+    function togglePwd(id, btn) {
+        const input = document.getElementById(id);
+        const icon = btn.querySelector('i');
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.replace('fa-eye', 'fa-eye-slash');
+        } else {
+            input.type = 'password';
+            icon.classList.replace('fa-eye-slash', 'fa-eye');
+        }
+    }
+</script>
+
         <div class="divider">
             <span>OR</span>
         </div>

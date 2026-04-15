@@ -39,8 +39,6 @@ return [
 
         'smtp' => [
             'transport' => 'smtp',
-            // Support both MAIL_SCHEME (Laravel 11+) and MAIL_ENCRYPTION (legacy key).
-            // Symfony expects "smtps" instead of "ssl".
             'scheme' => env('MAIL_SCHEME')
                 ?: (env('MAIL_ENCRYPTION') === 'ssl' ? 'smtps' : env('MAIL_ENCRYPTION')),
             'url' => env('MAIL_URL'),

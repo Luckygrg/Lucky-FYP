@@ -110,7 +110,11 @@ class PasswordResetController extends Controller
         $request->validate([
             'token' => 'required',
             'email' => 'required|email',
-            'password' => 'required|min:8|confirmed',
+            'password' => ['required', 'confirmed', 'min:8', 'regex:/[A-Z]/', 'regex:/[a-z]/', 'regex:/[0-9]/', 'regex:/[^A-Za-z0-9]/'],
+        ], [
+            'password.min'      => 'Password must be at least 8 characters with uppercase, lowercase, number and special character.',
+            'password.regex'    => 'Password must be at least 8 characters with uppercase, lowercase, number and special character.',
+            'password.confirmed'=> 'Passwords do not match.',
         ]);
 
         // Check if token exists and is valid

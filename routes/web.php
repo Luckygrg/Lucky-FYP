@@ -51,6 +51,10 @@ Route::get('/choose-role', [UserController::class, 'showRoleSelection'])->name('
 Route::get('/usersignup', [UserController::class, 'showsignup'])->name('usersignup');
 Route::post('/usersignup', [UserController::class, 'store'])->name('usersignup.create');
 
+// Email Verification Routes
+Route::get('/verify-notice', [UserController::class, 'showVerifyNotice'])->name('verify.notice');
+Route::get('/verify-email/{token}', [UserController::class, 'verifyEmail'])->name('verify.email');
+
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 // Password Reset Routes
