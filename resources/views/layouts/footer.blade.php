@@ -14,12 +14,7 @@
             <a href="{{ route('contact') }}" class="footer-link">Contact</a>
         </nav>
        
-        <div class="footer-social">
-            <a href="#" aria-label="Facebook" class="footer-social-btn"><i class="fa-brands fa-facebook"></i></a>
-            <a href="#" aria-label="Instagram" class="footer-social-btn"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" aria-label="Twitter" class="footer-social-btn"><i class="fa-brands fa-twitter"></i></a>
-            <a href="#" aria-label="LinkedIn" class="footer-social-btn"><i class="fa-brands fa-linkedin"></i></a>
-        </div>
+        <!-- Social media icons removed -->
         <div class="footer-divider"></div>
         <div class="footer-copyright">
             &copy; {{ date('Y') }} SpaLush · <a href="#" class="footer-legal">Privacy</a> · <a href="#" class="footer-legal">Terms</a>
