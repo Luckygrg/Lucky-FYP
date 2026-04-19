@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Spa;
 use App\Models\Service;
 use App\Models\SpaCategory;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class SpaOwnerController extends Controller
@@ -432,17 +435,21 @@ class SpaOwnerController extends Controller
 
     public function settings()
     {
-        return view('spa_owner.settings', ['user' => Auth::user()]);
+        /** @var User $user */
+        $user = Auth::user();
+
+        return view('spa_owner.settings', ['user' => $user]);
     }
 
     public function updateSettings(Request $request)
     {
-        // dd($request);
+        /** @var User $user */
         $user = Auth::user();
 
         $request->validate([
             'name'  => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
+            'current_password' => 'nullable|required_with:password|current_password',
             'password' => 'nullable|min:8|confirmed',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
@@ -451,10 +458,14 @@ class SpaOwnerController extends Controller
         $user->email = $request->email;
 
         if ($request->filled('password')) {
-            $user->password = bcrypt($request->password);
+            $user->password = Hash::make($request->password);
         }
 
         if ($request->hasFile('photo')) {
+            if ($user->photo) {
+                Storage::disk('public')->delete($user->photo);
+            }
+
             $photo = $request->file('photo');
             $path = $photo->store('avatars', 'public');
             $user->photo = $path;
