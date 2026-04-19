@@ -708,6 +708,19 @@
 </div>
 
 <script>
+    // Auto-open tab from URL param (e.g. ?tab=bookings)
+    (function() {
+        const params = new URLSearchParams(window.location.search);
+        const tab = params.get('tab');
+        if (tab && document.getElementById('tab-' + tab)) {
+            document.querySelectorAll('.sidebar-item').forEach(function(el) { el.classList.remove('active'); });
+            document.querySelectorAll('.content-section').forEach(function(s) { s.classList.remove('active'); });
+            document.getElementById('tab-' + tab).classList.add('active');
+            var sidebarItem = document.querySelector('.sidebar-item[data-tab="' + tab + '"]');
+            if (sidebarItem) sidebarItem.classList.add('active');
+        }
+    })();
+
     // Tab switching - all sidebar items with data-tab
     document.querySelectorAll('.sidebar-item[data-tab]').forEach(function(item) {
         item.addEventListener('click', function() {

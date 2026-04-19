@@ -124,7 +124,7 @@ class BookingController extends Controller
             ]);
         }
 
-        return redirect()->route('customer.bookings')
+        return redirect()->route('customer.profile', ['tab' => 'bookings'])
             ->with('success', 'Your booking at ' . $spa->name . ' has been placed! We will confirm it shortly.');
     }
 
@@ -133,13 +133,7 @@ class BookingController extends Controller
      */
     public function myBookings()
     {
-        $bookings = Booking::where('user_id', Auth::id())
-            ->with(['spa', 'bookingServices'])
-            ->orderByDesc('booking_date')
-            ->orderByDesc('created_at')
-            ->get();
-
-        return view('customer.bookings', compact('bookings'));
+        return redirect()->route('customer.profile', ['tab' => 'bookings']);
     }
 
     /**

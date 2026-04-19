@@ -23,7 +23,7 @@ class PaymentController extends Controller
         }
 
         if ($booking->status !== 'confirmed' || $booking->payment_status === 'paid') {
-            return redirect()->route('customer.bookings')
+            return redirect()->route('customer.profile', ['tab' => 'bookings'])
                 ->with('info', 'This booking is not eligible for payment selection.');
         }
 
@@ -32,7 +32,7 @@ class PaymentController extends Controller
             'payment_choice_made' => true,
         ]);
 
-        return redirect()->route('customer.bookings')
+        return redirect()->route('customer.profile', ['tab' => 'bookings'])
             ->with('success', 'Payment option selected: Pay at Spa.');
     }
 
@@ -48,7 +48,7 @@ class PaymentController extends Controller
 
         // Only confirmed bookings that are still unpaid can pay via eSewa
         if ($booking->status !== 'confirmed' || $booking->payment_status === 'paid') {
-            return redirect()->route('customer.bookings')
+            return redirect()->route('customer.profile', ['tab' => 'bookings'])
                 ->with('info', 'This booking is not eligible for online payment.');
         }
 
@@ -87,14 +87,14 @@ class PaymentController extends Controller
         $bookingId = session('esewa_booking_id');
 
         if (! $data || ! $bookingId) {
-            return redirect()->route('customer.bookings')
+            return redirect()->route('customer.profile', ['tab' => 'payments'])
                 ->with('error', 'Payment verification failed. Please contact support.');
         }
 
         $booking = Booking::with('spa')->find($bookingId);
 
         if (! $booking || $booking->user_id !== Auth::id()) {
-            return redirect()->route('customer.bookings')
+            return redirect()->route('customer.profile', ['tab' => 'payments'])
                 ->with('error', 'Invalid booking reference. Please contact support.');
         }
 
@@ -102,7 +102,7 @@ class PaymentController extends Controller
         if (($data['status'] ?? '') !== 'COMPLETE') {
             session()->forget(['esewa_booking_id', 'esewa_transaction_uuid']);
 
-            return redirect()->route('customer.bookings')
+            return redirect()->route('customer.profile', ['tab' => 'bookings'])
                 ->with('error', 'eSewa payment was not completed. You can choose to pay at the spa instead.');
         }
 
@@ -129,7 +129,7 @@ class PaymentController extends Controller
 
         session()->forget(['esewa_booking_id', 'esewa_transaction_uuid']);
 
-        return redirect()->route('customer.bookings')
+        return redirect()->route('customer.profile', ['tab' => 'payments'])
             ->with('success', 'Payment of Rs. ' . number_format($booking->total_price, 2) . ' via eSewa was successful! Transaction ID: ' . $transactionId);
     }
 }

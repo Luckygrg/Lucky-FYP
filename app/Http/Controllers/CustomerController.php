@@ -114,19 +114,11 @@ class CustomerController extends Controller
 
     public function paymentHistory()
     {
-        $payments = Payment::where('user_id', Auth::id())
-            ->with(['booking.bookingServices', 'booking.spa'])
-            ->orderByDesc('created_at')
-            ->get();
-
-        return view('customer.payments', compact('payments'));
+        return redirect()->route('customer.profile', ['tab' => 'payments']);
     }
 
     public function notifications()
     {
-        $user = Auth::user();
-        $notifications = $user->notifications()->paginate(20);
-
-        return view('customer.notifications', compact('notifications'));
+        return redirect()->route('customer.profile', ['tab' => 'notifications']);
     }
 }

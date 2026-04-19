@@ -70,15 +70,15 @@
                                     <i class="fas fa-user"></i>
                                     MY PROFILE
                                 </a>
-                                <a href="{{ route('customer.bookings') }}" class="dropdown-item">
+                                <a href="{{ route('customer.profile', ['tab' => 'bookings']) }}" class="dropdown-item">
                                     <i class="fas fa-calendar-check"></i>
                                     BOOKINGS
                                 </a>
-                                <a href="{{ route('customer.payments') }}" class="dropdown-item">
+                                <a href="{{ route('customer.profile', ['tab' => 'payments']) }}" class="dropdown-item">
                                     <i class="fas fa-credit-card"></i>
                                     PAYMENT HISTORY
                                 </a>
-                                <a href="{{ route('customer.notifications') }}" class="dropdown-item">
+                                <a href="{{ route('customer.profile', ['tab' => 'notifications']) }}" class="dropdown-item">
                                     <i class="fas fa-bell"></i>
                                     NOTIFICATIONS
                                 </a>
