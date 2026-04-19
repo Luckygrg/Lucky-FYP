@@ -394,7 +394,7 @@ class SpaOwnerController extends Controller
 
         $reviews = $spa
             ? \App\Models\Review::where('spa_id', $spa->id)
-                ->with(['customer:id,name,email', 'booking:id,booking_date,total_price'])
+                ->with(['customer:id,name,email,photo', 'booking:id,booking_date,total_price'])
                 ->latest()
                 ->get()
             : collect();
