@@ -334,7 +334,11 @@
                         <div class="review-card-top">
                             <div class="reviewer-info">
                                 <div class="reviewer-avatar">
-                                    {{ strtoupper(substr($review->customer->name, 0, 1)) }}
+                                    @if(!empty($review->customer->photo))
+                                        <img src="{{ asset('storage/' . $review->customer->photo) }}" alt="{{ $review->customer->name }}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />
+                                    @else
+                                        {{ strtoupper(substr($review->customer->name, 0, 1)) }}
+                                    @endif
                                 </div>
                                 <div>
                                     <div class="reviewer-name">{{ $review->customer->name }}</div>

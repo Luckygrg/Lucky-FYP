@@ -56,7 +56,22 @@ class CustomerController extends Controller
         $paymentsCount = Payment::where('user_id', $user->id)->count();
         $reviewsCount = Review::where('user_id', $user->id)->count();
 
-        return view('customer.profile', compact('user', 'bookingsCount', 'paymentsCount', 'reviewsCount'));
+        $bookings = Booking::where('user_id', $user->id)
+            ->with(['spa', 'bookingServices'])
+            ->orderByDesc('created_at')
+            ->get();
+
+        $payments = Payment::where('user_id', $user->id)
+            ->with(['booking.bookingServices', 'booking.spa'])
+            ->orderByDesc('created_at')
+            ->get();
+
+        $notifications = $user->notifications()->latest()->get();
+
+        return view('customer.profile', compact(
+            'user', 'bookingsCount', 'paymentsCount', 'reviewsCount',
+            'bookings', 'payments', 'notifications'
+        ));
     }
 
     public function updateProfile(Request $request)
