@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Mail\PaymentSuccessful;
 use App\Models\Booking;
 use App\Models\Payment;
+use App\Notifications\PayAtSpaSelectedNotification;
+use App\Notifications\PaymentSuccessfulNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -31,6 +33,9 @@ class PaymentController extends Controller
             'payment_option' => 'pay_later',
             'payment_choice_made' => true,
         ]);
+
+        $booking->loadMissing('spa', 'customer');
+        $booking->customer->notify(new PayAtSpaSelectedNotification($booking));
 
         return redirect()->route('customer.profile', ['tab' => 'bookings'])
             ->with('success', 'Payment option selected: Pay at Spa.');
@@ -122,6 +127,8 @@ class PaymentController extends Controller
             $booking->update(['payment_status' => 'paid']);
 
             $booking->load(['customer', 'spa', 'bookingServices']);
+
+            $booking->customer->notify(new PaymentSuccessfulNotification($booking, $payment));
 
             Mail::to($booking->customer->email)
                 ->send(new PaymentSuccessful($booking, $payment));

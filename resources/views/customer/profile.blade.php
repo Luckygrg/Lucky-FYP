@@ -688,6 +688,10 @@
                                 <div style="width:36px;height:36px;border-radius:50%;background:rgba(200,145,106,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
                                     @if(str_contains($notification->type, 'BookingConfirmed'))
                                         <i class="fas fa-check-circle" style="color:#43A047;font-size:15px;"></i>
+                                    @elseif(str_contains($notification->type, 'PaymentSuccessful'))
+                                        <i class="fas fa-credit-card" style="color:#1E88E5;font-size:15px;"></i>
+                                    @elseif(str_contains($notification->type, 'PayAtSpaSelected'))
+                                        <i class="fas fa-money-bill-wave" style="color:#8D6E63;font-size:15px;"></i>
                                     @elseif(str_contains($notification->type, 'BookingCreated'))
                                         <i class="fas fa-calendar-plus" style="color:#C8916A;font-size:15px;"></i>
                                     @else
