@@ -148,5 +148,6 @@ Route::middleware(['auth', 'role:customer'])->group(function () {
 // Review routes (customer only)
 Route::middleware(['auth', 'role:customer'])->group(function () {
     Route::post('/spas/{spa}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+    Route::put('/spas/{spa}/reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
     Route::delete('/spas/{spa}/reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
 });

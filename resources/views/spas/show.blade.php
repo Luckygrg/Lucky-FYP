@@ -820,6 +820,13 @@
 
     .review-booking-select:focus { outline: none; border-color: #C8916A; }
 
+    .review-field-error {
+        color: #d05f5f;
+        font-size: 12px;
+        margin-top: -6px;
+        margin-bottom: 12px;
+    }
+
     .btn-submit-review {
         padding: 10px 26px;
         background: #C8916A;
@@ -916,6 +923,54 @@
     }
 
     .review-delete-btn:hover { color: #ef9a9a; }
+
+    .review-edit-btn {
+        color: rgba(28,16,8,0.4);
+        font-size: 13px;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: color 0.2s;
+    }
+
+    .review-edit-btn:hover { color: #C8916A; }
+
+    .review-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .review-edit-form {
+        margin-top: 18px;
+        padding-top: 18px;
+        border-top: 1px solid rgba(28,16,8,0.08);
+    }
+
+    .review-field-label {
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        color: rgba(28,16,8,0.5);
+        display: block;
+        margin-bottom: 7px;
+    }
+
+    .review-edit-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 14px;
+        flex-wrap: wrap;
+    }
+
+    .review-cancel-link {
+        color: rgba(28,16,8,0.45);
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .review-cancel-link:hover { color: #1C1008; }
 
     .no-reviews {
         text-align: center;
@@ -1217,6 +1272,9 @@
         @if(session('review_error'))
             <div class="alert-review-error"><i class="fas fa-exclamation-circle"></i> {{ session('review_error') }}</div>
         @endif
+        @if($errors->any())
+            <div class="alert-review-error"><i class="fas fa-exclamation-circle"></i> {{ $errors->first() }}</div>
+        @endif
 
         {{-- Write Review Box --}}
         @auth
@@ -1224,7 +1282,7 @@
                 @if($reviewableBookings->count() > 0)
                     <div class="write-review-box">
                         <h4><i class="fas fa-pen"></i> &nbsp;Write a Review</h4>
-                        <form method="POST" action="{{ route('reviews.store', $spa) }}">
+                        <form method="POST" action="{{ route('reviews.store', $spa) }}" data-review-form>
                             @csrf
 
                             {{-- Booking selector --}}
@@ -1234,11 +1292,12 @@
                             <select name="booking_id" class="review-booking-select" required>
                                 <option value="" disabled selected>Select a completed visit…</option>
                                 @foreach($reviewableBookings as $bk)
-                                    <option value="{{ $bk->id }}">
+                                    <option value="{{ $bk->id }}" {{ (string) old('booking_id') === (string) $bk->id ? 'selected' : '' }}>
                                         {{ $bk->booking_date->format('M d, Y') }} — Rs. {{ number_format($bk->total_price, 0) }}
                                     </option>
                                 @endforeach
                             </select>
+                            @error('booking_id') <div class="review-field-error">{{ $message }}</div> @enderror
 
                             {{-- Star rating --}}
                             <label style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:rgba(28,16,8,0.5);display:block;margin-bottom:7px;">
@@ -1253,14 +1312,17 @@
                                     </label>
                                 @endfor
                             </div>
+                            <div class="review-field-error" data-rating-error style="display:none;">Please select a rating before submitting your review.</div>
+                            @error('rating') <div class="review-field-error">{{ $message }}</div> @enderror
 
                             {{-- Comment --}}
                             <label style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:rgba(28,16,8,0.5);display:block;margin-bottom:7px;">
-                                Comment <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span>
+                                Comment
                             </label>
                             <textarea name="comment" class="review-textarea"
                                       placeholder="Share your experience…"
-                                      maxlength="1000">{{ old('comment') }}</textarea>
+                                      maxlength="1000" required>{{ old('comment') }}</textarea>
+                            @error('comment') <div class="review-field-error">{{ $message }}</div> @enderror
 
                             <button type="submit" class="btn-submit-review">
                                 <i class="fas fa-paper-plane"></i> Submit Review
@@ -1270,7 +1332,7 @@
                 @elseif($existingReview)
                     <div class="write-review-box" style="text-align:center;color:rgba(28,16,8,0.45);font-size:14px;">
                         <i class="fas fa-check-circle" style="color:#C8916A;font-size:18px;"></i>
-                        &nbsp;You have already reviewed this spa. Thank you for your feedback!
+                        &nbsp;You have already reviewed this spa. You can edit or delete your review below.
                     </div>
                 @else
                     <div class="review-login-prompt">
@@ -1290,7 +1352,7 @@
         @if($reviews->count() > 0)
             <div class="reviews-list">
                 @foreach($reviews as $review)
-                    <div class="review-card">
+                    <div class="review-card" id="review-{{ $review->id }}">
                         <div class="review-card-header">
                             <div class="reviewer-info">
                                 <div class="reviewer-avatar">
@@ -1309,20 +1371,57 @@
                                 </div>
                                 @auth
                                     @if(auth()->user()->id === $review->user_id)
-                                        <form method="POST" action="{{ route('reviews.destroy', [$spa, $review]) }}"
-                                              onsubmit="return confirm('Remove your review?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="review-delete-btn">
-                                                <i class="fas fa-trash-alt"></i> Delete
-                                            </button>
-                                        </form>
+                                        <div class="review-actions">
+                                            <a href="{{ route('spas.show', $spa) }}?edit_review={{ $review->id }}#review-{{ $review->id }}" class="review-edit-btn">
+                                                <i class="fas fa-pen"></i> Edit
+                                            </a>
+                                            <form method="POST" action="{{ route('reviews.destroy', [$spa, $review]) }}"
+                                                  onsubmit="return confirm('Remove your review?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="review-delete-btn">
+                                                    <i class="fas fa-trash-alt"></i> Delete
+                                                </button>
+                                            </form>
+                                        </div>
                                     @endif
                                 @endauth
                             </div>
                         </div>
                         @if($review->comment)
                             <p class="review-comment">{{ $review->comment }}</p>
+                        @endif
+
+                        @if($editableReview && $editableReview->id === $review->id)
+                            <form method="POST" action="{{ route('reviews.update', [$spa, $review]) }}" class="review-edit-form" data-review-form>
+                                @csrf
+                                @method('PUT')
+                                <input type="hidden" name="review_edit_id" value="{{ $review->id }}">
+
+                                <label class="review-field-label">Rating</label>
+                                <div class="star-picker">
+                                    @for($i = 5; $i >= 1; $i--)
+                                        <input type="radio" name="rating" id="edit-star-{{ $review->id }}-{{ $i }}" value="{{ $i }}"
+                                               {{ (int) old('rating', $review->rating) === $i ? 'checked' : '' }} required>
+                                        <label for="edit-star-{{ $review->id }}-{{ $i }}" title="{{ $i }} star{{ $i > 1 ? 's' : '' }}">
+                                            <i class="fas fa-star"></i>
+                                        </label>
+                                    @endfor
+                                </div>
+                                <div class="review-field-error" data-rating-error style="display:none;">Please select a rating before updating your review.</div>
+                                @error('rating') <div class="review-field-error">{{ $message }}</div> @enderror
+
+                                <label class="review-field-label">Comment</label>
+                                <textarea name="comment" class="review-textarea" placeholder="Update your experience..." maxlength="1000" required>{{ old('comment', $review->comment) }}</textarea>
+                                @error('comment') <div class="review-field-error">{{ $message }}</div> @enderror
+
+                                <div class="review-edit-actions">
+                                    <button type="submit" class="btn-submit-review">
+                                        <i class="fas fa-save"></i> Update Review
+                                    </button>
+                                    <a href="{{ route('spas.show', $spa) }}#review-{{ $review->id }}" class="review-cancel-link">Cancel</a>
+                                </div>
+                            </form>
                         @endif
                     </div>
                 @endforeach
@@ -1532,6 +1631,37 @@
                     document.body.style.overflow = 'hidden';
                 });
             @endif
+
+            document.querySelectorAll('[data-review-form]').forEach(function(form) {
+                const ratingInputs = form.querySelectorAll('input[name="rating"]');
+                const ratingError = form.querySelector('[data-rating-error]');
+
+                function toggleRatingError() {
+                    const hasRating = Array.from(ratingInputs).some(function(input) {
+                        return input.checked;
+                    });
+
+                    if (ratingError) {
+                        ratingError.style.display = hasRating ? 'none' : 'block';
+                    }
+
+                    return hasRating;
+                }
+
+                ratingInputs.forEach(function(input) {
+                    input.addEventListener('invalid', function() {
+                        toggleRatingError();
+                    });
+
+                    input.addEventListener('change', toggleRatingError);
+                });
+
+                form.addEventListener('submit', function(event) {
+                    if (!toggleRatingError()) {
+                        event.preventDefault();
+                    }
+                });
+            });
         </script>
     @endif
 @endauth

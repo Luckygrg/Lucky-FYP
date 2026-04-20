@@ -19,7 +19,7 @@ class ReviewController extends Controller
         $request->validate([
             'booking_id' => ['required', 'exists:bookings,id'],
             'rating'     => ['required', 'integer', 'min:1', 'max:5'],
-            'comment'    => ['nullable', 'string', 'max:1000'],
+            'comment'    => ['required', 'string', 'max:1000'],
         ]);
 
         $booking = Booking::findOrFail($request->booking_id);
@@ -51,6 +51,37 @@ class ReviewController extends Controller
         $this->recalculateSpaRating($spa);
 
         return back()->with('review_success', 'Your review has been submitted. Thank you!');
+    }
+
+    /**
+     * Update an existing review (only by the review owner).
+     */
+    public function update(Request $request, Spa $spa, Review $review)
+    {
+        $request->validate([
+            'rating'  => ['required', 'integer', 'min:1', 'max:5'],
+            'comment' => ['required', 'string', 'max:1000'],
+        ]);
+
+        if ($review->user_id !== Auth::id() || $review->spa_id !== $spa->id) {
+            abort(403);
+        }
+
+        $review->loadMissing('booking');
+
+        if (! $review->booking || $review->booking->status !== 'completed') {
+            return back()->with('review_error', 'Only reviews from completed bookings can be updated.');
+        }
+
+        $review->update([
+            'rating' => $request->rating,
+            'comment' => $request->comment,
+        ]);
+
+        $this->recalculateSpaRating($spa);
+
+        return redirect()->to(route('spas.show', $spa) . '#review-' . $review->id)
+            ->with('review_success', 'Your review has been updated successfully.');
     }
 
     /**

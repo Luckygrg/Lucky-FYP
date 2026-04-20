@@ -86,7 +86,7 @@ class SpaController extends Controller
     /**
      * Display the specified spa
      */
-    public function show(Spa $spa)
+    public function show(Request $request, Spa $spa)
     {
         $spa->load('services.spaCategory');
 
@@ -103,6 +103,7 @@ class SpaController extends Controller
         // that don't already have a review (they can still write one)
         $reviewableBookings = collect();
         $existingReview     = null;
+        $editableReview     = null;
 
         if (Auth::check() && Auth::user()->role === 'customer') {
             $reviewedBookingIds = $reviews
@@ -116,8 +117,16 @@ class SpaController extends Controller
                 ->get();
 
             $existingReview = $reviews->where('user_id', Auth::id())->first();
+
+            $editReviewId = (int) ($request->query('edit_review', 0) ?: old('review_edit_id', 0));
+
+            if ($editReviewId > 0) {
+                $editableReview = $reviews
+                    ->where('user_id', Auth::id())
+                    ->firstWhere('id', $editReviewId);
+            }
         }
 
-        return view('spas.show', compact('spa', 'reviews', 'reviewableBookings', 'existingReview', 'avgRating', 'totalReviews'));
+        return view('spas.show', compact('spa', 'reviews', 'reviewableBookings', 'existingReview', 'editableReview', 'avgRating', 'totalReviews'));
     }
 }
