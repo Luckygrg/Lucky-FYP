@@ -651,11 +651,20 @@
                                     <span>Total Paid</span>
                                     <span style="color:#C8916A;">Rs. {{ number_format($payment->amount, 0) }}</span>
                                 </div>
-                                @if($payment->transaction_id)
-                                    <div style="margin-top:10px;font-size:13px;color:rgba(28,16,8,0.4);">
-                                        <i class="fas fa-receipt" style="margin-right:4px;"></i> TXN: {{ $payment->transaction_id }}
+                                <div style="margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+                                    <div style="font-size:13px;color:rgba(28,16,8,0.4);">
+                                        @if($payment->transaction_id)
+                                            <i class="fas fa-receipt" style="margin-right:4px;"></i> TXN: {{ $payment->transaction_id }}
+                                        @else
+                                            <span style="opacity:0.65;">No transaction ID</span>
+                                        @endif
                                     </div>
-                                @endif
+
+                                    <a href="{{ route('customer.payments.receipt', $payment) }}" style="display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;border:1px solid rgba(200,145,106,0.3);background:rgba(200,145,106,0.08);color:#A86F47;text-decoration:none;font-size:13px;font-weight:700;">
+                                        <i class="fas fa-file-pdf"></i>
+                                        Download Receipt
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         @endforeach

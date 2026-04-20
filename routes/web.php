@@ -129,6 +129,7 @@ Route::middleware(['auth', 'role:customer'])->prefix('customer')->name('customer
     Route::get('/profile', [CustomerController::class, 'profile'])->name('profile');
     Route::put('/profile', [CustomerController::class, 'updateProfile'])->name('profile.update');
     Route::get('/payments', [CustomerController::class, 'paymentHistory'])->name('payments');
+    Route::get('/payments/{payment}/receipt', [CustomerController::class, 'downloadReceipt'])->name('payments.receipt');
     Route::get('/notifications', [CustomerController::class, 'notifications'])->name('notifications');
 });
 

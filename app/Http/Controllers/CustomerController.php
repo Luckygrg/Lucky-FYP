@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Spa;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Service;
 use App\Models\Payment;
 use App\Models\Booking;
@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
 
 class CustomerController extends Controller
 {
@@ -115,6 +116,26 @@ class CustomerController extends Controller
     public function paymentHistory()
     {
         return redirect()->route('customer.profile', ['tab' => 'payments']);
+    }
+
+    public function downloadReceipt(Payment $payment): Response
+    {
+        abort_unless((int) $payment->user_id === (int) Auth::id(), 403);
+
+        $payment->loadMissing([
+            'user',
+            'booking.bookingServices',
+            'booking.spa',
+        ]);
+
+        $pdf = Pdf::loadView('customer.receipts.payment', [
+            'payment' => $payment,
+        ])->setPaper('a4');
+
+        return $pdf->download(sprintf(
+            'receipt-payment-%s.pdf',
+            $payment->transaction_id ?: $payment->id
+        ));
     }
 
     public function notifications()

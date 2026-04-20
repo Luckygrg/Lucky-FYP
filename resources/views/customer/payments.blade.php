@@ -198,6 +198,34 @@
         font-size: 13px;
         color: rgba(28,16,8,0.4);
     }
+
+    .payment-footer-left,
+    .payment-footer-right {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .receipt-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(200,145,106,0.3);
+        background: rgba(200,145,106,0.08);
+        color: #A86F47;
+        text-decoration: none;
+        font-weight: 700;
+        transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .receipt-btn:hover {
+        background: rgba(200,145,106,0.16);
+        border-color: rgba(200,145,106,0.5);
+        color: #8F5C38;
+    }
 </style>
 
 <div class="payments-page">
@@ -272,14 +300,24 @@
             </div>
 
             <div class="payment-footer">
-                @if($payment->transaction_id)
-                    <span><i class="fas fa-receipt" style="margin-right:4px;"></i> TXN: {{ $payment->transaction_id }}</span>
-                @else
-                    <span style="opacity:0.4;">No transaction ID</span>
-                @endif
-                <span style="background:rgba(67,160,71,0.12);color:#6fcf72;border:1px solid rgba(67,160,71,0.3);padding:4px 12px;border-radius:12px;font-weight:600;">
-                    <i class="fas fa-check-circle"></i> {{ ucfirst($payment->method ?? 'Paid') }}
-                </span>
+                <div class="payment-footer-left">
+                    @if($payment->transaction_id)
+                        <span><i class="fas fa-receipt" style="margin-right:4px;"></i> TXN: {{ $payment->transaction_id }}</span>
+                    @else
+                        <span style="opacity:0.4;">No transaction ID</span>
+                    @endif
+
+                    <a href="{{ route('customer.payments.receipt', $payment) }}" class="receipt-btn">
+                        <i class="fas fa-file-pdf"></i>
+                        Download Receipt
+                    </a>
+                </div>
+
+                <div class="payment-footer-right">
+                    <span style="background:rgba(67,160,71,0.12);color:#6fcf72;border:1px solid rgba(67,160,71,0.3);padding:4px 12px;border-radius:12px;font-weight:600;">
+                        <i class="fas fa-check-circle"></i> {{ ucfirst($payment->method ?? 'Paid') }}
+                    </span>
+                </div>
             </div>
         </div>
         @endforeach
