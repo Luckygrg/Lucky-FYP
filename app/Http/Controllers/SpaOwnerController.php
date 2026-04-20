@@ -280,9 +280,9 @@ class SpaOwnerController extends Controller
         $request->validate([
             'name'             => 'required|string|max:255',
             'description'      => 'nullable|string',
-            'price'            => 'nullable|numeric|min:0',
-            'duration_minutes' => 'nullable|integer|min:1',
-            'spa_category_id'  => 'nullable|exists:spa_categories,id',
+            'price'            => 'required|numeric|min:0',
+            'duration_minutes' => 'required|integer|min:1',
+            'spa_category_id'  => 'required|exists:spa_categories,id',
             'image'            => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
 
@@ -320,9 +320,9 @@ class SpaOwnerController extends Controller
         $request->validate([
             'name'             => 'required|string|max:255',
             'description'      => 'nullable|string',
-            'price'            => 'nullable|numeric|min:0',
-            'duration_minutes' => 'nullable|integer|min:1',
-            'spa_category_id'  => 'nullable|exists:spa_categories,id',
+            'price'            => 'required|numeric|min:0',
+            'duration_minutes' => 'required|integer|min:1',
+            'spa_category_id'  => 'required|exists:spa_categories,id',
             'image'            => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
 

@@ -28,6 +28,7 @@
     .btn-gold:hover { background: #AE7A55; transform: translateY(-1px); }
     .btn-outline { padding: 12px 24px; background: transparent; color: rgba(28,16,8,0.7); border: 1px solid rgba(28,16,8,0.2); border-radius: 6px; font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.3s; margin-left: 12px; }
     .btn-outline:hover { border-color: rgba(28,16,8,0.4); color: #1C1008; }
+    .alert-error { background: rgba(229,57,53,0.08); color: #b3261e; padding: 14px 18px; border-radius: 6px; margin-bottom: 20px; border-left: 4px solid #e53935; font-size: 14px; }
 </style>
 
 <div class="dashboard-container">
@@ -41,6 +42,10 @@
         </div>
 
         <div class="form-card">
+            @if($errors->any())
+                <div class="alert-error">Please fill in all required fields and fix the highlighted errors.</div>
+            @endif
+
             <form action="{{ route('spa_owner.services.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
@@ -58,20 +63,20 @@
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Price (Rs.)</label>
-                        <input type="number" name="price" value="{{ old('price') }}" placeholder="e.g. 800" min="0" step="0.01">
+                        <label>Price (Rs.) *</label>
+                        <input type="number" name="price" value="{{ old('price') }}" placeholder="e.g. 800" min="0" step="0.01" required>
                         @error('price')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                     <div class="form-group">
-                        <label>Duration (minutes)</label>
-                        <input type="number" name="duration_minutes" value="{{ old('duration_minutes') }}" placeholder="e.g. 60" min="1">
+                        <label>Duration (minutes) *</label>
+                        <input type="number" name="duration_minutes" value="{{ old('duration_minutes') }}" placeholder="e.g. 60" min="1" required>
                         @error('duration_minutes')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label>Category</label>
-                    <select name="spa_category_id">
+                    <label>Category *</label>
+                    <select name="spa_category_id" required>
                         <option value="">— Select Category —</option>
                         @foreach($categories as $cat)
                             <option value="{{ $cat->id }}" {{ old('spa_category_id') == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>
