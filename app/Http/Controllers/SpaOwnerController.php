@@ -446,6 +446,14 @@ class SpaOwnerController extends Controller
         /** @var User $user */
         $user = Auth::user();
 
+        $submittedSection = $request->input('update_section');
+        $isPasswordUpdate = $request->filled('password');
+        $hasProfileChanges = $request->hasFile('photo')
+            || $request->input('name') !== $user->name
+            || $request->input('email') !== $user->email;
+        $isProfileUpdate = $submittedSection === 'profile'
+            || ($submittedSection !== 'password' && $hasProfileChanges);
+
         $request->validate([
             'name'  => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
@@ -473,7 +481,15 @@ class SpaOwnerController extends Controller
 
         $user->save();
 
+        $successMessage = 'Settings updated successfully!';
+
+        if ($isProfileUpdate && ! $isPasswordUpdate) {
+            $successMessage = 'Profile info updated successfully!';
+        } elseif ($isPasswordUpdate && ! $isProfileUpdate) {
+            $successMessage = 'Password changed successfully!';
+        }
+
         return redirect()->route('spa_owner.settings')
-            ->with('success', 'Settings updated successfully!');
+            ->with('success', $successMessage);
     }
 }

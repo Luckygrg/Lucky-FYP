@@ -276,6 +276,7 @@
                     <form action="{{ route('spa_owner.settings.update') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
+                        <input type="hidden" name="update_section" value="profile">
 
                         <div class="profile-photo-block">
                             @if($user->photo)
@@ -319,6 +320,7 @@
                     <form action="{{ route('spa_owner.settings.update') }}" method="POST">
                         @csrf
                         @method('PUT')
+                        <input type="hidden" name="update_section" value="password">
 
                         <input type="hidden" name="name" value="{{ $user->name }}">
                         <input type="hidden" name="email" value="{{ $user->email }}">
