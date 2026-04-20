@@ -12,17 +12,22 @@ class SpaController extends Controller
     /**
      * Display a listing of all spas (for customers)
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search = trim((string) $request->query('search', ''));
+
         $spas = Spa::where('is_active', true)
             ->where('status', 'approved')
+            ->when($search !== '', function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%');
+            })
             ->withCount('reviews')
             ->withAvg('reviews', 'rating')
             ->orderBy('is_featured', 'desc')
             ->orderByDesc('reviews_avg_rating')
             ->get();
             
-        return view('spas.index', compact('spas'));
+        return view('spas.index', compact('spas', 'search'));
     }
 
     /**

@@ -47,7 +47,7 @@
     
     .spas-container {
         max-width: 1400px;
-        margin: 60px auto;
+        margin: 32px auto 60px;
         padding: 0 40px;
     }
     
@@ -55,6 +55,126 @@
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
         gap: 30px;
+    }
+
+    .spas-toolbar {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        margin-bottom: 32px;
+    }
+
+    .search-panel {
+        width: min(100%, 560px);
+        background: rgba(255,255,255,0.78);
+        border: 1px solid rgba(200,145,106,0.12);
+        box-shadow: 0 8px 18px rgba(28,16,8,0.04);
+        border-radius: 18px;
+        padding: 16px 18px 14px;
+        backdrop-filter: blur(6px);
+    }
+
+    .search-panel-label {
+        display: block;
+        margin-bottom: 8px;
+        color: rgba(28,16,8,0.72);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1.8px;
+        text-transform: uppercase;
+    }
+
+    .search-form {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+    }
+
+    .search-input-wrap {
+        position: relative;
+        flex: 1;
+        min-width: 0;
+    }
+
+    .search-input-icon {
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: rgba(28,16,8,0.35);
+        font-size: 14px;
+        pointer-events: none;
+    }
+
+    .search-input {
+        width: 100%;
+        height: 44px;
+        border-radius: 16px;
+        border: 1px solid rgba(28,16,8,0.1);
+        background: rgba(255,255,255,0.88);
+        color: #1C1008;
+        padding: 0 18px 0 44px;
+        font-size: 14px;
+        transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .search-input:focus {
+        outline: none;
+        border-color: rgba(200,145,106,0.8);
+        box-shadow: 0 0 0 4px rgba(200,145,106,0.12);
+    }
+
+    .search-submit,
+    .search-clear {
+        height: 44px;
+        border-radius: 16px;
+        border: 1px solid transparent;
+        padding: 0 26px;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+    }
+
+    .search-submit {
+        background: #24150d;
+        color: #FAF7F2;
+        box-shadow: 0 6px 14px rgba(28,16,8,0.1);
+    }
+
+    .search-clear {
+        background: rgba(255,255,255,0.84);
+        color: rgba(28,16,8,0.65);
+        border-color: rgba(28,16,8,0.1);
+    }
+
+    .search-submit:hover,
+    .search-clear:hover {
+        transform: translateY(-1px);
+    }
+
+    .search-submit:hover {
+        background: #1C1008;
+        box-shadow: 0 8px 16px rgba(28,16,8,0.12);
+    }
+
+    .search-clear:hover {
+        border-color: rgba(200,145,106,0.35);
+        color: #1C1008;
+    }
+
+    .search-meta {
+        margin-top: 10px;
+        color: rgba(28,16,8,0.55);
+        font-size: 13px;
+        line-height: 1.45;
     }
     
     .spa-card {
@@ -223,6 +343,24 @@
     }
     
     @media (max-width: 768px) {
+        .spas-toolbar {
+            justify-content: stretch;
+        }
+
+        .search-panel {
+            width: min(100%, 560px);
+        }
+
+        .search-form {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .search-submit,
+        .search-clear {
+            width: 100%;
+        }
+
         .spas-grid {
             grid-template-columns: 1fr;
         }
@@ -261,6 +399,33 @@
 
 <!-- Spas Grid -->
 <section id="spas-list" class="spas-container">
+    <div class="spas-toolbar">
+        <div class="search-panel">
+            <label for="spa-search" class="search-panel-label">Find Your Spa</label>
+            <form action="{{ route('spas.index') }}#spas-list" method="GET" class="search-form">
+                <div class="search-input-wrap">
+                    <i class="fas fa-search search-input-icon"></i>
+                    <input
+                        id="spa-search"
+                        type="search"
+                        name="search"
+                        class="search-input"
+                        value="{{ $search }}"
+                        placeholder="Enter a spa name"
+                        aria-label="Search spas by name"
+                    >
+                </div>
+                <button type="submit" class="search-submit">Search</button>
+                @if($search !== '')
+                    <a href="{{ route('spas.index') }}#spas-list" class="search-clear">Clear</a>
+                @endif
+            </form>
+            @if($search !== '')
+                <div class="search-meta">Showing results for "{{ $search }}"</div>
+            @endif
+        </div>
+    </div>
+
     @if($spas->count() > 0)
         <div class="spas-grid">
             @foreach($spas as $spa)
@@ -310,8 +475,12 @@
         </div>
     @else
         <div class="no-spas">
-            <h2>No Spas Available Yet</h2>
-            <p>Check back soon for amazing spa experiences!</p>
+            <h2>{{ $search !== '' ? 'No Matching Spas Found' : 'No Spas Available Yet' }}</h2>
+            <p>
+                {{ $search !== ''
+                    ? 'Try a different spa name or clear the search to browse all approved spas.'
+                    : 'Check back soon for amazing spa experiences!' }}
+            </p>
         </div>
     @endif
 </section>
