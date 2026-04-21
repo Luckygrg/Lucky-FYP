@@ -9,11 +9,154 @@ use App\Models\Spa;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
+    private function chartBuckets(string $period = 'monthly'): array
+    {
+        if ($period === 'daily') {
+            return [
+                'startDate' => now()->subDays(13)->toDateString(),
+                'expression' => "DATE(bookings.booking_date)",
+                'buckets' => collect(range(13, 0))->map(function ($i) {
+                    $date = now()->subDays($i);
+
+                    return [
+                        'key' => $date->toDateString(),
+                        'label' => $date->format('d M'),
+                    ];
+                }),
+            ];
+        }
+
+        if ($period === 'weekly') {
+            return [
+                'startDate' => now()->subWeeks(7)->startOfWeek()->toDateString(),
+                'expression' => "DATE_FORMAT(bookings.booking_date, '%x-%v')",
+                'buckets' => collect(range(7, 0))->map(function ($i) {
+                    $weekStart = now()->subWeeks($i)->startOfWeek();
+
+                    return [
+                        'key' => $weekStart->format('o') . '-' . $weekStart->format('W'),
+                        'label' => $weekStart->format('d M'),
+                    ];
+                }),
+            ];
+        }
+
+        return [
+            'startDate' => now()->subMonths(5)->startOfMonth()->toDateString(),
+            'expression' => "DATE_FORMAT(bookings.booking_date, '%Y-%m')",
+            'buckets' => collect(range(5, 0))->map(function ($i) {
+                $month = now()->subMonths($i);
+
+                return [
+                    'key' => $month->format('Y-m'),
+                    'label' => $month->format('M Y'),
+                ];
+            }),
+        ];
+    }
+
+    private function topSpaChartData(string $period = 'monthly'): array
+    {
+        $bucketMeta = $this->chartBuckets($period);
+
+        $rows = Booking::query()
+            ->join('spas', 'bookings.spa_id', '=', 'spas.id')
+            ->where('bookings.booking_date', '>=', $bucketMeta['startDate'])
+            ->selectRaw("{$bucketMeta['expression']} as bucket_key, spas.name as entity_name, count(*) as total")
+            ->groupBy('bucket_key', 'spas.name')
+            ->orderBy('bucket_key')
+            ->orderByDesc('total')
+            ->orderBy('spas.name')
+            ->get();
+
+        if ($rows->isEmpty()) {
+            return [
+                'labels' => [],
+                'data' => [],
+                'names' => [],
+            ];
+        }
+
+        $topByBucket = [];
+        foreach ($rows as $row) {
+            if (! isset($topByBucket[$row->bucket_key]) || $row->total > $topByBucket[$row->bucket_key]['total']) {
+                $topByBucket[$row->bucket_key] = [
+                    'name' => $row->entity_name,
+                    'total' => (int) $row->total,
+                ];
+            }
+        }
+
+        $labels = [];
+        $data = [];
+        $names = [];
+        foreach ($bucketMeta['buckets'] as $bucket) {
+            $labels[] = $bucket['label'];
+            $names[] = $topByBucket[$bucket['key']]['name'] ?? 'No bookings';
+            $data[] = $topByBucket[$bucket['key']]['total'] ?? 0;
+        }
+
+        return [
+            'labels' => $labels,
+            'data' => $data,
+            'names' => $names,
+        ];
+    }
+
+    private function topCategoryChartData(string $period = 'monthly'): array
+    {
+        $bucketMeta = $this->chartBuckets($period);
+
+        $rows = BookingService::query()
+            ->join('services', 'booking_services.service_id', '=', 'services.id')
+            ->join('spa_categories', 'services.spa_category_id', '=', 'spa_categories.id')
+            ->join('bookings', 'booking_services.booking_id', '=', 'bookings.id')
+            ->where('bookings.booking_date', '>=', $bucketMeta['startDate'])
+            ->selectRaw("{$bucketMeta['expression']} as bucket_key, spa_categories.name as entity_name, count(*) as total")
+            ->groupBy('bucket_key', 'spa_categories.name')
+            ->orderBy('bucket_key')
+            ->orderByDesc('total')
+            ->orderBy('spa_categories.name')
+            ->get();
+
+        if ($rows->isEmpty()) {
+            return [
+                'labels' => [],
+                'data' => [],
+                'names' => [],
+            ];
+        }
+
+        $topByBucket = [];
+        foreach ($rows as $row) {
+            if (! isset($topByBucket[$row->bucket_key]) || $row->total > $topByBucket[$row->bucket_key]['total']) {
+                $topByBucket[$row->bucket_key] = [
+                    'name' => $row->entity_name,
+                    'total' => (int) $row->total,
+                ];
+            }
+        }
+
+        $labels = [];
+        $data = [];
+        $names = [];
+        foreach ($bucketMeta['buckets'] as $bucket) {
+            $labels[] = $bucket['label'];
+            $names[] = $topByBucket[$bucket['key']]['name'] ?? 'No bookings';
+            $data[] = $topByBucket[$bucket['key']]['total'] ?? 0;
+        }
+
+        return [
+            'labels' => $labels,
+            'data' => $data,
+            'names' => $names,
+        ];
+    }
+
     /**
      * Show admin dashboard with real stats
      */
@@ -24,20 +167,8 @@ class AdminController extends Controller
         $totalSpas       = Spa::where('status', 'approved')->count();
         $pendingSpas     = Spa::where('status', 'pending')->count();
 
-        // Chart 1: bookings per spa
-        $bookingsPerSpa = Booking::select('spa_id', DB::raw('count(*) as total'))
-            ->groupBy('spa_id')
-            ->with('spa:id,name')
-            ->get()
-            ->map(fn($b) => ['spa' => $b->spa->name ?? 'Unknown', 'total' => $b->total]);
-
-        // Chart 2: most used categories (via booking_services -> services -> spa_categories)
-        $bookingsPerCategory = BookingService::join('services', 'booking_services.service_id', '=', 'services.id')
-            ->join('spa_categories', 'services.spa_category_id', '=', 'spa_categories.id')
-            ->select('spa_categories.name as category', DB::raw('count(*) as total'))
-            ->groupBy('spa_categories.name')
-            ->orderByDesc('total')
-            ->get();
+        $spaChart = $this->topSpaChartData('monthly');
+        $categoryChart = $this->topCategoryChartData('monthly');
 
         $recentMessages = ContactMessage::latest()->take(5)->get();
         $unreadCount    = ContactMessage::where('is_read', false)->count();
@@ -47,8 +178,8 @@ class AdminController extends Controller
             'totalCustomers',
             'totalSpas',
             'pendingSpas',
-            'bookingsPerSpa',
-            'bookingsPerCategory',
+            'spaChart',
+            'categoryChart',
             'recentMessages',
             'unreadCount'
         ));
@@ -61,37 +192,16 @@ class AdminController extends Controller
     {
         $period = $request->query('period', 'monthly');
 
-        if ($period === 'daily') {
-            $dateFilter = now()->subDays(13)->toDateString();
-        } elseif ($period === 'weekly') {
-            $dateFilter = now()->subWeeks(7)->startOfWeek()->toDateString();
-        } else {
-            $dateFilter = now()->subMonths(5)->startOfMonth()->toDateString();
-        }
-
-        // Bookings per spa (filtered by period)
-        $spaData = Booking::where('booking_date', '>=', $dateFilter)
-            ->select('spa_id', DB::raw('count(*) as total'))
-            ->groupBy('spa_id')
-            ->with('spa:id,name')
-            ->get()
-            ->map(fn($b) => ['spa' => $b->spa->name ?? 'Unknown', 'total' => $b->total]);
-
-        // Most used categories (filtered by period)
-        $categoryData = BookingService::join('services', 'booking_services.service_id', '=', 'services.id')
-            ->join('spa_categories', 'services.spa_category_id', '=', 'spa_categories.id')
-            ->join('bookings', 'booking_services.booking_id', '=', 'bookings.id')
-            ->where('bookings.booking_date', '>=', $dateFilter)
-            ->select('spa_categories.name as category', DB::raw('count(*) as total'))
-            ->groupBy('spa_categories.name')
-            ->orderByDesc('total')
-            ->get();
+        $spaChart = $this->topSpaChartData($period);
+        $categoryChart = $this->topCategoryChartData($period);
 
         return response()->json([
-            'spaLabels'      => $spaData->pluck('spa'),
-            'spaData'        => $spaData->pluck('total'),
-            'categoryLabels' => $categoryData->pluck('category'),
-            'categoryData'   => $categoryData->pluck('total'),
+            'spaLabels'      => $spaChart['labels'],
+            'spaData'        => $spaChart['data'],
+            'spaNames'       => $spaChart['names'],
+            'categoryLabels' => $categoryChart['labels'],
+            'categoryData'   => $categoryChart['data'],
+            'categoryNames'  => $categoryChart['names'],
         ]);
     }
 

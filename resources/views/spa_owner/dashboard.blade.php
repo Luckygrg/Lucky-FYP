@@ -293,6 +293,10 @@
         servicesPeriodLabel.textContent = labels.services;
     }
 
+    function buildServiceDisplayLabels(labels, names) {
+        return labels.map((label, index) => [label, names[index] ?? 'No bookings']);
+    }
+
     // Revenue Line Chart
     const revenueCtx = document.getElementById('revenueChart');
     let revenueChart = new Chart(revenueCtx, {
@@ -326,19 +330,26 @@
         }
     });
 
-    // Most Booked Services Bar Chart
+    // Most Booked Services Radar Chart
     const svcCtx = document.getElementById('servicesChart');
     let serviceNames = {!! json_encode($serviceNames) !!};
+    let serviceDisplayLabels = buildServiceDisplayLabels({!! json_encode($serviceLabels) !!}, serviceNames);
     let servicesChart = new Chart(svcCtx, {
-        type: 'bar',
+        type: 'radar',
         data: {
-            labels: {!! json_encode($serviceLabels) !!},
+            labels: serviceDisplayLabels,
             datasets: [{
                 label: 'Bookings',
                 data: {!! json_encode($serviceData) !!},
-                backgroundColor: palette[0],
-                borderRadius: 5,
-                borderSkipped: false,
+                borderColor: palette[0],
+                backgroundColor: 'rgba(200,145,106,0.18)',
+                fill: true,
+                pointBackgroundColor: palette[0],
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
+                pointRadius: 5,
+                pointHoverRadius: 7,
+                borderWidth: 2.5,
             }]
         },
         options: {
@@ -348,14 +359,22 @@
                 legend: { display: false },
                 tooltip: {
                     callbacks: {
-                        title: ctx => ctx[0]?.label ?? '',
+                        title: ctx => {
+                            const label = ctx[0]?.label;
+                            return Array.isArray(label) ? label.join(' - ') : (label ?? '');
+                        },
                         label: ctx => `${serviceNames[ctx.dataIndex] ?? 'No bookings'}: ${ctx.parsed.y} bookings`
                     }
                 }
             },
             scales: {
-                x: { ticks: { color: 'rgba(28,16,8,0.65)', font: { size: 11 } }, grid: { display: false } },
-                y: { beginAtZero: true, ticks: { stepSize: 1, color: 'rgba(28,16,8,0.45)' }, grid: { color: 'rgba(0,0,0,0.05)' } }
+                r: {
+                    beginAtZero: true,
+                    angleLines: { color: 'rgba(0,0,0,0.08)' },
+                    grid: { color: 'rgba(0,0,0,0.08)' },
+                    pointLabels: { color: 'rgba(28,16,8,0.62)', font: { size: 11 } },
+                    ticks: { stepSize: 1, color: 'rgba(28,16,8,0.45)', backdropColor: 'transparent' }
+                }
             }
         }
     });
@@ -374,10 +393,10 @@
                 revenueChart.update();
 
                 // Update services chart
-                servicesChart.data.labels = data.serviceLabels;
+                serviceDisplayLabels = buildServiceDisplayLabels(data.serviceLabels, data.serviceNames);
+                servicesChart.data.labels = serviceDisplayLabels;
                 servicesChart.data.datasets[0].data = data.serviceData;
                 serviceNames = data.serviceNames;
-                servicesChart.data.datasets[0].backgroundColor = palette[0];
                 servicesChart.update();
             });
     }

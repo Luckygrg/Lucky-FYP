@@ -384,10 +384,10 @@
             <div class="chart-card">
                 <div class="chart-card-header">
                     <h2>Bookings per Spa</h2>
-                    <p>Which spa has the most customers</p>
+                    <p id="spaPeriodLabel">Top spa by month</p>
                 </div>
                 <div class="chart-card-body">
-                    @if($bookingsPerSpa->isEmpty())
+                    @if(empty($spaChart['labels']))
                         <div style="text-align:center;padding:40px 0;color:rgba(28,16,8,0.3);font-size:14px;">No booking data yet</div>
                     @else
                         <canvas id="spaChart"></canvas>
@@ -398,10 +398,10 @@
             <div class="chart-card">
                 <div class="chart-card-header">
                     <h2>Most Used Categories</h2>
-                    <p>Which service category is booked the most</p>
+                    <p id="categoryPeriodLabel">Top category by month</p>
                 </div>
                 <div class="chart-card-body">
-                    @if($bookingsPerCategory->isEmpty())
+                    @if(empty($categoryChart['labels']))
                         <div style="text-align:center;padding:40px 0;color:rgba(28,16,8,0.3);font-size:14px;">No category data yet</div>
                     @else
                         <canvas id="categoryChart"></canvas>
@@ -444,19 +444,57 @@
 <script>
     const palette = ['#C8916A','#AE7A55','#D4A882','#8B5E3C','#E6C4A8','#7A4F2D','#BF8A6A','#9E6B45','#5C3A1E','#F0DDD0'];
     const chartUrl = @json(route('admin.admin.chartData'));
+    const periodLabels = {
+        daily: {
+            spa: 'Top spa by day',
+            category: 'Top category by day'
+        },
+        weekly: {
+            spa: 'Top spa by week',
+            category: 'Top category by week'
+        },
+        monthly: {
+            spa: 'Top spa by month',
+            category: 'Top category by month'
+        }
+    };
+    const spaPeriodLabel = document.getElementById('spaPeriodLabel');
+    const categoryPeriodLabel = document.getElementById('categoryPeriodLabel');
 
-    // Bookings per Spa bar chart
+    function updatePeriodLabels(period) {
+        const labels = periodLabels[period] ?? periodLabels.monthly;
+        spaPeriodLabel.textContent = labels.spa;
+        categoryPeriodLabel.textContent = labels.category;
+    }
+
+    function buildDisplayLabels(labels, names) {
+        return labels.map((label, index) => {
+            const name = names[index];
+            return name ? [label, name] : [label];
+        });
+    }
+
+    // Top Spa trend chart
     const spaCtx = document.getElementById('spaChart');
+    let spaNames = {!! json_encode($spaChart['names']) !!};
+    let spaDisplayLabels = buildDisplayLabels({!! json_encode($spaChart['labels']) !!}, spaNames);
     let spaChart = spaCtx ? new Chart(spaCtx, {
-        type: 'bar',
+        type: 'line',
         data: {
-            labels: {!! json_encode($bookingsPerSpa->pluck('spa')) !!},
+            labels: spaDisplayLabels,
             datasets: [{
                 label: 'Bookings',
-                data: {!! json_encode($bookingsPerSpa->pluck('total')) !!},
-                backgroundColor: palette,
-                borderRadius: 5,
-                borderSkipped: false,
+                data: {!! json_encode($spaChart['data']) !!},
+                borderColor: palette[0],
+                backgroundColor: 'rgba(200,145,106,0.16)',
+                fill: true,
+                tension: 0.35,
+                pointBackgroundColor: palette[0],
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
+                pointRadius: 5,
+                pointHoverRadius: 7,
+                borderWidth: 2.5,
             }]
         },
         options: {
@@ -464,7 +502,18 @@
             maintainAspectRatio: false,
             plugins: {
                 legend: { display: false },
-                tooltip: { callbacks: { label: ctx => ` ${ctx.parsed.y} bookings` } }
+                tooltip: {
+                    callbacks: {
+                        title: ctx => {
+                            const label = ctx[0]?.label;
+                            return Array.isArray(label) ? label.join(' - ') : (label ?? '');
+                        },
+                        label: ctx => {
+                            const name = spaNames[ctx.dataIndex];
+                            return name ? `${name}: ${ctx.parsed.y} bookings` : `${ctx.parsed.y} bookings`;
+                        }
+                    }
+                }
             },
             scales: {
                 y: { beginAtZero: true, ticks: { stepSize: 1, color: 'rgba(28,16,8,0.45)' }, grid: { color: 'rgba(0,0,0,0.05)' } },
@@ -473,47 +522,68 @@
         }
     }) : null;
 
-    // Most Used Categories doughnut chart
+    // Top Category bar chart
     const catCtx = document.getElementById('categoryChart');
+    let categoryNames = {!! json_encode($categoryChart['names']) !!};
+    let categoryDisplayLabels = buildDisplayLabels({!! json_encode($categoryChart['labels']) !!}, categoryNames);
     let categoryChart = catCtx ? new Chart(catCtx, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
-            labels: {!! json_encode($bookingsPerCategory->pluck('category')) !!},
+            labels: categoryDisplayLabels,
             datasets: [{
-                data: {!! json_encode($bookingsPerCategory->pluck('total')) !!},
-                backgroundColor: palette,
-                borderWidth: 2,
-                borderColor: '#fff',
+                label: 'Bookings',
+                data: {!! json_encode($categoryChart['data']) !!},
+                backgroundColor: palette[1],
+                borderRadius: 6,
+                borderSkipped: false,
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-                legend: { position: 'bottom', labels: { padding: 16, font: { size: 12 }, color: 'rgba(28,16,8,0.6)' } },
-                tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${ctx.parsed} bookings` } }
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        title: ctx => {
+                            const label = ctx[0]?.label;
+                            return Array.isArray(label) ? label.join(' - ') : (label ?? '');
+                        },
+                        label: ctx => {
+                            const name = categoryNames[ctx.dataIndex];
+                            return name ? `${name}: ${ctx.parsed.y} bookings` : `${ctx.parsed.y} bookings`;
+                        }
+                    }
+                }
             },
-            cutout: '62%',
+            scales: {
+                y: { beginAtZero: true, ticks: { stepSize: 1, color: 'rgba(28,16,8,0.45)' }, grid: { color: 'rgba(0,0,0,0.05)' } },
+                x: { ticks: { color: 'rgba(28,16,8,0.55)', font: { size: 11 } }, grid: { display: false } }
+            }
         }
     }) : null;
 
     function switchPeriod(period, btn) {
         document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
+        updatePeriodLabels(period);
 
         fetch(`${chartUrl}?period=${period}`)
             .then(r => r.json())
             .then(data => {
                 if (spaChart) {
-                    spaChart.data.labels = data.spaLabels;
+                    spaNames = data.spaNames;
+                    spaDisplayLabels = buildDisplayLabels(data.spaLabels, spaNames);
+                    spaChart.data.labels = spaDisplayLabels;
                     spaChart.data.datasets[0].data = data.spaData;
-                    spaChart.data.datasets[0].backgroundColor = palette.slice(0, data.spaLabels.length);
                     spaChart.update();
                 }
                 if (categoryChart) {
-                    categoryChart.data.labels = data.categoryLabels;
+                    categoryNames = data.categoryNames;
+                    categoryDisplayLabels = buildDisplayLabels(data.categoryLabels, categoryNames);
+                    categoryChart.data.labels = categoryDisplayLabels;
                     categoryChart.data.datasets[0].data = data.categoryData;
-                    categoryChart.data.datasets[0].backgroundColor = palette.slice(0, data.categoryLabels.length);
+                    categoryChart.data.datasets[0].backgroundColor = palette[1];
                     categoryChart.update();
                 }
             });
