@@ -34,6 +34,15 @@
                         </form>
                     @endif
 
+                    @if(Auth::user()->role === 'admin')
+                        <a href="{{ route('admin.admin') }}" class="luxury-nav-link">Dashboard</a>
+                        <span class="luxury-nav-welcome">{{ Auth::user()->name }}</span>
+                        <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                            @csrf
+                            <button class="luxury-logout-btn" type="submit">Logout</button>
+                        </form>
+                    @endif
+
                     @if(Auth::user()->role === 'customer')
                         <!-- Customer Profile Dropdown -->
                         <div class="profile-dropdown" id="profileDropdown">
