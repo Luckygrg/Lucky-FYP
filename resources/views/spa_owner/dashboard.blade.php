@@ -209,7 +209,7 @@
             <div class="card">
                 <div class="card-header">
                     <h2>Revenue Overview</h2>
-                    <p>Last 6 months</p>
+                    <p id="revenuePeriodLabel">Last 6 months</p>
                 </div>
                 <div class="chart-body">
                     <canvas id="revenueChart"></canvas>
@@ -220,7 +220,7 @@
             <div class="card">
                 <div class="card-header">
                     <h2>Most Booked Services</h2>
-                    <p>Top services at your spa</p>
+                    <p id="servicesPeriodLabel">Most booked service by month</p>
                 </div>
                 <div class="chart-body">
                     <canvas id="servicesChart"></canvas>
@@ -270,6 +270,28 @@
 <script>
     const palette = ['#C8916A','#AE7A55','#D4A882','#8B5E3C','#E6C4A8','#7A4F2D','#BF8A6A','#9E6B45'];
     const chartUrl = @json(route('spa_owner.dashboard.chartData'));
+    const periodLabels = {
+        daily: {
+            revenue: 'Last 14 days',
+            services: 'Most booked service by day'
+        },
+        weekly: {
+            revenue: 'Last 8 weeks',
+            services: 'Most booked service by week'
+        },
+        monthly: {
+            revenue: 'Last 6 months',
+            services: 'Most booked service by month'
+        }
+    };
+    const revenuePeriodLabel = document.getElementById('revenuePeriodLabel');
+    const servicesPeriodLabel = document.getElementById('servicesPeriodLabel');
+
+    function updatePeriodLabels(period) {
+        const labels = periodLabels[period] ?? periodLabels.monthly;
+        revenuePeriodLabel.textContent = labels.revenue;
+        servicesPeriodLabel.textContent = labels.services;
+    }
 
     // Revenue Line Chart
     const revenueCtx = document.getElementById('revenueChart');
@@ -306,14 +328,15 @@
 
     // Most Booked Services Bar Chart
     const svcCtx = document.getElementById('servicesChart');
+    let serviceNames = {!! json_encode($serviceNames) !!};
     let servicesChart = new Chart(svcCtx, {
         type: 'bar',
         data: {
-            labels: {!! json_encode($topServices->pluck('service_name')) !!},
+            labels: {!! json_encode($serviceLabels) !!},
             datasets: [{
-                label: 'Times Booked',
-                data: {!! json_encode($topServices->pluck('total')) !!},
-                backgroundColor: palette,
+                label: 'Bookings',
+                data: {!! json_encode($serviceData) !!},
+                backgroundColor: palette[0],
                 borderRadius: 5,
                 borderSkipped: false,
             }]
@@ -323,7 +346,12 @@
             maintainAspectRatio: false,
             plugins: {
                 legend: { display: false },
-                tooltip: { callbacks: { label: ctx => ` ${ctx.parsed.y} bookings` } }
+                tooltip: {
+                    callbacks: {
+                        title: ctx => ctx[0]?.label ?? '',
+                        label: ctx => `${serviceNames[ctx.dataIndex] ?? 'No bookings'}: ${ctx.parsed.y} bookings`
+                    }
+                }
             },
             scales: {
                 x: { ticks: { color: 'rgba(28,16,8,0.65)', font: { size: 11 } }, grid: { display: false } },
@@ -335,6 +363,7 @@
     function switchPeriod(period, btn) {
         document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
+        updatePeriodLabels(period);
 
         fetch(`${chartUrl}?period=${period}`)
             .then(r => r.json())
@@ -347,7 +376,8 @@
                 // Update services chart
                 servicesChart.data.labels = data.serviceLabels;
                 servicesChart.data.datasets[0].data = data.serviceData;
-                servicesChart.data.datasets[0].backgroundColor = palette.slice(0, data.serviceLabels.length);
+                serviceNames = data.serviceNames;
+                servicesChart.data.datasets[0].backgroundColor = palette[0];
                 servicesChart.update();
             });
     }

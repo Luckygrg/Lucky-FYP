@@ -20,6 +20,82 @@ class SpaOwnerController extends Controller
         return Spa::where('user_id', Auth::id())->firstOrFail();
     }
 
+    private function serviceChartData(int $spaId, string $period = 'monthly'): array
+    {
+        $DB = DB::class;
+        $labels = [];
+        $serviceData = [];
+        $serviceNames = [];
+
+        if ($period === 'daily') {
+            $startDate = now()->subDays(13)->toDateString();
+            $bucketExpression = "DATE(bookings.booking_date)";
+            $buckets = collect(range(13, 0))->map(function ($i) {
+                $date = now()->subDays($i);
+
+                return [
+                    'key' => $date->toDateString(),
+                    'label' => $date->format('d M'),
+                ];
+            });
+        } elseif ($period === 'weekly') {
+            $startDate = now()->subWeeks(7)->startOfWeek()->toDateString();
+            $bucketExpression = "DATE_FORMAT(bookings.booking_date, '%x-%v')";
+            $buckets = collect(range(7, 0))->map(function ($i) {
+                $weekStart = now()->subWeeks($i)->startOfWeek();
+
+                return [
+                    'key' => $weekStart->format('o') . '-' . $weekStart->format('W'),
+                    'label' => $weekStart->format('d M'),
+                ];
+            });
+        } else {
+            $startDate = now()->subMonths(5)->startOfMonth()->toDateString();
+            $bucketExpression = "DATE_FORMAT(bookings.booking_date, '%Y-%m')";
+            $buckets = collect(range(5, 0))->map(function ($i) {
+                $month = now()->subMonths($i);
+
+                return [
+                    'key' => $month->format('Y-m'),
+                    'label' => $month->format('M Y'),
+                ];
+            });
+        }
+
+        $rows = \App\Models\BookingService::query()
+            ->join('bookings', 'booking_services.booking_id', '=', 'bookings.id')
+            ->where('bookings.spa_id', $spaId)
+            ->where('bookings.booking_date', '>=', $startDate)
+            ->selectRaw("{$bucketExpression} as bucket_key, booking_services.service_name, count(*) as total")
+            ->groupBy('bucket_key', 'booking_services.service_name')
+            ->orderBy('bucket_key')
+            ->orderByDesc('total')
+            ->orderBy('booking_services.service_name')
+            ->get();
+
+        $topByBucket = [];
+        foreach ($rows as $row) {
+            if (! isset($topByBucket[$row->bucket_key]) || $row->total > $topByBucket[$row->bucket_key]['total']) {
+                $topByBucket[$row->bucket_key] = [
+                    'service_name' => $row->service_name,
+                    'total' => (int) $row->total,
+                ];
+            }
+        }
+
+        foreach ($buckets as $bucket) {
+            $labels[] = $bucket['label'];
+            $serviceNames[] = $topByBucket[$bucket['key']]['service_name'] ?? 'No bookings';
+            $serviceData[] = $topByBucket[$bucket['key']]['total'] ?? 0;
+        }
+
+        return [
+            'labels' => $labels,
+            'data' => $serviceData,
+            'names' => $serviceNames,
+        ];
+    }
+
     /* ── Dashboard ──────────────────────────────────────────────────────────── */
 
     public function dashboard()
@@ -31,6 +107,9 @@ class SpaOwnerController extends Controller
         $customersCount  = 0;
         $totalEarning    = 0;
         $recentCustomers = collect();
+        $serviceLabels   = [];
+        $serviceData     = [];
+        $serviceNames    = [];
 
         if ($spa) {
             // Auto-complete confirmed bookings whose date+time has passed
@@ -65,13 +144,10 @@ class SpaOwnerController extends Controller
                 ->orderByDesc('last_booking')
                 ->limit(10)
                 ->get();
-            // Most booked services for this spa
-            $topServices = \App\Models\BookingService::whereHas('booking', fn($q) => $q->where('spa_id', $spa->id))
-                ->select('service_name', \Illuminate\Support\Facades\DB::raw('count(*) as total'))
-                ->groupBy('service_name')
-                ->orderByDesc('total')
-                ->limit(8)
-                ->get();
+            $serviceChart = $this->serviceChartData($spa->id, 'monthly');
+            $serviceLabels = $serviceChart['labels'];
+            $serviceData = $serviceChart['data'];
+            $serviceNames = $serviceChart['names'];
 
             // Monthly revenue for the last 6 months
             $monthlyRevenue = \App\Models\Booking::where('spa_id', $spa->id)
@@ -95,15 +171,14 @@ class SpaOwnerController extends Controller
                 $revenueData[]   = (float) ($monthlyRevenue[$key]->revenue ?? 0);
             }
         } else {
-            $topServices    = collect();
             $revenueLabels  = [];
             $revenueData    = [];
         }
 
         return view('spa_owner.dashboard', compact(
             'spa', 'servicesCount', 'bookingsCount',
-            'customersCount', 'totalEarning', 'recentCustomers', 'topServices',
-            'revenueLabels', 'revenueData'
+            'customersCount', 'totalEarning', 'recentCustomers',
+            'revenueLabels', 'revenueData', 'serviceLabels', 'serviceData', 'serviceNames'
         ));
     }
 
@@ -118,6 +193,7 @@ class SpaOwnerController extends Controller
         $revenueData   = [];
         $serviceLabels = [];
         $serviceData   = [];
+        $serviceNames  = [];
 
         if ($spa) {
             $DB = \Illuminate\Support\Facades\DB::class;
@@ -140,11 +216,6 @@ class SpaOwnerController extends Controller
                     $revenueData[]   = (float) ($rows[$key]->revenue ?? 0);
                 }
 
-                // Top services (last 14 days)
-                $svcRows = \App\Models\BookingService::whereHas('booking', fn($q) => $q->where('spa_id', $spa->id)->where('booking_date', '>=', now()->subDays(13)->toDateString()))
-                    ->select('service_name', $DB::raw('count(*) as total'))
-                    ->groupBy('service_name')->orderByDesc('total')->limit(8)->get();
-
             } elseif ($period === 'weekly') {
                 // Last 8 weeks
                 $rows = \App\Models\Booking::where('spa_id', $spa->id)
@@ -164,11 +235,6 @@ class SpaOwnerController extends Controller
                     $revenueData[]   = (float) ($rows[$isoKey]->revenue ?? $rows[$key]->revenue ?? 0);
                 }
 
-                // Top services (last 8 weeks)
-                $svcRows = \App\Models\BookingService::whereHas('booking', fn($q) => $q->where('spa_id', $spa->id)->where('booking_date', '>=', now()->subWeeks(7)->startOfWeek()->toDateString()))
-                    ->select('service_name', $DB::raw('count(*) as total'))
-                    ->groupBy('service_name')->orderByDesc('total')->limit(8)->get();
-
             } else {
                 // Monthly — last 6 months
                 $rows = \App\Models\Booking::where('spa_id', $spa->id)
@@ -185,14 +251,12 @@ class SpaOwnerController extends Controller
                     $revenueLabels[] = now()->subMonths($i)->format('M Y');
                     $revenueData[]   = (float) ($rows[$key]->revenue ?? 0);
                 }
-
-                $svcRows = \App\Models\BookingService::whereHas('booking', fn($q) => $q->where('spa_id', $spa->id))
-                    ->select('service_name', $DB::raw('count(*) as total'))
-                    ->groupBy('service_name')->orderByDesc('total')->limit(8)->get();
             }
 
-            $serviceLabels = $svcRows->pluck('service_name');
-            $serviceData   = $svcRows->pluck('total');
+            $serviceChart = $this->serviceChartData($spa->id, $period);
+            $serviceLabels = $serviceChart['labels'];
+            $serviceData = $serviceChart['data'];
+            $serviceNames = $serviceChart['names'];
         }
 
         return response()->json([
@@ -200,6 +264,7 @@ class SpaOwnerController extends Controller
             'revenueData'    => $revenueData,
             'serviceLabels'  => $serviceLabels,
             'serviceData'    => $serviceData,
+            'serviceNames'   => $serviceNames,
         ]);
     }
 
