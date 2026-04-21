@@ -26,7 +26,7 @@
                     <a href="{{ route('about') }}" class="luxury-nav-link">About</a>
                     <a href="{{ route('contact') }}" class="luxury-nav-link">Contact</a>
                     @if(Auth::user()->role === 'spa_owner')
-                        <a href="{{ route('spa_owner.bookings') }}" class="luxury-nav-link">Bookings</a>
+                            <a href="{{ route('spa_owner.dashboard') }}" class="luxury-nav-link">Dashboard</a>
                         <span class="luxury-nav-welcome">{{ Auth::user()->name }}</span>
                         <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                             @csrf
